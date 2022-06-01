@@ -1,24 +1,20 @@
 import style from "./style.module.scss";
 import Link from "next/link";
 import { useState } from "react";
-import { PopUpCall } from "../InputForms/PopUpForms/PopUpForms"
+import { useModals } from "../../context/ModalsProvider";
 // import { Search } from "../Search/Search";
 
 export function HeaderMobile(props) {
 
   const [isBurgerOpen, setBurgerOpen] = useState(false);
-  const [isInputFormOpen, setInputFormOpen] = useState(false);
+  const modals = useModals()
 
   function onInputFormOpen() {
-    setInputFormOpen(!isInputFormOpen);
-    isInputFormOpen === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
+    modals.NamePhoneModalChangeVisibility()
   }
 
   function openBurgerMenu() {
     setBurgerOpen(!isBurgerOpen);
-    setInputFormOpen(false);
     isBurgerOpen === false
       ? (document.body.className = "popUp")
       : (document.body.className = "");
@@ -26,11 +22,6 @@ export function HeaderMobile(props) {
 
   return (
     <>
-      {isInputFormOpen === true ? (
-        <PopUpCall call={true} closeClick={onInputFormOpen} en={props.en} />
-      ) : (
-        <></>
-      )}
       <nav className={`${style.navigation_mobile} ${isBurgerOpen ? style.burgerOpen : undefined}`}>
         <div className={style.header_mobile}>
           <button
@@ -51,11 +42,7 @@ export function HeaderMobile(props) {
             className={style.header_mobile__call}
             style={isBurgerOpen === true ? { display: "none" } : null}
           >
-            {isInputFormOpen === false ? (
-              phoneIcon
-            ) : (
-              cross
-            )}
+            {phoneIcon}
           </button>
         </div>
         {isBurgerOpen ? (

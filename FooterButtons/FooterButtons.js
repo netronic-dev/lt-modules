@@ -1,9 +1,7 @@
-import { useState } from "react";
 import style from "./style.module.scss";
-import { PopUpCall, PopUpEmail } from "../InputForms/PopUpForms/PopUpForms";
-import { LPPopUpBp, LPPopUpCall, LPPopUpEmail } from "../InputForms/LpForms/LpForms";
 import { Fade } from "react-awesome-reveal";
 import { useInView } from "react-hook-inview";
+import { useModals } from "../../context/ModalsProvider";
 
 const logoses = {
   ltnet: "/ltnet-logo.svg",
@@ -21,38 +19,14 @@ const themes = {
 };
 
 export function FooterButtons(props) {
+
   const [ref, isVisible] = useInView({
     unobserveOnEnter: true
   })
-  const [isInputFormOpen, setInputFormOpen] = useState(false);
-  function onInputFormOpen() {
-    setInputFormOpen(!isInputFormOpen);
-    isInputFormOpen === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
-  }
+  const modals = useModals()
+
   return (
     <>
-      {isInputFormOpen === true ?
-        props.call ?
-          (<PopUpCall closeClick={onInputFormOpen} en={props.en} />)
-          :
-          props.callLP ?
-            (<LPPopUpCall closeClick={onInputFormOpen} en={props.en} />)
-            :
-            props.catalogLP ?
-              (<LPPopUpEmail closeClick={onInputFormOpen} en={props.en} />)
-              :
-              props.business ?
-                (<LPPopUpBp closeClick={onInputFormOpen} en={props.en} />)
-                :
-                props.catalog ?
-                  (<PopUpEmail closeClick={onInputFormOpen} en={props.en} />)
-                  :
-                  (<PopUpEmail closeClick={onInputFormOpen} en={props.en} />)
-        : (
-          <></>
-        )}
       <div className={style.footer_buttons__out}>
         <div
           ref={ref}
@@ -69,7 +43,10 @@ export function FooterButtons(props) {
           </div>
           <div className={style.right_side}>
             <Fade delay={500} triggerOnce>
-              <button onClick={onInputFormOpen} className={style.button}>
+              <button
+                onClick={modals.NamePhoneModalChangeVisibility}
+                className={style.button}
+              >
                 {props.buttonText}
               </button>
             </Fade>

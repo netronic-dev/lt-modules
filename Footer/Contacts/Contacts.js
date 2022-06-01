@@ -59,7 +59,6 @@ export function ContactsEn() {
               </p>
             </div>
             <div className={style.contacts__content_item}>
-              <p className={style.title}>Manufacturing Address</p>
               <p className={`${style.contacts__link} ${style.default}`}>
                 Plekhanivska street 134, Kharkiv, Ukraine
               </p>

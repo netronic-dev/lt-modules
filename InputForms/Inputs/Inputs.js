@@ -39,12 +39,11 @@ export function InputEmail(props) {
           id={props.emailFormID ? props.emailFormID + "email" : "email"}
           name="email"
           style={{ backgroundColor: props.bg_color, color: props.color }}
-          placeholder={props.placeholder ? props.placeholder : props.noPlace ? "" : "Email *"}
-          type="email"
+          placeholder={props.placeholder || "Email *"}
         />
         {props.anotherPlace ?
           <AddingPlaceholder
-            text="Email *"
+            text={props.anotherPlace || "Email *"}
             value={props.value}
           /> : ""}
         {props.noIcons ? "" :
@@ -52,7 +51,11 @@ export function InputEmail(props) {
             {props.error ? icon.error : props.value === "" ? "" : icon.agree}
           </div>}
       </div>
-      <div className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}>{props.error}</div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
     </div >
   );
 }
@@ -64,8 +67,12 @@ export function InputCall(props) {
   }
   if (props.error_1) { icon.error = icons.error_1 }
   return (
-    <div className={style.input_block_out}>
-      <div className={theme[props.theme ? props.theme : "standard"]}>
+    <div
+      className={style.input_block_out}
+    >
+      <div
+        className={theme[props.theme ? props.theme : "standard"]}
+      >
         <input
           minLength="5"
           maxLength="30"
@@ -78,21 +85,26 @@ export function InputCall(props) {
           type="tel"
           id={props.phoneFormID ? props.phoneFormID + "phoneNumber" : "phoneNumber"}
           name="phoneNumber"
-          placeholder={props.placeholder ? props.placeholder : props.noPlace ? "" : props.en ? "Phone number *" : "Телефон *"}
+          placeholder={props.placeholder || "Phone number *"}
           style={{ backgroundColor: props.bg_color, color: props.color }}
           onChange={props.onChange}
           value={props.value}
         />
-        {props.anotherPlace ? <AddingPlaceholder
-          text={props.en ? "Phone number *" : "Телефон *"}
-          value={props.value}
-        /> : ""}
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace || "Phone number *"}
+            value={props.value}
+          /> : ""}
         {props.noIcons ? "" :
           <div className={style.error_icon}>
             {props.error ? icon.error : props.value === "" ? "" : icon.agree}
           </div>}
       </div>
-      <div className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}>{props.error}</div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
     </div>
   );
 }
@@ -119,20 +131,25 @@ export function InputName(props) {
           id={props.nameFormID ? props.nameFormID + "name" : "name"}
           name="name"
           type="name"
-          placeholder={props.placeholder ? props.placeholder : props.noPlace ? "" : props.en ? "Name *" : "Имя *"}
+          placeholder={props.placeholder || "Name *"}
           onChange={props.onChange}
           value={props.value}
         />
-        {props.anotherPlace ? <AddingPlaceholder
-          text={props.en ? "Name *" : "Имя *"}
-          value={props.value}
-        /> : ""}
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace || "Name *"}
+            value={props.value}
+          /> : ""}
         {props.noIcons ? "" :
           <div className={style.error_icon}>
             {props.error ? icon.error : props.value === "" ? "" : icon.agree}
           </div>}
       </div>
-      <div className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}>{props.error}</div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
     </div>
   );
 }
@@ -271,7 +288,10 @@ function CheckBoxArrow(props) {
       ${props.active ? style.checkbox_arrow_active : ""}
       `}
     >
-      <path d="M5.99967 11.1698L1.82967 6.99984L0.409668 8.40984L5.99967 13.9998L17.9997 1.99984L16.5897 0.589844L5.99967 11.1698Z" fill="white" />
+      <path
+        d="M5.99967 11.1698L1.82967 6.99984L0.409668 8.40984L5.99967 13.9998L17.9997 1.99984L16.5897 0.589844L5.99967 11.1698Z"
+        fill="white"
+      />
     </svg>
 
   )
@@ -335,7 +355,9 @@ export function Input(props) {
             {props.error ? icon.error : props.value === "" ? "" : icon.agree}
           </div>}
       </div>
-      <div className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
         {props.error}
       </div>
     </div >

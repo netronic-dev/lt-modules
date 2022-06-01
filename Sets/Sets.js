@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PriceButton } from "../Buttons/Buttons";
+import { Button } from "../Buttons/Buttons";
 import { FalconTable, FalconTableEn } from "../LandModules/FalconTable/FalconTable";
 import style from "./style.module.scss";
 
@@ -11,7 +11,7 @@ export function SetsButtons(props) {
         style={{ gridTemplateColumns: `repeat(${props.columns}, 1fr)` }}
       >
         {props.data.map((data, index) => (
-          <Button
+          <SetButton
             active={props.active === index ? true : false}
             onClick={data.onClick}
             key={index}
@@ -24,7 +24,7 @@ export function SetsButtons(props) {
   );
 }
 
-function Button(props) {
+function SetButton(props) {
   return (
     <div
       className={`${style.button} ${props.active === true ? style.active : null
@@ -45,9 +45,8 @@ export function SetsHeader(props) {
         <p className={style.text}>{props.text}</p>
       </div>
       <div className={style.sets_header_button}>
-        <PriceButton
+        <Button
           style="blueBlack"
-          en={props.en}
           text={props.buttonText}
         />
       </div>
@@ -195,10 +194,9 @@ export function SetsTable(props) {
           </div>
         </div>
         <div className={style.button_form}>
-          <PriceButton
-            catalog={true}
+          <Button
+            type="catalog"
             style="blueBlack"
-            en={props.en}
             text={props.buttonText}
           />
         </div>
@@ -217,10 +215,9 @@ export function SetsTable(props) {
             (<FalconTableEn sets={true} />) :
             (<FalconTable sets={true} />)}
           <div className={style.button_form}>
-            <PriceButton
-              en={props.en}
+            <Button
               text={props.buttonText}
-              catalog={true}
+              type="catalog"
               style="blueBlack"
             />
           </div>

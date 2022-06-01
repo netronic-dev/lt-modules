@@ -1,10 +1,10 @@
 import style from "./style.module.scss"
 import { useState } from "react"
-import { PopUpCall } from "../InputForms/PopUpForms/PopUpForms"
+import { useModals } from "../../context/ModalsProvider"
 
 export function Calculator(props) {
   let sortedNumbersData
-
+  const modals = useModals()
   if (props.lt) {
     if (props.en) {
       sortedNumbersData = numbersData.ltWorld
@@ -20,9 +20,6 @@ export function Calculator(props) {
   }
 
   const [activeCell, changeActiveCell] = useState(1)
-
-  const [isPopUpActive, changePopUpView] = useState(false)
-
   // Количество рабочих дней арены в месяце
   const [input1, changeInput1] = useState(sortedNumbersData.workingDays)
   // Количество рабочих часов арены в день
@@ -124,15 +121,11 @@ export function Calculator(props) {
     changeActiveCell(3)
   }
   function onInputFormOpen() {
-    changePopUpView(!isPopUpActive)
+    modals.NamePhoneModalChangeVisibility
   }
 
   return (
     <>
-      {isPopUpActive ? <PopUpCall
-        closeClick={onInputFormOpen}
-        en={props.en}
-      /> : null}
       <div className={style.desktop}>
         <PageButtons
           activeCell={activeCell}

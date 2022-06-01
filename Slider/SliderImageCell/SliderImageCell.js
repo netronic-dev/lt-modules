@@ -59,7 +59,7 @@ export default function SliderImageCell(props) {
             <span key={activeCell} className="fade-up-animation">
               {activeCell + 1}
             </span>
-                /{data.length}
+            /{data.length}
           </p>
         </div>
         <div className={style.text_block} key={activeCell}>
@@ -75,7 +75,7 @@ export default function SliderImageCell(props) {
         <div className={style.buttons} >
           <button className={`${style.button_prev} zoom-animation`} onClick={Prev}>{arrow}</button>
           <button className={`${style.button_next} zoom-animation animated-second`} onClick={Next}>
-            <span>{props.en ? "Next" : "Далее"}</span>
+            <span>Next</span>
             {arrow}
           </button>
         </div>

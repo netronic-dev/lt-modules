@@ -72,7 +72,7 @@ export function NewsBlock(props) {
     <div
       className={`
       ${style.news_block_out}
-      ${theme.newsBlock[props.theme ? props.theme : "default"]}`}
+      ${theme.newsBlock[props.theme || "default"]}`}
       ref={ref}
     >
       <div className={style.news_block_header} >
@@ -86,12 +86,14 @@ export function NewsBlock(props) {
           {props.title}
         </h2>
         <Link
-          href={props.buttonBlogLink ? props.buttonBlogLink : "/"}
+          href={props.buttonBlogLink || "/"}
         >
-          <button className={style.button_link}>
-            {props.readMoreButtonText}{" "}
-            {arrow}
-          </button>
+          <a>
+            <button className={style.button_link}>
+              {props.readMoreButtonText}{" "}
+              {arrow}
+            </button>
+          </a>
         </Link>
       </div>
       <div className={style.news_block}>
@@ -106,7 +108,7 @@ export function NewsBlock(props) {
             path={data[0].path}
             index={1}
           />
-          : null}
+          : ""}
         {data[1] ?
           <News
             theme={props.theme}
@@ -118,7 +120,7 @@ export function NewsBlock(props) {
             path={data[1].path}
             index={2}
           />
-          : null}
+          : ""}
         {data[2] ?
           <News
             theme={props.theme}
@@ -130,7 +132,7 @@ export function NewsBlock(props) {
             path={data[2].path}
             index={3}
           />
-          : null}
+          : ""}
       </div>
     </div >
   );

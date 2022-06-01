@@ -1,29 +1,17 @@
 import style from "./header.module.scss";
 import Link from "next/link";
-import { useState } from "react";
-import { PopUpCall } from "../InputForms/PopUpForms/PopUpForms"
+import { useModals } from "../../context/ModalsProvider";
 
 export default function Header(props) {
 
-  const [isInputFormOpen, setInputFormOpen] = useState(false);
+  const modals = useModals()
 
-  function onInputFormOpen() {
-    setInputFormOpen(!isInputFormOpen);
-    isInputFormOpen === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
-  }
   return (
     <>
-      {isInputFormOpen === true ? (
-        <PopUpCall call={true} closeClick={onInputFormOpen} en={props.en} />
-      ) : (
-        <></>
-      )}
       <div
-        className={`${style.header}  `}
+        className={`${style.header} header`}
       >
-        <div className={`${isInputFormOpen ? style.active : style.inactive} active`}>
+        <div className={`active`}>
         </div>
         <nav className={style.header_inside}>
           <ul className={style.menu}>
@@ -44,7 +32,7 @@ export default function Header(props) {
             ))}
             <li
               className={`${style.phone_icon} ${style.nav__item}`}
-              onClick={onInputFormOpen}
+              onClick={modals.NamePhoneModalChangeVisibility}
             >
               {phoneIcon}
             </li>

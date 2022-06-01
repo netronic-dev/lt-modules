@@ -1,8 +1,5 @@
 import style from "./pricebutton.module.scss";
-import { useState } from "react";
-import { PopUpCall, PopUpEmail, PopUpEvent, PopUpNameEmail, PopUpOutdoor } from "../InputForms/PopUpForms/PopUpForms";
-import { LPPopUpBp, LPPopUpCall, LPPopUpEmail } from "../InputForms/LpForms/LpForms";
-import { VideoPopUp } from "../Video/Video";
+import { useModals } from "../../context/ModalsProvider";
 
 const fillButtonStyles = {
   blueBlack: style.button_blue_black,
@@ -10,7 +7,7 @@ const fillButtonStyles = {
   blueWhiteArrow: style.button_blue_white_arrow,
   blueWhite: style.button_blue_white,
   white: style.button_white,
-  whiteBlack: style.button_white_black,
+  "whiteBlack": style.button_white_black,
   black: style.button_black,
   pulse: style.button_pulse,
   bigBlack: style.button_big_black,
@@ -44,191 +41,86 @@ const videoButtonTheme = {
 
 export function BUTTON(props) {
 
-  const popUpType = {
-    "call":
-      (<PopUpCall
-        text={props.text}
-        closeClick={onInputFormOpen}
-        en={props.en}
-      />),
-    "callLP":
-      (<LPPopUpCall
-        closeClick={onInputFormOpen}
-      />),
-    "catalogLP":
-      (<LPPopUpEmail
-        closeClick={onInputFormOpen}
-      />),
-    "business":
-      (<LPPopUpBp closeClick={onInputFormOpen} />),
-    "catalog":
-      (<PopUpEmail
-        en={props.en}
-        id={props.id}
-        closeClick={onInputFormOpen}
-        title={props.formTitle}
-        subtitle={props.formSubtitle}
-        buttonText={props.buttonText}
-        emailFormID={props.emailFormID}
-        phoneFormID={props.phoneFormID}
-      />),
-    "outdoor":
-      (<PopUpOutdoor
-        en={props.en}
-        closeClick={onInputFormOpen}
-      />),
-    "event":
-      (<PopUpEvent
-        en={props.en}
-        text={props.text}
-        eventNumber={props.eventNumber}
-        closeClick={onInputFormOpen}
-        subTitle={props.subTitle}
-        buttonText={props.buttonText}
-      />),
-    "nameEmail":
-      (<PopUpNameEmail
-        en={props.en}
-        closeClick={onInputFormOpen}
-        title={props.title}
-        subTitle={props.subTitle}
-        emailFormID={props.emailFormID}
-        nameFormID={props.nameFormID}
-        buttonText={props.buttonText}
-        id={props.id}
-      />)
-  }
+  const modals = useModals()
 
-  const [isInputFormOpen, setInputFormOpen] = useState(false);
-
-  function onInputFormOpen() {
-    setInputFormOpen(!isInputFormOpen);
-    isInputFormOpen === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
+  const modalType = {
+    "call": modals.NamePhoneModalChangeVisibility,
+    "catalog": modals.EmailPhoneModalChangeVisibility,
+    "event": modals.EventModalChangeVisibility,
+    "nameEmail": modals.NameEmailModalChangeVisibility
   }
 
   return (
     <>
-      {isInputFormOpen ? popUpType[props.type] : null}
       <button
-        onClick={onInputFormOpen}
-        className={`${fillButtonStyles[props.style ? props.style : "blueBlack"]} ${props.uniqueClass}`}
+        onClick={modalType[props.type || "call"]}
+        className={`${fillButtonStyles[props.style || "blueBlack"]} ${props.uniqueClass}`}
       >
-        {props.text ? props.text : "Узнать цену"}
-        {props.arrow ? <div className={style.arrow_out}>{arrow}</div> : null}
+        {props.text}
+        {props.arrow ?
+          <div className={style.arrow_out}>{arrow}</div>
+          : ""}
       </button>
     </>
   )
 }
 
-export function PriceButton(props) {
-  const [isInputFormOpen, setInputFormOpen] = useState(false);
-  function onInputFormOpen() {
-    setInputFormOpen(!isInputFormOpen);
-    isInputFormOpen === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
+export function Button(props) {
+  const modals = useModals()
+
+  const modalType = {
+    "call": modals.NamePhoneModalChangeVisibility,
+    "catalog": modals.EmailPhoneModalChangeVisibility,
+    "event": modals.EventModalChangeVisibility,
+    "nameEmail": modals.NameEmailModalChangeVisibility
   }
+
   return (
-    <>
-      {isInputFormOpen === true ?
-        props.call ?
-          (<PopUpCall
-            text={props.text}
-            closeClick={onInputFormOpen}
-            en={props.en}
-          />)
-          : props.callLP ?
-            (<LPPopUpCall
-              closeClick={onInputFormOpen}
-            />)
-            : props.catalogLP ?
-              (<LPPopUpEmail
-                closeClick={onInputFormOpen}
-              />)
-              : props.business ?
-                (<LPPopUpBp closeClick={onInputFormOpen} />)
-                : props.catalog ?
-                  (<PopUpEmail
-                    en={props.en}
-                    closeClick={onInputFormOpen}
-                  />)
-                  : props.outdoor ?
-                    (<PopUpOutdoor
-                      en={props.en}
-                      closeClick={onInputFormOpen}
-                    />)
-                    : props.event ?
-                      (<PopUpEvent
-                        en={props.en}
-                        text={props.text}
-                        eventNumber={props.eventNumber}
-                        closeClick={onInputFormOpen}
-                        subTitle={props.subTitle}
-                        buttonText={props.buttonText}
-                      />)
-                      : (<PopUpCall
-                        en={props.en}
-                        text={props.text}
-                        closeClick={onInputFormOpen}
-                      />) : null}
-      < button
-        onClick={onInputFormOpen}
-        className={`${fillButtonStyles[props.style ? props.style : "blueBlack"]} ${props.uniqueClass}`}
-      >
-        {props.text ? props.text : "Узнать цену"}
-      </button>
-    </>
+    <button
+      onClick={modalType[props.type || "call"]}
+      className={`${fillButtonStyles[props.style || "blueBlack"]} ${props.uniqueClass}`}
+    >
+      {props.text || "Check price"}
+    </button>
   );
 }
 
 export function FillButton(props) {
-  return <button
-    className={`${fillButtonStyles[props.style ? props.style : "blueBlack"]}
-    ${props.className}
+  return (
+    <button
+      className={`${fillButtonStyles[props.style || "blueBlack"]}
+        ${props.className}
     `}
-    id={props.id ? props.id : ""}
-    type={props.submit ? "submit" : "button"}
-    onClick={props.onClick}
-    style={props.uppercase ? { textTransform: 'uppercase' } : null}
-  >
-    {props.text ? props.text : "Скачать"}
-    {props.arrow ? <div className={style.arrow_out}>{arrow}</div> : null}
-  </button>;
+      id={props.id ? props.id : ""}
+      type={props.submit ? "submit" : "button"}
+      onClick={props.onClick}
+      style={props.uppercase ? { textTransform: 'uppercase' } : null}
+    >
+      {props.text || "Download"}
+      {props.arrow ? <div className={style.arrow_out}>{arrow}</div> : ""}
+    </button>
+  );
 }
 
 export function VideoButton(props) {
-  const [showVideo, changeVideoState] = useState(false)
-  function changeVideoVisibility() {
-    changeVideoState(!showVideo)
-    showVideo === true
-      ? (document.body.className = "")
-      : (document.body.className = "popUp");
-  }
+
+  const modals = useModals()
+
   return (
     <>
       <button
         className={
-          videoButtonTheme[props.style ? props.style : "normal"].style
+          videoButtonTheme[props.style || "normal"].style
         }
         style={props.uppercase ? { textTransform: 'uppercase' } : null}
-        onClick={changeVideoVisibility}
+        onClick={() => modals.VideoModalOpen(props.link)}
       >
-        {videoButtonTheme[props.style ? props.style : "normal"].playButton ? playIcon : ""}
-        <div className={style.text}>{props.text ? props.text : "Смотреть видео"}</div>
+        {videoButtonTheme[props.style || "normal"].playButton ? playIcon : ""}
+        <div className={style.text}>
+          {props.text || "Watch video"}
+        </div>
         {props.circle_fill_icon ? playIconCircleFill : ""}
       </button>
-      {
-        showVideo ?
-          (<VideoPopUp
-            withoutPreview={props.withoutPreview}
-            theme={props.theme}
-            new={props.new}
-            onClick={changeVideoVisibility}
-            link={props.link}
-          />) : ""
-      }
     </>
   );
 }
@@ -243,7 +135,13 @@ export function DefaultButton(props) {
 }
 
 const arrow = (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={style.arrow_vector}>
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    className={style.arrow_vector}
+  >
     <path
       className={style.arrow}
       d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"

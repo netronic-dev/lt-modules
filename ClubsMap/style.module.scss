@@ -129,20 +129,9 @@
 	margin-bottom: 40px;
 }
 .category_block {
-	width: 100%;
 	display: grid;
 	grid-template-columns: 2fr 6fr;
 	margin-bottom: 20px;
-}
-.copied {
-	bottom: 0;
-	right: 0;
-	display: none;
-	position: absolute;
-	z-index: 2;
-	background-color: #000;
-	color: #0090ff;
-	padding: 10px;
 }
 .category_block_blue {
 	width: 100%;
@@ -151,8 +140,7 @@
 	grid-template-columns: 2fr 6fr;
 	margin-bottom: 10px;
 	.club_text {
-		width: 100%;
-		overflow-wrap: anywhere;
+		overflow: hidden;
 		color: #0090ff;
 	}
 	.active {
@@ -183,7 +171,6 @@
 	font-size: 12px;
 	line-height: 20px;
 	color: #ffffff;
-	text-align: left;
 }
 .bordered_block {
 	cursor: pointer;
@@ -483,8 +470,6 @@
 	.cities_grid {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 	}
-}
-@media (max-width: 768px) {
 	.cards_grid {
 		grid-template-columns: 1fr;
 	}

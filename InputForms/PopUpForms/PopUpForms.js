@@ -5,11 +5,15 @@ import { useRouter } from "next/router";
 import { validate } from "../validate/validate";
 import { icons } from "../icons/icons";
 import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
-import Link from "next/link"
+import { useModals } from "../../../context/ModalsProvider";
 
-export function PopUpCall(props) {
+function turnOnScroll() {
+  document.body.className = ""
+}
+
+export function PopUpNamePhone(props) {
   const router = useRouter();
-
+  const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
 
   function onAgreementChange() {
@@ -24,21 +28,14 @@ export function PopUpCall(props) {
     validate,
     onSubmit: () => {
       setTimeout(() => {
-        router.push("/thanks-call").then(() => router.reload());
-        document.body.className = "";
+        modals.NamePhoneModalChangeVisibility();
+        router.push(props.thank_you_page).then(() => router.reload());
+        turnOnScroll();
       }, 400);
     },
   });
 
-  function turnOnScroll() {
-    document.body.className = ""
-  }
-
-  function onAgreementLinkClick() {
-    turnOnScroll()
-  }
-
-  const id = props.en ? "popup-call-submit-en" : "popup-call-submit"
+  const id = props.id || "popup-call-submit-en"
 
   return (
     <div className={style.inputs_block_out}>
@@ -49,10 +46,10 @@ export function PopUpCall(props) {
         </div>
         <div className={style.text_block}>
           <p className={style.title}>
-            {props.en ? "Fill in the form below" : "Заполните форму"}
+            {props.title || "Fill in the form below"}
           </p>
           <p className={style.paragraph}>
-            {props.en ? "Our manager will contact you" : "Мы свяжемся с Вами в ближайшее время"}
+            {props.subtitle || "Our manager will contact you"}
           </p>
         </div>
         <div className={style.inputs_block__inputs}>
@@ -61,124 +58,12 @@ export function PopUpCall(props) {
           >
             <div className={style.inputs_block__input}>
               <InputName
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
+                nameFormID={props.nameFormID}
               />
               <InputCall
-                en={props.en}
-                onChange={formik.handleChange}
-                value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber} />
-            </div>
-            <div className={style.agreement}>
-              <div
-                className={
-                  agreement === true
-                    ? style.agreement_dot_button_active
-                    : style.agreement_dot_button
-                }
-                onClick={onAgreementChange}
-              >
-                {icons.dot}
-              </div>
-              <p className={style.agreement__text}>
-                <span onClick={onAgreementChange}>
-                  {props.en ? "I agree with conditions of the processing and use " : "Подтверждаю, что ознакомился и согласен с условиями"}
-                </span>
-                {" "}{props.en ?
-                  <Link href="/privacy-policy">
-                    <a onClick={onAgreementLinkClick}>
-                      of my personal data
-                    </a>
-                  </Link>
-                  :
-                  <Link href="/agreement">
-                    <a onClick={onAgreementLinkClick}>
-                      политики конфиденциальности
-                    </a>
-                  </Link>
-                }
-              </p>
-            </div>
-            <button
-              type={agreement ? "submit" : "button"}
-              id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
-              className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
-            >
-              {props.text ? props.text : props.en ? "Get price" : "Узнать цену"}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function PopUpEmail(props) {
-  const router = useRouter();
-
-  const [agreement, changeAgreement] = useState(false);
-
-  function onAgreementChange() {
-    changeAgreement(!agreement);
-  }
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      phoneNumber: "",
-    },
-    validate,
-    onSubmit: (values) => {
-      setTimeout(() => {
-        router.push("/thanks-catalog").then(() => router.reload());
-        document.body.className = "";
-      }, 400);
-    },
-  });
-
-  function turnOnScroll() {
-    document.body.className = ""
-  }
-
-  function onAgreementLinkClick() {
-    turnOnScroll()
-  }
-
-  const id = props.id ? props.id : props.en ? "popup-email-submit-en" : "popup-email-submit"
-
-  return (
-    <div className={style.inputs_block_out}>
-      <div className={style.close_block} onClick={props.closeClick}></div>
-      <div className={style.inputs_block}>
-        <div className={style.close}>
-          <button onClick={props.closeClick}>{icons.cross}</button>
-        </div>
-        <div className={style.text_block}>
-          <p className={style.title}>
-            {props.title ? props.title : props.en ? "Fill in the form below" : "Заполните форму"}
-          </p>
-          <p className={style.paragraph}>
-            {props.subTitle ? props.subTitle : props.en ? "Get an equipment catalog with prices" : "Получите на почту каталог с ценами"}
-          </p>
-        </div>
-        <div className={style.inputs_block__inputs}>
-          <form
-            onSubmit={formik.handleSubmit}
-          >
-            <div className={style.inputs_block__input}>
-              <InputEmail
-                en={props.en}
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                error={formik.errors.email}
-                emailFormID={props.emailFormID}
-
-              />
-              <InputCall
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.phoneNumber}
                 error={formik.errors.phoneNumber}
@@ -198,21 +83,9 @@ export function PopUpEmail(props) {
               </div>
               <p className={style.agreement__text}>
                 <span onClick={onAgreementChange}>
-                  {props.en ? "I agree with conditions of the processing and use " : "Подтверждаю, что ознакомился и согласен с условиями"}
+                  {props.agreement_text}
                 </span>
-                {" "}{props.en ?
-                  <Link href="/privacy-policy">
-                    <a onClick={onAgreementLinkClick}>
-                      of my personal data
-                    </a>
-                  </Link>
-                  :
-                  <Link href="/agreement">
-                    <a onClick={onAgreementLinkClick}>
-                      политики конфиденциальности
-                    </a>
-                  </Link>
-                }
+                {" "}{props.agreement_link}
               </p>
             </div>
             <button
@@ -220,17 +93,18 @@ export function PopUpEmail(props) {
               id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
-              {props.formButtonText ? props.formButtonText : props.en ? "Get catalog" : "Получить каталог"}
+              {props.buttonText}
             </button>
           </form>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
-export function PopUpOutdoor(props) {
-  const router = useRouter();
 
+export function PopUpEmailPhone(props) {
+  const router = useRouter();
+  const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
 
   function onAgreementChange() {
@@ -245,21 +119,14 @@ export function PopUpOutdoor(props) {
     validate,
     onSubmit: (values) => {
       setTimeout(() => {
-        router.push("/thanks-catalog").then(() => router.reload());
-        document.body.className = "";
+        modals.EmailPhoneModalChangeVisibility();
+        router.push(props.thank_you_page).then(() => router.reload());
+        turnOnScroll();
       }, 400);
     },
   });
 
-  function turnOnScroll() {
-    document.body.className = ""
-  }
-
-  function onAgreementLinkClick() {
-    turnOnScroll()
-  }
-
-  const id = props.en ? "popup-outdoor-submit-en" : "popup-outdoor-submit"
+  const id = props.id || "popup-email-submit-en"
 
   return (
     <div className={style.inputs_block_out}>
@@ -270,10 +137,10 @@ export function PopUpOutdoor(props) {
         </div>
         <div className={style.text_block}>
           <p className={style.title}>
-            {props.en ? "Fill in the form below" : "Заполните форму"}
+            {props.title || "Fill in the form below"}
           </p>
           <p className={style.paragraph}>
-            {props.en ? "Get the guide to laser tag scenarios" : "Получите на почту руководство"}
+            {props.subTitle || "Get an equipment catalog with prices"}
           </p>
         </div>
         <div className={style.inputs_block__inputs}>
@@ -282,16 +149,18 @@ export function PopUpOutdoor(props) {
           >
             <div className={style.inputs_block__input}>
               <InputEmail
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
+                emailFormID={props.emailFormID}
+
               />
               <InputCall
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber} />
+                error={formik.errors.phoneNumber}
+                phoneFormID={props.phoneFormID}
+              />
             </div>
             <div className={style.agreement}>
               <div
@@ -306,21 +175,9 @@ export function PopUpOutdoor(props) {
               </div>
               <p className={style.agreement__text}>
                 <span onClick={onAgreementChange}>
-                  {props.en ? "I agree with conditions of the processing and use " : "Подтверждаю, что ознакомился и согласен с условиями"}
+                  {props.agreement_text}
                 </span>
-                {" "}{props.en ?
-                  <Link href="/privacy-policy">
-                    <a onClick={onAgreementLinkClick}>
-                      of my personal data
-                    </a>
-                  </Link>
-                  :
-                  <Link href="/agreement">
-                    <a onClick={onAgreementLinkClick}>
-                      политики конфиденциальности
-                    </a>
-                  </Link>
-                }
+                {" "}{props.agreement_link}
               </p>
             </div>
             <button
@@ -328,18 +185,18 @@ export function PopUpOutdoor(props) {
               id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
-              {props.en ? "Get the guide" : "Получить руководство"}
+              {props.buttonText || "Get catalog"}
             </button>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
 export function PopUpEvent(props) {
   const router = useRouter();
-
+  const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
 
   function onAgreementChange() {
@@ -355,21 +212,14 @@ export function PopUpEvent(props) {
     validate,
     onSubmit: (values) => {
       setTimeout(() => {
-        router.push("/thanks-pres").then(() => router.reload());
-        document.body.className = "";
+        modals.EventModalChangeVisibility();
+        router.push(props.thank_you_page).then(() => router.reload());
+        turnOnScroll();
       }, 400);
     },
   });
 
-  function turnOnScroll() {
-    document.body.className = ""
-  }
-
-  function onAgreementLinkClick() {
-    turnOnScroll()
-  }
-
-  const id = props.en ? `popup-event-${props.eventNumber}-submit-en` : `popup-event-${props.eventNumber}-submit`
+  const id = props.id || `popup-event-${props.eventNumber}-submit-en`
 
   return (
     <div className={style.inputs_block_out}>
@@ -380,7 +230,7 @@ export function PopUpEvent(props) {
         </div>
         <div className={style.text_block}>
           <p className={style.title}>
-            {props.en ? "Fill in the form below" : "Заполните форму"}
+            {props.title || "Fill in the form below"}
           </p>
           <p className={style.paragraph}>
             {props.subTitle}
@@ -392,22 +242,23 @@ export function PopUpEvent(props) {
           >
             <div className={style.inputs_block__input}>
               <InputName
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
+                nameFormID={props.nameFormID}
               />
               <InputEmail
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
+                emailFormID={props.emailFormID}
               />
               <InputCall
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber} />
+                error={formik.errors.phoneNumber}
+                phoneFormID={props.phoneFormID}
+              />
             </div>
             <div className={style.agreement}>
               <div
@@ -422,21 +273,9 @@ export function PopUpEvent(props) {
               </div>
               <p className={style.agreement__text}>
                 <span onClick={onAgreementChange}>
-                  {props.en ? "I agree with conditions of the processing and use " : "Подтверждаю, что ознакомился и согласен с условиями"}
+                  {props.agreement_text}
                 </span>
-                {" "}{props.en ?
-                  <Link href="/privacy-policy">
-                    <a onClick={onAgreementLinkClick}>
-                      of my personal data
-                    </a>
-                  </Link>
-                  :
-                  <Link href="/agreement">
-                    <a onClick={onAgreementLinkClick}>
-                      политики конфиденциальности
-                    </a>
-                  </Link>
-                }
+                {" "}{props.agreement_link}
               </p>
             </div>
             <button
@@ -455,7 +294,7 @@ export function PopUpEvent(props) {
 
 export function PopUpNameEmail(props) {
   const router = useRouter();
-
+  const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
 
   function onAgreementChange() {
@@ -470,21 +309,15 @@ export function PopUpNameEmail(props) {
     validate,
     onSubmit: () => {
       setTimeout(() => {
-        router.push("/thanks-call").then(() => router.reload());
-        document.body.className = "";
+        modals.NameEmailModalChangeVisibility();
+        router.push(props.thank_you_page)
+          .then(() => router.reload());
+        turnOnScroll();
       }, 400);
     },
   });
 
-  function turnOnScroll() {
-    document.body.className = ""
-  }
-
-  function onAgreementLinkClick() {
-    turnOnScroll()
-  }
-
-  const id = props.id ? props.id : props.en ? "popup-name-email-en" : "popup-name-email"
+  const id = props.id || "popup-name-email-en"
 
   return (
     <div className={style.inputs_block_out}>
@@ -498,7 +331,7 @@ export function PopUpNameEmail(props) {
             {props.title}
           </p>
           <p className={style.paragraph}>
-            {props.subTitle}
+            {props.subtitle}
           </p>
         </div>
         <div className={style.inputs_block__inputs}>
@@ -507,14 +340,12 @@ export function PopUpNameEmail(props) {
           >
             <div className={style.inputs_block__input}>
               <InputName
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
                 nameFormID={props.nameFormID}
               />
               <InputEmail
-                en={props.en}
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
@@ -534,21 +365,9 @@ export function PopUpNameEmail(props) {
               </div>
               <p className={style.agreement__text}>
                 <span onClick={onAgreementChange}>
-                  {props.en ? "I agree with conditions of the processing and use " : "Подтверждаю, что ознакомился и согласен с условиями"}
+                  {props.agreement_text}
                 </span>
-                {" "}{props.en ?
-                  <Link href="/privacy-policy">
-                    <a onClick={onAgreementLinkClick}>
-                      of my personal data
-                    </a>
-                  </Link>
-                  :
-                  <Link href="/agreement">
-                    <a onClick={onAgreementLinkClick}>
-                      политики конфиденциальности
-                    </a>
-                  </Link>
-                }
+                {" "}{props.agreement_link}
               </p>
             </div>
             <button
@@ -556,7 +375,7 @@ export function PopUpNameEmail(props) {
               id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
-              {props.buttonText ? props.buttonText : props.en ? "Get" : "Получить"}
+              {props.buttonText || "Get"}
             </button>
           </form>
         </div>
