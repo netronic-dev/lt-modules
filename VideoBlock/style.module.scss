@@ -1,0 +1,126 @@
+.video_short {
+	position: relative;
+	cursor: pointer;
+	width: 775px;
+	height: calc(9 * 775px / 16);
+	background-color: #000000;
+}
+.video_full {
+	position: relative;
+	cursor: pointer;
+	width: 1170px;
+	height: calc(9 * 1170px / 16);
+	background-color: #000000;
+}
+.video__link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: hidden;
+	img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+.video__media {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	border: none;
+}
+.video__button {
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0);
+	outline: 0;
+	border: 0;
+	z-index: 2;
+	position: absolute;
+	top: 42%;
+	left: 47%;
+}
+.video_full:hover {
+	.video__button_shape {
+		fill: #ff0000;
+		opacity: 1;
+	}
+}
+.video_short:hover {
+	.video__button_shape {
+		fill: #ff0000;
+		opacity: 1;
+	}
+}
+.video__frame {
+	width: 100%;
+	height: 100%;
+}
+@media (max-width: 1200px) {
+	.video_full {
+		width: 900px;
+		height: calc(9 * 900px / 16);
+	}
+}
+@media (max-width: 992px) {
+	.video_short {
+		width: 700px;
+		height: calc(9 * 700px / 16);
+		margin: 100px auto;
+	}
+	.video_full {
+		width: 700px;
+		height: calc(9 * 700px / 16);
+	}
+}
+@media (max-width: 768px) {
+	.video_short {
+		width: 570px;
+		height: calc(9 * 570px / 16);
+		margin: 50px auto;
+	}
+	.video_full {
+		width: 500px;
+		height: calc(9 * 500px / 16);
+	}
+}
+@media (max-width: 576px) {
+	.video_short {
+		width: 400px;
+		height: calc(9 * 400px / 16);
+		margin: 50px auto;
+	}
+	.video_full {
+		width: 400px;
+		height: calc(9 * 400px / 16);
+	}
+}
+@media (max-width: 400px) {
+	.video_short {
+		width: 340px;
+		height: calc(9 * 340px / 16);
+		margin: 50px auto;
+	}
+	.video_full {
+		width: 340px;
+		height: calc(9 * 340px / 16);
+	}
+}
+@media (max-width: 350px) {
+	.video_short {
+		width: 300px;
+		height: calc(9 * 300px / 16);
+		margin: 50px auto;
+	}
+	.video_full {
+		width: 300px;
+		height: calc(9 * 300px / 16);
+	}
+}

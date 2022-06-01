@@ -1,0 +1,46 @@
+.timer {
+	display: flex;
+	align-items: flex-end;
+	background: #e0e0e0;
+	border-radius: 70px;
+	width: max-content;
+	padding: 5px 20px;
+}
+.number {
+	font-family: Manrope;
+	font-weight: 600;
+	font-size: 40px;
+	line-height: 55px;
+	text-transform: uppercase;
+	color: #0090ff;
+	margin-right: 5px;
+}
+.text {
+	font-family: Manrope;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 45px;
+	text-transform: uppercase;
+	color: #0090ff;
+	margin-right: 10px;
+}
+.seconds {
+	width: 45px;
+	display: flex;
+	justify-content: flex-end;
+}
+@media (max-width: 900px) {
+	.number {
+		font-size: 36px;
+		line-height: 48px;
+	}
+	.text {
+		font-size: 24px;
+		line-height: 42px;
+	}
+	.seconds {
+		width: 40px;
+		display: flex;
+		justify-content: flex-end;
+	}
+}

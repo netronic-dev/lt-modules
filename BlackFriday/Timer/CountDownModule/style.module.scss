@@ -1,0 +1,42 @@
+.timer {
+	display: flex;
+	align-items: flex-end;
+}
+.number {
+	font-family: Manrope;
+	font-weight: 600;
+	font-size: 72px;
+	line-height: 60px;
+	text-transform: uppercase;
+	color: #0090ff;
+	margin-right: 10px;
+}
+.text {
+	font-family: Manrope;
+	font-weight: 600;
+	font-size: 48px;
+	line-height: 48px;
+	text-transform: uppercase;
+	color: #0090ff;
+	margin-right: 10px;
+}
+.seconds {
+	width: 85px;
+	display: flex;
+	justify-content: flex-end;
+}
+@media (max-width: 900px) {
+	.number {
+		font-size: 36px;
+		line-height: 48px;
+	}
+	.text {
+		font-size: 24px;
+		line-height: 42px;
+	}
+	.seconds {
+		width: 40px;
+		display: flex;
+		justify-content: flex-end;
+	}
+}

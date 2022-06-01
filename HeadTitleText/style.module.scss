@@ -1,0 +1,109 @@
+%block {
+  width: 1170px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  border-radius: 3px;
+  padding: 30px;
+}
+%title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: left;
+  width: 40%;
+  margin: auto 0;
+}
+%text {
+  padding: 0;
+  width: 45%;
+  text-align: left;
+  font-size: 13px;
+  line-height: 20px;
+  margin: auto 0;
+}
+.block_dark {
+  @extend %block;
+  background: black;
+
+  .title {
+    @extend %title;
+    color: #ffffff;
+  }
+  .text {
+    @extend %text;
+    color: #c4c4c4;
+  }
+}
+.block_white {
+  @extend %block;
+  background: #fff;
+  .title {
+    @extend %title;
+    color: #212121;
+  }
+  .text {
+    @extend %text;
+    color: #4f4f4f;
+  }
+}
+.block_light {
+  @extend %block;
+  background: #f2f2f2;
+
+  .title {
+    @extend %title;
+    color: #212121;
+  }
+  .text {
+    @extend %text;
+    color: #4f4f4f;
+  }
+}
+.block_product_card {
+  @extend %block;
+  background: #f9f9fa;
+
+  .title {
+    @extend %title;
+    color: #212121;
+  }
+  .text {
+    @extend %text;
+    color: #4f4f4f;
+  }
+}
+@media (max-width: 1200px) {
+  %block {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media (max-width: 768px) {
+  %block {
+    width: auto;
+    display: flex;
+    justify-content: normal;
+    flex-direction: column;
+    padding: 35px 24px;
+  }
+  %title {
+    font-size: 24px;
+    line-height: 28px;
+    width: auto;
+  }
+  %text {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    width: auto;
+    margin: 30px 0;
+  }
+}
+@media (max-width: 576px) {
+  %block {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

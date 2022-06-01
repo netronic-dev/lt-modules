@@ -1,0 +1,42 @@
+$font-1: Manrope, sans-serif;
+$font-2: Mada, sans-serif;
+// colors
+$black: #000000;
+$white: #fff;
+$grey: #8c8c8c;
+$bg-color: #edeef0;
+
+$transition-1: all 0.3s ease-in-out;
+$transition-2: all 0.5s ease-in-out;
+
+%page_grid {
+	width: 1170px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+%title {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 48px;
+	line-height: 50px;
+	text-transform: uppercase;
+	span {
+		font-weight: 500;
+		color: #0090ff;
+	}
+}
+@media (max-width: 1200px) {
+	%page_grid {
+		width: auto;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+@media (max-width: 500px) {
+	%page_grid {
+		width: auto;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+}

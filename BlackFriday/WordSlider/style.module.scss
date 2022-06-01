@@ -1,0 +1,105 @@
+@import "../default";
+
+.slider {
+	width: 100%;
+	overflow-x: hidden;
+}
+.slider_left {
+	position: relative;
+	bottom: -50px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-left;
+	* {
+		user-select: none;
+	}
+}
+@keyframes infiniteslide-left {
+	0% {
+		transform: translate3d(-1000px, 0, 0);
+	}
+	100% {
+		transform: translate3d(2000px, 0, 0);
+	}
+}
+.slider_right {
+	position: relative;
+	top: -50px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-right;
+	* {
+		user-select: none;
+	}
+}
+@keyframes infiniteslide-right {
+	0% {
+		transform: translate3d(2000px, 0, 0);
+	}
+	100% {
+		transform: translate3d(-1000px, 0, 0);
+	}
+}
+.text {
+	font-family: Manrope;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 200px;
+	line-height: 96.6%;
+	text-transform: uppercase;
+	color: $color-3;
+	// -webkit-text-stroke-width: 1px;
+	// -webkit-text-stroke-color: black;
+	text-shadow: 0px 0px 3px #fff;
+}
+@media (max-width: 750px) {
+	.text {
+		font-size: 80px;
+		line-height: 78px;
+	}
+	.slider_left {
+		bottom: 0;
+		margin-bottom: 180px;
+	}
+	.slider_right {
+		top: 0;
+	}
+	@keyframes infiniteslide-right {
+		0% {
+			transform: translate3d(750px, 0, 0);
+		}
+		100% {
+			transform: translate3d(-500px, 0, 0);
+		}
+	}
+	@keyframes infiniteslide-left {
+		0% {
+			transform: translate3d(-500px, 0, 0);
+		}
+		100% {
+			transform: translate3d(750px, 0, 0);
+		}
+	}
+}

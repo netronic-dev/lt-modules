@@ -1,0 +1,139 @@
+%block {
+	width: 1170px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 25px 35px;
+	border-radius: 3px;
+}
+%text_block {
+	margin-left: 35px;
+	.top {
+		width: 100%;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 14px;
+		color: #c4c4c4;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+	.bottom {
+		width: 100%;
+		height: auto;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 28px;
+		color: #ffffff;
+		margin: 0px;
+	}
+}
+
+.block {
+	@extend %block;
+	background-color: #000000;
+	.text_block {
+		@extend %text_block;
+		.top {
+			color: #c4c4c4;
+		}
+		.bottom {
+			color: #ffffff;
+		}
+	}
+}
+.block_black {
+	@extend %block;
+	background-color: #101010;
+	.text_block {
+		@extend %text_block;
+		.top {
+			color: #c4c4c4;
+		}
+		.bottom {
+			color: #ffffff;
+		}
+	}
+}
+
+.block_grey {
+	@extend %block;
+	background-color: #f2f2f2;
+	.text_block {
+		@extend %text_block;
+		.top {
+			color: #070707;
+		}
+		.bottom {
+			color: #070707;
+		}
+	}
+}
+.left_side {
+	display: flex;
+	align-items: center;
+	width: auto;
+}
+.right_side {
+	display: flex;
+	align-items: center;
+	button {
+		cursor: pointer;
+		margin: auto 0;
+	}
+}
+.button {
+	padding: 8px 36px;
+	border-radius: 100px;
+	border: 1px solid #0090ff;
+	outline: 0;
+	background: #0090ff;
+	color: white;
+}
+.button:hover {
+	border: 1px solid #fff;
+	background-color: rgb(255, 255, 255);
+	color: #070707;
+}
+@media (max-width: 1200px) {
+	%block {
+		width: 100%;
+	}
+	.footer_buttons__out {
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+}
+@media (max-width: 768px) {
+	.block {
+		justify-content: normal;
+		flex-direction: column;
+		align-items: center;
+	}
+	.left_side {
+		flex-direction: column;
+	}
+	.text_block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		margin-left: 0 !important;
+		margin: 20px 0 40px;
+		padding: 0 !important;
+	}
+	.right_side {
+		margin-bottom: 25px;
+	}
+	.block_black {
+		justify-content: normal;
+		flex-direction: column;
+		align-items: center;
+	}
+	.block_grey {
+		justify-content: normal;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 30px;
+	}
+}

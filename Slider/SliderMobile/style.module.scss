@@ -1,0 +1,86 @@
+.content {
+	display: none;
+}
+.cell {
+	margin-right: 280px;
+}
+.cell__title {
+	font-weight: bold;
+	font-size: 28px;
+	line-height: 33px;
+	color: #ffffff;
+	margin: 0 0 18px;
+}
+.cell__text {
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	color: #ffffff;
+	margin-bottom: 60px;
+}
+.cell__image {
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 25px;
+}
+.button_prev {
+	transition: all 0.4s ease-in-out;
+	cursor: pointer;
+}
+.button_prev:hover {
+	transform: scale(0.9);
+}
+.button_prev:active {
+	.square {
+		fill: rgb(233, 233, 233);
+	}
+}
+.button_next {
+	cursor: pointer;
+	transition: all 0.4s ease-in-out;
+}
+.button_next:hover {
+	transform: scale(0.9);
+}
+.button_next:active {
+	.square {
+		fill: rgb(233, 233, 233);
+	}
+}
+.buttons {
+	margin-bottom: 30px;
+}
+.button {
+	width: 68px;
+	margin-right: 0px;
+	background-color: rgba(255, 255, 255, 0);
+	border: 0;
+	margin-right: 10px;
+	svg {
+		width: 100%;
+	}
+}
+@media (max-width: 992px) {
+	.cell {
+		margin-right: 0px;
+	}
+	.buttons {
+		margin-bottom: 75px;
+		display: flex;
+		justify-content: center;
+	}
+	.cell__text {
+		margin-bottom: 35px;
+		font-size: 12px;
+		line-height: 14px;
+	}
+	.cell__title {
+		font-size: 16px;
+		line-height: 19px;
+	}
+	.button {
+		width: 50px;
+		margin-right: 0px;
+	}
+}

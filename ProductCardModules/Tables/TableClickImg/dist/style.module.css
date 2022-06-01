@@ -1,0 +1,64 @@
+.image_showed, .image {
+  width: 500px;
+  height: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.line_image :hover {
+  background-color: #f0f0f0;
+  transition-duration: 0.5s;
+}
+
+.inside {
+  width: 630px;
+  margin: 0 auto;
+}
+
+.block {
+  width: 100%;
+}
+
+.title {
+  text-align: left;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 400;
+  color: #212121;
+  margin-bottom: 45px;
+}
+
+.line {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-block-start: 0em !important;
+  margin-block-end: 0em !important;
+}
+
+.image {
+  display: none;
+}
+
+.image_showed {
+  display: block;
+}
+
+.tab_title {
+  display: block;
+  z-index: 10;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.line_image input {
+  display: none;
+}
+
+.line_image .tab_content {
+  display: none;
+}
+
+.line_image :checked ~ .tab_content {
+  display: block;
+}

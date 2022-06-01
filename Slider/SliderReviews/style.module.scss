@@ -1,0 +1,81 @@
+.cell {
+	height: 320px;
+	position: relative;
+	background-color: #fff;
+	padding: 58px 75px 42px 50px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: grab;
+}
+.review {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	.text {
+		margin: 20px 0;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 27px;
+		color: #1c1c1f;
+		width: 100%;
+	}
+	.quot_left {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+	}
+	.quot_right {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+	}
+}
+.info {
+	display: flex;
+	align-items: center;
+}
+.text_block {
+	margin-left: 15px;
+	.name {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: left;
+		color: #1c1c1f;
+	}
+	.title {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: left;
+		color: #8e8e8e;
+	}
+}
+
+@media (max-width: 1350px) {
+	.cell {
+		height: 450px;
+	}
+}
+@media (max-width: 768px) {
+	.cell {
+		height: 350px;
+	}
+	.review {
+		.text {
+			font-size: 14px;
+			line-height: 16px;
+			max-height: 140px;
+		}
+	}
+}
+@media (max-width: 500px) {
+	.cell {
+		height: 300px;
+		padding: 30px 15px 30px 12px;
+	}
+}

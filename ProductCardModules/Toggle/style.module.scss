@@ -1,0 +1,40 @@
+
+%buttons {
+  cursor: pointer;
+  padding: 6px 26px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+.buttons_block {
+  margin: 0 auto;
+  border-radius: 40px;
+  background-color: #070707;
+  padding: 8px 2px;
+  width: max-content;
+  height: max-content;
+  min-height: max-content;
+  min-width: max-content;
+}
+.buttons_block:hover {
+  .button {
+    font-weight: 500;
+    background-color: white;
+    color: black;
+  }
+  .button_active {
+    @extend %buttons;
+    color: white;
+    background-color: rgb(0, 0, 0);
+  }
+}
+.button {
+  @extend %buttons;
+  color: white;
+}
+.button_active {
+  @extend %buttons;
+  color: black;
+  background-color: white;
+}

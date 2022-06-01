@@ -1,0 +1,45 @@
+.cell {
+	padding: 25px 40px 30px 25px;
+	background-color: #212121;
+	width: 100%;
+	border-radius: 3px;
+}
+.subtitle {
+	margin-bottom: 10px;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	color: #0090ff;
+}
+.title {
+	margin-top: 0;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 21px;
+	color: #ffffff;
+}
+.top {
+	margin-bottom: 40px;
+}
+.field {
+	display: grid;
+	grid-template-columns: 50px auto;
+	grid-gap: 30px;
+	margin-bottom: 20px;
+	.field_title {
+		font-weight: 400;
+		font-size: 10px;
+		line-height: 20px;
+		color: #8e8e8e;
+		min-width: 10ch;
+	}
+	.field_text {
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 20px;
+		color: #ffffff;
+		text-overflow: ellipsis;
+		min-width: 10ch;
+		word-wrap: break-word;
+	}
+}

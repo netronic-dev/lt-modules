@@ -1,0 +1,112 @@
+%cell_black {
+  height: 745px;
+  width: 100%;
+  section {
+    transition: all 0.3s ease-in-out;
+  }
+}
+%cell_white {
+  height: 745px;
+  width: 100%;
+  section {
+    transition: all 0.3s ease-in-out;
+  }
+}
+%cell_white:hover {
+  .bg {
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgb(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  section {
+    transform: translate(0, 25%);
+  }
+}
+%cell_black:hover {
+  .bg {
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  section {
+    transform: translate(0, 25%);
+  }
+}
+.One {
+  @extend %cell_white;
+  background: url("/index/kt-smart.jpg");
+}
+.Two {
+  @extend %cell_white;
+  background: url("/index/tv-out.jpg");
+}
+.Three {
+  @extend %cell_black;
+  background: url("/index/tv-out.jpg");
+}
+.Four {
+  @extend %cell_white;
+  background: url("/index/kt-smart.jpg");
+}
+.Five {
+  @extend %cell_white;
+  background: url("/index/tv-out.jpg");
+}
+.Six {
+  @extend %cell_white;
+  background: url("/index/tv-out.jpg");
+}
+@media (max-width: 992px) {
+  %cell_white:hover {
+    section {
+      transform: translate(0, 0%);
+    }
+  }
+  %cell_black:hover {
+    section {
+      transform: translate(0, 0%);
+    }
+  }
+}
+@media (max-width: 1200px) {
+  %cell_black {
+    height: 620px;
+  }
+  %cell_white {
+    height: 620px;
+  }
+}
+@media (max-width: 992px) {
+  %cell_black {
+    height: 620px;
+  }
+  %cell_white {
+    height: 620px;
+  }
+}
+@media (max-width: 768px) {
+  %cell_black {
+    height: 745px;
+  }
+  %cell_white {
+    height: 745px;
+  }
+}
+@media (max-width: 576px) {
+  %cell_black {
+    height: 620px;
+  }
+  %cell_white {
+    height: 620px;
+  }
+}

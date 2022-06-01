@@ -1,0 +1,133 @@
+@import "../default";
+
+.video_block {
+	background: #ffffff;
+	border-radius: 20px;
+	padding: 100px 0;
+}
+.video_block__in {
+	@extend %page_grid;
+}
+.video {
+	position: relative;
+	cursor: pointer;
+	border-radius: 15px;
+	overflow: hidden;
+	margin-bottom: 100px;
+	&:hover {
+		.play_icon {
+			svg {
+				circle {
+					r: 90;
+				}
+			}
+		}
+	}
+}
+.logo {
+	position: relative;
+	height: 100px;
+	width: 100%;
+	max-width: 500px;
+	margin-bottom: 20px;
+}
+.image {
+	height: 500px;
+}
+.image_resonsive {
+	height: 500px;
+	display: none;
+}
+.title {
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	z-index: 2;
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 60px;
+	line-height: 65px;
+	text-transform: uppercase;
+	color: #ffffff;
+}
+.text {
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 60px;
+	line-height: 55px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #040e18;
+	margin-bottom: 60px;
+	span {
+		color: #0090ff;
+		font-weight: 500;
+	}
+}
+.play_icon {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	* {
+		transition: all 0.4s ease-in-out;
+	}
+}
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.button {
+	cursor: pointer;
+	background: #0090ff;
+	border-radius: 60px;
+	transition: all 0.4s ease-in-out;
+	outline: 0;
+	border: 0;
+	padding: 13px 28px;
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #ffffff;
+	&:hover {
+		background-color: #000;
+	}
+}
+@media (max-width: 800px) {
+}
+@media (max-width: 650px) {
+	.video_block {
+		padding: 80px 0;
+	}
+	.title {
+		font-size: 30px;
+		line-height: 35px;
+	}
+	.video_responsive_img {
+		.image {
+			display: none;
+		}
+		.image_resonsive {
+			display: block;
+		}
+	}
+
+	.play_icon {
+		svg {
+			width: 150px;
+			height: 150px;
+		}
+	}
+	.text {
+		font-size: 40px;
+		line-height: 45px;
+		margin-bottom: 40px;
+	}
+}

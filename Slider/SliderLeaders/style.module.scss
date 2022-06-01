@@ -1,0 +1,155 @@
+.leaders {
+	width: 1170px;
+	margin: 0 auto;
+}
+.leaders_text {
+	margin-bottom: 80px;
+	cursor: grab;
+}
+.image_block {
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	position: relative;
+	width: 100%;
+	height: 385px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	img {
+		filter: grayscale(100%);
+	}
+}
+.leaders_images {
+	width: 870px;
+	margin: 0 auto;
+}
+.leaders_images_grid {
+	width: 1170px;
+	margin: 0 auto;
+}
+.main {
+	margin: 50px 0 0;
+}
+.cell {
+	display: grid;
+	grid-template-columns: 2fr 4fr;
+}
+.cell_image {
+	display: none;
+}
+.name {
+	font-weight: 500;
+	font-size: 48px;
+	line-height: 50px;
+	color: #0c1122;
+	margin-bottom: 15px;
+	.span {
+		margin: 0;
+	}
+}
+.blue {
+	color: #0090ff;
+}
+.title {
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	color: #0c1122;
+	text-align: left;
+}
+.text {
+	width: 85%;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 27px;
+	color: #0c1122;
+	margin: 20px 50px 0px;
+}
+.quote_left {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+}
+.quote_right {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+@media (max-width: 1200px) {
+	.leaders {
+		width: auto;
+		margin: 0 20px;
+	}
+	.leaders_images_grid {
+		width: auto;
+		margin: 0 auto;
+	}
+}
+@media (max-width: 1000px) {
+	.leaders_images {
+		width: auto;
+		margin: 0 auto;
+	}
+}
+@media (max-width: 750px) {
+	.cell {
+		grid-template-columns: 1fr;
+		height: 545px;
+		background: #f2f2f2;
+		border-radius: 10px;
+		padding: 0 15px 25px;
+		margin-top: 35px;
+		display: flex;
+		flex-direction: column;
+	}
+	.cell_image {
+		position: relative;
+		overflow: hidden;
+		display: block;
+		margin: -35px 35px 35px;
+		max-height: 350px;
+	}
+	.main {
+		margin: 0;
+	}
+	.leaders_images {
+		display: none;
+	}
+	.leaders_images_grid {
+		display: none;
+	}
+	.name {
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 28px;
+		color: #0c1122;
+		height: auto;
+		br {
+			display: none;
+		}
+		span:last-child {
+			margin-left: 7px;
+		}
+	}
+	.title {
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 14px;
+		color: #8e8e8e;
+		margin-bottom: 14px;
+	}
+	.text {
+		height: auto;
+		width: auto;
+		font-size: 14px;
+		line-height: 16px;
+		color: #0c1122;
+		margin: 0;
+	}
+	.quote_right {
+		display: none;
+	}
+	.quote_left {
+		display: none;
+	}
+}

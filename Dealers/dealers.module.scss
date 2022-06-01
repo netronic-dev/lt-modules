@@ -1,0 +1,67 @@
+.body {
+	background-color: #101010;
+	padding: 60px 0 100px;
+}
+.grid {
+	width: 1170px;
+	margin: 0 auto;
+}
+.title {
+	margin: 0 0 40px 0;
+	font-weight: 500;
+	font-size: 40px;
+	line-height: 47px;
+	color: #ffffff;
+}
+.cards_greed {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+}
+.dealers_menu {
+	background-color: #212121;
+	display: flex;
+	gap: 50px;
+	padding: 25px 50px;
+	margin-bottom: 50px;
+	border-radius: 5px;
+}
+.item {
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: 400;
+}
+.active {
+	color: #0090ff;
+}
+@media (max-width: 1200px) {
+	.grid {
+		width: auto;
+		margin: 0 20px;
+	}
+	.dealers_menu {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 30px;
+	}
+	.cards_greed {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media (max-width: 775px) {
+	.cards_greed {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 600px) {
+	.title {
+		margin: 0 0 40px 0;
+		font-size: 20px;
+		line-height: 25px;
+	}
+	.dealers_menu {
+		grid-template-columns: 1fr 1fr;
+	}
+}

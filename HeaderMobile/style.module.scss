@@ -1,0 +1,151 @@
+%burger_main_text {
+	padding: 20px 0;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 14px;
+	color: #fff;
+}
+.navigation_mobile {
+	position: fixed;
+	z-index: 50;
+	display: none;
+	background-color: #000;
+	width: 100%;
+}
+.burgerOpen {
+	height: 100%;
+}
+.header_mobile {
+	width: 100%;
+	height: 50px;
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	align-items: center;
+}
+// Buttons
+.header_mobile__call {
+	background-color: rgba(0, 0, 0, 0);
+	outline: 0;
+	height: 100%;
+	border: 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 25px;
+}
+.header_mobile__burger {
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0);
+	outline: 0;
+	border: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 25px;
+}
+// Logo
+.header_mobile__logo {
+	display: flex;
+	justify-content: center;
+}
+// Burger icon
+.burger_line_top {
+	transition: all 0.2s ease-in-out;
+}
+.burger_line_bottom {
+	transition: all 0.2s ease-in-out;
+}
+.burger_svg_active {
+	.burger_line_top {
+		transform: rotate(45deg) translate(0, -2px);
+	}
+	.burger_line_bottom {
+		transform: rotate(-45deg) translate(-10px, -1px);
+	}
+}
+.mobile__burger_menu {
+	position: relative;
+	background-color: #000;
+	outline: 0;
+	border: 0;
+	height: 100%;
+	overflow-y: scroll;
+	width: 100%;
+	justify-content: flex-start;
+}
+.accordion__text {
+	@extend %burger_main_text;
+	width: 50%;
+}
+.nonBurgerItem {
+	margin: 0 25px;
+	border-bottom: 1px solid #1d1d1f;
+	.nonBurgerItem_text {
+		@extend %burger_main_text;
+	}
+}
+.accordion {
+	margin: 0 25px;
+	border-bottom: 1px solid #1d1d1f;
+	margin-top: -1px;
+	.accordion__input {
+		display: none;
+	}
+	.tab_content {
+		display: none;
+	}
+	.tab_title {
+		cursor: pointer;
+		display: flex;
+		z-index: 10;
+	}
+}
+.accordion__arrow {
+	position: relative;
+	width: 50%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	svg {
+		transform: rotate(180deg);
+		transition: all 0.2s ease-out;
+	}
+}
+.accordion :checked ~ .tab_title {
+	.accordion__arrow {
+		svg {
+			transform: rotate(0deg);
+		}
+	}
+}
+.accordion :checked ~ .tab_content {
+	display: block;
+}
+.tab_content {
+	ul {
+		margin: 0;
+	}
+	a {
+		margin: 0;
+		padding: 0;
+		height: max-content;
+	}
+}
+// inside accordion text
+.tab_content__list {
+	padding: 20px 0;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	color: rgba(196, 196, 196, 0.8);
+	.developing {
+		font-size: 9px;
+		margin-left: 5px;
+		color: #ff6157;
+	}
+}
+@media (max-width: 1200px) {
+	.navigation_mobile {
+		display: block;
+	}
+}
