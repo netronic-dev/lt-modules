@@ -116,8 +116,7 @@ export function TileFullWidthReverse(props) {
                   quality={90}
                 />)}
             </div>
-            <div className={style.text}
-              className={style.text}>
+            <div className={style.text}>
               <TextTitle
                 title={props.title}
                 text={props.text}

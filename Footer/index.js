@@ -1,8 +1,8 @@
-import { ContactsEn } from "./Contacts/Contacts";
-import FooterSocial from "./FooterSocial/FooterSocial";
+import { ContactsEn } from "./Contacts";
+import FooterSocial from "./Social";
 import style from "./footer.module.scss";
-import FooterMobile from "./FooterMobile/FooterMobile";
-import FooterMenuEn from "./FooterMenu/FooterMenuEn";
+import FooterMobile from "./Mobile";
+import FooterMenuEn from "./Menu";
 
 export default function Footer(props) {
   return (

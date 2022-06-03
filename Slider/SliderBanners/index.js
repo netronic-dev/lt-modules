@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Fade } from "react-awesome-reveal"
 import { useSwipeable } from "react-swipeable"
-import { FillButton } from "../../Buttons/Buttons"
+import { FillButton } from "../../../lt-modules/Buttons"
 import style from "./style.module.scss"
 
 export default function SliderBanners(props) {

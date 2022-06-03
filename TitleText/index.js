@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-import ButtonDetails from "../Buttons/ButtonDetails/ButtonDetails";
+import ButtonDetails from "../../lt-modules/Buttons/ButtonDetails";
 
 const themes = {
   Black: style.black,

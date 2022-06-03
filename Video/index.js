@@ -1,4 +1,4 @@
-import NewVideo from "../NewVideo/NewVideo";
+import NewVideo from "../NewVideo";
 import style from "./style.module.scss"
 
 export function VideoPopUp(props) {

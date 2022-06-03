@@ -1,4 +1,4 @@
-import { FooterButtons } from "../FooterButtons/FooterButtons";
+import { FooterButtons } from "../FooterButtons";
 import style from "./style.module.scss";
 import Image from "next/image"
 export function SeoTitleText(props) {
