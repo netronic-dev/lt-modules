@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-import { TitleText, TextTitle } from "../TitleText/TitleText";
+import { TitleText, TextTitle } from "../TitleText";
 import Link from "next/link";
 import Image from "next/image"
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import style from "./style.module.scss";
 import Image from "next/image"
 import { useEffect } from "react";
-import FooterSocial from "../Footer/FooterSocial/FooterSocial";
+import FooterSocial from "../Footer/Social";
 
 export function ThankYou(props) {
   useEffect(() => {

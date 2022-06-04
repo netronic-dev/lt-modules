@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Button } from "../Buttons/Buttons";
-import { FalconTable, FalconTableEn } from "../LandModules/FalconTable/FalconTable";
+import { Button } from "../Buttons";
+import { FalconTable, FalconTableEn } from "../../lt-lands-modules/FalconTable";
 import style from "./style.module.scss";
 
 export function SetsButtons(props) {

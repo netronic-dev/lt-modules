@@ -1,7 +1,6 @@
 import style from "./style.module.scss"
 import { InputCall, InputEmail, InputName } from "../../InputForms/Inputs/Inputs"
 import { useFormik } from "formik";
-import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function IAAPAForm(props) {
@@ -46,8 +45,6 @@ export default function IAAPAForm(props) {
             >
               {props.name ?
                 <InputName
-                  en={props.en}
-                  theme={props.theme}
                   onChange={formik.handleChange}
                   value={formik.values.name}
                   error={formik.errors.name}
@@ -58,8 +55,6 @@ export default function IAAPAForm(props) {
                 /> : ""}
               {props.email ?
                 <InputEmail
-                  en={props.en}
-                  theme={props.theme}
                   onChange={formik.handleChange}
                   value={formik.values.email}
                   error={formik.errors.email}
@@ -70,8 +65,6 @@ export default function IAAPAForm(props) {
                 /> : ""}
               {props.phone ?
                 <InputCall
-                  en={props.en}
-                  theme={props.theme}
                   onChange={formik.handleChange}
                   value={formik.values.phoneNumber}
                   error={formik.errors.phoneNumber}
