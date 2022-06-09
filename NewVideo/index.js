@@ -10,7 +10,6 @@ export default function NewVideo(props) {
   }
 
   let additional_scripts = props.additional_scripts ? props.additional_scripts : ""
-
   let autoplay
 
   if (props.autoplay) {
@@ -23,7 +22,6 @@ export default function NewVideo(props) {
   } else if (!autoplay) {
     autoplay = ""
   }
-
   let linkSource = "https://www.youtube.com/embed/" + props.link + additional_scripts + autoplay
 
   return (
@@ -40,7 +38,7 @@ export default function NewVideo(props) {
         <div className={style.video__preview} >
           <Image
             className={style.video__image}
-            src={props.image ? props.image :
+            src={props.image ||
               `https://i.ytimg.com/vi/${props.link}/maxresdefault.jpg`
             }
             width={1920}
