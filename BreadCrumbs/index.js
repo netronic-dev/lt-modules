@@ -11,29 +11,32 @@ const styles = {
 };
 
 export function BreadCrumbs(props) {
+  if (!props.breadcrumbData) {
+    return <></>
+  }
   return (
     <div className={styles[props.color ? props.color : "grey"]}>
       <ul className={style.list}>
-        {props.breadcrumbData.map((data, index) => (
+        {props.breadcrumbData.map((item, index) => (
           index ? index == props.breadcrumbData.length - 1 ?
             (<BreadElement
               noLink
               key={index}
-              text={data.name}
-              link={data.item}
+              text={item.name}
+              link={item.item}
               index={index}
             />) :
             (<BreadElement
               key={index}
-              text={data.name}
-              link={data.item}
+              text={item.name}
+              link={item.item}
               index={index}
             />) :
             (<BreadElement
               noLine
               key={index}
-              text={data.name}
-              link={data.item}
+              text={item.name}
+              link={item.item}
               index={index}
             />)
         ))}
@@ -48,7 +51,7 @@ function BreadElement(props) {
       className={`${style.item} fade-down-animation`}
       style={{ animationDelay: ((props.index + 1) * 100) + "ms" }}
     >
-      {props.noLine ? null : <span className={style.line}>/</span>}
+      {props.noLine ? "" : <span className={style.line}>/</span>}
       {props.noLink ? (<span className={style.text}>{props.text}</span>) :
         <Link href={props.link}>
           <a>
