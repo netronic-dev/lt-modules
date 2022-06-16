@@ -11,20 +11,20 @@ export default function NewVideo(props) {
 
   let additional_scripts = props.additional_scripts ? props.additional_scripts : ""
 
-  let autoplay
+  let autoplayScript
 
   if (props.autoplay) {
     if (props.additional_scripts) {
-      autoplay = "&autoplay=1"
+      autoplayScript = "&autoplay=1"
     }
-    autoplay = "?autoplay=1"
+    autoplayScript = "?autoplay=1"
   } else if (props.autoplay === undefined) {
-    autoplay = "?autoplay=1"
-  } else if (!autoplay) {
-    autoplay = ""
+    autoplayScript = "?autoplay=1"
+  } else if (!autoplayScript) {
+    autoplayScript = ""
   }
 
-  let linkSource = "https://www.youtube.com/embed/" + props.link + additional_scripts + autoplay
+  let linkSource = "https://www.youtube.com/embed/" + props.link + additional_scripts + autoplayScript
 
   return (
     <div className={style.video} >
@@ -40,7 +40,8 @@ export default function NewVideo(props) {
         <div className={style.video__preview} >
           <Image
             className={style.video__image}
-            src={props.image ? props.image :
+            src={props.image ||
+              props.defaultPreview ? "/video-previews/5.jpg" :
               `https://i.ytimg.com/vi/${props.link}/maxresdefault.jpg`
             }
             width={1920}
