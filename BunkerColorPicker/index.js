@@ -6,36 +6,36 @@ import { nanoid } from "nanoid";
 
 export default function BunkerColorPicker(props) {
 
-  const [firstColor, setFirstColor] = useState(colors[0])
-  const [secondColor, setSecondColor] = useState(colors[1])
+  const [firstColor, setFirstColor] = useState(props.colors[0])
+  const [secondColor, setSecondColor] = useState(props.colors[1])
 
   return (
     <section className={style.section}>
       <div className={style.wrapper}>
         <div className={style.content_cell}>
           <h1 className={style.title}>
-            Выберите цвет<br /> надувной фигуры!
+            {props.title}
           </h1>
           <div className={style.color_pickers}>
             <div
               className={style.color_picker_1}
             >
               <p className={style.text}>
-                Выберите основной цвет фигуры
+                {props.subtitle_1}
               </p>
               <DropDown
                 activeColor={firstColor ? firstColor.name : ""}
-                colors={colors}
+                colors={props.colors}
                 setNewColor={(index) => setFirstColor(index)}
               />
             </div>
             <div className={style.color_picker_1}>
               <p className={style.text}>
-                Выберите дополнительный цвет фигуры
+                {props.subtitle_2}
               </p>
               <DropDown
                 activeColor={secondColor ? secondColor.name : ""}
-                colors={colors}
+                colors={props.colors}
                 setNewColor={(index) => setSecondColor(index)}
               />
             </div>
@@ -105,73 +105,6 @@ const arrow = (
   </svg>
 
 )
-
-const colors = [
-  {
-    color: "ef8d2b",
-    name: "Оранжевый",
-  },
-  {
-    color: "141412",
-    name: "Черный",
-  },
-  {
-    color: "384f3d",
-    name: "Болотный",
-  },
-  {
-    color: "cad5dd",
-    name: "Белый",
-  },
-  {
-    color: "d6d69f",
-    name: "Кремовый",
-  },
-  {
-    color: "fccc00",
-    name: "Желтый",
-  },
-  {
-    color: "bcb8af",
-    name: "Серый",
-  },
-  {
-    color: "cc181b",
-    name: "Красный",
-  },
-  {
-    color: "015031",
-    name: "Зеленый",
-  },
-  {
-    color: "279941",
-    name: "Салатовый",
-  },
-  {
-    color: "005aa3",
-    name: "Голубой",
-  },
-  {
-    color: "1f4059",
-    name: "Синий",
-  },
-  {
-    color: "7580be",
-    name: "Сиреневый",
-  },
-  {
-    color: "444798",
-    name: "Фиолетовый",
-  },
-  {
-    color: "b12971",
-    name: "Малиновый",
-  },
-  {
-    color: "473529",
-    name: "Коричневый",
-  }
-]
 
 const VectorImage = (props) => {
   return (
