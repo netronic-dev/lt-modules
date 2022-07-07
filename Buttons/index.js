@@ -2,18 +2,18 @@ import style from "./pricebutton.module.scss";
 import { useModals } from "../../context/ModalsProvider";
 
 const fillButtonStyles = {
-  blueBlack: style.button_blue_black,
-  blueBlackArrow: style.button_blue_black_arrow,
-  blueWhiteArrow: style.button_blue_white_arrow,
-  blueWhite: style.button_blue_white,
-  white: style.button_white,
+  "blueBlack": style.button_blue_black,
+  "blueBlackArrow": style.button_blue_black_arrow,
+  "blueWhiteArrow": style.button_blue_white_arrow,
+  "blueWhite": style.button_blue_white,
+  "white": style.button_white,
   "whiteBlack": style.button_white_black,
-  black: style.button_black,
-  pulse: style.button_pulse,
-  bigBlack: style.button_big_black,
-  bigBlue: style.button_big_blue,
-  whiteArrowBorder: style.white_arrow_border,
-  blackArrowBorder: style.black_arrow_border,
+  "black": style.button_black,
+  "pulse": style.button_pulse,
+  "bigBlack": style.button_big_black,
+  "bigBlue": style.button_big_blue,
+  "whiteArrowBorder": style.white_arrow_border,
+  "blackArrowBorder": style.black_arrow_border,
 };
 
 const videoButtonTheme = {
