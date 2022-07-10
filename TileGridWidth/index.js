@@ -61,7 +61,7 @@ export function TileGridWidth(props) {
                 title={props.title}
                 text={props.text}
                 theme={props.style}
-                en={props.en}
+                buttonText={props.buttonText}
               />
             </div>
           </a>
@@ -85,7 +85,7 @@ export function TileGridWidthLeft(props) {
                 title={props.title}
                 text={props.text}
                 theme={props.style}
-                en={props.en}
+                buttonText={props.buttonText}
               />
             </div>
             <div className={style.right}>
@@ -129,7 +129,7 @@ export function TileGridWidthLeftFull(props) {
                 title={props.title}
                 text={props.text}
                 theme={props.style}
-                en={props.en}
+                buttonText={props.buttonText}
               />
             </div>
           </div>
@@ -190,7 +190,7 @@ export class TileGridWidthButtons extends Component {
                 title={this.props.title}
                 text={this.props.text}
                 theme={this.props.style}
-                en={this.props.en}
+                buttonText={this.props.buttonText}
               />
             </div>
           </a>

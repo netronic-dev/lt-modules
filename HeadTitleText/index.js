@@ -7,7 +7,7 @@ const styles = {
   "productCard": style.block_product_card
 }
 
-function HeadTitleText(props) {
+export default function HeadTitleText(props) {
   return (
     <section className={styles[props.style]}>
       <h1 className={style.title}>{props.title}</h1>
@@ -15,5 +15,3 @@ function HeadTitleText(props) {
     </section>
   )
 }
-
-export default HeadTitleText

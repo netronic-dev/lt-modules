@@ -25,7 +25,7 @@ export function TitleText(props) {
         }
         <div className={style.margin}></div>
         <div className={style.buttons}>
-          <ButtonDetails theme={props.theme} en={props.en} />
+          <ButtonDetails theme={props.theme} text={props.buttonText} />
         </div>
       </div>
     </div >
@@ -45,7 +45,7 @@ export function TextTitle(props) {
         }
         <div className={style.margin}></div>
         <div className={style.buttons_reverse}>
-          <ButtonDetails theme={props.theme} en={props.en} />
+          <ButtonDetails theme={props.theme} text={props.buttonText} />
         </div>
       </div>
     </ div>

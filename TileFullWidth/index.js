@@ -59,7 +59,7 @@ export function TileFullWidth(props) {
                 title={props.title}
                 text={props.text}
                 theme={props.style}
-                en={props.en}
+                buttonText={props.buttonText}
                 direction={props.direction}
               />
             </div>
@@ -123,7 +123,7 @@ export function TileFullWidthReverse(props) {
                 theme={props.style}
                 description={props.description}
                 direction={props.direction}
-                en={props.en}
+                buttonText={props.buttonText}
               />
             </div>
           </div>

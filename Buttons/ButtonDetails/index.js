@@ -6,7 +6,7 @@ const themes = {
 export default function ButtonDetails(props) {
   return (
     <button className={themes[props.theme]}>
-      <span className="button__text">Learn more</span>
+      <span className="button__text">{props.text || "Learn more"}</span>
       {icon}
     </button>
   );

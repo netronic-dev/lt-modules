@@ -31,7 +31,6 @@ export function TileToTile(props) {
                 title={props.title}
                 text={props.text}
                 theme={props.styleFirst}
-                en={props.en}
               />
             </div>
           </div>
@@ -57,7 +56,7 @@ export function TileToTile(props) {
                 title={props.titleTwo}
                 text={props.textTwo}
                 theme={props.styleSecond}
-                en={props.en}
+                buttonText={props.buttonText}
               />
             </div>
           </div>
@@ -90,7 +89,7 @@ export function TileToTileReverse(props) {
               </div>
               <div className={style.text}>
                 <TextTitle
-                  en={props.en}
+                  buttonText={props.buttonText}
                   title={props.title}
                   text={props.text}
                   theme={props.styleFirst}
@@ -121,7 +120,7 @@ export function TileToTileReverse(props) {
               </div>
               <div className={style.text}>
                 <TextTitle
-                  en={props.en}
+                  buttonText={props.buttonText}
                   title={props.titleTwo}
                   text={props.textTwo}
                   theme={props.styleSecond}

@@ -1,6 +1,7 @@
 import { FooterButtons } from "../FooterButtons";
 import style from "./style.module.scss";
 import Image from "next/image"
+
 export function SeoTitleText(props) {
   return (
     <div className={style.title_text}>
@@ -9,6 +10,7 @@ export function SeoTitleText(props) {
     </div>
   );
 }
+
 export function SeoImg(props) {
   return (
     <div className={style.img}>
@@ -22,6 +24,7 @@ export function SeoImg(props) {
     </div>
   );
 }
+
 export function SeoTitleTable(props) {
   return (
     <div className={style.title_table}>
@@ -30,6 +33,7 @@ export function SeoTitleTable(props) {
     </div>
   );
 }
+
 export function SeoCTA(props) {
   return (
     <div className={style.cta}>

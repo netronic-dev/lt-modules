@@ -7,39 +7,38 @@ export default function HeaderSubMenu(props) {
     <div className={style.submenu}>
       <Fade direction="down" triggerOnce>
         <ul className={style.submenu_in}>
-          <Link href={props.en ? "/outdoor-laser-tag" : "/vnearennoe-lasertag-oborudovanie"
-          }>
+          <Link href="/outdoor-laser-tag">
             <a>
               <li>
                 <span className={style.vector}>{outDoor}</span>
                 <span
-                  className={`${props.out === true ? style.active : null} ${style.text
-                    }`}
+                  className={`
+                    ${props.out && style.active}
+                    ${style.text}
+                  `}
                 >
-                  {props.en ? "Outdoor equipment" : "Внеаренное оборудование"}
+                  Outdoor equipment
                 </span>
               </li>
             </a>
           </Link>
-          <Link href={
-            props.en ?
-              "/indoor-laser-tag-equipment"
-              : "/arennoe-lasertag-oborudovanie"
-          }>
+          <Link href="/indoor-laser-tag-equipment">
             <a>
               <li>
                 <span className={style.vector}>{inDoor}</span>
                 <span
-                  className={`${props.in === true ? style.active : null} ${style.text
+                  className={`
+                    ${props.in && style.active}
+                    ${style.text
                     }`}
                 >
-                  {props.en ? "Indoor Equipment" : "Аренное оборудование"}
+                  Indoor Equipment
                   <p className={style.newitem}>New</p>
                 </span>
               </li>
             </a>
           </Link>
-          <Link href={props.en ? "/outdoor-laser-tag/shock-band" : "/vnearennoe-lasertag-oborudovanie/shok-braslet-scorpion"}>
+          <Link href="/outdoor-laser-tag/shock-band">
             <a>
               <li>
                 <span className={style.vector}>{schokBand}</span>
@@ -48,11 +47,11 @@ export default function HeaderSubMenu(props) {
                     }`}
                 >
                   Shock-band
-              </span>
+                </span>
               </li>
             </a>
           </Link>
-          <Link href={props.en ? "/equipment/game-based-devices" : "/oborudovanie/scenarnie-ustroistva"}>
+          <Link href="/equipment/game-based-devices">
             <a>
               <li>
                 <span className={style.vector}>{scriptDevices}</span>
@@ -60,12 +59,12 @@ export default function HeaderSubMenu(props) {
                   className={`${props.script === true ? style.active : null} ${style.text
                     }`}
                 >
-                  {props.en ? "Game-based devices" : "Сценарные устройства"}
+                  Game-based devices
                 </span>
               </li>
             </a>
           </Link>
-          <Link href={props.en ? "/equipment/software" : "/oborudovanie/prilozhenie"}>
+          <Link href="/equipment/software">
             <a>
               <li>
                 <span className={style.vector}>{soft}</span>
@@ -73,12 +72,12 @@ export default function HeaderSubMenu(props) {
                   className={`${props.soft === true ? style.active : null} ${style.text
                     }`}
                 >
-                  {props.en ? "Software" : "Программное обеспечение"}
+                  Software
                 </span>
               </li>
             </a>
           </Link>
-          <Link href={props.en ? "/equipment/accessories" : "/oborudovanie/aksessuary"}>
+          <Link href="/equipment/accessories">
             <a>
               <li>
                 <span className={style.vector}>{accessories}</span>
@@ -86,12 +85,12 @@ export default function HeaderSubMenu(props) {
                   className={`${props.accessories === true ? style.active : null
                     } ${style.text}`}
                 >
-                  {props.en ? "Accessories" : "Аксессуары"}
+                  Accessories
                 </span>
               </li>
             </a>
           </Link>
-          <Link href={props.en ? "/equipment/sets/" : "/oborudovanie/komplektacii/"}>
+          <Link href="/equipment/sets/">
             <a>
               <li>
                 <span className={style.vector}>{sets}</span>
@@ -99,7 +98,7 @@ export default function HeaderSubMenu(props) {
                   className={`${props.sets === true ? style.active : null} ${style.text
                     }`}
                 >
-                  {props.en ? "Sets for business" : "Комплектации"}
+                  Sets for business
                 </span>
               </li>
             </a>
@@ -205,12 +204,23 @@ const scriptDevices = (
 const soft = (
   <svg width="78" height="44" viewBox="0 0 78 44" fill="none" >
     <g clipPath="url(#clip0)">
-      <path d="M69.743 35.6625V1.84059C69.7586 0.849526 68.9756 0.0157755 67.9891 4.43485e-05C67.9734 4.43485e-05 67.9421 4.43485e-05 67.9264 4.43485e-05H13.2418C12.2553 -0.0156868 11.441 0.786601 11.4253 1.77766C11.4253 1.79339 11.4253 1.82486 11.4253 1.84059V13.9221H13.1166V2.84738H68.13V35.6625H17.092V39.3594H68.9756C70.6513 39.3594 75.2866 38.6986 76.0696 37.4244V35.6625H69.743Z" fill="#1D1D1F" />
-      <path d="M15.5863 14.7086C16.5416 14.7086 17.3246 15.4952 17.3246 16.4548V40.6807C17.3246 41.6403 16.5416 42.4269 15.5863 42.4269H4.38946C3.4342 42.4269 2.6512 41.6403 2.6512 40.6807V16.4548C2.6512 15.4952 3.4342 14.7086 4.38946 14.7086H15.5863ZM15.5863 13.1355H4.38946C2.55724 13.1355 1.08521 14.63 1.08521 16.4548V40.6807C1.08521 42.5055 2.55724 44 4.38946 44H15.5863C17.4029 44 18.8906 42.5213 18.8906 40.6807V16.4548C18.8749 14.63 17.4029 13.1355 15.5863 13.1355Z" fill="#1D1D1F" />
+      <path
+        d="M69.743 35.6625V1.84059C69.7586 0.849526 68.9756 0.0157755 67.9891 4.43485e-05C67.9734 4.43485e-05 67.9421 4.43485e-05 67.9264 4.43485e-05H13.2418C12.2553 -0.0156868 11.441 0.786601 11.4253 1.77766C11.4253 1.79339 11.4253 1.82486 11.4253 1.84059V13.9221H13.1166V2.84738H68.13V35.6625H17.092V39.3594H68.9756C70.6513 39.3594 75.2866 38.6986 76.0696 37.4244V35.6625H69.743Z"
+        fill="#1D1D1F"
+      />
+      <path
+        d="M15.5863 14.7086C16.5416 14.7086 17.3246 15.4952 17.3246 16.4548V40.6807C17.3246 41.6403 16.5416 42.4269 15.5863 42.4269H4.38946C3.4342 42.4269 2.6512 41.6403 2.6512 40.6807V16.4548C2.6512 15.4952 3.4342 14.7086 4.38946 14.7086H15.5863ZM15.5863 13.1355H4.38946C2.55724 13.1355 1.08521 14.63 1.08521 16.4548V40.6807C1.08521 42.5055 2.55724 44 4.38946 44H15.5863C17.4029 44 18.8906 42.5213 18.8906 40.6807V16.4548C18.8749 14.63 17.4029 13.1355 15.5863 13.1355Z"
+        fill="#1D1D1F"
+      />
     </g>
     <defs>
       <clipPath id="clip0">
-        <rect width="77" height="44" fill="white" transform="translate(0.0852051)" />
+        <rect
+          width="77"
+          height="44"
+          fill="white"
+          transform="translate(0.0852051)"
+        />
       </clipPath>
     </defs>
   </svg>

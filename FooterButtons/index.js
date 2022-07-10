@@ -1,5 +1,4 @@
 import style from "./style.module.scss";
-import { Fade } from "react-awesome-reveal";
 import { useInView } from "react-hook-inview";
 import { useModals } from "../../context/ModalsProvider";
 
@@ -30,26 +29,30 @@ export function FooterButtons(props) {
       <div className={style.footer_buttons__out}>
         <div
           ref={ref}
-          key={isVisible ? 1 : 0}
-          className={`${themes[props.theme ? props.theme : "normal"]}
+          key={isVisible ? "footer_buttons-inview" : "footer_buttons"}
+          className={`
+            ${themes[props.theme || "normal"]}
             zoom-animation
-      `}>
+          `}
+        >
           <div className={style.left_side}>
             <img src={logoses[props.logoName]} alt={props.logoName} />
             <div className={style.text_block}>
-              <p className={style.top}>{props.textTop}</p>
-              <p className={style.bottom}>{props.textBottom}</p>
+              <p className={style.top}>
+                {props.textTop}
+              </p>
+              <p className={style.bottom}>
+                {props.textBottom}
+              </p>
             </div>
           </div>
           <div className={style.right_side}>
-            <Fade delay={500} triggerOnce>
-              <button
-                onClick={modals.NamePhoneModalChangeVisibility}
-                className={style.button}
-              >
-                {props.buttonText}
-              </button>
-            </Fade>
+            <button
+              onClick={modals.NamePhoneModalChangeVisibility}
+              className={`${style.button} fade-animation`}
+            >
+              {props.buttonText}
+            </button>
           </div>
         </div>
       </div>
