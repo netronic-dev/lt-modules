@@ -43,7 +43,8 @@ export function TileFullWidth(props) {
                     />
                   </div>
                 </>
-                ) : (<Image
+                ) :
+                (<Image
                   alt={props.title}
                   src={props.bg}
                   layout="fill"

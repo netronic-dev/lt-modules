@@ -38,9 +38,6 @@ export function SeoCTA(props) {
   return (
     <div className={style.cta}>
       <FooterButtons
-        en={props.en}
-        call={props.call}
-        catalog={props.catalog}
         theme={props.theme}
         logoName={props.logoName}
         textTop={props.textTop}
