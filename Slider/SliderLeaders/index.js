@@ -2,7 +2,6 @@ import Slider from "react-slick";
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import Image from "next/image"
-import { Fade } from "react-awesome-reveal";
 
 export function SliderLeaders(props) {
   const [nav1, changeNav1] = useState(null);

@@ -1,12 +1,9 @@
 import { useFormik } from "formik";
-import Link from "next/link";
 import { useState } from "react";
 import style from "../forms.module.scss";
 import { useRouter } from "next/router";
 import { validate } from "../validate/validate"
-import { icons } from "../icons/icons"
 import { InputName, InputCall, InputEmail, DropDownList } from "../Inputs/Inputs"
-import { Fade } from "react-awesome-reveal";
 import { useInView } from "react-hook-inview";
 
 const buttonTheme = {
@@ -215,19 +212,20 @@ export function FormWMaterials(props) {
           {props.buttonText}
         </button>
       </div>
-      <Fade direction="up" triggerOnce>
-        <div onClick={onAgreementChange} className={style.agreement}>
-          <Dot active={agreement ? true : false} colorDot={props.colorDot} />
-          <input
-            className={style.radioBox}
-            name="materials"
-            type='radio'
-            id="radioBox-materials"
-            value={agreement}
-          />
-          {props.materialsAgreementText}
-        </div>
-      </Fade>
+      <div
+        onClick={onAgreementChange}
+        className={`${style.agreement} fade-animation`}
+      >
+        <Dot active={agreement ? true : false} colorDot={props.colorDot} />
+        <input
+          className={style.radioBox}
+          name="materials"
+          type='radio'
+          id="radioBox-materials"
+          value={agreement}
+        />
+        {props.materialsAgreementText}
+      </div>
     </form>
   )
 }

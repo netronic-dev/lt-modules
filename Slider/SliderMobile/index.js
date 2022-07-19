@@ -1,7 +1,6 @@
 import Slider from "react-slick";
 import Image from "next/image"
 import style from "./style.module.scss"
-import { Fade } from "react-awesome-reveal";
 import { useRef } from "react";
 import { useInView } from "react-hook-inview";
 

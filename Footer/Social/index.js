@@ -2,34 +2,17 @@ import Link from "next/link";
 import style from "../footer.module.scss";
 
 function FooterSocial(props) {
-  const links = {
-    ru: {
-      facebook: "https://www.facebook.com/lasertagru",
-      instagram: "https://www.instagram.com/lasertag.ru",
-      youtube: "https://www.youtube.com/c/LasertagRu1/?sub_confirmation=1",
-      vk: "https://vk.com/lasertag_ru"
-    },
-    en: {
-      facebook: "https://www.facebook.com/lasertagnet/",
-      instagram: "https://www.instagram.com/lasertag_net/",
-      youtube: "https://www.youtube.com/channel/UCfQUCL7EoD5vjO1dTmKWAqw",
-    },
-  }
-  const logo = {
-    ru: "/forpost-logo.svg",
-    en: "/ltnet-logo.svg"
-  }
   return (
     <div className={style.footer_social}>
       <div className={style.footer_social_inside}>
         <img
           className={style.logo}
-          src={props.en ? logo.en : logo.ru}
+          src={props.logo}
         />
         <ul>
           {/* facebook */}
           <a
-            href={props.en ? links.en.facebook : links.ru.facebook} target="_blank">
+            href={props.facebook} target="_blank">
             <button>
               <li>
                 {facebookIcon}
@@ -38,8 +21,9 @@ function FooterSocial(props) {
           </a>
           {/* instagram */}
           <a
-            href={props.en ? links.en.instagram : links.ru.instagram}
-            target="_blank">
+            href={props.instagram}
+            target="_blank"
+          >
             <button>
               <li>
                 {instagramIcon}
@@ -48,7 +32,7 @@ function FooterSocial(props) {
           </a>
           {/* youtube */}
           <a
-            href={props.en ? links.en.youtube : links.ru.youtube}
+            href={props.youtube}
             target="_blank"
           >
             <button>
@@ -57,49 +41,26 @@ function FooterSocial(props) {
               </li>
             </button>
           </a>
-          {/* vk or telegram for ru or en */}
-          {props.en ?
-            "" :
-            (<a
-              href={links.ru.vk}
-              target="_blank">
-              <button>
-                <li>
-                  {vkIcon}
-                </li>
-              </button>
-            </a>)}
         </ul>
         <div className={style.footer_text}>
-
-          <Link href={props.en ? "/privacy-policy" : "/agreement/"}>
+          <Link href="/privacy-policy">
             <a>
               <div>
-                {props.en ? "Privacy Policy" :
-                  "Политика конфиденциальности"
-                }
+                Privacy Policy
               </div>
             </a>
           </Link>
-
-          {props.lp ? (
-            <></>
-          ) : (
-            <>
-              <hr className={style.line} />
-              <Link href="/sitemap/">
-                <a>
-                  <div>
-                    {props.en ? "Site-map" :
-                      "Карта сайта"}
-                  </div>
-                </a>
-              </Link>
-            </>
-          )}
+          <hr className={style.line} />
+          <Link href="/sitemap/">
+            <a>
+              <div>
+                Site-map
+              </div>
+            </a>
+          </Link>
         </div>
         <div className={style.copyright}>
-          Copyright © 2022 All Rights Reserved.
+          Copyright © {new Date().getFullYear()} All Rights Reserved.
         </div>
       </div>
     </div>

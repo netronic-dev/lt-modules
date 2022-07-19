@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { Fade } from "react-awesome-reveal"
 import { useSwipeable } from "react-swipeable"
 import { FillButton } from "../../../lt-modules/Buttons"
 import style from "./style.module.scss"
@@ -39,20 +38,18 @@ export default function SliderBanners(props) {
   return (
     <>
       <div className={style.slider_changer_out} >
-        <Fade direction="up" triggerOnce>
-          <div className={style.slider_changer}>
-            {props.data.map((item, index) => (
-              <p
-                onClick={() => { changeSliderData(index) }}
-                className={`${style.slider_changer_text} 
+        <div className={`${style.slider_changer} fade-up-animation`}>
+          {props.data.map((item, index) => (
+            <p
+              onClick={() => { changeSliderData(index) }}
+              className={`${style.slider_changer_text} 
                 ${index == ArrayNumber ? style.active : null}`}
-                key={index}
-              >
-                {item.name}
-              </p>
-            ))}
-          </div>
-        </Fade>
+              key={index}
+            >
+              {item.name}
+            </p>
+          ))}
+        </div>
       </div>
       <div className={style.slider} key={ArrayNumber} {...swipeHandlers}>
         <div className={`${style.image_cell} ${style.pointer}`} onClick={prev}>
@@ -102,26 +99,26 @@ function CellAdder(props) {
   return (
     props.visible ?
       <Link href={props.link}>
-        <a>
-          <Fade triggerOnce cascade duration={500}>
-            <Image
-              src={props.image}
-              layout="responsive"
-              width={972}
-              height={530}
-              quality={92}
-              priority={true}
-            />
-            <Fade cascade>
-              <div className={style.cell_button}>
-                <FillButton text={props.text} />
-              </div>
-            </Fade>
-          </Fade>
+        <a className={`fade-up-animation`}>
+          <Image
+            src={props.image}
+            layout="responsive"
+            width={972}
+            height={530}
+            quality={92}
+            priority={true}
+          />
+          <div
+            className={`
+              ${style.cell_button} fade-up-animation animated-second
+            `}
+          >
+            <FillButton text={props.text} />
+          </div>
         </a>
       </Link >
       :
-      <Fade cascade triggerOnce duration={500}>
+      <div className="fade-up-animation animated-second">
         <Image
           src={props.image}
           layout="fill"
@@ -129,7 +126,7 @@ function CellAdder(props) {
           objectPosition={props.objectPosition}
           priority={true}
         />
-      </Fade>
+      </div>
   )
 }
 

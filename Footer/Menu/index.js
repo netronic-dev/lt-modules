@@ -1,7 +1,7 @@
 import Link from "next/link";
 import style from "../footer.module.scss";
 
-export default function FooterMenuEn(props) {
+export default function FooterMenu(props) {
   return (
     <div className={style.footer_menu}>
       <div className={style.inside}>
@@ -14,142 +14,77 @@ export default function FooterMenuEn(props) {
               </li>
             </a>
           </Link>
-          <Link href="/indoor-laser-tag-equipment"
+          <Link href="/equipment/falcon"
           >
             <a>
               <li>
-                Indoor laser tag
+                Falcon
               </li>
             </a>
           </Link>
-          <Link href="/outdoor-laser-tag">
+          <Link href="/equipment/lux">
             <a>
               <li>
-                Outdoor laser tag
+                Falcon Lux
               </li>
             </a>
           </Link>
           <Link href="/equipment/software">
             <a>
               <li>
-                Mobile laser tag
+                Headband
               </li>
             </a>
           </Link>
-          <Link href="/equipment/sets">
+          <Link href="/equipment/headband">
             <a>
               <li>
                 Laser tag sets
               </li>
             </a>
           </Link>
-          <Link href="/outdoor-laser-tag/shock-band">
+          <Link href="/equipment/scorpion">
             <a>
               <li>
-                Shock-band
+                Scorpion
               </li>
             </a>
           </Link>
-          <Link href="/equipment/software">
+        </ul>
+        <ul>
+          <Link href="/mobile-business">
             <a>
-              <li>
+              <li className={style.general}>
+                Mobile business
+              </li>
+            </a>
+          </Link>
+          <Link href="/software">
+            <a>
+              <li className={style.general}>
                 Software
               </li>
             </a>
           </Link>
-          <Link href="/equipment/software">
-            <a>
-              <li>
-                Mobile laser tag
-              </li>
-            </a>
-          </Link>
         </ul>
         <ul>
-          <Link href="/laser-tag-business">
+          <Link href="/about-company">
             <a>
               <li className={style.general}>
-                Bussiness
+                About company
               </li>
             </a>
           </Link>
-          <Link href="/laser-tag-business/indoor">
+          <Link href="/about-company/clubs">
             <a>
               <li>
-                Indoor
+                Laser tag clubs
               </li>
             </a>
           </Link>
-          <Link href="/laser-tag-business/outdoor">
+          <Link href="/about-company/contacts/">
             <a>
               <li>
-                Outdoor
-              </li>
-            </a>
-          </Link>
-          <Link href="/laser-tag-business/shock-fight">
-            <a>
-              <li>
-                Shock-Fight
-              </li>
-            </a>
-          </Link>
-          <Link href="/laser-tag-business/mobile">
-            <a>
-              <li>
-                Mobile
-              </li>
-            </a>
-          </Link>
-          <Link href="/laser-tag-business/arena-development">
-            <a>
-              <li>
-                Arena development
-              </li>
-            </a>
-          </Link>
-        </ul>
-        <ul>
-          <Link href="/about-us">
-            <a>
-              <li className={style.general}>
-                About us
-              </li>
-            </a>
-          </Link>
-          <Link href="/official-dealers">
-            <a>
-              <li>
-                Dealers
-              </li>
-            </a>
-          </Link>
-          <Link href="/about-us/video">
-            <a>
-              <li>
-                Video
-              </li>
-            </a>
-          </Link>
-        </ul>
-        <ul>
-          <Link href="/blog">
-            <a>
-              <li className={style.general}>
-                Blog
-              </li>
-            </a>
-          </Link>
-          <Link href="/support/warranty">
-            <a>
-              <li className={style.general}>
-                Warranty
-              </li>
-            </a>
-          </Link>
-          <Link href="/about-us/contact/">
-            <a>
-              <li className={style.general}>
                 Contacts
               </li>
             </a>
@@ -162,12 +97,7 @@ export default function FooterMenuEn(props) {
 function Developing(props) {
   return (
     <p className={style.developing}>
-      {props.en
-        ?
-        "Developing"
-        :
-        "В разработке"
-      }
+      Developing
     </p>
   )
 }

@@ -39,8 +39,11 @@ function FooterAccordion(props) {
       <label htmlFor={props.id + "f"} className={style.tab_title}>
         {props.link ?
           (<Link href={props.link}>
-            <p className={style.accordion__text}>{props.title}</p>
-          </Link>) : (<p className={style.accordion__text}>{props.title}</p>)}
+            <p className={style.accordion__text}>
+              {props.title}
+            </p>
+          </Link>) :
+          (<p className={style.accordion__text}>{props.title}</p>)}
         <div className={style.accordion__arrow}>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path
@@ -68,26 +71,20 @@ function FooterAccordion(props) {
 }
 
 function AccordionItem(props) {
+
   function scroll() {
     window.scroll({ top: 0 })
   }
+
   return (
-    <>
-      {
-        props.link ? (
-          <Link href={props.link ? props.link : ""}>
-            <a>
-              <li onClick={scroll} className={style.tab_content__list}>
-                {props.text}
-                {props.developing ? (<span className={style.developing}>В разработке</span>) : null}
-              </li>
-            </a>
-          </Link>
-        ) : props.linkA ? (
-          <a target="_blank" href={props.linkA}>
-            <li className={style.tab_content__list}>{props.text} {props.developing ? (<span className={style.developing}>В разработке</span>) : null}</li>
-          </a>
-        ) : null}
-    </>
+    <Link href={props.link ? props.link : ""}>
+      <a
+        target={props.blank ? "_blank" : false}
+      >
+        <li onClick={scroll} className={style.tab_content__list}>
+          {props.text}
+        </li>
+      </a>
+    </Link>
   );
 }

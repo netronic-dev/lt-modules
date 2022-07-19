@@ -2,7 +2,6 @@ import style from "./style.module.scss";
 import Link from "next/link";
 import { useState } from "react";
 import { useModals } from "../../context/ModalsProvider";
-// import { Search } from "../Search/Search";
 
 export function HeaderMobile(props) {
 
@@ -33,7 +32,7 @@ export function HeaderMobile(props) {
           <div className={style.header_mobile__logo}>
             <Link href="/">
               <a>
-                <img src={props.en ? "/ltnet-logo.svg" : "/forpost-logo.svg"} alt="logo" />
+                <img src={props.logo} alt="logo" />
               </a>
             </Link>
           </div>
@@ -47,7 +46,6 @@ export function HeaderMobile(props) {
         </div>
         {isBurgerOpen ? (
           <div className={style.mobile__burger_menu}>
-            {/* <Search en={props.en} mobile /> */}
             {props.data.map((item, index) => (
               item.items ?
                 (<HeaderAccordion
@@ -65,7 +63,7 @@ export function HeaderMobile(props) {
             ))}
           </div>
         )
-          : null}
+          : ""}
       </nav>
     </>
   );
@@ -126,40 +124,19 @@ export function HeaderAccordionItem(props) {
     document.body.className = "";
   }
   return (
-    <>
-      {props.link ? (
-        <Link href={props.link ? props.link : ""}>
-          <a>
-            <li
-              onClick={(onMenuButtonClick, props.click)}
-              className={style.tab_content__list}
-            >
-              {props.text}
-            </li>
-          </a>
-        </Link>
-      ) : props.linkA ? (
-        <a
-          target="_blank"
-          href={props.linkA}
+    <Link href={props.link ? props.link : ""}>
+      <a target={props.blank ? "_blank" : false}>
+        <li
+          onClick={(onMenuButtonClick, props.click)}
+          className={style.tab_content__list}
         >
-          <li
-            className={style.tab_content__list}
-          >
-            {props.text}
-            {props.developing ?
-              (<span
-                className={style.developing}
-              >
-                В разработке
-              </span>
-              ) : null}
-          </li>
-        </a>
-      ) : null}
-    </>
+          {props.text}
+        </li>
+      </a>
+    </Link>
   );
 }
+
 function NonBurgerItem(props) {
   function onMenuButtonClick() {
     document.body.className = "";
@@ -176,6 +153,7 @@ function NonBurgerItem(props) {
     </div>
   )
 }
+
 function BurgerVector(props) {
   return (
     <svg

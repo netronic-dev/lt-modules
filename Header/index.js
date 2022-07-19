@@ -15,20 +15,26 @@ export default function Header(props) {
         </div>
         <nav className={style.header_inside}>
           <ul className={style.menu}>
-            <li className={`${props.ltNet ? style.header__logo_net : style.header__logo}`}>
+            <li className={style.header__logo_net}>
               <Link href="/">
                 <a>
-                  <img src={props.ltNet ? "/ltnet-logo.svg" : "/forpost-logo.svg"} alt="logo Forpost" />
+                  <img src={props.logo} alt="logo" />
                 </a>
               </Link>
             </li>
             {props.data.map((item, index) => (
-              item.items ? (<HeaderHoverItem
-                key={index}
-                text={item.name}
-                link={item.link}
-                data={item.items}
-              />) : <HeaderSingleItemMain key={index} text={item.name} link={item.link} />
+              item.items ?
+                (<HeaderHoverItem
+                  key={index}
+                  text={item.name}
+                  link={item.link}
+                  data={item.items}
+                />) :
+                <HeaderSingleItemMain
+                  key={index}
+                  text={item.name}
+                  link={item.link}
+                />
             ))}
             <li
               className={`${style.phone_icon} ${style.nav__item}`}
@@ -62,26 +68,14 @@ const phoneIcon = (
 function HeaderSingleItem(props) {
   return (
     <li className={style.nav__item}>
-      {props.link ?
-        (
-          <Link href={props.link}>
-            <a className={style.nav__item_a}>
-              {props.text}
-            </a>
-          </Link>
-        ) : (
-          <a className={style.nav__item_a} target="_blank" href={props.linkA}>
-            {props.text}
-            {props.developing === true ?
-              (< span className={style.developing}>
-                В разработке
-              </span>) : (
-                null
-              )
-            }
-          </a>
-        )
-      }
+      <Link href={props.link}>
+        <a
+          className={style.nav__item_a}
+          target={props.blank ? "_blank" : false}
+        >
+          {props.text}
+        </a>
+      </Link>
     </li >
   )
 }
@@ -113,26 +107,14 @@ function HeaderHoverItem(props) {
 function HeaderSingleItemMain(props) {
   return (
     <li className={style.nav__item_main}>
-      {props.link ?
-        (
-          <Link href={props.link}>
-            <a className={style.nav__item_main_a}>
-              {props.text}
-            </a>
-          </Link>
-        ) : (
-          <a target="_blank" href={props.linkA}>
-            {props.text}
-            {props.developing === true ?
-              (< span className={style.developing}>
-                В разработке
-              </span>) : (
-                null
-              )
-            }
-          </a>
-        )
-      }
+      <Link href={props.link}>
+        <a
+          className={style.nav__item_main_a}
+          target={props.blank ? "_blank" : false}
+        >
+          {props.text}
+        </a>
+      </Link>
     </li >
   )
 }

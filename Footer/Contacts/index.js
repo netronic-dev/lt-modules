@@ -1,48 +1,6 @@
 import style from "../footer.module.scss";
 
-export default function Contacts() {
-  return (
-    <div className={style.contacts}>
-      <div className={style.contacts_in}>
-        <div className={style.contacts__content}>
-          <div className={style.contacts__content_item}>
-            <p className={style.title}>Email</p>
-            <a target="_blank" href="mailto:info@lasertag.ru">
-              <p className={style.contacts__link_underline}>info@lasertag.ru </p>
-            </a>
-          </div>
-          <div className={style.contacts__content_item}>
-            <p className={style.title}>Телефон</p>
-            <a target="_blank" href="tel:+74722402916">
-              <p className={style.contacts__link}>+7 472 240 29 16</p>
-            </a>
-            <a target="_blank" href="tel:+74993504052">
-              <p className={style.contacts__link}>+7 499 350 40 52</p>
-            </a>
-          </div>
-        </div>
-        <div className={style.contacts__icons}>
-          <div className={style.icon_item}>
-            <a target="_blank" href="https://wa.me/79163276546">
-              {whatsAppIcon}
-            </a>
-          </div>
-          <div className={style.icon_item}>
-            <a target="_blank" href="tg://resolve?domain=79163276546">
-              {telegramIcon}
-            </a>
-          </div>
-          <div className={style.icon_item}>
-            <a target="_blank" href="viber://chat?number=+79163276546">
-              {viberIcon}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-export function ContactsEn() {
+export function Contacts() {
   return (
     <div className={style.contacts}>
       <div className={style.contacts_cards}>
