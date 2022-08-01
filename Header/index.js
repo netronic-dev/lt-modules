@@ -14,7 +14,10 @@ export default function Header(props) {
         <div className={`active`}>
         </div>
         <nav className={style.header_inside}>
-          <ul className={style.menu}>
+          <ul
+            className={style.menu}
+            style={{ gridTemplateColumns: `repeat(${props.data.length + 2}, 1fr)` }}
+          >
             <li className={style.header__logo_net}>
               <Link href="/">
                 <a>

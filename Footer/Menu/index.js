@@ -27,7 +27,6 @@ export default function FooterMenu(props) {
             ))}
           </ul>
         ))}
-
       </div>
     </div>
   );
