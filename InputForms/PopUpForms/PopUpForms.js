@@ -2,16 +2,17 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import style from "../forms.module.scss";
 import { useRouter } from "next/router";
-import { validate } from "../validate/validate";
 import { icons } from "../icons/icons";
 import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
 import { useModals } from "../../../context/ModalsProvider";
+import { useValidation } from "../../../context/ValidationProvider"
 
 function turnOnScroll() {
   document.body.className = ""
 }
 
 export function PopUpNamePhone(props) {
+  const validate = useValidation()
   const router = useRouter();
   const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
@@ -103,6 +104,7 @@ export function PopUpNamePhone(props) {
 }
 
 export function PopUpEmailPhone(props) {
+  const validate = useValidation()
   const router = useRouter();
   const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
@@ -195,6 +197,7 @@ export function PopUpEmailPhone(props) {
 }
 
 export function PopUpEvent(props) {
+  const validate = useValidation()
   const router = useRouter();
   const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
@@ -293,6 +296,7 @@ export function PopUpEvent(props) {
 }
 
 export function PopUpNameEmail(props) {
+  const validate = useValidation()
   const router = useRouter();
   const modals = useModals()
   const [agreement, changeAgreement] = useState(false);
