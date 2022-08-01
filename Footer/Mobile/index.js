@@ -5,6 +5,12 @@ export default function FooterMobile(props) {
   function scroll() {
     window.scroll({ top: 0 })
   }
+  if (!props.data) {
+    return (
+      <div className={style.footer_menu_mobile}>
+      </div>
+    )
+  }
   return (
     <div className={style.footer_menu_mobile}>
       {props.data.map((data, index) =>

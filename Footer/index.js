@@ -8,11 +8,13 @@ export default function Footer(props) {
   return (
     <div className={style.footer}>
       <div className={style.footer_desktop}>
-        (<FooterMenu />)
+        (<FooterMenu
+          data={props.data}
+        />)
       </div>
       <div className={style.footer_mobile}>
         <FooterMobile
-          data={props.data}
+          data={props.dataResponsive}
         />
       </div>
       (<Contacts />)
