@@ -36,13 +36,12 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 			!formik.values.isAgreePrivacyPolicy
 		);
 	}
-	function onDateChange(name: string) {
-		formik.setFieldValue("date", name);
+	function onDateChange(item: any) {
+		formik.setFieldValue("date", item.myName);
 	}
-	function onEquipmentTypeChange(name: string) {
-		formik.setFieldValue("equipmentType", name);
+	function onEquipmentTypeChange(item: any) {
+		formik.setFieldValue("equipmentType", item.myName);
 	}
-
 	const formik = useFormik({
 		initialValues: {
 			name: "",
@@ -110,8 +109,8 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 						</div>
 						<div className={style.cell}>
 							<DropDownList
-								onClick={(name: string) => {
-									onDateChange(name);
+								onClick={(item: any) => {
+									onDateChange(item);
 								}}
 								id="iaapa-popup-dropdown"
 								error={formik.errors.date}
@@ -119,9 +118,10 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								data={props.datesData}
 								value={formik.values.date}
 							/>
+							{console.log(formik.values.date)}
 							<DropDownList
-								onClick={(name: string) => {
-									onEquipmentTypeChange(name);
+								onClick={(item: any) => {
+									onEquipmentTypeChange(item);
 								}}
 								id="iaapa-popup-dropdown-1"
 								error={formik.errors.equipmentType}
