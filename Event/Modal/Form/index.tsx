@@ -118,7 +118,6 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								data={props.datesData}
 								value={formik.values.date}
 							/>
-							{console.log(formik.values.date)}
 							<DropDownList
 								onClick={(item: any) => {
 									onEquipmentTypeChange(item);
