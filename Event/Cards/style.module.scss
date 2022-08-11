@@ -1,0 +1,68 @@
+@import "../default";
+
+.section {
+	background-color: #fff;
+	padding: 50px 0 38px;
+}
+.title {
+	@extend %title;
+	margin-bottom: 30px;
+}
+.wrapper {
+	@extend %page_grid;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+}
+.cell {
+	background: #f0f0f2;
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 25px;
+	padding: 38px 20px 40px 40px;
+}
+.cell_image {
+	position: relative;
+	border-radius: 20px;
+	overflow: hidden;
+	height: 230px;
+}
+.cell_content {
+}
+.cell_title {
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 26px;
+	text-transform: uppercase;
+	color: #000000;
+	margin: 0 0 10px;
+}
+.cell_text {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 26px;
+	color: #000000;
+}
+@media (max-width: 1000px) {
+	.grid {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 600px) {
+	.cell {
+		grid-template-columns: 1fr;
+	}
+	.cell_title {
+		font-size: 18px;
+		line-height: 26px;
+	}
+	.cell_text {
+		font-size: 16px;
+		line-height: 26px;
+	}
+}

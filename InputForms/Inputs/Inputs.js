@@ -181,8 +181,6 @@ export function DropDownList(props) {
         <div className={`
         ${style.dropdownlist} 
         ${listIsActive ? style.dropdownlist_active : ""}
-        ${props.error ? style.dropdownlist_error : ""}
-        ${props.correct ? style.dropdownlist_correct : ""}
         ${props.className}
         `}>
           <div
@@ -191,7 +189,7 @@ export function DropDownList(props) {
           >
             <p className={style.dropdownlist_title}
             >
-              {listTitle ? listTitle : props.title}
+              {listTitle || props.title}
             </p>
             <Arrow
               active={listIsActive}
@@ -215,13 +213,15 @@ export function DropDownList(props) {
             ${style.radioBox}
            `}
             defaultChecked
-            name={props.value ? props.value : listTitle}
+            name={props.value || listTitle}
             type='radio'
             id={props.id}
-            value={props.value ? props.value : listTitle}
+            value={props.value || listTitle}
           />
         </div>
-        <div className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}>{props.error}</div>
+        <div className={errorTheme[props.errorTheme || "standard"]}>
+          {props.error}
+        </div>
       </div>
     </>
   );

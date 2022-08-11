@@ -1,0 +1,81 @@
+@import "../../default";
+
+.how_find {
+	@extend %page_grid;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+	padding: 60px 0 100px;
+}
+.title {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 36px;
+	line-height: 42px;
+	text-transform: uppercase;
+	color: #040e18;
+	margin: 0 0 30px;
+	span {
+		color: #0090ff;
+		font-weight: 600;
+	}
+}
+.cell_title {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #8e8e8e;
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: 12px;
+}
+.cell__text {
+	font-family: $font-1;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 30px;
+	color: #040e18;
+	span {
+		font-weight: 600;
+		color: #0090ff;
+	}
+}
+.place_icon {
+	margin-right: 10px;
+}
+
+.map {
+	img {
+		width: 100%;
+	}
+}
+@media (max-width: 850px) {
+	.how_find {
+		grid-template-columns: 1fr;
+		grid-gap: 60px;
+		padding: 60px 50px 100px;
+	}
+	.text_wrapper {
+		margin: 0 auto;
+	}
+}
+@media (max-width: 550px) {
+	.how_find {
+		padding: 40px 20px 60px;
+	}
+	.title {
+		font-size: 26px;
+		line-height: 30px;
+		margin: 0 0 30px;
+		br {
+			display: none;
+		}
+	}
+	.calendar {
+		width: 100%;
+	}
+}

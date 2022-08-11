@@ -1,0 +1,57 @@
+@import "../default";
+
+.cta {
+	@extend %page_grid;
+	background: #f0f0f2;
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: 5fr 3fr;
+	grid-gap: 70px;
+	padding: 18px 100px 18px 67px;
+	align-items: center;
+}
+.text {
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 27px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+
+	color: #000000;
+}
+.button {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 370px;
+	height: max-content;
+	background: #0090ff;
+	border-radius: 60px;
+	padding: 16px;
+	border: 0;
+	transition: all 0.4s ease-in-out;
+	cursor: pointer;
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #ffffff;
+
+	&:hover {
+		background-color: #000000;
+	}
+}
+@media (max-width: 1000px) {
+	.cta {
+		grid-template-columns: 1fr;
+		grid-gap: 20px;
+	}
+	.text {
+		text-align: center;
+	}
+	.cta {
+		padding: 28px 22px;
+	}
+}

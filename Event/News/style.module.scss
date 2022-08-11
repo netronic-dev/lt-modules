@@ -1,8 +1,11 @@
 @import "../default";
 
 .news {
-	background: #f0f0f2;
-	padding: 100px 0;
+	background: #fff;
+	padding: 100px 0 130px;
+}
+.slider {
+	margin-bottom: 45px;
 }
 .title {
 	font-family: $font-1;
@@ -32,7 +35,7 @@
 .cell {
 	display: flex;
 	flex-direction: column;
-	background: #ffffff;
+	background: #f0f0f2;
 	border-radius: 20px;
 	position: relative;
 	overflow: hidden;

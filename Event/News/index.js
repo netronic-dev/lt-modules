@@ -1,6 +1,7 @@
 import Image from "next/image"
 import style from "./style.module.scss"
 import Slider from "react-slick";
+import CTA from "../CTA";
 
 export default function IAAPANews(props) {
   const settings = {
@@ -44,7 +45,7 @@ export default function IAAPANews(props) {
         <h2 className={style.title}>
           {props.title}
         </h2>
-        <div className="iaapa_slider">
+        <div className={`${style.slider} iaapa_slider`}>
           <Slider {...settings}>
             {props.data.map((data, index) => (
               <Cell
@@ -58,6 +59,11 @@ export default function IAAPANews(props) {
           </Slider>
         </div>
       </div>
+      <CTA
+        text={props.cta_text}
+        buttonText={props.cta_buttonText}
+        onClick={props.cta_button_onClick}
+      />
     </section>
   )
 }
