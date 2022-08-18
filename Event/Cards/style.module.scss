@@ -28,7 +28,8 @@
 	position: relative;
 	border-radius: 20px;
 	overflow: hidden;
-	height: 230px;
+	min-height: 230px;
+	height: 100%;
 }
 .cell_content {
 }

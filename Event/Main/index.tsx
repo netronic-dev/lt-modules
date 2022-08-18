@@ -22,7 +22,12 @@ const Main: FunctionComponent<MainProps> = (props) => {
 			<div className={style.wrapper}>
 				<h1 className={style.title}>{props.title || ""}</h1>
 				<div className={style.image_responsive}>
-					<Image src={props.image} layout="fill" objectFit="cover" />
+					<Image
+						src={props.image}
+						layout="fill"
+						objectFit="cover"
+						objectPosition={props.objectPosition}
+					/>
 				</div>
 				{props.eventIcon || props.eventText ? (
 					<div className={style.event}>
