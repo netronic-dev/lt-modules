@@ -36,7 +36,6 @@ export function InputEmail(props) {
           type="email"
           onChange={props.onChange}
           value={props.value}
-          id={props.emailFormID ? props.emailFormID + "email" : "email"}
           name="email"
           style={{ backgroundColor: props.bg_color, color: props.color }}
           placeholder={props.placeholder || "Email *"}
@@ -83,8 +82,7 @@ export function InputCall(props) {
             ${props.className}
            `}
           type="tel"
-          id={props.phoneFormID ? props.phoneFormID + "phoneNumber" : "phoneNumber"}
-          name="phoneNumber"
+          name="phone"
           placeholder={props.placeholder || "Phone number *"}
           style={{ backgroundColor: props.bg_color, color: props.color }}
           onChange={props.onChange}
@@ -128,7 +126,6 @@ export function InputName(props) {
             ${props.className}
            `}
           style={{ backgroundColor: props.bg_color, color: props.color }}
-          id={props.nameFormID ? props.nameFormID + "name" : "name"}
           name="name"
           type="name"
           placeholder={props.placeholder || "Name *"}
@@ -215,7 +212,6 @@ export function DropDownList(props) {
             defaultChecked
             name={props.value || listTitle}
             type='radio'
-            id={props.id}
             value={props.value || listTitle}
           />
         </div>
@@ -252,7 +248,6 @@ export function CheckBox(props) {
             type='checkbox'
             checked={props.active}
             onChange={onItemClick}
-            id={props.id ? props.id + "checkBox" : "checkBox"}
             value={props.title}
           />
         </div>
@@ -321,7 +316,6 @@ export function Input(props) {
   // type="type"
   // onChange={onChange}
   // value={value}
-  // id={id}
   // name="name"
   // noPlace={true}
   // anotherPlace={true}
@@ -341,7 +335,6 @@ export function Input(props) {
           type={props.type}
           onChange={props.onChange}
           value={props.value}
-          id={props.id}
           name={props.name}
           placeholder={props.noPlace ? "" : props.placeholder}
         />

@@ -6,6 +6,7 @@ import { icons } from "../icons/icons";
 import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
 import { useModals } from "../../../context/ModalsProvider";
 import { useValidation } from "../../../context/ValidationProvider"
+import { postData } from "../../functions/postData";
 
 function turnOnScroll() {
   document.body.className = ""
@@ -20,23 +21,19 @@ export function PopUpNamePhone(props) {
   function onAgreementChange() {
     changeAgreement(!agreement);
   }
-
   const formik = useFormik({
     initialValues: {
       name: "",
-      phoneNumber: "",
+      phone: "",
     },
     validate,
-    onSubmit: () => {
-      setTimeout(() => {
-        modals.NamePhoneModalChangeVisibility();
-        router.push(props.thank_you_page).then(() => router.reload());
-        turnOnScroll();
-      }, 400);
+    onSubmit: (values) => {
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      modals.NamePhoneModalChangeVisibility();
+      router.push(props.thank_you_page);
+      turnOnScroll();
     },
   });
-
-  const id = props.id || "popup-call-submit-en"
 
   return (
     <div className={style.inputs_block_out}>
@@ -62,13 +59,11 @@ export function PopUpNamePhone(props) {
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
-                nameFormID={props.nameFormID}
               />
               <InputCall
                 onChange={formik.handleChange}
-                value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber}
-                phoneFormID={props.phoneFormID}
+                value={formik.values.phone}
+                error={formik.errors.phone}
               />
             </div>
             <div className={style.agreement}>
@@ -91,7 +86,6 @@ export function PopUpNamePhone(props) {
             </div>
             <button
               type={agreement ? "submit" : "button"}
-              id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
               {props.buttonText}
@@ -116,20 +110,17 @@ export function PopUpEmailPhone(props) {
   const formik = useFormik({
     initialValues: {
       email: "",
-      phoneNumber: "",
+      phone: "",
     },
     validate,
     onSubmit: (values) => {
-      setTimeout(() => {
-        modals.EmailPhoneModalChangeVisibility();
-        router.push(props.thank_you_page).then(() => router.reload());
-        turnOnScroll();
-      }, 400);
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      modals.EmailPhoneModalChangeVisibility();
+      router.push(props.thank_you_page);
+      turnOnScroll();
     },
   });
-
-  const id = props.id || "popup-email-submit-en"
-
+  console.log(formik.values)
   return (
     <div className={style.inputs_block_out}>
       <div className={style.close_block} onClick={props.closeClick}></div>
@@ -154,14 +145,11 @@ export function PopUpEmailPhone(props) {
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
-                emailFormID={props.emailFormID}
-
               />
               <InputCall
                 onChange={formik.handleChange}
-                value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber}
-                phoneFormID={props.phoneFormID}
+                value={formik.values.phone}
+                error={formik.errors.phone}
               />
             </div>
             <div className={style.agreement}>
@@ -184,7 +172,6 @@ export function PopUpEmailPhone(props) {
             </div>
             <button
               type={agreement ? "submit" : "button"}
-              id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
               {props.buttonText || "Get catalog"}
@@ -209,20 +196,17 @@ export function PopUpEvent(props) {
   const formik = useFormik({
     initialValues: {
       email: "",
-      phoneNumber: "",
+      phone: "",
       name: ""
     },
     validate,
     onSubmit: (values) => {
-      setTimeout(() => {
-        modals.EventModalChangeVisibility();
-        router.push(props.thank_you_page).then(() => router.reload());
-        turnOnScroll();
-      }, 400);
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      modals.EventModalChangeVisibility();
+      router.push(props.thank_you_page);
+      turnOnScroll();
     },
   });
-
-  const id = props.id || `popup-event-${props.eventNumber}-submit-en`
 
   return (
     <div className={style.inputs_block_out}>
@@ -248,19 +232,16 @@ export function PopUpEvent(props) {
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
-                nameFormID={props.nameFormID}
               />
               <InputEmail
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
-                emailFormID={props.emailFormID}
               />
               <InputCall
                 onChange={formik.handleChange}
-                value={formik.values.phoneNumber}
-                error={formik.errors.phoneNumber}
-                phoneFormID={props.phoneFormID}
+                value={formik.values.phone}
+                error={formik.errors.phone}
               />
             </div>
             <div className={style.agreement}>
@@ -283,7 +264,6 @@ export function PopUpEvent(props) {
             </div>
             <button
               type={agreement ? "submit" : "button"}
-              id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
               {props.buttonText}
@@ -311,17 +291,14 @@ export function PopUpNameEmail(props) {
       email: "",
     },
     validate,
-    onSubmit: () => {
-      setTimeout(() => {
-        modals.NameEmailModalChangeVisibility();
-        router.push(props.thank_you_page)
-          .then(() => router.reload());
-        turnOnScroll();
-      }, 400);
+    onSubmit: (values) => {
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      modals.NameEmailModalChangeVisibility();
+      router.push(props.thank_you_page)
+        ;
+      turnOnScroll();
     },
   });
-
-  const id = props.id || "popup-name-email-en"
 
   return (
     <div className={style.inputs_block_out}>
@@ -347,13 +324,11 @@ export function PopUpNameEmail(props) {
                 onChange={formik.handleChange}
                 value={formik.values.name}
                 error={formik.errors.name}
-                nameFormID={props.nameFormID}
               />
               <InputEmail
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 error={formik.errors.email}
-                emailFormID={props.emailFormID}
               />
             </div>
             <div className={style.agreement}>
@@ -376,7 +351,6 @@ export function PopUpNameEmail(props) {
             </div>
             <button
               type={agreement ? "submit" : "button"}
-              id={agreement ? Object.keys(formik.errors).length == 0 ? id : null : null}
               className={`${agreement ? Object.keys(formik.errors).length == 0 ? style.general_button_active : style.general_button_inactive : style.general_button_inactive} "button-submit"`}
             >
               {props.buttonText || "Get"}
@@ -387,3 +361,4 @@ export function PopUpNameEmail(props) {
     </div>
   );
 }
+

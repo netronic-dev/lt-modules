@@ -2,9 +2,10 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import style from "../forms.module.scss";
 import { useRouter } from "next/router";
-import { validate } from "../validate/validate"
-import { InputName, InputCall, InputEmail, DropDownList } from "../Inputs/Inputs"
+import { InputName, InputCall, InputEmail } from "../Inputs/Inputs"
 import { useInView } from "react-hook-inview";
+import { postData } from "../../functions/postData";
+import { useValidation } from "../../../context/ValidationProvider";
 
 const buttonTheme = {
   "general": style.general_button_inactive,
@@ -25,20 +26,20 @@ const themeFormTheme = {
 
 export function ThemeForm(props) {
 
+  const validate = useValidation()
   const router = useRouter();
 
   const formik = useFormik({
 
     initialValues: {
       name: "",
-      phoneNumber: ""
+      phone: ""
     },
     validate,
     onSubmit: () => {
-      setTimeout(() => {
-        router.push("/thanks-pres").then(() => router.reload());
-        document.body.className = "";
-      }, 400);
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      router.push("/thanks-pres").then(() => router.reload());
+      document.body.className = "";
     },
 
   });
@@ -51,19 +52,16 @@ export function ThemeForm(props) {
           onChange={formik.handleChange}
           value={formik.values.name}
           error={formik.errors.name}
-          nameFormID={props.formID}
         />
         <InputCall
           theme={props.theme}
           onChange={formik.handleChange}
-          value={formik.values.phoneNumber}
-          error={formik.errors.phoneNumber}
-          phoneFormID={props.formID}
+          value={formik.values.phone}
+          error={formik.errors.phone}
         />
       </div>
       <button
         type="submit"
-        id={Object.keys(formik.errors).length == 0 ? props.id : null}
         className={`
         ${Object.keys(formik.errors).length == 0 ?
             buttonActiveTheme[props.buttonActiveTheme]
@@ -79,7 +77,7 @@ export function ThemeForm(props) {
 }
 
 export function ThemeFormAll(props) {
-
+  const validate = useValidation()
   const router = useRouter();
 
   const formik = useFormik({
@@ -87,14 +85,13 @@ export function ThemeFormAll(props) {
     initialValues: {
       name: "",
       email: "",
-      phoneNumber: ""
+      phone: ""
     },
     validate,
     onSubmit: () => {
-      setTimeout(() => {
-        router.push("/thanks-pres").then(() => router.reload());
-        document.body.className = "";
-      }, 400);
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      router.push("/thanks-pres").then(() => router.reload());
+      document.body.className = "";
     },
   });
 
@@ -106,26 +103,22 @@ export function ThemeFormAll(props) {
           onChange={formik.handleChange}
           value={formik.values.name}
           error={formik.errors.name}
-          nameFormID={props.formID}
         />
         <InputEmail
           theme={props.theme}
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
-          emailFormID={props.formID}
         />
         <InputCall
           theme={props.theme}
           onChange={formik.handleChange}
-          value={formik.values.phoneNumber}
-          error={formik.errors.phoneNumber}
-          phoneFormID={props.formID}
+          value={formik.values.phone}
+          error={formik.errors.phone}
         />
       </div>
       <button
         type="submit"
-        id={Object.keys(formik.errors).length == 0 ? props.id : null}
         className={`
         ${Object.keys(formik.errors).length == 0 ?
             buttonActiveTheme[props.buttonActiveTheme]
@@ -141,7 +134,7 @@ export function ThemeFormAll(props) {
 }
 
 export function FormWMaterials(props) {
-
+  const validate = useValidation()
   const [ref, IsVisible] = useInView({
     unobserveOnEnter: true
   })
@@ -158,10 +151,9 @@ export function FormWMaterials(props) {
     },
     validate,
     onSubmit: () => {
-      setTimeout(() => {
-        router.push("/thanks-pres").then(() => router.reload());
-        document.body.className = "";
-      }, 400);
+      postData(values, props.destinationURL, props.orderName, props.lang, window.location.hostname, router.query)
+      router.push("/thanks-pres").then(() => router.reload());
+      document.body.className = "";
     },
   });
 
@@ -179,7 +171,6 @@ export function FormWMaterials(props) {
           onChange={formik.handleChange}
           value={formik.values.name}
           error={formik.errors.name}
-          nameFormID={props.formID}
           errorTheme={props.errorTheme}
           correct={formik.values.name ? formik.errors.name ? false : true : false}
         />
@@ -192,7 +183,6 @@ export function FormWMaterials(props) {
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
-          emailFormID={props.formID}
           errorTheme={props.errorTheme}
           correct={formik.values.email ? formik.errors.email ? false : true : false}
         />
@@ -200,7 +190,6 @@ export function FormWMaterials(props) {
       <div className={style.cell}>
         <button
           type="submit"
-          id={Object.keys(formik.errors).length == 0 ? props.id : null}
           className={`
         ${Object.keys(formik.errors).length == 0 ?
               buttonActiveTheme[props.buttonActiveTheme]
