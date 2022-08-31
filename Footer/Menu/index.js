@@ -12,22 +12,31 @@ export default function FooterMenu(props) {
     <div className={style.footer_menu}>
       <div className={style.inside}>
         {props.data.map((item, index) => (
-          <ul>
+          <ul key={index}>
             {item.data.map((subItem, subIndex) => (
-              <Link
+              <Cell
                 key={"" + subIndex + index}
-                href={subItem.link}
-              >
-                <a>
-                  <li className={`${subItem.general && style.general}`}>
-                    {subItem.name}
-                  </li>
-                </a>
-              </Link>
+                name={subItem.name}
+                general={subItem.general}
+                link={subItem.link}
+              />
             ))}
           </ul>
         ))}
       </div>
     </div>
   );
+}
+function Cell(props) {
+  return (
+    <Link
+      href={props.link}
+    >
+      <a >
+        <li className={`${props.general && style.general}`}>
+          {props.name}
+        </li>
+      </a>
+    </Link>
+  )
 }
