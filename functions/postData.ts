@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function postData(
+export async function postData(
 	values: any,
 	url: string,
 	orderName: string,

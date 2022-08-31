@@ -9,6 +9,7 @@ import {
 } from "../../../InputForms/Inputs/Inputs";
 import style from "./style.module.scss";
 import Agreement from "../../Form/Agreement";
+import { postData } from "../../../functions/postData";
 
 interface FormModalProps {
 	thank_you_page_url: string;
@@ -22,6 +23,9 @@ interface FormModalProps {
 	datesData: dropdownInputDataCell[];
 	equpmentTypeTitle: string;
 	equipmentTypeData: dropdownInputDataCell[];
+	destinationURL: string;
+	orderName: string;
+	lang: string;
 }
 interface dropdownInputDataCell {
 	name: string;
@@ -46,16 +50,34 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 		initialValues: {
 			name: "",
 			email: "",
-			phoneNumber: "",
+			phone: "",
 			date: "",
 			equipmentType: "",
 			isAgreePrivacyPolicy: true,
 		},
 		validate,
 		onSubmit: (values) => {
-			setTimeout(() => {
-				router.push(props.thank_you_page_url).then(() => router.reload());
-			}, 400);
+			postData(
+				values,
+				props.destinationURL,
+				props.orderName,
+				props.lang,
+				window.location.hostname,
+				router.query,
+				[
+					{
+						name: "date",
+						value: values.date,
+						BXName: "UF_CRM_1599805349",
+					},
+					{
+						name: "Type of Equipment",
+						value: values.equipmentType,
+						BXName: "UF_CRM_1624974650",
+					},
+				]
+			);
+			router.push(props.thank_you_page_url);
 		},
 	});
 
@@ -83,7 +105,6 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								onChange={formik.handleChange}
 								value={formik.values.name}
 								error={formik.errors.name}
-								nameFormID="iaapa-popup-"
 								theme="rounded"
 								noIcons
 								errorTheme="rounded_flat"
@@ -92,16 +113,14 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								onChange={formik.handleChange}
 								value={formik.values.email}
 								error={formik.errors.email}
-								emailFormID="iaapa-popup-"
 								theme="rounded"
 								noIcons
 								errorTheme="rounded_flat"
 							/>
 							<InputCall
 								onChange={formik.handleChange}
-								value={formik.values.phoneNumber}
-								error={formik.errors.phoneNumber}
-								phoneFormID="iaapa-popup-"
+								value={formik.values.phone}
+								error={formik.errors.phone}
 								theme="rounded"
 								noIcons
 								errorTheme="rounded_flat"
@@ -112,7 +131,6 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								onClick={(item: any) => {
 									onDateChange(item);
 								}}
-								id="iaapa-popup-dropdown"
 								error={formik.errors.date}
 								title={props.dateTitle}
 								data={props.datesData}
@@ -122,7 +140,6 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 								onClick={(item: any) => {
 									onEquipmentTypeChange(item);
 								}}
-								id="iaapa-popup-dropdown-1"
 								error={formik.errors.equipmentType}
 								title={props.equpmentTypeTitle}
 								data={props.equipmentTypeData}
@@ -137,11 +154,7 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 						</div>
 					</div>
 					<div className={style.submit_wrapper}>
-						<button
-							id={props.submitButtonID}
-							type="submit"
-							className={style.button_submit}
-						>
+						<button type="submit" className={style.button_submit}>
 							{props.buttonText}
 						</button>
 					</div>
@@ -184,15 +197,15 @@ export const validation = (values: any) => {
 			errors.email = "Wrong email";
 		}
 	}
-	if (values.phoneNumber !== undefined) {
-		if (values.phoneNumber === "") {
-			errors.phoneNumber = "Required";
+	if (values.phone !== undefined) {
+		if (values.phone === "") {
+			errors.phone = "Required";
 		} else if (
 			!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(
-				values.phoneNumber
+				values.phone
 			)
 		) {
-			errors.phoneNumber = "Wrong phone number";
+			errors.phone = "Wrong phone number";
 		}
 	}
 	if (values.date !== undefined) {
