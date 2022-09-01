@@ -120,7 +120,7 @@ export function PopUpEmailPhone(props) {
       turnOnScroll();
     },
   });
-  console.log(formik.values)
+
   return (
     <div className={style.inputs_block_out}>
       <div className={style.close_block} onClick={props.closeClick}></div>

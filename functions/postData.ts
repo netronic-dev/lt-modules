@@ -26,18 +26,17 @@ export async function postData(
 	};
 	let locationData: locationData | {} = {};
 
-	axios.get("https://ipapi.co/json/").then((response: any) => {
-		locationData = {
-			ip: response.ip,
-			region: response.region,
-			country_name: response.country_name,
-			timezone: response.timezone,
-			utc_offset: response.utc_offset,
-			currency: response.currency,
-			currency_name: response.currency_name,
-		};
-	});
-	console.log(locationData);
+	// axios.get("https://ipapi.co/json/").then((response: any) => {
+	// 	locationData = {
+	// 		ip: response.ip,
+	// 		region: response.region,
+	// 		country_name: response.country_name,
+	// 		timezone: response.timezone,
+	// 		utc_offset: response.utc_offset,
+	// 		currency: response.currency,
+	// 		currency_name: response.currency_name,
+	// 	};
+	// });
 	axios.post(url, data);
 }
 
