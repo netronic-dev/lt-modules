@@ -74,7 +74,7 @@ function HeaderSingleItem(props) {
       <Link href={props.link}>
         <a
           className={style.nav__item_a}
-          target={props.blank ? "_blank" : false}
+          target={props.blank ? "_blank" : ""}
         >
           {props.text}
         </a>
@@ -113,7 +113,7 @@ function HeaderSingleItemMain(props) {
       <Link href={props.link}>
         <a
           className={style.nav__item_main_a}
-          target={props.blank ? "_blank" : false}
+          target={props.blank ? "_blank" : ""}
         >
           {props.text}
         </a>

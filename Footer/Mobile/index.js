@@ -85,7 +85,7 @@ function AccordionItem(props) {
   return (
     <Link href={props.link ? props.link : ""}>
       <a
-        target={props.blank ? "_blank" : false}
+        target={props.blank ? "_blank" : ""}
       >
         <li onClick={scroll} className={style.tab_content__list}>
           {props.text}
