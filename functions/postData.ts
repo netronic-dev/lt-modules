@@ -28,7 +28,7 @@ export async function postData(
 			{
 				name: "Страна",
 				value: locationInfo.country_name,
-				BXName: "ADDRESS_COUNTRY",
+				BXName: "ADDRESS_COUNTRY ",
 			},
 			{
 				name: "Страна",
