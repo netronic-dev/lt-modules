@@ -23,7 +23,6 @@ export async function postData(
 			utm_source: routerQuerry.utm_source || "",
 			utm_term: routerQuerry.utm_term || "",
 		},
-		ip: locationInfo.ip,
 		fields: [
 			{
 				name: "Страна",
