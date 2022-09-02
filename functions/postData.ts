@@ -39,7 +39,6 @@ export async function postData(
 				name: "IP",
 				value: locationInfo.ip,
 			},
-			fields,
 		],
 	});
 }
