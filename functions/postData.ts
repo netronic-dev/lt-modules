@@ -42,7 +42,6 @@ export async function postData(
 			},
 		],
 	};
-	console.log(routerQuerry);
 	if (fields) {
 		data.fields = [...data.fields, fields];
 	}
