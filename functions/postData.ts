@@ -32,7 +32,7 @@ export async function postData(
 				BXName: "ADDRESS_COUNTRY",
 			},
 			{
-				name: "Страна",
+				name: "Регион",
 				value: locationInfo.region,
 				BXName: "ADDRESS_CITY",
 			},
