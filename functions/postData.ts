@@ -9,7 +9,7 @@ export async function postData(
 	routerQuerry: any,
 	fields?: field[]
 ) {
-	let locationInfo: any = getLocationData();
+	// let locationInfo: any = getLocationData();
 	let data = {
 		siteName: siteDomain,
 		orderName: orderName,
@@ -24,20 +24,20 @@ export async function postData(
 			utm_term: routerQuerry.utm_term || "",
 		},
 		fields: [
-			{
-				name: "Страна",
-				value: locationInfo.country_name,
-				BXName: "ADDRESS_COUNTRY",
-			},
-			{
-				name: "Страна",
-				value: locationInfo.region,
-				BXName: "ADDRESS_CITY",
-			},
-			{
-				name: "IP",
-				value: locationInfo.ip,
-			},
+			// {
+			// 	name: "Страна",
+			// 	value: locationInfo.country_name,
+			// 	BXName: "ADDRESS_COUNTRY",
+			// },
+			// {
+			// 	name: "Страна",
+			// 	value: locationInfo.region,
+			// 	BXName: "ADDRESS_CITY",
+			// },
+			// {
+			// 	name: "IP",
+			// 	value: locationInfo.ip,
+			// },
 			fields,
 		],
 	};
