@@ -9,8 +9,9 @@ export async function postData(
 	routerQuerry: any,
 	fields?: field[]
 ) {
-	// let locationInfo: any = getLocationData();
-	let data = {
+	let locationInfo: any = await getLocationData();
+
+	return await axios.post(url, {
 		siteName: siteDomain,
 		orderName: orderName,
 		name: values.name || "",
@@ -24,25 +25,23 @@ export async function postData(
 			utm_term: routerQuerry.utm_term || "",
 		},
 		fields: [
-			// {
-			// 	name: "Страна",
-			// 	value: locationInfo.country_name,
-			// 	BXName: "ADDRESS_COUNTRY",
-			// },
-			// {
-			// 	name: "Страна",
-			// 	value: locationInfo.region,
-			// 	BXName: "ADDRESS_CITY",
-			// },
-			// {
-			// 	name: "IP",
-			// 	value: locationInfo.ip,
-			// },
+			{
+				name: "Страна",
+				value: locationInfo.country,
+				BXName: "ADDRESS_COUNTRY",
+			},
+			{
+				name: "Страна",
+				value: locationInfo.region,
+				BXName: "ADDRESS_CITY",
+			},
+			{
+				name: "IP",
+				value: locationInfo.ip,
+			},
 			fields,
 		],
-	};
-	axios.post(url, data);
-	return console.log(data);
+	});
 }
 
 export interface field {
@@ -53,17 +52,21 @@ export interface field {
 interface locationData {
 	ip: string;
 	region: string;
-	country_name: string;
+	country: string;
 }
 
-function getLocationData() {
+async function getLocationData() {
 	let locationData: locationData | {} = {};
-	axios.get("https://ipapi.co/json/").then((response: any) => {
-		locationData = {
-			ip: response.ip,
-			region: response.region,
-			country_name: response.country_name,
-		};
-	});
+	await axios
+		.get(
+			"https://ipgeolocation.abstractapi.com/v1/?api_key=e2d2ea1613cd480b88aadaa79bc71675"
+		)
+		.then((response: any) => {
+			locationData = {
+				ip: response.data.ip_address,
+				region: response.data.region,
+				country: response.data.country,
+			};
+		});
 	return locationData;
 }
