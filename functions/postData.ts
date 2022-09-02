@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 export async function postData(
 	values: any,
@@ -9,6 +9,7 @@ export async function postData(
 	routerQuerry: any,
 	fields?: field[]
 ) {
+	let locationInfo: any = getLocationData();
 	let data = {
 		siteName: siteDomain,
 		orderName: orderName,
@@ -22,21 +23,25 @@ export async function postData(
 			utm_source: routerQuerry.utm_source || "",
 			utm_term: routerQuerry.utm_term || "",
 		},
-		fields: fields,
+		ip: locationInfo.ip,
+		fields: [
+			{
+				name: "Страна",
+				value: locationInfo.country_name,
+				BXName: "ADDRESS_COUNTRY",
+			},
+			{
+				name: "Страна",
+				value: locationInfo.region,
+				BXName: "ADDRESS_CITY",
+			},
+			{
+				name: "IP",
+				value: locationInfo.ip,
+			},
+			fields,
+		],
 	};
-	let locationData: locationData | {} = {};
-
-	// axios.get("https://ipapi.co/json/").then((response: any) => {
-	// 	locationData = {
-	// 		ip: response.ip,
-	// 		region: response.region,
-	// 		country_name: response.country_name,
-	// 		timezone: response.timezone,
-	// 		utc_offset: response.utc_offset,
-	// 		currency: response.currency,
-	// 		currency_name: response.currency_name,
-	// 	};
-	// });
 	axios.post(url, data);
 }
 
@@ -46,11 +51,19 @@ export interface field {
 	BXName?: string;
 }
 interface locationData {
-	ip: AxiosResponse<any>;
-	region: AxiosResponse<any>;
-	country_name: AxiosResponse<any>;
-	timezone: AxiosResponse<any>;
-	utc_offset: AxiosResponse<any>;
-	currency: AxiosResponse<any>;
-	currency_name: AxiosResponse<any>;
+	ip: string;
+	region: string;
+	country_name: string;
+}
+
+function getLocationData() {
+	let locationData: locationData | {} = {};
+	axios.get("https://ipapi.co/json/").then((response: any) => {
+		locationData = {
+			ip: response.ip,
+			region: response.region,
+			country_name: response.country_name,
+		};
+	});
+	return locationData;
 }
