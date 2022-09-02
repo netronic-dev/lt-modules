@@ -42,6 +42,7 @@ export async function postData(
 		],
 	};
 	axios.post(url, data);
+	return console.log(data);
 }
 
 export interface field {
