@@ -43,7 +43,7 @@ export async function postData(
 		],
 	};
 	if (fields) {
-		data.fields = [...data.fields, fields];
+		data.fields = [...data.fields, ...fields];
 	}
 	return await axios.post(url, data);
 }
