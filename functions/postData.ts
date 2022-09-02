@@ -10,20 +10,21 @@ export async function postData(
 	fields?: field[]
 ) {
 	let locationInfo: any = await getLocationData();
-
-	return await axios.post(url, {
+	let data: any = {
 		siteName: siteDomain,
 		orderName: orderName,
 		name: values.name || "",
 		email: values.email || "",
 		phone: values.phone || "",
 		lang: lang,
-		query: {
-			utm_campaign: routerQuerry.utm_campaign || "",
-			utm_medium: routerQuerry.utm_medium || "",
-			utm_source: routerQuerry.utm_source || "",
-			utm_term: routerQuerry.utm_term || "",
-		},
+		query: routerQuerry
+			? {
+					utm_campaign: routerQuerry.utm_campaign || "",
+					utm_medium: routerQuerry.utm_medium || "",
+					utm_source: routerQuerry.utm_source || "",
+					utm_term: routerQuerry.utm_term || "",
+			  }
+			: {},
 		fields: [
 			{
 				name: "Страна",
@@ -40,7 +41,12 @@ export async function postData(
 				value: locationInfo.ip,
 			},
 		],
-	});
+	};
+	console.log(routerQuerry);
+	if (fields) {
+		data.fields = [...data.fields, fields];
+	}
+	return await axios.post(url, data);
 }
 
 export interface field {
