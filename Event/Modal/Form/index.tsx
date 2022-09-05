@@ -208,16 +208,6 @@ export const validation = (values: any) => {
 			errors.phone = "Wrong phone number";
 		}
 	}
-	if (values.date !== undefined) {
-		if (values.date === "") {
-			errors.date = "Required";
-		}
-	}
-	if (values.equipmentType !== undefined) {
-		if (values.equipmentType === "") {
-			errors.equipmentType = "Required";
-		}
-	}
 	if (values.isAgreePrivacyPolicy !== undefined) {
 		if (values.isAgreePrivacyPolicy === false) {
 			errors.isAgreePrivacyPolicy = "Required";
