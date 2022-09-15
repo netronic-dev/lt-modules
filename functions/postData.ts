@@ -6,7 +6,7 @@ export async function postData(
 	orderName: string,
 	lang: string,
 	siteDomain: string,
-	routerQuerry: any,
+	routerQuerry?: any,
 	fields?: field[]
 ) {
 	let locationInfo: any = await getLocationData();
