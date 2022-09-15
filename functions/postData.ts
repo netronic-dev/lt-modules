@@ -7,7 +7,7 @@ export async function postData(
 	lang: string,
 	siteDomain: string,
 	routerQuerry?: any,
-	fields?: field[]
+	fields?: field[] | []
 ) {
 	let locationInfo: any = await getLocationData();
 	let data: any = {
@@ -60,7 +60,11 @@ interface locationData {
 }
 
 async function getLocationData() {
-	let locationData: locationData | {} = {};
+	let locationData: locationData | {} = {
+		ip: "",
+		region: "",
+		country: "",
+	};
 	await axios
 		.get(
 			"https://ipgeolocation.abstractapi.com/v1/?api_key=e2d2ea1613cd480b88aadaa79bc71675"
@@ -71,6 +75,9 @@ async function getLocationData() {
 				region: response.data.region,
 				country: response.data.country,
 			};
+		})
+		.catch((error) => {
+			console.log(error);
 		});
 	return locationData;
 }
