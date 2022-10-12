@@ -1,10 +1,14 @@
 import Image from "next/image";
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactElement, ReactNode } from "react";
+import CTA from "../CTA";
 import style from "./style.module.scss";
 
 interface CardsProps {
 	title?: ReactNode;
 	data?: Cell[];
+	cta_text: string;
+	cta_buttonText: string;
+	cta_button_onClick: () => void;
 }
 
 const Cards: FunctionComponent<CardsProps> = (props) => {
@@ -25,13 +29,18 @@ const Cards: FunctionComponent<CardsProps> = (props) => {
 					</div>
 				)}
 			</div>
+			<CTA
+				text={props.cta_text}
+				buttonText={props.cta_buttonText}
+				onClick={props.cta_button_onClick}
+			/>
 		</section>
 	);
 };
 
 interface Cell {
 	image?: string;
-	title?: string;
+	title?: ReactElement;
 	text?: string;
 }
 

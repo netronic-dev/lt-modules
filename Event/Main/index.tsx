@@ -5,10 +5,11 @@ import { FunctionComponent, ReactNode } from "react";
 interface MainProps {
 	title: ReactNode | string;
 	image: string;
-	eventIcon: string;
-	eventText: ReactNode | string;
+	imageResponsive: string;
+	eventLogo: string;
 	buttonText: string;
 	objectPosition: string;
+	resObjectPosition: string;
 	dateName: string;
 	date: ReactNode | string;
 	placeName: string;
@@ -20,57 +21,37 @@ const Main: FunctionComponent<MainProps> = (props) => {
 	return (
 		<section className={style.main}>
 			<div className={style.wrapper}>
+				<div className={style.event_logo}>
+					<Image src={props.eventLogo} layout="fill" objectFit="contain" />
+				</div>
 				<h1 className={style.title}>{props.title || ""}</h1>
 				<div className={style.image_responsive}>
 					<Image
-						src={props.image}
+						src={props.imageResponsive}
 						layout="fill"
 						objectFit="cover"
-						objectPosition={props.objectPosition}
+						objectPosition={props.resObjectPosition}
 					/>
 				</div>
-				{props.eventIcon || props.eventText ? (
-					<div className={style.event}>
-						{props.eventIcon && (
-							<div className={style.event_icon}>
-								<Image
-									src={props.eventIcon}
-									layout="fill"
-									objectFit="contain"
-								/>
-							</div>
-						)}
-						{props.eventIcon && props.eventText && (
-							<div className={style.line} />
-						)}
-						{props.eventText && (
-							<div className={style.event_text}>{props.eventText}</div>
-						)}
-					</div>
-				) : (
-					""
-				)}
 				<EventInfo
 					dateName={props.dateName}
 					date={props.date}
 					placeName={props.placeName}
 					place={props.place}
 				/>
-				<button className={style.button} onClick={props.onClick}>
-					{props.buttonText}
-				</button>
+				<div className={style.button_outer}>
+					<button className={style.button} onClick={props.onClick}>
+						{props.buttonText}
+					</button>
+				</div>
 			</div>
 			<div className={style.background}>
-				<div className={style.background_part} />
-				<div className={style.background_image}>
-					<div className={style.background_image__gradient} />
-					<Image
-						src={props.image}
-						layout="fill"
-						objectFit="cover"
-						objectPosition={props.objectPosition}
-					/>
-				</div>
+				<Image
+					src={props.image}
+					layout="fill"
+					objectFit="cover"
+					objectPosition={props.objectPosition}
+				/>
 			</div>
 		</section>
 	);
@@ -88,14 +69,14 @@ interface EventInfoProps {
 function EventInfo(props: EventInfoProps) {
 	return (
 		<div className={style.event_info}>
-			<div className={style.event_info__date}>
+			<div className={style.event_info_cell}>
 				<div className={style.event_info__top}>
 					<div className={style.event_info__date_icon_outer}>{dateIcon}</div>
 					<div className={style.event_info__title}>{props.dateName}</div>
 				</div>
 				<div className={style.event_info__text}>{props.date}</div>
 			</div>
-			<div className={style.event_info__place}>
+			<div className={style.event_info_cell}>
 				<div className={style.event_info__top}>
 					<div className={style.event_info__place_icon_outer}>{placeIcon}</div>
 					<div className={style.event_info__title}>{props.placeName}</div>
@@ -120,7 +101,7 @@ const placeIcon = (
 );
 const dateIcon = (
 	<svg
-		width="18"
+		width="25"
 		height="20"
 		viewBox="0 0 18 20"
 		fill="none"

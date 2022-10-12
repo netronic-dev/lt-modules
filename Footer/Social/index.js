@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 function FooterSocial(props) {
+  const GAEvents = useGAEvents()
   return (
     <div className={style.footer_social}>
       <div className={style.footer_social_inside}>
@@ -12,7 +14,15 @@ function FooterSocial(props) {
         <ul>
           {/* facebook */}
           <a
-            href={props.facebook} target="_blank">
+            href={props.facebook} target="_blank"
+            onClick={() =>
+              GAEvents.buttonClick(
+                "Footer",
+                "Link click",
+                props.facebook
+              )
+            }
+          >
             <button>
               <li>
                 {facebookIcon}
@@ -23,6 +33,13 @@ function FooterSocial(props) {
           <a
             href={props.instagram}
             target="_blank"
+            onClick={() =>
+              GAEvents.buttonClick(
+                "Footer",
+                "Link click",
+                props.instagram
+              )
+            }
           >
             <button>
               <li>
@@ -34,6 +51,13 @@ function FooterSocial(props) {
           <a
             href={props.youtube}
             target="_blank"
+            onClick={() =>
+              GAEvents.buttonClick(
+                "Footer",
+                "Link click",
+                props.youtube
+              )
+            }
           >
             <button>
               <li>
@@ -44,17 +68,17 @@ function FooterSocial(props) {
         </ul>
         <div className={style.footer_text}>
           <Link href="/privacy-policy">
-            <a>
+            <a
+              onClick={() =>
+                GAEvents.buttonClick(
+                  "Footer",
+                  "Link click",
+                  "/privacy-policy"
+                )
+              }
+            >
               <div>
                 Privacy Policy
-              </div>
-            </a>
-          </Link>
-          <hr className={style.line} />
-          <Link href="/sitemap/">
-            <a>
-              <div>
-                Site-map
               </div>
             </a>
           </Link>
@@ -92,14 +116,6 @@ const instagramIcon = (
     <path
       d="M13.4678 4.35615C13.4678 4.8886 13.0362 5.32021 12.5037 5.32021C11.9713 5.32021 11.5397 4.8886 11.5397 4.35615C11.5397 3.8237 11.9713 3.39209 12.5037 3.39209C13.0362 3.39209 13.4678 3.8237 13.4678 4.35615Z"
       className={style.social_icon}
-    />
-  </svg>
-)
-const vkIcon = (
-  <svg width="26" height="14" viewBox="0 0 26 14" fill="none">
-    <path
-      className={style.social_icon}
-      d="M24.7379 0.778583H20.566C20.3958 0.778582 20.2287 0.819263 20.0825 0.896297C19.9364 0.97333 19.8167 1.08383 19.7362 1.21605C19.7362 1.21605 18.0723 3.91634 17.5378 4.82585C16.1 7.27254 15.1689 6.50444 15.1689 5.36891V1.45359C15.1689 1.12641 15.0214 0.812631 14.7589 0.581282C14.4963 0.349933 14.1403 0.219963 13.769 0.219963H10.6323C10.2051 0.191975 9.77695 0.260683 9.3884 0.41956C8.99985 0.578437 8.66384 0.822208 8.41229 1.12772C8.41229 1.12772 10.005 0.900786 10.005 2.79194C10.005 3.26089 10.0325 4.60994 10.0574 5.74145C10.0621 5.90819 10.0087 6.07219 9.90426 6.21131C9.79984 6.35042 9.6495 6.45795 9.47352 6.51939C9.29755 6.58082 9.10443 6.59319 8.92022 6.55483C8.73602 6.51647 8.5696 6.42923 8.44345 6.30489C7.15956 4.73135 6.09607 3.02691 5.27609 1.22861C5.20567 1.09408 5.09294 0.980182 4.95127 0.900416C4.8096 0.82065 4.64494 0.778367 4.47682 0.778583C3.57208 0.778583 1.7616 0.778583 0.686418 0.778583C0.582157 0.777957 0.479283 0.799646 0.386633 0.841785C0.293983 0.883925 0.214327 0.945255 0.154509 1.02051C0.0946904 1.09576 0.0564984 1.18268 0.0432136 1.27381C0.0299288 1.36494 0.0419484 1.45755 0.0782398 1.54368C1.22919 4.32568 6.18711 13.0682 11.8461 13.0682H14.2279C14.4775 13.0682 14.7168 12.9809 14.8933 12.8254C15.0698 12.6698 15.1689 12.4589 15.1689 12.239V10.9716C15.1689 10.8126 15.2217 10.6571 15.3208 10.5242C15.4198 10.3914 15.5609 10.2869 15.7265 10.2238C15.8921 10.1607 16.075 10.1416 16.2527 10.169C16.4305 10.1964 16.5952 10.269 16.7267 10.3778L19.5776 12.7382C19.8337 12.9502 20.1718 13.0682 20.5231 13.0682H24.2668C26.0724 13.0682 26.0724 11.9641 25.088 11.1098C24.3952 10.5085 21.8951 8.18636 21.8951 8.18636C21.681 7.99092 21.5533 7.73443 21.5351 7.46326C21.5169 7.19209 21.6093 6.92412 21.7958 6.70778C22.6038 5.77068 23.9256 4.23672 24.4861 3.57958C25.2524 2.68139 26.6391 0.778583 24.7379 0.778583Z"
     />
   </svg>
 )

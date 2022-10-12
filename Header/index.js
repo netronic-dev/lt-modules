@@ -1,10 +1,16 @@
 import style from "./header.module.scss";
 import Link from "next/link";
 import { useModals } from "../../context/ModalsProvider";
+import { useGAEvents } from "../../context/GAEventsProvider";
 
 export default function Header(props) {
 
   const modals = useModals()
+  const GAEvents = useGAEvents()
+
+  function onGAEventSend(link) {
+    GAEvents.buttonClick("Header", "link click", link)
+  }
 
   return (
     <>
@@ -18,9 +24,11 @@ export default function Header(props) {
             className={style.menu}
             style={{ gridTemplateColumns: `repeat(${props.data.length + 2}, 1fr)` }}
           >
-            <li className={style.header__logo_net}>
+            <li
+              className={style.header__logo_net}
+            >
               <Link href="/">
-                <a>
+                <a onClick={() => onGAEventSend("/")}>
                   <img src={props.logo} alt="logo" />
                 </a>
               </Link>
@@ -32,11 +40,13 @@ export default function Header(props) {
                   text={item.name}
                   link={item.link}
                   data={item.items}
+                  onLinkClick={(link) => onGAEventSend(link)}
                 />) :
                 <HeaderSingleItemMain
                   key={index}
                   text={item.name}
                   link={item.link}
+                  onLinkClick={(link) => onGAEventSend(link)}
                 />
             ))}
             <li
@@ -70,11 +80,16 @@ const phoneIcon = (
 
 function HeaderSingleItem(props) {
   return (
-    <li className={style.nav__item}>
-      <Link href={props.link}>
+    <li
+      className={style.nav__item}
+    >
+      <Link
+        href={props.link}
+      >
         <a
           className={style.nav__item_a}
           target={props.blank ? "_blank" : ""}
+          onClick={props.onLinkClick}
         >
           {props.text}
         </a>
@@ -87,8 +102,14 @@ function HeaderHoverItem(props) {
   return (
     <li className={`${style.drop} ${style.nav__item_main}`}>
       {props.link ?
-        (<Link href={props.link}>
-          <a className={style.nav__item_main_a}>
+        (<Link
+          href={props.link}
+
+        >
+          <a
+            className={style.nav__item_main_a}
+            onClick={() => props.onLinkClick(props.link)}
+          >
             {props.text}
           </a>
         </Link>) : (<> {props.text}</>)}
@@ -100,6 +121,7 @@ function HeaderHoverItem(props) {
             link={item.link}
             linkA={item.linkA}
             developing={item.developing}
+            onLinkClick={() => props.onLinkClick(item.link)}
           />
         ))}
       </ul>
@@ -109,11 +131,16 @@ function HeaderHoverItem(props) {
 
 function HeaderSingleItemMain(props) {
   return (
-    <li className={style.nav__item_main}>
-      <Link href={props.link}>
+    <li
+      className={style.nav__item_main}
+    >
+      <Link
+        href={props.link}
+      >
         <a
           className={style.nav__item_main_a}
           target={props.blank ? "_blank" : ""}
+          onClick={() => props.onLinkClick(props.link)}
         >
           {props.text}
         </a>

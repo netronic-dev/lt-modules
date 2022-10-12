@@ -10,14 +10,14 @@ import {
 import style from "./style.module.scss";
 import Agreement from "../../Form/Agreement";
 import { postData } from "../../../functions/postData";
-
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../../../store/actions/userData";
 interface FormModalProps {
 	thank_you_page_url: string;
 	text: string;
 	onQuitClick: () => void;
 	title: ReactNode;
 	agreement__text: ReactNode | string;
-	submitButtonID: string;
 	buttonText: string;
 	dateTitle: string;
 	datesData: dropdownInputDataCell[];
@@ -32,7 +32,9 @@ interface dropdownInputDataCell {
 }
 const FormModal: FunctionComponent<FormModalProps> = (props) => {
 	let validate = validation;
+
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	function onAgreementChange() {
 		formik.setFieldValue(
@@ -57,6 +59,7 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 		},
 		validate,
 		onSubmit: (values) => {
+			dispatch(setUserData(values.name));
 			postData(
 				values,
 				props.destinationURL,
@@ -77,6 +80,7 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 					},
 				]
 			);
+			document.body.className = "";
 			router.push(props.thank_you_page_url);
 		},
 	});

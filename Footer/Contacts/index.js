@@ -1,19 +1,20 @@
+import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 export function Contacts() {
+
+  const GAEvents = useGAEvents()
+
   return (
     <div className={style.contacts}>
       <div className={style.contacts_cards}>
         <div className={style.contacts_two_cards}>
           <div className={style.contacts__content}>
-            <h3 className={style.contacts__blue}>
-              EUROPE
-            </h3>
+            <h3 className={style.contacts__blue}>EUROPE</h3>
             <div className={style.contacts__content_item}>
               <p className={style.title}>Main Office Address</p>
               <p className={`${style.contacts__link} ${style.default}`}>
-                Kaupmehe tn 7-120 Tallinn Harjumaa
-                10114 Republic of Estonia
+                Kaupmehe tn 7-120 Tallinn Harjumaa 10114 Republic of Estonia
               </p>
             </div>
             <div className={style.contacts__content_item}>
@@ -23,30 +24,82 @@ export function Contacts() {
             </div>
             <div className={`${style.contacts__content_item} ${style.short}`}>
               <p className={style.title}>Email</p>
-              <a target="_blank" href="mailto:sales@lasertag.net">
-                <p className={style.contacts__link_underline}>sales@lasertag.net</p>
+              <a
+                target="_blank"
+                href="mailto:sales@lasertag.net"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "sales@lasertag.net"
+                  )
+                }
+              >
+                <p className={style.contacts__link_underline}>
+                  sales@lasertag.net
+                </p>
               </a>
             </div>
             <div className={`${style.contacts__content_item} ${style.short}`}>
               <p className={style.title}>Phone</p>
-              <a target="_blank" href="tel:+37258662265">
+              <a
+                target="_blank"
+                href="tel:+37258662265"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "tel:+37258662265"
+                  )
+                }
+              >
                 <p className={style.contacts__link}>+372 5866 2265</p>
               </a>
             </div>
           </div>
           <div className={style.contacts__icons}>
             <div className={style.icon_item}>
-              <a target="_blank" href="skype:chiefsales?chat">
+              <a
+                target="_blank"
+                href="skype:chiefsales?chat"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "skype:chiefsales?chat"
+                  )
+                }
+              >
                 {skypeLogo}
               </a>
             </div>
             <div className={style.icon_item}>
-              <a target="_blank" href="https://wa.me/37258662265">
+              <a
+                target="_blank"
+                href="https://wa.me/37258662265"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "https://wa.me/37258662265"
+                  )
+                }
+              >
                 {whatsAppIcon}
               </a>
             </div>
             <div className={style.icon_item}>
-              <a target="_blank" href="https://wa.me/34645379324">
+              <a
+                target="_blank"
+                href="https://wa.me/34645379324"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "https://wa.me/34645379324"
+                  )
+                }
+              >
                 {whatsAppIcon}
               </a>
             </div>
@@ -54,9 +107,7 @@ export function Contacts() {
         </div>
         <div className={style.contacts_two_cards}>
           <div className={style.contacts__content}>
-            <h3 className={style.contacts__blue}>
-              USA
-            </h3>
+            <h3 className={style.contacts__blue}>USA</h3>
             <div className={style.contacts__content_item}>
               <p className={style.title}>Address</p>
               <p className={`${style.contacts__link} ${style.default}`}>
@@ -65,33 +116,95 @@ export function Contacts() {
             </div>
             <div className={`${style.contacts__content_item} ${style.short}`}>
               <p className={style.title}>Email</p>
-              <a target="_blank" href="mailto:sales@lasertag.net">
-                <p className={style.contacts__link_underline}>sales@lasertag.net</p>
+              <a
+                target="_blank"
+                href="mailto:sales@lasertag.net"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "mailto:sales@lasertag.net"
+                  )
+                }
+              >
+                <p className={style.contacts__link_underline}>
+                  sales@lasertag.net
+                </p>
               </a>
             </div>
             <div className={`${style.contacts__content_item} ${style.short}`}>
               <p className={style.title}>Phone</p>
-              <a target="_blank" href="tel:+16465859534">
+              <a
+                target="_blank"
+                href="tel:+16465859534"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "tel:+16465859534"
+                  )
+                }
+              >
                 <p className={style.contacts__link}>+1 646 585 9534</p>
               </a>
-              <a target="_blank" href="tel:+16464802917">
+              <a
+                target="_blank"
+                href="tel:+16464802917"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "tel:+16464802917"
+                  )
+                }
+              >
                 <p className={style.contacts__link}>+1 646 480 2917</p>
               </a>
             </div>
           </div>
           <div className={style.contacts__icons}>
             <div className={style.icon_item}>
-              <a target="_blank" href="skype:chiefsales?chat">
+              <a
+                target="_blank"
+                href="skype:chiefsales?chat"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "skype:chiefsales?chat"
+                  )
+                }
+              >
                 {skypeLogo}
               </a>
             </div>
             <div className={style.icon_item}>
-              <a target="_blank" href="https://wa.me/16464802917">
+              <a
+                target="_blank"
+                href="https://wa.me/16464802917"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "https://wa.me/16464802917"
+                  )
+                }
+              >
                 {whatsAppIcon}
               </a>
             </div>
             <div className={style.icon_item}>
-              <a target="_blank" href="https://wa.me/16464802917">
+              <a
+                target="_blank"
+                href="https://wa.me/16464802917"
+                onClick={() =>
+                  GAEvents.buttonClick(
+                    "Footer",
+                    "Link click",
+                    "https://wa.me/16464802917"
+                  )
+                }
+              >
                 {whatsAppIcon}
               </a>
             </div>

@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 export default function FooterMenu(props) {
+  const GAEvents = useGAEvents()
+
+  function SendGAClickEvent(link) {
+    GAEvents.buttonClick("Footer", "Link click", link)
+  }
+
   if (!props.data) {
     return (
       <div className={style.footer_menu}>
@@ -19,6 +26,7 @@ export default function FooterMenu(props) {
                 name={subItem.name}
                 general={subItem.general}
                 link={subItem.link}
+                onLinkClick={() => SendGAClickEvent(subItem.link)}
               />
             ))}
           </ul>
@@ -27,12 +35,15 @@ export default function FooterMenu(props) {
     </div>
   );
 }
+
 function Cell(props) {
   return (
     <Link
       href={props.link}
     >
-      <a >
+      <a
+        onClick={props.onLinkClick}
+      >
         <li className={`${props.general && style.general}`}>
           {props.name}
         </li>

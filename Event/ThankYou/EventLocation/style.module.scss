@@ -1,5 +1,8 @@
 @import "../../default";
 
+.section {
+	position: relative;
+}
 .how_find {
 	@extend %page_grid;
 	display: grid;
@@ -20,6 +23,12 @@
 		font-weight: 600;
 	}
 }
+.cell {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-gap: 25px 0;
+	margin-bottom: 25px;
+}
 .cell_title {
 	font-family: $font-1;
 	font-weight: 500;
@@ -28,8 +37,6 @@
 	text-align: center;
 	text-transform: uppercase;
 	color: #8e8e8e;
-	display: flex;
-	align-items: flex-end;
 	margin-bottom: 12px;
 }
 .cell__text {
@@ -44,7 +51,7 @@
 		color: #0090ff;
 	}
 }
-.place_icon {
+.icon {
 	margin-right: 10px;
 }
 
@@ -52,6 +59,15 @@
 	img {
 		width: 100%;
 	}
+}
+.bg_figure {
+	position: absolute;
+	top: -200px;
+	left: -411px;
+	z-index: -1;
+	width: 1400px;
+	height: 1400px;
+	transform: rotate(-60deg);
 }
 @media (max-width: 850px) {
 	.how_find {
@@ -64,6 +80,15 @@
 	}
 }
 @media (max-width: 550px) {
+	.bg_figure {
+		display: none;
+	}
+	.cell_title {
+		text-align: left;
+	}
+	.cell {
+		grid-template-columns: 1fr;
+	}
 	.how_find {
 		padding: 40px 20px 60px;
 	}
