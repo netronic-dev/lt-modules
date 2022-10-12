@@ -1,9 +1,10 @@
 import style from "./style.module.scss";
 import { TitleText } from "../TitleText";
 import Link from "next/link";
-import { Component, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useGAEvents } from "../../context/GAEventsProvider";
+import { InView } from "react-intersection-observer";
 
 const theme = {
 	White: "white_tile",
@@ -12,8 +13,16 @@ const theme = {
 
 export function TileGridWidth(props) {
 	const GAEvents = useGAEvents();
+	function sectionWasInView(sectionName) {
+		GAEvents.sectionInView(sectionName);
+	}
 	return (
-		<>
+		<InView
+			as="div"
+			onChange={(inView, entry) =>
+				inView && sectionWasInView(`Card ${props.title || ""}`)
+			}
+		>
 			<div
 				className={`${style.tile} ${theme[props.style]}`}
 				style={{ height: props.height }}
@@ -85,81 +94,105 @@ export function TileGridWidth(props) {
 					</a>
 				</Link>
 			</div>
-		</>
+		</InView>
 	);
 }
 
 export function TileGridWidthLeft(props) {
 	const GAEvents = useGAEvents();
+	function sectionWasInView(sectionName) {
+		GAEvents.sectionInView(sectionName);
+	}
 	return (
-		<div
-			className={`${theme[props.style]} ${style.tile_left}`}
-			style={{ background: props.color, height: props.height }}
+		<InView
+			as="div"
+			onChange={(inView, entry) =>
+				inView && sectionWasInView(`Card ${props.title || ""}`)
+			}
 		>
-			<Link href={props.link}>
-				<a
-					onClick={() => GAEvents.buttonClick("Card", "Link Click", props.link)}
-				>
-					<div className={style.tile_left_side}>
-						<div style={{ background: props.color }} className={style.left}>
-							<TitleText
-								title={props.title}
-								text={props.text}
-								theme={props.style}
-								buttonText={props.buttonText}
-							/>
+			<div
+				className={`${theme[props.style]} ${style.tile_left}`}
+				style={{ background: props.color, height: props.height }}
+			>
+				<Link href={props.link}>
+					<a
+						onClick={() =>
+							GAEvents.buttonClick("Card", "Link Click", props.link)
+						}
+					>
+						<div className={style.tile_left_side}>
+							<div style={{ background: props.color }} className={style.left}>
+								<TitleText
+									title={props.title}
+									text={props.text}
+									theme={props.style}
+									buttonText={props.buttonText}
+								/>
+							</div>
+							<div className={style.right}>
+								<Image
+									priority={true}
+									alt={props.title}
+									src={props.bg}
+									layout="fill"
+									objectFit="cover"
+									objectPosition="100% 100%"
+									quality={90}
+								/>
+							</div>
 						</div>
-						<div className={style.right}>
-							<Image
-								priority={true}
-								alt={props.title}
-								src={props.bg}
-								layout="fill"
-								objectFit="cover"
-								objectPosition="100% 100%"
-								quality={90}
-							/>
-						</div>
-					</div>
-				</a>
-			</Link>
-		</div>
+					</a>
+				</Link>
+			</div>
+		</InView>
 	);
 }
 
 export function TileGridWidthLeftFull(props) {
 	const GAEvents = useGAEvents();
+	function sectionWasInView(sectionName) {
+		GAEvents.sectionInView(sectionName);
+	}
 	return (
-		<div
-			className={`${theme[props.style]} ${style.tile_left_full}`}
-			style={{ height: props.height }}
+		<InView
+			as="div"
+			onChange={(inView, entry) =>
+				inView && sectionWasInView(`Card ${props.title || ""}`)
+			}
 		>
-			<Link href={props.link}>
-				<a
-					onClick={() => GAEvents.buttonClick("Card", "Link Click", props.link)}
-				>
-					<div className={style.tile_left_side}>
-						<div className={style.tile_bg}>
-							<Image
-								priority={true}
-								alt={props.title}
-								src={props.bg}
-								layout="fill"
-								objectFit="cover"
-							/>
+			<div
+				className={`${theme[props.style]} ${style.tile_left_full}`}
+				style={{ height: props.height }}
+			>
+				<Link href={props.link}>
+					<a
+						onClick={() =>
+							GAEvents.buttonClick("Card", "Link Click", props.link)
+						}
+					>
+						<div className={style.tile_left_side}>
+							<div className={style.tile_bg}>
+								<Image
+									priority={true}
+									alt={props.title}
+									src={props.bg}
+									layout="fill"
+									objectFit="cover"
+								/>
+							</div>
+							<div className={style.left}>
+								<TitleText
+									title={props.title}
+									text={props.text}
+									theme={props.style}
+									buttonText={props.buttonText}
+								/>
+							</div>
 						</div>
-						<div className={style.left}>
-							<TitleText
-								title={props.title}
-								text={props.text}
-								theme={props.style}
-								buttonText={props.buttonText}
-							/>
-						</div>
-					</div>
-				</a>
-			</Link>
-		</div>
+					</a>
+				</Link>
+			</div>
+		</InView>
 	);
 }
 export function TileGridWidthButtons(props) {
@@ -177,58 +210,72 @@ export function TileGridWidthButtons(props) {
 			setImage(firstImage);
 		}
 	}
+	function sectionWasInView(sectionName) {
+		GAEvents.sectionInView(sectionName);
+	}
 	return (
-		<div
-			className={`${style.tile} ${theme[props.style]}`}
-			style={{
-				height: props.height,
-			}}
+		<InView
+			as="div"
+			onChange={(inView, entry) =>
+				inView && sectionWasInView(`Card ${props.title || ""}`)
+			}
 		>
-			<Link href={props.link}>
-				<a
-					onClick={() => GAEvents.buttonClick("Card", "Link Click", props.link)}
-				>
-					<div
-						className={style.tile_bg}
-						style={{ backgroundColor: props.bgColor }}
-					>
-						<Image
-							alt={props.title}
-							src={image}
-							layout="fill"
-							objectFit="contain"
-							objectPosition="50% 50%"
-							priority={true}
-						/>
-					</div>
-					<div className={style.text}>
-						<TitleText
-							title={props.title}
-							text={props.text}
-							theme={props.style}
-							buttonText={props.buttonText}
-						/>
-					</div>
-				</a>
-			</Link>
-			<div className={style.buttons_out}>
-				<div className={style.buttons} onClick={onSwapImage}>
-					<div
-						className={
-							image === firstImage ? style.buttonActive : style.buttonInactive
+			<div
+				className={`${style.tile} ${theme[props.style]}`}
+				style={{
+					height: props.height,
+				}}
+			>
+				<Link href={props.link}>
+					<a
+						onClick={() =>
+							GAEvents.buttonClick("Card", "Link Click", props.link)
 						}
 					>
-						{props.textFirstButton}
-					</div>
-					<div
-						className={
-							image === secondImage ? style.buttonActive : style.buttonInactive
-						}
-					>
-						{props.textSecondButton}
+						<div
+							className={style.tile_bg}
+							style={{ backgroundColor: props.bgColor }}
+						>
+							<Image
+								alt={props.title}
+								src={image}
+								layout="fill"
+								objectFit="contain"
+								objectPosition="50% 50%"
+								priority={true}
+							/>
+						</div>
+						<div className={style.text}>
+							<TitleText
+								title={props.title}
+								text={props.text}
+								theme={props.style}
+								buttonText={props.buttonText}
+							/>
+						</div>
+					</a>
+				</Link>
+				<div className={style.buttons_out}>
+					<div className={style.buttons} onClick={onSwapImage}>
+						<div
+							className={
+								image === firstImage ? style.buttonActive : style.buttonInactive
+							}
+						>
+							{props.textFirstButton}
+						</div>
+						<div
+							className={
+								image === secondImage
+									? style.buttonActive
+									: style.buttonInactive
+							}
+						>
+							{props.textSecondButton}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</InView>
 	);
 }
