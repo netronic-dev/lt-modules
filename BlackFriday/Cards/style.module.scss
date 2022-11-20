@@ -1,0 +1,220 @@
+@import "../default";
+
+.section {
+	position: relative;
+	padding: 20px 0 75px;
+	z-index: 1;
+}
+.wrapper {
+	@extend %page_grid;
+}
+.cards_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+.cell {
+	height: 370px;
+	display: grid;
+
+	grid-template-columns: 5fr 7fr;
+	grid-gap: 18px;
+	border-radius: 20px;
+	overflow: hidden;
+	background-color: $color-2;
+}
+.title {
+	@extend %title;
+	color: $color-2;
+	margin-bottom: 35px;
+}
+.image_outer {
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+.discount {
+	padding: 10px 10px;
+	width: 300px;
+	position: absolute;
+	z-index: 5;
+	left: -90px;
+	top: 30px;
+	background: linear-gradient(168.44deg, #0090ff 33.95%, #00f18a 79.51%);
+	transform: rotate(-45deg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	* {
+		user-select: none;
+	}
+}
+.discount__title {
+	font-family: "Manrope";
+	font-weight: 600;
+	font-size: 19px;
+	line-height: 20px;
+	text-transform: uppercase;
+	color: $color-2;
+}
+.discount__text {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 31px;
+	line-height: 30px;
+	text-transform: uppercase;
+	color: $color-2;
+}
+.cell_text_outer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 30px 40px 35px 12px;
+}
+.cell__title {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 38px;
+	line-height: 45px;
+	text-transform: uppercase;
+	color: #040e18;
+	margin: 0 0 15px;
+	span {
+		color: #0090ff;
+	}
+}
+.cell__text {
+	font-family: "Manrope";
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 26px;
+	color: #040e18;
+}
+.cell_bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.cell_price {
+	display: flex;
+	flex-direction: column;
+}
+.cell_price__old {
+	font-family: "Manrope";
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+	text-transform: uppercase;
+	text-decoration: line-through;
+	color: #0090ff;
+	opacity: 0.6;
+}
+.cell_price__new {
+	font-family: "Manrope";
+	font-weight: 600;
+	font-size: 40px;
+	line-height: 50px;
+	text-transform: uppercase;
+	color: #0090ff;
+}
+.cell__button {
+	background-color: #0090ff;
+	background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+	border-radius: 56px;
+	min-width: 220px;
+	cursor: pointer;
+	height: 55px;
+	font-family: "Manrope";
+	font-weight: 800;
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #f1f4f6;
+	outline: 0;
+	border: 0;
+	&:hover {
+		background-color: #000 !important;
+		background: linear-gradient(81.25deg, #000 100%, #000 100%) !important;
+	}
+}
+@media (max-width: 860px) {
+	.cell {
+		height: 550px;
+		grid-template-columns: 5fr 6fr;
+	}
+	.cell_bottom {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+}
+@media (max-width: 700px) {
+	.cell {
+		height: auto;
+		grid-template-columns: 1fr;
+	}
+	.image_outer {
+		height: 190px;
+	}
+	.cell__title {
+		font-size: 30px;
+		line-height: 35px;
+		margin: 0 0 5px;
+	}
+	.cell__text {
+		font-size: 14px;
+		line-height: 24px;
+		margin-bottom: 10px;
+	}
+	.cell_price {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+	}
+	.cell_text_outer {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 16px 8px 30px 12px;
+	}
+	.cell_price__old {
+		font-size: 20px;
+		line-height: 20px;
+	}
+	.cell_price__new {
+		font-size: 40px;
+		line-height: 40px;
+	}
+}
+@media (max-width: 575px) {
+	.discount {
+		padding: 5px 10px;
+		width: 300px;
+		position: absolute;
+		z-index: 5;
+		left: -100px;
+		top: 20px;
+		background: linear-gradient(168.44deg, #0090ff 33.95%, #00f18a 79.51%);
+		transform: rotate(-45deg);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		* {
+			user-select: none;
+		}
+	}
+	.discount__title {
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.discount__text {
+		font-size: 26px;
+		line-height: 30px;
+	}
+}

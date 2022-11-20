@@ -6,6 +6,7 @@
 }
 .slider_left {
 	position: relative;
+	z-index: 1;
 	bottom: -50px;
 	height: max-content;
 	overflow-y: hidden;
@@ -63,16 +64,14 @@
 	}
 }
 .text {
-	font-family: Manrope;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 200px;
 	line-height: 96.6%;
 	text-transform: uppercase;
-	color: $color-3;
-	// -webkit-text-stroke-width: 1px;
-	// -webkit-text-stroke-color: black;
-	text-shadow: 0px 0px 3px #fff;
+	color: #00000000;
+	-webkit-text-stroke: 0.5px #fff;
+	// text-shadow: 0px 0px 2px #fff;
 }
 @media (max-width: 750px) {
 	.text {

@@ -1,7 +1,7 @@
 @import "../default";
 
 .section {
-	background: #040e18;
+	background: #fff;
 	position: relative;
 	z-index: 4;
 }
@@ -37,14 +37,17 @@
 	letter-spacing: 0.02em;
 	text-transform: uppercase;
 	color: #f1f4f6;
-	background: #0090ff;
+	background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+
 	border-radius: 60px;
 	padding: 13px 40px;
 	outline: 0;
 	border: 0;
 	cursor: pointer;
 	&:hover {
-		opacity: 0.7;
+		background: linear-gradient(81.25deg, #000000 18.31%, #000000 126.68%);
+		color: $color-2;
+		animation: none;
 	}
 }
 @media (max-width: 900px) {
