@@ -3,7 +3,7 @@ import style from "./style.module.scss";
 
 const Cards = (props) => {
 	return (
-		<section className={style.section} name={props.name}>
+		<section className={style.section} id={props.name}>
 			<div className={style.wrapper}>
 				<h2 className={style.title}>{props.title}</h2>
 				<div className={style.cards_wrapper}>
