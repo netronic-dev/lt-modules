@@ -220,6 +220,9 @@ $color3: #fff;
 .contacts__link_underline {
 	@extend %contacts_links;
 	text-decoration: underline;
+	a {
+		color: #ffffff;
+	}
 	:hover {
 		color: $color1;
 	}
