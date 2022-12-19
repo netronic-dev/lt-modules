@@ -57,7 +57,7 @@ export function Contacts() {
                                     GAEvents.buttonClick(
                                         'Footer',
                                         'Link click',
-                                        'tel:+37258662265'
+                                        'tel:+48573581044'
                                     )
                                 }
                             >
