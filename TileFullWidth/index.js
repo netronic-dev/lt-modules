@@ -22,7 +22,7 @@ export function TileFullWidth(props) {
 				inView && sectionWasInView(`Card ${props.title || ""}`)
 			}
 		>
-			<Link href={props.link}>
+			<Link href={props.link} >
 				<a
 					onClick={() => GAEvents.buttonClick("Card", "Link Click", props.link)}
 				>
@@ -85,6 +85,7 @@ export function TileFullWidth(props) {
 }
 
 export function TileFullWidthReverse(props) {
+	const GAEvents = useGAEvents();
 	let LinkComponent = props.external ? "div" : Link;
 	function sectionWasInView(sectionName) {
 		GAEvents.sectionInView(sectionName);
