@@ -13,6 +13,7 @@
 	outline: 0;
 	transition: all 0.4s ease-in-out;
 }
+
 .button_big_black {
 	@extend %button;
 	height: 58px;
@@ -21,11 +22,13 @@
 	border-radius: 46px;
 	color: #ffffff;
 }
+
 .button_big_black:hover {
 	background-color: #fff;
 	border: 2px solid #ffffff;
 	color: #000;
 }
+
 .button_big_blue {
 	@extend %button;
 	height: 58px;
@@ -34,11 +37,13 @@
 	border-radius: 46px;
 	color: #ffffff;
 }
+
 .button_big_blue:hover {
 	background-color: #000;
 	border: 2px solid #000;
 	color: #fff;
 }
+
 .video_popup_out {
 	position: fixed;
 	z-index: 51;
@@ -51,29 +56,35 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .video_popup {
 	position: relative;
 	z-index: 53;
 }
+
 .button_out {
 	cursor: pointer;
 	display: flex;
 	justify-content: flex-end;
 }
+
 .video_button_close {
 	cursor: pointer;
 	background-color: rgba(255, 255, 255, 0);
 	outline: 0;
 	border: 0;
 }
+
 .video_button_close:hover {
 	.cross_bg {
 		fill: #494949;
 	}
+
 	.cross {
 		fill: rgb(0, 0, 0);
 	}
 }
+
 .close_block {
 	cursor: pointer;
 	position: absolute;
@@ -82,6 +93,7 @@
 	height: 100%;
 	background-color: rgba(255, 255, 255, 0);
 }
+
 .default_button {
 	cursor: pointer;
 	transition: all 0.4s ease-in-out;
@@ -95,67 +107,102 @@
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 21px;
+
 	span {
 		color: #0090ff;
 		margin-right: 10px;
 	}
+
 	* {
 		transition: all 0.2s ease-in-out;
 	}
 }
+
 .default_button:hover {
 	span {
 		color: #005799;
 	}
+
 	.arrow {
 		fill: #005799;
 	}
 }
+
 .button_white {
 	@extend %button;
 	background-color: #fff;
 	border: 2px solid #fff;
 	color: #0090ff;
 }
+
 .button_white:hover {
 	background-color: #00000000;
 	border: 2px solid #ffffff;
 	color: rgb(255, 255, 255);
 }
+
 .button_white_black {
 	@extend %button;
 	background-color: #fff;
 	border: 2px solid #fff;
 	color: #000;
 	font-weight: 600;
+
 	&:hover {
 		background-color: #00000000;
 		border: 2px solid #ffffff;
 		color: rgb(255, 255, 255);
 	}
 }
+
 .button_black {
 	@extend %button;
 	background-color: #000;
 	border: 2px solid #000;
 	color: #fff;
 }
+
 .button_black:hover {
 	background-color: #fff;
 	border: 2px solid #fff;
 	color: #0090ff;
 }
+
 .button_blue_black {
 	@extend %button;
 	background-color: #0090ff;
 	border: 2px solid #0090ff;
 	color: white;
 }
+
 .button_blue_black:hover {
 	background-color: #000000;
 	border: 2px solid #000000;
 	color: rgb(255, 255, 255);
 }
+
+.button_blue_black_main_banner_with_girl {
+	@extend %button;
+	background-color: #0090ff;
+	border: 2px solid #0090ff;
+	color: white;
+	width: 198px;
+	height: 45px;
+	font-size: 20px;
+	line-height: 24px;
+	text-transform: uppercase;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+
+	&:hover {
+		background-color: #000000;
+		border: 2px solid #000000;
+		color: rgb(255, 255, 255);
+	}
+}
+
+
 .button_blue_black_arrow {
 	@extend %button;
 	font-family: IBM Plex Sans;
@@ -167,25 +214,31 @@
 	line-height: 16px;
 	padding: 5px 20px;
 	height: 37px;
+
 	.arrow_vector {
 		margin-left: 15px;
 	}
+
 	.arrow {
 		fill: #fff;
 	}
+
 	.arrow_out {
 		display: flex;
 		align-items: center;
 	}
+
 	&:hover {
 		background-color: #000;
 		border: 2px solid #000;
 		color: #fff;
+
 		.arrow {
 			fill: #8c8c8c;
 		}
 	}
 }
+
 .button_blue_white_arrow {
 	@extend %button;
 	font-family: IBM Plex Sans;
@@ -197,25 +250,31 @@
 	border: 2px solid #0090ff;
 	color: #fff;
 	padding: 5px 20px;
+
 	.arrow_vector {
 		margin-left: 30px;
 	}
+
 	.arrow {
 		fill: #fff;
 	}
+
 	.arrow_out {
 		display: flex;
 		align-items: center;
 	}
+
 	&:hover {
 		background-color: #fff;
 		border: 2px solid #fff;
 		color: #000;
+
 		.arrow {
 			fill: #8e8e8e;
 		}
 	}
 }
+
 .white_arrow_border {
 	@extend %button;
 	width: auto;
@@ -224,25 +283,31 @@
 	background-color: #00000000;
 	border: 0;
 	color: white;
+
 	* {
 		transition: all 0.3s ease-in-out;
 	}
+
 	.arrow_out {
 		margin-left: 30px;
 		border: 1px solid #8e8e8e;
 		border-radius: 60px;
 		padding: 10px 32px 9px;
 	}
+
 	.arrow {
 		fill: #fff;
 	}
+
 	&:hover {
 		color: #8e8e8e;
+
 		.arrow_out {
 			padding: 10px 20px 9px 44px;
 		}
 	}
 }
+
 .black_arrow_border {
 	@extend %button;
 	width: auto;
@@ -251,47 +316,57 @@
 	background-color: #00000000;
 	border: 0;
 	color: #000;
+
 	* {
 		transition: all 0.3s ease-in-out;
 	}
+
 	.arrow_out {
 		margin-left: 15px;
 		border: 1px solid #8e8e8e;
 		border-radius: 60px;
 		padding: 10px 32px 9px;
 	}
+
 	.arrow {
 		fill: #000;
 	}
 }
+
 .black_arrow_border:hover {
 	color: #8e8e8e;
+
 	.arrow_out {
 		padding: 10px 20px 9px 44px;
 	}
 }
+
 .button_pulse {
 	@extend %button;
 	background-color: #fff;
 	border: 2px solid #fff;
 	color: #0090ff;
 }
+
 .button_pulse:hover {
 	background-color: #011321;
 	border: 2px solid #011321;
 	color: #fff;
 }
+
 .button_blue_white {
 	@extend %button;
 	background-color: #0090ff;
 	border: 2px solid #0090ff;
 	color: white;
 }
+
 .button_blue_white:hover {
 	background-color: #ffffff;
 	border: 2px solid #ffffff;
 	color: #070707;
 }
+
 .video_button {
 	cursor: pointer;
 	border: 0;
@@ -302,19 +377,24 @@
 	font-size: 15px;
 	line-height: 20px;
 	background-color: rgba(255, 255, 255, 0);
+
 	svg {
 		margin-right: 20px;
 	}
 }
+
 .video_button:hover {
 	color: #606060;
+
 	.fill {
 		fill: #606060;
 	}
+
 	.stroke {
 		stroke: #606060;
 	}
 }
+
 .button_border_white {
 	cursor: pointer;
 	border: 1px solid #8e8e8e;
@@ -327,6 +407,7 @@
 	transition: all 0.3s ease-in-out;
 	width: max-content;
 	height: 37px;
+
 	.text {
 		font-family: "IBM Plex Sans", sans-serif;
 		font-weight: 500;
@@ -334,16 +415,20 @@
 		line-height: 16px;
 		color: #fff;
 	}
+
 	* {
 		transition: all 0.3s ease-in-out;
 	}
+
 	.play_icon_circle_fill {
 		margin-left: 30px;
 	}
+
 	&:hover {
 		.text {
 			color: #8e8e8e;
 		}
+
 		.play_icon_circle_fill {
 			path {
 				fill: #fff;
@@ -351,6 +436,7 @@
 		}
 	}
 }
+
 .button_border_black {
 	cursor: pointer;
 	border: 1px solid #8e8e8e;
@@ -363,9 +449,11 @@
 	transition: all 0.3s ease-in-out;
 	width: max-content;
 	height: 37px;
+
 	* {
 		transition: all 0.3s ease-in-out;
 	}
+
 	.text {
 		font-family: "IBM Plex Sans", sans-serif;
 		font-weight: 500;
@@ -373,13 +461,16 @@
 		line-height: 16px;
 		color: #000;
 	}
+
 	.play_icon_circle_fill {
 		margin-left: 30px;
 	}
+
 	&:hover {
 		.text {
 			color: #8e8e8e;
 		}
+
 		.play_icon_circle_fill {
 			path {
 				fill: #000;
@@ -398,19 +489,24 @@
 	font-size: 15px;
 	line-height: 20px;
 	background-color: rgba(255, 255, 255, 0);
+
 	svg {
 		margin-right: 20px;
 	}
 }
+
 .video_button_dark:hover {
 	color: #011321;
+
 	.fill {
 		fill: #011321;
 	}
+
 	.stroke {
 		stroke: #011321;
 	}
 }
+
 @media (max-width: 575px) {
 	.button_big_black {
 		height: auto;
@@ -418,40 +514,58 @@
 		line-height: 14px;
 		padding: 12px 20px;
 	}
+
 	.button_big_blue {
 		height: auto;
 		font-size: 12px;
 		line-height: 14px;
 		padding: 12px 20px;
 	}
+
 	.button_border_white {
 		border: 0;
 		padding: 0 30px 0 0;
+
 		.text {
 			display: none;
 		}
+
 		.play_icon_circle_fill {
 			height: 40px;
 			width: 40px;
 			margin-left: 0;
+
 			path {
 				fill: #fff;
 			}
 		}
 	}
+
 	.button_border_black {
 		border: 0;
 		padding: 0 30px 0 0;
+
 		.text {
 			display: none;
 		}
+
 		.play_icon_circle_fill {
 			height: 40px;
 			width: 40px;
 			margin-left: 0;
+
 			path {
 				fill: #000;
 			}
 		}
+	}
+}
+
+@media (max-width: 500px) {
+	.button_blue_black_main_banner_with_girl {
+		width: 170px;
+		height: 40px;
+		font-size: 18px;
+		line-height: 22px;
 	}
 }

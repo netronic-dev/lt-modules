@@ -1,15 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
+import { useGAEvents } from "../../context/GAEventsProvider";
 import style from "./style.module.scss"
 
 export default function NewVideo(props) {
   const [isFrameOpen, changeFrameView] = useState(props.withoutPreview ? true : false)
 
-  function onFrameViewChange() {
-    changeFrameView(!isFrameOpen)
-  }
+  const GAEvents = useGAEvents()
 
-  let additional_scripts = props.additional_scripts ? props.additional_scripts : ""
+  let additional_scripts = props.additional_scripts || ""
 
   let autoplayScript
 
@@ -25,6 +24,11 @@ export default function NewVideo(props) {
   }
 
   let linkSource = "https://www.youtube.com/embed/" + props.link + additional_scripts + autoplayScript
+
+  function onFrameViewChange() {
+    changeFrameView(!isFrameOpen)
+    GAEvents.buttonClick(`video ${linkSource} open`)
+  }
 
   return (
     <div className={style.video} >
@@ -51,7 +55,7 @@ export default function NewVideo(props) {
           <div
             onClick={onFrameViewChange}
             className={style.video__button}
-            aria-label="Запустить видео"
+            aria-label="Start video"
           >
             {props.videoIconLP ? videoIconLP : videoIcon}
           </div>

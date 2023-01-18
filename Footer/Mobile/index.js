@@ -1,10 +1,19 @@
 import Link from "next/link";
+import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 export default function FooterMobile(props) {
+
+  const GAEvents = useGAEvents()
+
   function scroll() {
     window.scroll({ top: 0 })
   }
+
+  function SendGAClickEvent(link) {
+    GAEvents.buttonClick("Footer", "Link click", link)
+  }
+
   if (!props.data) {
     return (
       <div className={style.footer_menu_mobile}>
@@ -16,9 +25,16 @@ export default function FooterMobile(props) {
       {props.data.map((data, index) =>
         data.items === undefined ? (
           <Link href={data.link} key={index} >
-            <div onClick={scroll} className={style.mobile_menu__item}>
+            <div
+              onClick={() => {
+                scroll(),
+                  SendGAClickEvent(data.link)
+              }}
+              className={style.mobile_menu__item}
+            >
               <p className={style.mobile_menu__item_text}>{data.name}</p>
-            </div></Link>
+            </div>
+          </Link>
         ) : (
           <FooterAccordion
             key={index}
@@ -26,6 +42,7 @@ export default function FooterMobile(props) {
             title={data.name}
             listData={data.items}
             link={data.link}
+            onLinkClick={(link) => SendGAClickEvent(link)}
           />
         )
       )}
@@ -45,7 +62,10 @@ function FooterAccordion(props) {
       <label htmlFor={props.id + "f"} className={style.tab_title}>
         {props.link ?
           (<Link href={props.link}>
-            <p className={style.accordion__text}>
+            <p
+              className={style.accordion__text}
+              onClick={() => props.onLinkClick(props.link)}
+            >
               {props.title}
             </p>
           </Link>) :
@@ -65,14 +85,13 @@ function FooterAccordion(props) {
             <AccordionItem
               key={index}
               link={listData.link}
-              linkA={listData.linkA}
               text={listData.name}
-              developing={listData.developing}
+              onLinkClick={() => props.onLinkClick(listData.link)}
             />
           ))}
         </ul>
       </span>
-    </div>
+    </div >
   );
 }
 
@@ -83,9 +102,10 @@ function AccordionItem(props) {
   }
 
   return (
-    <Link href={props.link ? props.link : ""}>
+    <Link href={props.link || "/"}>
       <a
-        target={props.blank ? "_blank" : false}
+        target={props.blank ? "_blank" : ""}
+        onClick={props.onLinkClick}
       >
         <li onClick={scroll} className={style.tab_content__list}>
           {props.text}

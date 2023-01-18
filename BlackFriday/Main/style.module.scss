@@ -1,7 +1,6 @@
 @import "../default";
 
 .section {
-	background-color: $color-3;
 	position: relative;
 	padding-bottom: 130px;
 }
@@ -24,9 +23,15 @@
 	bottom: 0px;
 }
 .title {
-	@extend %title;
+	font-weight: 800;
+	font-size: 80px;
+	line-height: 90px;
 	color: $color-2;
-	margin-bottom: 20px;
+	text-transform: uppercase;
+	margin: 0 0 25px;
+	span {
+		color: #0090ff;
+	}
 }
 .text {
 	font-family: $font-1;
@@ -48,21 +53,21 @@
 	text-transform: uppercase;
 	color: #f1f4f6;
 	padding: 19px 55px 17px;
-	background-color: $color-1;
+	background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
 	border-radius: 60px;
 	outline: 0;
 	border: 0;
 	animation: radial-pulse 1s infinite;
 	&:hover {
-		background-color: $color-2;
-		color: $color-3;
+		background: linear-gradient(81.25deg, #000000 18.31%, #000000 126.68%);
+		color: $color-2;
 		animation: none;
 	}
 }
 .image_outer {
 	position: relative;
 	width: 100%;
-	height: 500px;
+	height: 560px;
 	border-radius: 20px;
 	overflow: hidden;
 	* {
@@ -78,7 +83,7 @@
 		transform: scale(0.97);
 	}
 }
-@media (max-width: 1200px) {
+@media (max-width: 750px) {
 	.desktop {
 		display: none;
 	}
@@ -88,7 +93,18 @@
 }
 @media (max-width: 600px) {
 	.image_outer {
-		height: 300px;
+		height: 385px;
+	}
+	.title {
+		font-weight: 500;
+		font-size: 45px;
+		line-height: 50px;
+		span {
+			font-weight: 600;
+		}
+		br {
+			display: none;
+		}
 	}
 	.text {
 		font-size: 14px;

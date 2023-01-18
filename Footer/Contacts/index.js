@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 import style from '../footer.module.scss';
 
 export function Contacts() {
+=======
+import { useGAEvents } from '../../../context/GAEventsProvider';
+import style from '../footer.module.scss';
+
+export function Contacts() {
+    const GAEvents = useGAEvents();
+
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
     return (
         <div className={style.contacts}>
             <div className={style.contacts_cards}>
@@ -8,9 +17,13 @@ export function Contacts() {
                     <div className={style.contacts__content}>
                         <h3 className={style.contacts__blue}>EUROPE</h3>
                         <div className={style.contacts__content_item}>
+<<<<<<< HEAD
                             <p className={style.title}>
                                 Adresse du bureau principal
                             </p>
+=======
+                            <p className={style.title}>Main Office Address</p>
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                             <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
@@ -29,7 +42,21 @@ export function Contacts() {
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
                             <p className={style.title}>Email</p>
+<<<<<<< HEAD
                             <a target='_blank' href='mailto:sales@lasertag.net'>
+=======
+                            <a
+                                target='_blank'
+                                href='mailto:sales@lasertag.net'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'sales@lasertag.net'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 <p className={style.contacts__link_underline}>
                                     sales@lasertag.net
                                 </p>
@@ -39,7 +66,21 @@ export function Contacts() {
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
                             <p className={style.title}>Phone</p>
+<<<<<<< HEAD
                             <a target='_blank' href='tel:+48573581044'>
+=======
+                            <a
+                                target='_blank'
+                                href='tel:+48573581044'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'tel:+48573581044'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 <p className={style.contacts__link}>
                                     +48 573 58 10 44
                                 </p>
@@ -48,17 +89,59 @@ export function Contacts() {
                     </div>
                     <div className={style.contacts__icons}>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='skype:chiefsales?chat'>
+=======
+                            <a
+                                target='_blank'
+                                href='skype:chiefsales?chat'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'skype:chiefsales?chat'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {skypeLogo}
                             </a>
                         </div>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='https://wa.me/37258662265'>
+=======
+                            <a
+                                target='_blank'
+                                href='https://wa.me/37258662265'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'https://wa.me/37258662265'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {whatsAppIcon}
                             </a>
                         </div>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='https://wa.me/34645379324'>
+=======
+                            <a
+                                target='_blank'
+                                href='https://wa.me/34645379324'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'https://wa.me/34645379324'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {whatsAppIcon}
                             </a>
                         </div>
@@ -68,7 +151,11 @@ export function Contacts() {
                     <div className={style.contacts__content}>
                         <h3 className={style.contacts__blue}>USA</h3>
                         <div className={style.contacts__content_item}>
+<<<<<<< HEAD
                             <p className={style.title}>Addresse</p>
+=======
+                            <p className={style.title}>Address</p>
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                             <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
@@ -79,7 +166,21 @@ export function Contacts() {
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
                             <p className={style.title}>Email</p>
+<<<<<<< HEAD
                             <a target='_blank' href='mailto:sales@lasertag.net'>
+=======
+                            <a
+                                target='_blank'
+                                href='mailto:sales@lasertag.net'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'mailto:sales@lasertag.net'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 <p className={style.contacts__link_underline}>
                                     sales@lasertag.net
                                 </p>
@@ -89,7 +190,21 @@ export function Contacts() {
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
                             <p className={style.title}>Phone</p>
+<<<<<<< HEAD
                             <a target='_blank' href='tel:+13479192246'>
+=======
+                            <a
+                                target='_blank'
+                                href='tel:+13479192246'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'tel:+13479192246'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 <p className={style.contacts__link}>
                                     +1 347 919 2246
                                 </p>
@@ -98,17 +213,59 @@ export function Contacts() {
                     </div>
                     <div className={style.contacts__icons}>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='skype:chiefsales?chat'>
+=======
+                            <a
+                                target='_blank'
+                                href='skype:chiefsales?chat'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'skype:chiefsales?chat'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {skypeLogo}
                             </a>
                         </div>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='https://wa.me/16464802917'>
+=======
+                            <a
+                                target='_blank'
+                                href='https://wa.me/16464802917'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'https://wa.me/16464802917'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {whatsAppIcon}
                             </a>
                         </div>
                         <div className={style.icon_item}>
+<<<<<<< HEAD
                             <a target='_blank' href='https://wa.me/16464802917'>
+=======
+                            <a
+                                target='_blank'
+                                href='https://wa.me/16464802917'
+                                onClick={() =>
+                                    GAEvents.buttonClick(
+                                        'Footer',
+                                        'Link click',
+                                        'https://wa.me/16464802917'
+                                    )
+                                }
+                            >
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
                                 {whatsAppIcon}
                             </a>
                         </div>

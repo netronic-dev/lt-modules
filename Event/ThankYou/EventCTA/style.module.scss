@@ -1,0 +1,87 @@
+@import "../../default";
+
+.event {
+	margin: 10px auto 90px;
+	@extend %page_grid;
+	padding: 24px 50px 16px 80px;
+	background: #fff;
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: 2fr 5fr 3fr;
+}
+.cell {
+}
+.cell__title {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+	text-transform: uppercase;
+	color: #8e8e8e;
+	margin-bottom: 4px;
+	display: flex;
+	align-items: flex-end;
+}
+.cell__text {
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 27px;
+	color: #040e18;
+}
+.text {
+	font-family: $font-1;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;
+	text-transform: uppercase;
+	color: #000000;
+	span {
+		color: #0090ff;
+		font-weight: 600;
+	}
+}
+.button_outer {
+}
+.button {
+	cursor: pointer;
+	transition: all 0.4s ease-in-out;
+	background: #0090ff;
+	border-radius: 60px;
+	width: 100%;
+	max-width: 300px;
+	display: flex;
+	justify-content: center;
+	padding: 8px 10px 9px;
+	align-items: center;
+	gap: 10px;
+	border: 0;
+	font-family: $font-1;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #ffffff;
+	&:hover {
+		background-color: #000;
+	}
+}
+.calendar_icon {
+	margin-right: 7px;
+}
+.calendar_icon_button {
+}
+@media (max-width: 1000px) {
+	.event {
+		margin-left: 20px;
+		margin-right: 20px;
+		grid-template-columns: 1fr;
+		grid-gap: 20px;
+	}
+}
+@media (max-width: 500px) {
+	.event {
+		padding: 10px 20px;
+	}
+}

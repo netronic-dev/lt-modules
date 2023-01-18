@@ -35,6 +35,7 @@ export function InputEmail(props) {
              ${props.correct ? style.input_correct : ''}
              ${props.className}
             `}
+<<<<<<< HEAD
                     type='email'
                     onChange={props.onChange}
                     value={props.value}
@@ -79,6 +80,32 @@ export function InputEmail(props) {
             </div>
         </div>
     );
+=======
+          type="email"
+          onChange={props.onChange}
+          value={props.value}
+          name="email"
+          style={{ backgroundColor: props.bg_color, color: props.color }}
+          placeholder={props.placeholder || "Email *"}
+        />
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace || "Email *"}
+            value={props.value}
+          /> : ""}
+        {props.noIcons ? "" :
+          <div className={style.error_icon}>
+            {props.error ? icon.error : props.value === "" ? "" : icon.agree}
+          </div>}
+      </div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
+    </div >
+  );
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
 }
 
 export function InputCall(props) {
@@ -101,6 +128,7 @@ export function InputCall(props) {
             ${props.correct ? style.input_correct : ''}
             ${props.className}
            `}
+<<<<<<< HEAD
                     type='tel'
                     id={
                         props.phoneFormID
@@ -145,6 +173,32 @@ export function InputCall(props) {
             </div>
         </div>
     );
+=======
+          type="tel"
+          name="phone"
+          placeholder={props.placeholder || "Phone number *"}
+          style={{ backgroundColor: props.bg_color, color: props.color }}
+          onChange={props.onChange}
+          value={props.value}
+        />
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace || "Phone number *"}
+            value={props.value}
+          /> : ""}
+        {props.noIcons ? "" :
+          <div className={style.error_icon}>
+            {props.error ? icon.error : props.value === "" ? "" : icon.agree}
+          </div>}
+      </div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
+    </div>
+  );
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
 }
 
 export function InputName(props) {
@@ -166,6 +220,7 @@ export function InputName(props) {
             ${props.error ? style.input_error : ''}
             ${props.correct ? style.input_correct : ''}
             ${props.className}
+<<<<<<< HEAD
           `}
                     style={{
                         backgroundColor: props.bg_color,
@@ -207,6 +262,33 @@ export function InputName(props) {
             </div>
         </div>
     );
+=======
+           `}
+          style={{ backgroundColor: props.bg_color, color: props.color }}
+          name="name"
+          type="name"
+          placeholder={props.placeholder || "Name *"}
+          onChange={props.onChange}
+          value={props.value}
+        />
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace || "Name *"}
+            value={props.value}
+          /> : ""}
+        {props.noIcons ? "" :
+          <div className={style.error_icon}>
+            {props.error ? icon.error : props.value === "" ? "" : icon.agree}
+          </div>}
+      </div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
+    </div>
+  );
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
 }
 
 export function DropDownList(props) {
@@ -240,6 +322,7 @@ export function DropDownList(props) {
                 <div
                     className={`
         ${style.dropdownlist} 
+<<<<<<< HEAD
         ${listIsActive ? style.dropdownlist_active : ''}
         ${props.error ? style.dropdownlist_error : ''}
         ${props.correct ? style.dropdownlist_correct : ''}
@@ -297,6 +380,52 @@ export function DropDownList(props) {
             </div>
         </>
     );
+=======
+        ${listIsActive ? style.dropdownlist_active : ""}
+        ${props.className}
+        `}>
+          <div
+            className={style.dropdownlist_title_out}
+            onClick={() => { changeListActivity(!listIsActive) }}
+          >
+            <p className={style.dropdownlist_title}
+            >
+              {listTitle || props.title}
+            </p>
+            <Arrow
+              active={listIsActive}
+            />
+          </div>
+          <ul
+            className={style.dropdownlist_list}
+          >
+            {props.data.map((item, index) => (
+              (<li
+                key={index}
+                className={`${style.dropdownlist_item} ${listTitle === item.name ? style.dropdownlist_item_active : ""}`}
+                onClick={() => { onItemClick(item, item.name, index) }}
+              >
+                {item.name}
+              </li>)
+            ))}
+          </ul>
+          <input
+            className={`
+            ${style.radioBox}
+           `}
+            defaultChecked
+            name={props.value || listTitle}
+            type='radio'
+            value={props.value || listTitle}
+          />
+        </div>
+        <div className={errorTheme[props.errorTheme || "standard"]}>
+          {props.error}
+        </div>
+      </div>
+    </>
+  );
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
 }
 export function CheckBox(props) {
     function onItemClick() {
@@ -321,6 +450,7 @@ export function CheckBox(props) {
                         className={`
             ${style.checkbox__input}
            `}
+<<<<<<< HEAD
                         name={props.title}
                         type='checkbox'
                         checked={props.active}
@@ -332,6 +462,18 @@ export function CheckBox(props) {
             </div>
         </>
     );
+=======
+            name={props.title}
+            type='checkbox'
+            checked={props.active}
+            onChange={onItemClick}
+            value={props.title}
+          />
+        </div>
+      </div>
+    </>
+  );
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
 }
 
 function Arrow(props) {
@@ -383,6 +525,7 @@ function AddingPlaceholder(props) {
 }
 
 export function Input(props) {
+<<<<<<< HEAD
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -409,11 +552,37 @@ export function Input(props) {
             <div className={theme[props.theme ? props.theme : 'standard']}>
                 <input
                     className={`
+=======
+  const icon = {
+    error: icons.error,
+    agree: icons.agree,
+  }
+  if (props.error_1) { icon.error = icons.error_1 }
+  // error_1={true}
+  // error={howYouDetectTrueError}
+  // correct={howYouDetectTrueError}
+  // className={className}
+  // theme=""
+  // type="type"
+  // onChange={onChange}
+  // value={value}
+  // name="name"
+  // noPlace={true}
+  // anotherPlace={true}
+  // noIcons={true}
+  // errorTheme=""
+  return (
+    <div className={style.input_block_out}>
+      <div className={theme[props.theme ? props.theme : "standard"]}>
+        <input
+          className={`
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
              ${style.input}
              ${props.error ? style.input_error : ''}
              ${props.correct ? style.input_correct : ''}
              ${props.className}
             `}
+<<<<<<< HEAD
                     style={
                         props.uppercase ? { textTransform: 'uppercase' } : null
                     }
@@ -454,3 +623,30 @@ export function Input(props) {
         </div>
     );
 }
+=======
+          style={props.uppercase ? { textTransform: "uppercase" } : null}
+          type={props.type}
+          onChange={props.onChange}
+          value={props.value}
+          name={props.name}
+          placeholder={props.noPlace ? "" : props.placeholder}
+        />
+        {props.anotherPlace ?
+          <AddingPlaceholder
+            text={props.anotherPlace}
+            value={props.value}
+          /> : ""}
+        {props.noIcons ? "" :
+          <div className={style.error_icon}>
+            {props.error ? icon.error : props.value === "" ? "" : icon.agree}
+          </div>}
+      </div>
+      <div
+        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
+      >
+        {props.error}
+      </div>
+    </div >
+  );
+}
+>>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde

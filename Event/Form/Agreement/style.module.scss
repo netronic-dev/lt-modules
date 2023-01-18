@@ -1,0 +1,55 @@
+@import "../../default";
+
+.agreement {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+.agreement__checkbox {
+	margin-top: 5px;
+	cursor: pointer;
+}
+.agreement__checkbox_active {
+	.agreement_dot {
+		path {
+			transition: all 0.4s ease-in-out;
+			opacity: 1;
+		}
+	}
+}
+.error {
+	.agreement_dot {
+		circle {
+			stroke: #ff6157;
+		}
+	}
+}
+.agreement_dot {
+	path {
+		opacity: 0;
+	}
+}
+.agreement__text {
+	cursor: default;
+	font-family: $font-1;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #4f4f4f;
+	a {
+		cursor: pointer;
+		text-decoration: inherit;
+		color: rgb(196, 196, 196);
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+	span {
+		text-decoration-line: underline;
+		color: #8e8e8e;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+}

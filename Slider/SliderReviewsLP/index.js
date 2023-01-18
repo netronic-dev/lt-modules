@@ -2,6 +2,7 @@ import Slider from "react-slick"
 import React from "react"
 import Image from "next/image"
 import style from "./style.module.scss"
+import { useModals } from "../../../context/ModalsProvider"
 
 const theme = {
   "default": style.theme_default,
@@ -9,6 +10,9 @@ const theme = {
 }
 
 export default function SliderReviewsLP(props) {
+
+  const modals = useModals()
+
   const settings = {
     customPaging: function (i) {
       return (
@@ -86,8 +90,10 @@ export default function SliderReviewsLP(props) {
       <Slider {...settings}>
         {props.data.map((data, index) => (
           <BlockAdder
+            videoImg={data.videoImg}
+            picture={data.picture}
             index={index}
-            onVideoOpen={props.onVideoOpen}
+            onVideoOpen={() => modals.VideoModalOpen(data.videoLink)}
             image={data.image}
             videoLink={data.videoLink}
             alt={data.name}
@@ -108,33 +114,44 @@ function BlockAdder(props) {
     >
       <div className={style.cell_in}>
         <div className={style.review}>
-          {props.text ?
+          {props.text &&
             <p className={style.text}>{props.text}</p>
-            : ""}
-          {props.videoLink ?
+          }
+          {props.videoLink &&
             <div
               className={style.video_preview}
               onClick={() => { props.onVideoOpen(props.videoLink) }}
             >
               <Image
-                src={`https://i.ytimg.com/vi/${props.videoLink}/maxresdefault.jpg`}
+                src={props.videoImg || `https://i.ytimg.com/vi/${props.videoLink}/maxresdefault.jpg`}
                 className={style.video_preview__image}
                 layout="fill"
                 objectFit="cover"
                 quality={75}
               />
               <div className={style.videoButton}>{videoIcon}</div>
-            </div> : ""}
+            </div>}
+          {props.picture &&
+            <div
+              className={style.video_preview}
+            >
+              <Image
+                src={props.picture}
+                className={style.video_preview__image}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>}
         </div>
         <div className={style.info}>
-          {props.image ?
+          {props.image &&
             <Image
               src={props.image}
               layout="fixed"
               width={55}
               height={54}
               quality={75}
-            /> : ""}
+            />}
           <div className={style.text_block}>
             <p className={style.name}>
               {props.name}

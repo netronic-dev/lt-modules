@@ -1,186 +1,166 @@
 @import "../default";
 
 .main {
-	background: #f0f0f2;
-	margin-top: -100px;
-	padding-top: 100px;
+	height: 710px;
+	position: relative;
 }
-.main__in {
+.wrapper {
+	position: relative;
+	z-index: 1;
 	@extend %page_grid;
-}
-.image {
-	position: relative;
-	width: 100%;
-	max-width: 1150px;
-	height: 520px;
-}
-.image_with_resp_ver {
-	.image_desktop {
-		display: block;
-	}
-	.image_responsive {
-		display: none;
-	}
-}
-.event_info_top {
-	display: grid;
-	grid-template-columns: 3fr 4fr 5fr;
-	grid-template-areas: "logo text timer";
-	align-items: center;
-	grid-gap: 20px;
-	margin-bottom: 25px;
-	width: 100%;
-}
-.event_info_top__text {
-	grid-area: text;
-	font-family: $font-1;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 30px;
-	color: #040e18;
-	padding: 10px 0 10px 30px;
-	border-left: 1px solid #0090ff;
-}
-.event_info_top__logo {
-	grid-area: logo;
-	position: relative;
-	width: 100%;
-	max-width: 300px;
-	height: 80px;
-}
-.counter_outer {
-	grid-area: timer;
-}
-.counter_title {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 24px;
-	text-transform: uppercase;
-	color: #8e8e8e;
-	margin-bottom: 10px;
+	padding: 40px 0 50px;
 }
 .title {
-	font-family: $font-1;
+	font-family: "Manrope";
 	font-weight: 600;
-	font-size: 60px;
+	font-size: 55px;
 	line-height: 65px;
 	text-transform: uppercase;
-	color: #040e18;
+	color: #000;
+	margin: 0 0 35px;
 	span {
-		font-weight: 500;
 		color: #0090ff;
 	}
 }
-.when {
-	display: flex;
-	flex-direction: column;
-	margin-right: 60px;
+.line {
+	width: 0;
+	height: 56px;
+	border: 1px solid #89a2c8;
 }
-.date {
-	svg {
-		margin-right: 10px;
-	}
-	display: flex;
-	align-items: center;
-	font-family: $font-1;
+.event_text {
+	font-family: "Manrope";
 	font-weight: 500;
-	font-size: 14px;
-	line-height: 19px;
+	font-size: 13px;
+	line-height: 16px;
+	color: #89a2c8;
+}
+.button {
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	background: #0090ff;
+	border-radius: 60px;
+	padding: 16px;
+	width: 100%;
+	max-width: 280px;
+	border: 0;
+	font-family: "Manrope";
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	letter-spacing: 0.02em;
 	text-transform: uppercase;
-	color: #8e8e8e;
-	margin-bottom: 5px;
-}
-.date_text {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 27px;
-
-	color: #040e18;
-}
-.where {
-	display: flex;
-	flex-direction: column;
-}
-.place {
-	svg {
-		margin-right: 10px;
+	color: #ffffff;
+	&:hover {
+		background-color: #101010;
 	}
-	display: flex;
-	align-items: center;
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 19px;
-	text-transform: uppercase;
-	color: #8e8e8e;
-	margin-bottom: 5px;
 }
-.place_text {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 24px;
-	color: #040e18;
+.image_responsive {
+	position: relative;
+	display: none;
+	height: 265px;
+	width: 100%;
+	margin-bottom: 35px;
+}
+.background {
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+.event_logo {
+	position: relative;
+	width: 100%;
+	max-width: 170px;
+	height: 55px;
+	margin-bottom: 30px;
 }
 .event_info {
+	width: 100%;
+	max-width: 575px;
+	margin-bottom: 40px;
+	display: grid;
+	gap: 10px;
+}
+.event_info_cell {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	grid-gap: 10px;
+}
+.event_info__top {
 	display: flex;
+	gap: 10px;
+	align-items: center;
 }
-@media (max-width: 1100px) {
-	.event_info_top {
-		grid-template-columns: 1fr 2fr;
-		grid-template-areas:
-			"logo text"
-			"timer timer";
-	}
+.event_info__title {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #8e8e8e;
+	margin-bottom: 6px;
 }
-@media (max-width: 750px) {
-	.event_info_top {
-		grid-template-columns: 1fr 1fr;
-	}
-	.event_info_top__text {
-		font-size: 16px;
-		line-height: 24px;
-		br {
-			display: none;
-		}
-	}
-
-	.event_info_top__logo {
-		height: 50px;
-	}
-	.image_with_resp_ver {
-		.image_desktop {
-			display: none;
-		}
-		.image_responsive {
-			display: block;
-		}
+.event_info__text {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 25px;
+	color: #040e18;
+	span {
+		color: #0090ff;
 	}
 }
-@media (max-width: 650px) {
+@media (max-width: 1000px) {
 	.title {
 		font-size: 40px;
 		line-height: 45px;
+	}
+}
+@media (max-width: 600px) {
+	.event_info__text {
 		br {
 			display: none;
 		}
 	}
-	.when {
-		margin-right: 0;
+	.main {
+		height: auto;
+	}
+	.wrapper {
+		margin: 0;
+	}
+	.title {
+		padding: 0 15px;
+		font-size: 35px;
+		line-height: 43px;
+		br {
+			display: none;
+		}
+	}
+	.event_logo {
+		margin-left: 15px;
 	}
 	.event_info {
-		display: grid;
+		padding: 0 15px 30px;
 		grid-template-columns: 1fr 1fr;
-		grid-gap: 22px;
 	}
-	.place_text {
+	.event_info_cell {
+		grid-template-columns: 1fr;
+	}
+	.button_outer {
+		display: flex;
+		justify-content: center;
+	}
+	.button {
 		font-size: 16px;
-		line-height: 24px;
+		line-height: 22px;
 	}
-	.image {
-		height: 350px;
+	.image_responsive {
+		display: block;
+	}
+	.background {
+		display: none;
 	}
 }

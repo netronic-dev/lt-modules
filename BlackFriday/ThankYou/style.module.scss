@@ -1,14 +1,16 @@
 @import "../default";
-
+.section {
+	padding: 60px 0;
+}
 .main {
-	background: #040e18;
-	padding: 300px 100px;
+	@extend %page_grid;
+	background: #fff;
 }
 .main_in {
-	@extend %page_grid;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 75px;
 }
 .title {
 	font-family: $font-1;
@@ -17,7 +19,7 @@
 	line-height: 50px;
 	text-align: center;
 	text-transform: uppercase;
-	color: #fff;
+	color: #000;
 	margin: 0 0 20px;
 }
 .subtitle {
@@ -26,160 +28,17 @@
 	font-size: 16px;
 	line-height: 20px;
 	text-align: center;
-	color: #8c8c8c;
+	color: #828282;
 }
-.how_find {
-	@extend %page_grid;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 20px;
-	padding: 60px 0 100px;
-}
-.how_find__title {
-	font-family: $font-1;
-	font-weight: 600;
-	font-size: 36px;
-	line-height: 42px;
-	text-transform: uppercase;
-	color: #040e18;
-	margin: 0 0 30px;
-	span {
-		color: #0090ff;
-		font-weight: 500;
-	}
-}
-.when {
-	margin-bottom: 20px;
-}
-.where {
-	margin-bottom: 80px;
-}
-.when__title {
-	display: flex;
-	align-items: center;
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 19px;
-	text-align: center;
-	text-transform: uppercase;
-	color: #8e8e8e;
-}
-.where__title {
-	display: flex;
-	align-items: center;
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 19px;
-	text-align: center;
-	text-transform: uppercase;
-	color: #8e8e8e;
-}
-.calendar_icon {
-	margin-right: 10px;
-}
-.place_icon {
-	margin-right: 10px;
-}
-.when__text {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 27px;
-	color: #040e18;
-}
-.where__text {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 27px;
-	color: #040e18;
-}
-.google_calendar {
-	background: #040e18;
-	border-radius: 10px;
-	padding: 20px 22px;
-	display: flex;
-	flex-direction: column;
-	width: max-content;
-}
-.google_calendar__text {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 22px;
-	color: #8e8e8e;
-	margin-bottom: 30px;
-	span {
-		color: #ffffff;
-	}
-}
-.calendar_icon_button {
-	margin-right: 10px;
-}
-.google_calendar__button {
-	width: 100%;
-	outline: 0;
-	border: 0;
-	padding: 10px;
-	background: #0090ff;
-	border-radius: 60px;
-	font-family: Manrope;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 19px;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
-	color: #ffffff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	&:hover {
-		background: #0066b4;
-	}
-}
-.google_calendar__button_link {
-	width: 100%;
-}
-.map {
-	img {
-		width: 100%;
-	}
-}
-@media (max-width: 850px) {
-	.how_find {
-		grid-template-columns: 1fr;
-		grid-gap: 60px;
-		padding: 60px 50px 100px;
-	}
-	.text_block {
-		margin: 0 auto;
-	}
+.image {
+	position: relative;
+	border-radius: 20px;
+	overflow: hidden;
 }
 @media (max-width: 550px) {
-	.how_find {
-		padding: 40px 20px 60px;
-	}
-	.main {
-		padding: 60px 20px 30px;
-	}
 	.title {
 		font-size: 30px;
 		line-height: 40px;
 		margin: 0 0 20px;
-	}
-	.how_find__title {
-		font-size: 26px;
-		line-height: 30px;
-		margin: 0 0 30px;
-		br {
-			display: none;
-		}
-	}
-	.google_calendar {
-		width: 100%;
 	}
 }
