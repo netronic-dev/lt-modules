@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 import { useFormik } from 'formik';
-import { useState } from 'react';
 import style from '../forms.module.scss';
 import { useRouter } from 'next/router';
-import { validate } from '../validate/validate';
-import {
-    InputName,
-    InputCall,
-    InputEmail,
-    DropDownList,
-} from '../Inputs/Inputs';
-import { useInView } from 'react-hook-inview';
+import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
+import { postData } from '../../functions/postData';
+import { useValidation } from '../../../context/ValidationProvider';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -30,19 +23,24 @@ const themeFormTheme = {
 };
 
 export function ThemeForm(props) {
+    const validate = useValidation();
     const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            phoneNumber: '',
+            phone: '',
         },
         validate,
-        onSubmit: () => {
-            setTimeout(() => {
-                router.push('/thanks-pres').then(() => router.reload());
-                document.body.className = '';
-            }, 400);
+        onSubmit: (values) => {
+            postData(
+                values,
+                props.destinationURL,
+                props.orderName,
+                props.lang,
+                window.location.hostname,
+                router.query
+            ).then(router.push('/thanks-pres'));
         },
     });
 
@@ -59,21 +57,16 @@ export function ThemeForm(props) {
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     error={formik.errors.name}
-                    nameFormID={props.formID}
-                    placeholder='Nom complet'
                 />
                 <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
-                    value={formik.values.phoneNumber}
-                    error={formik.errors.phoneNumber}
-                    phoneFormID={props.formID}
-                    placeholder='Téléphone'
+                    value={formik.values.phone}
+                    error={formik.errors.phone}
                 />
             </div>
             <button
                 type='submit'
-                id={Object.keys(formik.errors).length == 0 ? props.id : null}
                 className={`
         ${
             Object.keys(formik.errors).length == 0
@@ -89,20 +82,25 @@ export function ThemeForm(props) {
 }
 
 export function ThemeFormAll(props) {
+    const validate = useValidation();
     const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
-            phoneNumber: '',
+            phone: '',
         },
         validate,
-        onSubmit: () => {
-            setTimeout(() => {
-                router.push('/thanks-pres').then(() => router.reload());
-                document.body.className = '';
-            }, 400);
+        onSubmit: (values) => {
+            postData(
+                values,
+                props.destinationURL,
+                props.orderName,
+                props.lang,
+                window.location.hostname,
+                router.query
+            ).then(router.push('/thanks-pres'));
         },
     });
 
@@ -119,29 +117,22 @@ export function ThemeFormAll(props) {
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     error={formik.errors.name}
-                    nameFormID={props.formID}
-                    placeholder={props.placeholderName}
                 />
                 <InputEmail
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.email}
                     error={formik.errors.email}
-                    emailFormID={props.formID}
-                    placeholder={props.placeholderEmail}
                 />
                 <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
-                    value={formik.values.phoneNumber}
-                    error={formik.errors.phoneNumber}
-                    phoneFormID={props.formID}
-                    placeholder={props.placeholderCall}
+                    value={formik.values.phone}
+                    error={formik.errors.phone}
                 />
             </div>
             <button
                 type='submit'
-                id={Object.keys(formik.errors).length == 0 ? props.id : null}
                 className={`
         ${
             Object.keys(formik.errors).length == 0
@@ -155,289 +146,3 @@ export function ThemeFormAll(props) {
         </form>
     );
 }
-
-export function FormWMaterials(props) {
-    const [ref, IsVisible] = useInView({
-        unobserveOnEnter: true,
-    });
-
-    const [agreement, changeAgreement] = useState(false);
-
-    const router = useRouter();
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            materials: false,
-        },
-        validate,
-        onSubmit: () => {
-            setTimeout(() => {
-                router.push('/thanks-pres').then(() => router.reload());
-                document.body.className = '';
-            }, 400);
-        },
-    });
-
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-    }
-
-    return (
-        <form
-            ref={ref}
-            key={IsVisible ? 1 : 0}
-            onSubmit={formik.handleSubmit}
-            className={style.form_materials}
-        >
-            <div className={`${style.form_materials__input} ${style.name}`}>
-                <InputName
-                    className='zoom-animation'
-                    error_1
-                    theme={props.theme}
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    error={formik.errors.name}
-                    nameFormID={props.formID}
-                    errorTheme={props.errorTheme}
-                    correct={
-                        formik.values.name
-                            ? formik.errors.name
-                                ? false
-                                : true
-                            : false
-                    }
-                />
-            </div>
-            <div className={`${style.form_materials__input} ${style.email}`}>
-                <InputEmail
-                    error_1
-                    className='zoom-animation animated-second'
-                    theme={props.theme}
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                    error={formik.errors.email}
-                    emailFormID={props.formID}
-                    errorTheme={props.errorTheme}
-                    correct={
-                        formik.values.email
-                            ? formik.errors.email
-                                ? false
-                                : true
-                            : false
-                    }
-                />
-            </div>
-            <div className={style.cell}>
-                <button
-                    type='submit'
-                    id={
-                        Object.keys(formik.errors).length == 0 ? props.id : null
-                    }
-                    className={`
-        ${
-            Object.keys(formik.errors).length == 0
-                ? buttonActiveTheme[props.buttonActiveTheme]
-                : buttonTheme[props.buttonTheme]
-        }
-        `}
-                >
-                    {props.buttonText}
-                </button>
-            </div>
-            <div
-                onClick={onAgreementChange}
-                className={`${style.agreement} fade-animation`}
-            >
-                <Dot
-                    active={agreement ? true : false}
-                    colorDot={props.colorDot}
-                />
-                <input
-                    className={style.radioBox}
-                    name='materials'
-                    type='radio'
-                    id='radioBox-materials'
-                    value={agreement}
-                />
-                {props.materialsAgreementText}
-            </div>
-        </form>
-    );
-}
-
-const Dot = (props) => {
-    return (
-        <svg
-            width='21'
-            height='21'
-            viewBox='0 0 21 21'
-            fill='none'
-            className={style.dot}
-        >
-            <circle
-                cx='10.5'
-                cy='10.5'
-                r='10'
-                stroke={props.colorDot}
-                className={style.dot_border}
-            />
-            {props.active ? (
-                <circle
-                    cx='10.5'
-                    cy='10.5'
-                    r='6.5'
-                    fill={props.colorDot}
-                    className={style.dot_point}
-                />
-            ) : null}
-        </svg>
-    );
-};
-=======
-import { useFormik } from "formik";
-import style from "../forms.module.scss";
-import { useRouter } from "next/router";
-import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
-import { postData } from "../../functions/postData";
-import { useValidation } from "../../../context/ValidationProvider";
-
-const buttonTheme = {
-	general: style.general_button_inactive,
-	black: style.button_black_inactive,
-	bigBlack: style.button_big_black_inactive,
-};
-
-const buttonActiveTheme = {
-	general: style.general_button_active,
-	white: style.button_white_active,
-	black: style.button_black_active,
-	bigBlack: style.button_big_black_active,
-};
-const themeFormTheme = {
-	general: style.theme_form,
-	mobile: style.theme_form_mobile,
-};
-
-export function ThemeForm(props) {
-	const validate = useValidation();
-	const router = useRouter();
-
-	const formik = useFormik({
-		initialValues: {
-			name: "",
-			phone: "",
-		},
-		validate,
-		onSubmit: (values) => {
-			postData(
-				values,
-				props.destinationURL,
-				props.orderName,
-				props.lang,
-				window.location.hostname,
-				router.query
-			).then(router.push("/thanks-pres"));
-		},
-	});
-
-	return (
-		<form
-			onSubmit={formik.handleSubmit}
-			className={themeFormTheme[props.formTheme ? props.formTheme : "general"]}
-		>
-			<div className={style.inputs}>
-				<InputName
-					theme={props.theme}
-					onChange={formik.handleChange}
-					value={formik.values.name}
-					error={formik.errors.name}
-				/>
-				<InputCall
-					theme={props.theme}
-					onChange={formik.handleChange}
-					value={formik.values.phone}
-					error={formik.errors.phone}
-				/>
-			</div>
-			<button
-				type="submit"
-				className={`
-        ${
-					Object.keys(formik.errors).length == 0
-						? buttonActiveTheme[props.buttonActiveTheme]
-						: buttonTheme[props.buttonTheme]
-				}
-        `}
-			>
-				{props.buttonText}
-			</button>
-		</form>
-	);
-}
-
-export function ThemeFormAll(props) {
-	const validate = useValidation();
-	const router = useRouter();
-
-	const formik = useFormik({
-		initialValues: {
-			name: "",
-			email: "",
-			phone: "",
-		},
-		validate,
-		onSubmit: (values) => {
-			postData(
-				values,
-				props.destinationURL,
-				props.orderName,
-				props.lang,
-				window.location.hostname,
-				router.query
-			).then(router.push("/thanks-pres"));
-		},
-	});
-
-	return (
-		<form
-			onSubmit={formik.handleSubmit}
-			className={themeFormTheme[props.formTheme ? props.formTheme : "general"]}
-		>
-			<div className={style.inputs}>
-				<InputName
-					theme={props.theme}
-					onChange={formik.handleChange}
-					value={formik.values.name}
-					error={formik.errors.name}
-				/>
-				<InputEmail
-					theme={props.theme}
-					onChange={formik.handleChange}
-					value={formik.values.email}
-					error={formik.errors.email}
-				/>
-				<InputCall
-					theme={props.theme}
-					onChange={formik.handleChange}
-					value={formik.values.phone}
-					error={formik.errors.phone}
-				/>
-			</div>
-			<button
-				type="submit"
-				className={`
-        ${
-					Object.keys(formik.errors).length == 0
-						? buttonActiveTheme[props.buttonActiveTheme]
-						: buttonTheme[props.buttonTheme]
-				}
-        `}
-			>
-				{props.buttonText}
-			</button>
-		</form>
-	);
-}
->>>>>>> 777832d7b8db0d22d880cd3ed1fcc78d29788fde
