@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import style from '../forms.module.scss';
 import { useRouter } from 'next/router';
 import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
-import { postData } from '../../functions/postData';
+import { postData } from '../../functions/postData.ts';
 import { useValidation } from '../../../context/ValidationProvider';
 
 const buttonTheme = {
@@ -57,12 +57,14 @@ export function ThemeForm(props) {
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     error={formik.errors.name}
+                    placeholder={props.namePlaceholder}
                 />
                 <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.phone}
                     error={formik.errors.phone}
+                    placeholder={props.callPlaceholder}
                 />
             </div>
             <button
@@ -117,18 +119,21 @@ export function ThemeFormAll(props) {
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     error={formik.errors.name}
+                    placeholder={props.placeholderName}
                 />
                 <InputEmail
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.email}
                     error={formik.errors.email}
+                    placeholder={props.placeholderEmail}
                 />
                 <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.phone}
                     error={formik.errors.phone}
+                    placeholder={props.placeholderCall}
                 />
             </div>
             <button

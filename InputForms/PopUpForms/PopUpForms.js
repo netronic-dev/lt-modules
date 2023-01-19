@@ -6,7 +6,7 @@ import { icons } from '../icons/icons';
 import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
 import { useModals } from '../../../context/ModalsProvider';
 import { useValidation } from '../../../context/ValidationProvider';
-import { postData } from '../../functions/postData';
+import { postData } from '../../functions/postData.ts';
 
 function turnOnScroll() {
     document.body.className = '';
@@ -64,11 +64,13 @@ export function PopUpNamePhone(props) {
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
                                 error={formik.errors.name}
+                                placeholder={props.namePlaceholder}
                             />
                             <InputCall
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 error={formik.errors.phone}
+                                placeholder={props.callPlaceholder}
                             />
                         </div>
                         <div className={style.agreement}>
@@ -162,11 +164,13 @@ export function PopUpEmailPhone(props) {
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
                                 error={formik.errors.email}
+                                placeholder={props.emailPlaceholder}
                             />
                             <InputCall
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 error={formik.errors.phone}
+                                placeholder={props.callPlaceholder}
                             />
                         </div>
                         <div className={style.agreement}>
@@ -356,11 +360,13 @@ export function PopUpNameEmail(props) {
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
                                 error={formik.errors.name}
+                                placeholder={props.namePlaceholder}
                             />
                             <InputEmail
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
                                 error={formik.errors.email}
+                                placeholder={props.emailPlaceholder}
                             />
                         </div>
                         <div className={style.agreement}>

@@ -7,7 +7,7 @@ import { useGAEvents } from '../../context/GAEventsProvider';
 export function SeoTitleText(props) {
     const GAEvents = useGAEvents();
     function sectionWasInView(sectionName) {
-        GAEvents.sectionInView(sectionName);
+        GAEvents.sectionWasInView(sectionName);
     }
     return (
         <InView
@@ -27,7 +27,7 @@ export function SeoTitleText(props) {
 export function SeoImg(props) {
     const GAEvents = useGAEvents();
     function sectionWasInView(sectionName) {
-        GAEvents.sectionInView(sectionName);
+        GAEvents.sectionWasInView(sectionName);
     }
     return (
         <InView
@@ -53,7 +53,7 @@ export function SeoImg(props) {
 export function SeoTitleTable(props) {
     const GAEvents = useGAEvents();
     function sectionWasInView(sectionName) {
-        GAEvents.sectionInView(sectionName);
+        GAEvents.sectionWasInView(sectionName);
     }
     return (
         <InView
@@ -74,7 +74,7 @@ export function SeoTitleTable(props) {
 export function SeoCTA(props) {
     const GAEvents = useGAEvents();
     function sectionWasInView(sectionName) {
-        GAEvents.sectionInView(sectionName);
+        GAEvents.sectionWasInView(sectionName);
     }
     return (
         <InView

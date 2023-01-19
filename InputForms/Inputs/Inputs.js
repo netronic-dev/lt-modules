@@ -30,11 +30,11 @@ export function InputEmail(props) {
             <div className={theme[props.theme ? props.theme : 'standard']}>
                 <input
                     className={`
-             ${style.input}
-             ${props.error ? style.input_error : ''}
-             ${props.correct ? style.input_correct : ''}
-             ${props.className}
-            `}
+                        ${style.input}
+                        ${props.error ? style.input_error : ''}
+                        ${props.correct ? style.input_correct : ''}
+                        ${props.className}
+                        `}
                     type='email'
                     onChange={props.onChange}
                     value={props.value}
@@ -152,11 +152,11 @@ export function InputName(props) {
                 <input
                     maxLength='30'
                     className={`
-            ${style.input}
-            ${props.error ? style.input_error : ''}
-            ${props.correct ? style.input_correct : ''}
-            ${props.className}
-           `}
+                        ${style.input}
+                        ${props.error ? style.input_error : ''}
+                        ${props.correct ? style.input_correct : ''}
+                        ${props.className}
+                    `}
                     style={{
                         backgroundColor: props.bg_color,
                         color: props.color,
