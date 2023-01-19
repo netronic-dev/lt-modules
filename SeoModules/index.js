@@ -18,7 +18,10 @@ export function SeoTitleText(props) {
         >
             <div className={style.title_text}>
                 <h2 className={style.title}>{props.title}</h2>
-                <div className={style.text}>{props.text}</div>
+                <div className={style.text}>
+                    {props.text}
+                    {props.list}
+                </div>
             </div>
         </InView>
     );
