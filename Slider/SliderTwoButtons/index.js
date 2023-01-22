@@ -21,13 +21,20 @@ export default class SliderTwoButtons extends Component {
             slidesToScroll: 1,
         };
         return (
-            <div className='sliderTwoButtons'>
+            <div
+                className={
+                    this.props.downButtons
+                        ? 'sliderTwoButtonsDownBtn'
+                        : 'sliderTwoButtons'
+                }
+            >
                 <Slider {...settings}>
                     {this.props.sliderData.map((data, index) => (
                         <ImageAdder
                             src={data.image}
                             key={index}
                             height={data.imgHeight}
+                            width={data.imgWidth}
                         />
                     ))}
                 </Slider>
@@ -43,7 +50,7 @@ function ImageAdder(props) {
             <Image
                 src={props.src}
                 layout='responsive'
-                width={1180}
+                width={props.width || 1180}
                 height={props.height || '485'}
             />
         </div>
