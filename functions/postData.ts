@@ -19,11 +19,11 @@ export async function postData(
         lang: lang,
         query: routerQuerry
             ? {
-                  utm_campaign: routerQuerry.utm_campaign || '',
-                  utm_medium: routerQuerry.utm_medium || '',
-                  utm_source: routerQuerry.utm_source || '',
-                  utm_term: routerQuerry.utm_term || '',
-              }
+                utm_campaign: routerQuerry.utm_campaign || '',
+                utm_medium: routerQuerry.utm_medium || '',
+                utm_source: routerQuerry.utm_source || '',
+                utm_term: routerQuerry.utm_term || '',
+            }
             : {},
         fields: [
             {
@@ -94,9 +94,9 @@ async function getLocationData() {
         )
         .then((response: any) => {
             locationData = {
-                ip: response.ip,
-                region: response.continent_name,
-                country: response.country_name,
+                ip: response.data.ip,
+                region: response.data.continent_name,
+                country: response.data.country_name,
             };
         })
         .catch((error) => {
