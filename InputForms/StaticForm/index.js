@@ -40,7 +40,7 @@ export function ThemeForm(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(router.push('/thanks-pres'));
+            ).then(router.push('/thank-you/pres'));
         },
     });
 

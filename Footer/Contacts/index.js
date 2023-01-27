@@ -1,7 +1,8 @@
 import { useGAEvents } from '../../../context/GAEventsProvider';
 import style from '../footer.module.scss';
+import Link from 'next/link';
 
-export function Contacts() {
+export function Contacts(props) {
     const GAEvents = useGAEvents();
 
     return (
@@ -9,9 +10,13 @@ export function Contacts() {
             <div className={style.contacts_cards}>
                 <div className={style.contacts_two_cards}>
                     <div className={style.contacts__content}>
-                        <h3 className={style.contacts__blue}>EUROPE</h3>
+                        <h3 className={style.contacts__blue}>
+                            {props.nameOfRegion || 'EUROPE'}
+                        </h3>
                         <div className={style.contacts__content_item}>
-                            <p className={style.title}>Main Office Address</p>
+                            <p className={style.title}>
+                                {props.adressTitle || 'Main Office Address'}{' '}
+                            </p>
                             <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
@@ -29,89 +34,102 @@ export function Contacts() {
                         <div
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
-                            <p className={style.title}>Email</p>
-                            <a
-                                target='_blank'
-                                href='mailto:sales@lasertag.net'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'sales@lasertag.net'
-                                    )
-                                }
-                            >
-                                <p className={style.contacts__link_underline}>
-                                    sales@lasertag.net
-                                </p>
-                            </a>
+                            <p className={style.title}>
+                                {props.emailTitle || 'Email'}
+                            </p>
+                            <Link href='mailto:sales@lasertag.net'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'sales@lasertag.net'
+                                        )
+                                    }
+                                >
+                                    <p
+                                        className={
+                                            style.contacts__link_underline
+                                        }
+                                    >
+                                        sales@lasertag.net
+                                    </p>
+                                </a>
+                            </Link>
                         </div>
                         <div
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
-                            <p className={style.title}>Phone</p>
-                            <a
-                                target='_blank'
-                                href='tel:+48573581044'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'tel:+48573581044'
-                                    )
-                                }
-                            >
-                                <p className={style.contacts__link}>
-                                    +48 573 58 10 44
-                                </p>
-                            </a>
+                            <p className={style.title}>
+                                {props.phoneTitle || 'Phone'}
+                            </p>
+                            <Link href='tel:+48573581044'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'tel:+48573581044'
+                                        )
+                                    }
+                                >
+                                    <p className={style.contacts__link}>
+                                        +48 573 58 10 44
+                                    </p>
+                                </a>
+                            </Link>
                         </div>
                     </div>
                     <div className={style.contacts__icons}>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='skype:chiefsales?chat'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'skype:chiefsales?chat'
-                                    )
-                                }
-                            >
-                                {skypeLogo}
-                            </a>
+                            <Link href='skype:chiefsales?chat'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'skype:chiefsales?chat'
+                                        )
+                                    }
+                                >
+                                    {skypeLogo}
+                                </a>
+                            </Link>
                         </div>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='https://wa.me/37258662265'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'https://wa.me/37258662265'
-                                    )
-                                }
-                            >
-                                {whatsAppIcon}
-                            </a>
+                            <Link href='https://wa.me/37258662265'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'https://wa.me/37258662265'
+                                        )
+                                    }
+                                >
+                                    {whatsAppIcon}
+                                </a>
+                            </Link>
                         </div>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='https://wa.me/34645379324'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'https://wa.me/34645379324'
-                                    )
-                                }
-                            >
-                                {whatsAppIcon}
-                            </a>
+                            <Link href='https://wa.me/34645379324'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'https://wa.me/34645379324'
+                                        )
+                                    }
+                                >
+                                    {whatsAppIcon}
+                                </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -119,7 +137,9 @@ export function Contacts() {
                     <div className={style.contacts__content}>
                         <h3 className={style.contacts__blue}>USA</h3>
                         <div className={style.contacts__content_item}>
-                            <p className={style.title}>Address</p>
+                            <p className={style.title}>
+                                {props.adressTitle || 'Address'}
+                            </p>
                             <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
@@ -129,89 +149,102 @@ export function Contacts() {
                         <div
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
-                            <p className={style.title}>Email</p>
-                            <a
-                                target='_blank'
-                                href='mailto:sales@lasertag.net'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'mailto:sales@lasertag.net'
-                                    )
-                                }
-                            >
-                                <p className={style.contacts__link_underline}>
-                                    sales@lasertag.net
-                                </p>
-                            </a>
+                            <p className={style.title}>
+                                {props.emailTitle || 'Email'}
+                            </p>
+                            <Link href='mailto:sales@lasertag.net'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'mailto:sales@lasertag.net'
+                                        )
+                                    }
+                                >
+                                    <p
+                                        className={
+                                            style.contacts__link_underline
+                                        }
+                                    >
+                                        sales@lasertag.net
+                                    </p>
+                                </a>
+                            </Link>
                         </div>
                         <div
                             className={`${style.contacts__content_item} ${style.short}`}
                         >
-                            <p className={style.title}>Phone</p>
-                            <a
-                                target='_blank'
-                                href='tel:+13479192246'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'tel:+13479192246'
-                                    )
-                                }
-                            >
-                                <p className={style.contacts__link}>
-                                    +1 347 919 2246
-                                </p>
-                            </a>
+                            <p className={style.title}>
+                                {props.phoneTitle || 'Phone'}
+                            </p>
+                            <Link href='tel:+13479192246'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'tel:+13479192246'
+                                        )
+                                    }
+                                >
+                                    <p className={style.contacts__link}>
+                                        +1 347 919 2246
+                                    </p>
+                                </a>
+                            </Link>
                         </div>
                     </div>
                     <div className={style.contacts__icons}>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='skype:chiefsales?chat'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'skype:chiefsales?chat'
-                                    )
-                                }
-                            >
-                                {skypeLogo}
-                            </a>
+                            <Link href='skype:chiefsales?chat'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'skype:chiefsales?chat'
+                                        )
+                                    }
+                                >
+                                    {skypeLogo}
+                                </a>
+                            </Link>
                         </div>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='https://wa.me/16464802917'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'https://wa.me/16464802917'
-                                    )
-                                }
-                            >
-                                {whatsAppIcon}
-                            </a>
+                            <Link href='https://wa.me/16464802917'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'https://wa.me/16464802917'
+                                        )
+                                    }
+                                >
+                                    {whatsAppIcon}
+                                </a>
+                            </Link>
                         </div>
                         <div className={style.icon_item}>
-                            <a
-                                target='_blank'
-                                href='https://wa.me/16464802917'
-                                onClick={() =>
-                                    GAEvents.buttonClick(
-                                        'Footer',
-                                        'Link click',
-                                        'https://wa.me/16464802917'
-                                    )
-                                }
-                            >
-                                {whatsAppIcon}
-                            </a>
+                            <Link href='https://wa.me/16464802917'>
+                                <a
+                                    target='_blank'
+                                    onClick={() =>
+                                        GAEvents.buttonClick(
+                                            'Footer',
+                                            'Link click',
+                                            'https://wa.me/16464802917'
+                                        )
+                                    }
+                                >
+                                    {whatsAppIcon}
+                                </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

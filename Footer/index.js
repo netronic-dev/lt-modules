@@ -34,7 +34,12 @@ export default function Footer(props) {
                     inView && sectionWasInView('Footer Contacts')
                 }
             >
-                <Contacts />
+                <Contacts
+                    nameOfRegion={props.nameOfRegion}
+                    adressTitle={props.adressTitle}
+                    emailTitle={props.emailTitle}
+                    phoneTitle={props.phoneTitle}
+                />
             </InView>
             <InView
                 as='div'

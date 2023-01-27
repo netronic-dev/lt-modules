@@ -19,11 +19,11 @@ export async function postData(
         lang: lang,
         query: routerQuerry
             ? {
-                utm_campaign: routerQuerry.utm_campaign || '',
-                utm_medium: routerQuerry.utm_medium || '',
-                utm_source: routerQuerry.utm_source || '',
-                utm_term: routerQuerry.utm_term || '',
-            }
+                  utm_campaign: routerQuerry.utm_campaign || '',
+                  utm_medium: routerQuerry.utm_medium || '',
+                  utm_source: routerQuerry.utm_source || '',
+                  utm_term: routerQuerry.utm_term || '',
+              }
             : {},
         fields: [
             {
