@@ -110,17 +110,9 @@ export function SetsTable(props) {
         </h2>
         <div className={style.table}>
           <div className={style.grid}>
-            <p className={style.title}>Galaxy</p>
-            <p className={style.title}>Galaxy Pulse</p>
             <p className={style.title}>Galaxy Eclipse</p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>
-              {props.en ? "Rubber protective tip" : "Резиновый бампер"}
-            </p>
-            <p className={style.text}>
-              {props.en ? "Rubber protective tip" : "Резиновый бампер"}
-            </p>
             <p className={style.text}>
               {props.en ? "Rubberized body" : "Прорезиненый корпус"}
             </p>
@@ -132,12 +124,6 @@ export function SetsTable(props) {
             <p className={style.text}>
               {props.en ? "+" : "Есть"}
             </p>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Defeat sensor" : "Датчик поражения"}
             </p>
@@ -146,31 +132,17 @@ export function SetsTable(props) {
             <p className={style.text}>
               {props.en ? "+" : "Есть"}
             </p>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Second hand sensor" : "Датчик второй руки"}
             </p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>IPS 128х128 px</p>
-            <p className={style.text}>IPS 128х128 px</p>
             <p className={style.text}>IPS 240х240 px</p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Display" : "Дисплей"}
             </p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>
-              {props.en ? "-" : "Нет"}
-            </p>
-            <p className={style.text}>
-              {props.en ? "Impulse recoil module" : "Модуль импульсной отдачи"}
-            </p>
             <p className={style.text}>
               {props.en ? "Recoil imitation module in the butt" : "Модуль вибрации в прикладе"}
             </p>
@@ -179,12 +151,6 @@ export function SetsTable(props) {
             </p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>
-              {props.en ? "Standard" : "Стандартная"}
-            </p>
-            <p className={style.text}>
-              {props.en ? "Standard" : "Стандартная"}
-            </p>
             <p className={style.text}>
               {props.en ? "Reinforced" : "Усиленная"}
             </p>
