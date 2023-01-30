@@ -22,7 +22,7 @@ export default function SliderLand(props) {
         nextArrow: nextArrow,
     };
     return (
-        <div className='slider_land_eclipse'>
+        <div className={props.eclipse ? 'slider_land_eclipse' : 'slider_land'}>
             <Slider {...settings}>
                 {props.sliderData.map((data, index) => (
                     <BlockAdder
@@ -33,6 +33,7 @@ export default function SliderLand(props) {
                         width={props.width}
                         height={props.height}
                         itemTitle={data.itemTitle}
+                        eclipse
                     />
                 ))}
             </Slider>
@@ -42,11 +43,17 @@ export default function SliderLand(props) {
 
 function BlockAdder(props) {
     return (
-        <div className='slider_land_eclipse'>
+        <div className={props.eclipse ? 'slider_land_eclipse' : 'slider_land'}>
             <div className='slider_land_upper_part_dark'>
                 <div className='slider_land_upper_part'></div>
             </div>
-            <div className='slider_land_picture_eclipse'>
+            <div
+                className={
+                    props.eclipse
+                        ? 'slider_land_picture_eclipse'
+                        : 'slider_land_picture'
+                }
+            >
                 <Image
                     src={props.src}
                     alt={props.alt}
@@ -55,8 +62,24 @@ function BlockAdder(props) {
                 />
             </div>
             <div className='slider_land_content'>
-                <h3 className='slider_land_title_eclipse'>{props.itemTitle}</h3>
-                <p className='slider_land_text_eclipse'>{props.itemText}</p>
+                <h3
+                    className={
+                        props.eclipse
+                            ? 'slider_land_title_eclipse'
+                            : 'slider_land_title'
+                    }
+                >
+                    {props.itemTitle}
+                </h3>
+                <p
+                    className={
+                        props.eclipse
+                            ? 'slider_land_text_eclipse'
+                            : 'slider_land_text'
+                    }
+                >
+                    {props.itemText}
+                </p>
             </div>
         </div>
     );
