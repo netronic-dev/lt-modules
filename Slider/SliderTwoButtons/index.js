@@ -21,24 +21,41 @@ export default class SliderTwoButtons extends Component {
             slidesToScroll: 1,
         };
         return (
-            <div
-                className={
-                    this.props.downButtons
-                        ? 'sliderTwoButtonsDownBtn'
-                        : 'sliderTwoButtons'
-                }
-            >
-                <Slider {...settings}>
-                    {this.props.sliderData.map((data, index) => (
-                        <ImageAdder
-                            src={data.image}
-                            key={index}
-                            height={data.imgHeight}
-                            width={data.imgWidth}
-                        />
-                    ))}
-                </Slider>
-            </div>
+            <>
+                {this.props.vest ? (
+                    <div className='sliderTwoButtonsDownBtnVest'>
+                        <Slider {...settings}>
+                            {this.props.sliderData.map((data, index) => (
+                                <ImageAdder
+                                    src={data.image}
+                                    key={index}
+                                    height={data.imgHeight}
+                                    width={data.imgWidth}
+                                />
+                            ))}
+                        </Slider>
+                    </div>
+                ) : (
+                    <div
+                        className={
+                            this.props.downButtons
+                                ? 'sliderTwoButtonsDownBtn'
+                                : 'sliderTwoButtons'
+                        }
+                    >
+                        <Slider {...settings}>
+                            {this.props.sliderData.map((data, index) => (
+                                <ImageAdder
+                                    src={data.image}
+                                    key={index}
+                                    height={data.imgHeight}
+                                    width={data.imgWidth}
+                                />
+                            ))}
+                        </Slider>
+                    </div>
+                )}
+            </>
         );
     }
 }
