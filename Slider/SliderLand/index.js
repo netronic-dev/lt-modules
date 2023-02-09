@@ -1,5 +1,4 @@
 import Slider from 'react-slick';
-import React, { Component } from 'react';
 import Image from 'next/image';
 
 export default function SliderLand(props) {
@@ -23,20 +22,33 @@ export default function SliderLand(props) {
     };
     return (
         <div className={props.eclipse ? 'slider_land_eclipse' : 'slider_land'}>
-            <Slider {...settings}>
-                {props.sliderData.map((data, index) => (
-                    <BlockAdder
-                        src={data.image}
-                        alt={data.itemText}
-                        itemText={data.itemText}
-                        key={index}
-                        width={props.width}
-                        height={props.height}
-                        itemTitle={data.itemTitle}
-                        eclipse
-                    />
-                ))}
-            </Slider>
+            {props.eclipse ?
+                <Slider {...settings}>
+                    {props.sliderData.map((data, index) => (
+                        <BlockAdder
+                            src={data.image}
+                            alt={data.itemText}
+                            itemText={data.itemText}
+                            key={index}
+                            width={props.width}
+                            height={props.height}
+                            itemTitle={data.itemTitle}
+                            eclipse
+                        />
+                    ))}
+                </Slider> : <Slider {...settings}>
+                    {props.sliderData.map((data, index) => (
+                        <BlockAdder
+                            src={data.image}
+                            alt={data.itemText}
+                            itemText={data.itemText}
+                            key={index}
+                            width={props.width}
+                            height={props.height}
+                            itemTitle={data.itemTitle}
+                        />
+                    ))}
+                </Slider>}
         </div>
     );
 }
