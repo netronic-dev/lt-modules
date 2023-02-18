@@ -9,7 +9,7 @@ const geoUrl = '/map.json';
 
 const colorScaleFr = scaleQuantize()
     .domain([1, 4])
-    .range(['#0090FF', '#0090FF', '#0090FF', '#ffffff']);
+    .range(['#0090FF', '#0090FF', '#0090FF', '#dddddd']);
 
 const colorScale = scaleQuantize().domain([1, 2]).range(['#dddddd', '#0090FF']);
 
