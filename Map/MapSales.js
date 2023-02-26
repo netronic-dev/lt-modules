@@ -7,6 +7,10 @@ import { useInView } from 'react-hook-inview';
 
 const geoUrl = '/map.json';
 
+const colorScaleFr = scaleQuantize()
+    .domain([1, 4])
+    .range(['#0090FF', '#0090FF', '#0090FF', '#dddddd']);
+
 const colorScale = scaleQuantize().domain([1, 2]).range(['#dddddd', '#0090FF']);
 
 export function MapSales(props) {
@@ -52,7 +56,15 @@ export function MapSales(props) {
                                             outline: 'none',
                                         },
                                     }}
-                                    fill={colorScale(cur ? cur.rate : '#EEE')}
+                                    fill={
+                                        props.fr
+                                            ? colorScaleFr(
+                                                  cur ? cur.rate : '#EEE'
+                                              )
+                                            : colorScale(
+                                                  cur ? cur.rate : '#EEE'
+                                              )
+                                    }
                                 />
                             );
                         })
