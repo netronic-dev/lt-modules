@@ -227,11 +227,9 @@ export function DropDownList(props) {
             )}
             <div className={style.input_block_out}>
                 <div
-                    className={`
-        ${style.dropdownlist} 
-        ${listIsActive ? style.dropdownlist_active : ''}
-        ${props.className}
-        `}
+                    className={`${style.dropdownlist}  ${
+                        listIsActive ? style.dropdownlist_active : ''
+                    } ${props.className}`}
                 >
                     <div
                         className={style.dropdownlist_title_out}

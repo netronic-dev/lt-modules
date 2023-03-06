@@ -22,7 +22,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
 		<section className={style.main}>
 			<div className={style.wrapper}>
 				<div className={style.event_logo}>
-					<Image src={props.eventLogo} layout="fill" objectFit="contain" />
+					<Image src={props.eventLogo} width="246" height={87} />
 				</div>
 				<h1 className={style.title}>{props.title || ""}</h1>
 				<div className={style.image_responsive}>
