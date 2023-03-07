@@ -25,19 +25,23 @@ const EventLocation: FunctionComponent<EventLocationProps> = (props) => {
                     >
                         {props.title}
                     </h2>
-                    <div className={style.cell}>
-                        <div className={style.cell_title}>
-                            {calendarIcon}
-                            {props.dateName}
+                    <div className={style.cell_row}>
+                        <div className={style.cell}>
+                            <div className={style.cell_title}>
+                                {calendarIcon}
+                                {props.dateName}
+                            </div>
+                            <p className={style.cell__text}>{props.dateText}</p>
                         </div>
-                        <p className={style.cell__text}>{props.dateText}</p>
-                    </div>
-                    <div className={style.cell}>
-                        <div className={style.cell_title}>
-                            {placeIcon}
-                            {props.placeName}
+                        <div className={style.cell}>
+                            <div className={style.cell_title}>
+                                {placeIcon}
+                                {props.placeName}
+                            </div>
+                            <p className={style.cell__text}>
+                                {props.placeText}
+                            </p>
                         </div>
-                        <p className={style.cell__text}>{props.placeText}</p>
                     </div>
                 </div>
                 {props.mapImage && (
