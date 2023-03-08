@@ -49,7 +49,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
 				<Image
 					src={props.image}
 					layout="fill"
-					objectFit="cover"
+					objectFit="contain"
 					objectPosition={props.objectPosition}
 				/>
 			</div>

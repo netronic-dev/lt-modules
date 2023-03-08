@@ -159,6 +159,7 @@
 		grid-template-columns: 1fr;
 		grid-template-areas: "form-block";
 		padding: 0;
+		overflow-y: scroll;
 	}
 	.quit_block {
 		display: none;
@@ -172,7 +173,6 @@
 	}
 	.wrapper {
 		border-radius: 0;
-		height: 100vh;
 		padding: 75px 18px;
 		overflow-x: hidden;
 	}
