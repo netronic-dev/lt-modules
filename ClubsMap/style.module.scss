@@ -374,7 +374,7 @@
 	}
 	svg:hover {
 		.circle {
-			stroke-width: 0;
+			strokeWidth: 0;
 		}
 	}
 }
@@ -383,7 +383,7 @@
 		.circle {
 			r: 7;
 			border: 2px solid white;
-			stroke-width: 3px;
+			strokeWidth: 3px;
 			fill: #0090ff;
 		}
 	}
