@@ -1,25 +1,32 @@
 .banner {
     position: fixed;
-    bottom: 0;
+    top: 45px;
     left: 0;
-    height: 184px;
+    width: 100%;
+    height: max-content;
     background-color: #F0F0F2;
     border-radius: 20px;
     display: grid;
-    grid-template-columns: 379px 1fr 1fr 1fr;
+    grid-template-columns: 20.67% 300px 1fr;
     align-items: center;
     padding: 0 80px;
-    gap: 50px;
-    z-index: 102;
+    gap: 0 50px;
+    z-index: 20;
     overflow: hidden;
 }
 
 .banner_logo {
-    // flex: 1 1 379px;
     width: 100%;
 }
 
+.descr_row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
 .button_submit {
+    flex: 0 0 300px;
     outline: auto;
     cursor: pointer;
     font-family: "Manrope";
@@ -31,9 +38,8 @@
     color: #f1f4f6;
     background: #0090ff;
     border-radius: 60px;
-    max-width: 255px;
-    width: 100%;
-    padding: 15px;
+    height: 70px;
+    width: 300px;
 
     &:hover {
         opacity: 0.7;
@@ -50,7 +56,7 @@
 
 .event_info_cell {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 2fr;
     grid-gap: 10px;
 }
 
@@ -90,6 +96,11 @@
     right: 10px;
     outline: none;
     cursor: pointer;
+    overflow: hidden;
+}
+
+.text_wrap {
+    max-width: 600px;
 }
 
 .text {
@@ -97,7 +108,159 @@
     font-style: normal;
     font-weight: 700;
     font-size: 29px;
-    line-height: 33px;
+    line-height: 1.13em;
     text-transform: uppercase;
     color: #0090FF;
+    max-width: 600px;
+}
+
+@media (max-width: 1800px) {
+    .text {
+        max-width: 450px;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 1680px) {
+    .banner {
+        gap: 0 40px;
+    }
+
+    .text {
+        max-width: 400px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .banner {
+        padding: 0 40px;
+        gap: 0 30px;
+    }
+
+    .text {
+        padding: 20px 0;
+    }
+
+    .descr_row {
+        gap: 30px;
+    }
+
+    .button_submit {
+        flex: 0 0 200px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .banner {
+        top: 50px;
+        padding: 0 60px 0 40px;
+    }
+
+    .descr_row {
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .button_submit_wrap {
+        order: 2;
+    }
+
+    .text {
+        max-width: 350px;
+        width: 100%;
+        order: 1;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .banner {
+        grid-template-columns: 20.67% 30.3% 1fr;
+    }
+
+    .text {
+        font-size: 20px;
+    }
+
+    .button_submit_wrap {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    .button_submit {
+        width: 100%;
+    }
+
+    .event_info_cell {
+        grid-template-columns: 1fr 2.5fr;
+    }
+
+    .event_info__title {
+        font-size: 12px;
+    }
+
+    .event_info__text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 786px) {
+    .banner {
+        grid-template-columns: 30% 1fr;
+        grid-template-areas:
+            "logo event"
+            "text text";
+        padding: 0 20px;
+        gap: 10px;
+    }
+
+    .banner_logo {
+        width: 100%;
+        grid-area: logo;
+    }
+
+    .event_info {
+        padding: 39px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .event_info_cell {
+        grid-area: event;
+    }
+
+    .descr_row {
+        grid-area: text;
+    }
+
+    .text {
+        display: block;
+        width: 100%;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .event_info__text {
+        font-size: 12px;
+    }
+
+    .button_submit_wrap {
+        max-width: 200px;
+        width: 100%;
+    }
+
+    .button_submit {
+        height: 36px;
+        font-size: 14px;
+        line-height: 19px;
+    }
 }

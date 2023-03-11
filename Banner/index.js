@@ -5,29 +5,32 @@ import Link from 'next/link';
 
 const Banner = (props) => {
     return (
-        <div className={`${style.banner} fade-up-animation`}>
+        <div className={`${style.banner} fade-down-animation`}>
             <div className={style.banner_logo}>
                 <Image src={bannerLogo} width='379' height={134} alt='logo' />
             </div>
-            <div className={style.banner_info}>
-                <EventInfo
-                    dateName={props.dateName}
-                    date={props.date}
-                    placeName={props.placeName}
-                    place={props.place}
-                />
+            <EventInfo
+                dateName={props.dateName}
+                date={props.date}
+                placeName={props.placeName}
+                place={props.place}
+            />
+            <div className={style.descr_row}>
+                <div className={style.button_submit_wrap}>
+                    <Link href='/laser-tag-convention-2023#utm_source=site&utm_medium=banner%2Fpop-up&utm_campaign=exhibition_las_vegas_2023'>
+                        <button
+                            type='submit'
+                            className={style.button_submit}
+                            onClick={() => props.toggleActivity()}
+                        >
+                            {props.buttonText}
+                        </button>
+                    </Link>
+                </div>
+                <div className={style.text_wrap}>
+                    <p className={style.text}>{props.text}</p>
+                </div>
             </div>
-            <Link href='/laser-tag-convention-2023#utm_source=site&utm_medium=banner%2Fpop-up&utm_campaign=exhibition_las_vegas_2023'>
-                <button
-                    type='submit'
-                    className={style.button_submit}
-                    onClick={() => props.toggleActivity()}
-                >
-                    {props.buttonText}
-                </button>
-            </Link>
-            <p className={style.text}>{props.text}</p>
-
             <button
                 className={style.button_close}
                 onClick={() => props.toggleActivity()}
