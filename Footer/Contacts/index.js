@@ -25,11 +25,11 @@ export function Contacts(props) {
                             </p>
                         </div>
                         <div className={style.contacts__content_item}>
-                            <p
+                            {/* <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
                                 Plekhanivska street 134, Kharkiv, Ukraine
-                            </p>
+                            </p> */}
                         </div>
                         <div
                             className={`${style.contacts__content_item} ${style.short}`}
@@ -108,22 +108,6 @@ export function Contacts(props) {
                                             'Footer',
                                             'Link click',
                                             'https://wa.me/37258662265'
-                                        )
-                                    }
-                                >
-                                    {whatsAppIcon}
-                                </a>
-                            </Link>
-                        </div>
-                        <div className={style.icon_item}>
-                            <Link href='https://wa.me/34645379324'>
-                                <a
-                                    target='_blank'
-                                    onClick={() =>
-                                        GAEvents.buttonClick(
-                                            'Footer',
-                                            'Link click',
-                                            'https://wa.me/34645379324'
                                         )
                                     }
                                 >
@@ -211,22 +195,6 @@ export function Contacts(props) {
                                     }
                                 >
                                     {skypeLogo}
-                                </a>
-                            </Link>
-                        </div>
-                        <div className={style.icon_item}>
-                            <Link href='https://wa.me/16464802917'>
-                                <a
-                                    target='_blank'
-                                    onClick={() =>
-                                        GAEvents.buttonClick(
-                                            'Footer',
-                                            'Link click',
-                                            'https://wa.me/16464802917'
-                                        )
-                                    }
-                                >
-                                    {whatsAppIcon}
                                 </a>
                             </Link>
                         </div>
