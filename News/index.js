@@ -40,10 +40,10 @@ export function News(props) {
                     }
                 >
                     <div
-                        className={`
-              ${style.news_item} 
-              ${theme.news[props.theme ? props.theme : 'default']} 
-            `}
+                        className={`${style.news_item} ${
+                            theme.news[props.theme ? props.theme : 'default']
+                        }
+                        `}
                         ref={ref}
                     >
                         <div className={`${style.news_item__image}`}>
@@ -78,9 +78,9 @@ export function NewsBlock(props) {
 
     return (
         <div
-            className={`
-      ${style.news_block_out}
-      ${theme.newsBlock[props.theme || 'default']}`}
+            className={`${style.news_block_out} ${
+                theme.newsBlock[props.theme || 'default']
+            }`}
             ref={ref}
         >
             <div className={style.news_block_header}>

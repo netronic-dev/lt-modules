@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: max-content;
-    background-color: #F0F0F2;
+    background-color: #ACACAC;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 20.67% 300px 1fr;
@@ -26,8 +26,7 @@
 }
 
 .button_submit {
-    flex: 0 0 300px;
-    outline: auto;
+    border: none;
     cursor: pointer;
     font-family: "Manrope";
     font-weight: 600;
@@ -72,7 +71,7 @@
     line-height: 19px;
     text-align: center;
     text-transform: uppercase;
-    color: #8e8e8e;
+    color: #fff;
     margin-bottom: 6px;
 }
 
@@ -81,7 +80,7 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 25px;
-    color: #040e18;
+    color: #fff;
 
     span {
         color: #0090ff;
@@ -97,6 +96,7 @@
     outline: none;
     cursor: pointer;
     overflow: hidden;
+    background-color: transparent;
 }
 
 .text_wrap {
@@ -110,7 +110,7 @@
     font-size: 29px;
     line-height: 1.13em;
     text-transform: uppercase;
-    color: #0090FF;
+    color: #fff;
     max-width: 600px;
 }
 
