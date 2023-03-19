@@ -31,6 +31,20 @@ const Banner = (props) => {
                     <p className={style.text}>{props.text}</p>
                 </div>
             </div>
+            <div className={style.button_submit_wrap_mob}>
+                <Link href='/laser-tag-convention-2023#utm_source=site&utm_medium=banner%2Fpop-up&utm_campaign=exhibition_las_vegas_2023'>
+                    <button
+                        type='submit'
+                        className={style.button_submit}
+                        onClick={() => props.toggleActivity()}
+                    >
+                        {props.buttonText}
+                    </button>
+                </Link>
+            </div>
+            <div className={style.text_wrap_mob}>
+                <p className={style.text}>{props.text}</p>
+            </div>
             <button
                 className={style.button_close}
                 onClick={() => props.toggleActivity()}
@@ -60,7 +74,7 @@ function EventInfo(props) {
                     <div className={style.event_info__place_icon_outer_mob}>
                         {calendarIconMob}
                     </div>
-                    <div className={style.event_info__title}>
+                    <div className={`${style.event_info__title} ${style.event_info__title_date}`}>
                         {props.dateName}
                     </div>
                 </div>
@@ -112,10 +126,19 @@ const calendarIcon = (
 );
 
 const calendarIconMob = (
-    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5.25 7.57272H6.75V8.92986H5.25V7.57272ZM15.75 4.17986V13.6799C15.75 14.4263 15.075 15.037 14.25 15.037H3.75C2.9175 15.037 2.25 14.4263 2.25 13.6799L2.2575 4.17986C2.2575 3.43343 2.9175 2.82272 3.75 2.82272H4.5V1.46558H6V2.82272H12V1.46558H13.5V2.82272H14.25C15.075 2.82272 15.75 3.43343 15.75 4.17986ZM3.75 5.537H14.25V4.17986H3.75V5.537ZM14.25 13.6799V6.89415H3.75V13.6799H14.25ZM11.25 8.92986H12.75V7.57272H11.25V8.92986ZM8.25 8.92986H9.75V7.57272H8.25V8.92986Z" fill="white" />
+    <svg
+        width='18'
+        height='17'
+        viewBox='0 0 18 17'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M5.25 7.57272H6.75V8.92986H5.25V7.57272ZM15.75 4.17986V13.6799C15.75 14.4263 15.075 15.037 14.25 15.037H3.75C2.9175 15.037 2.25 14.4263 2.25 13.6799L2.2575 4.17986C2.2575 3.43343 2.9175 2.82272 3.75 2.82272H4.5V1.46558H6V2.82272H12V1.46558H13.5V2.82272H14.25C15.075 2.82272 15.75 3.43343 15.75 4.17986ZM3.75 5.537H14.25V4.17986H3.75V5.537ZM14.25 13.6799V6.89415H3.75V13.6799H14.25ZM11.25 8.92986H12.75V7.57272H11.25V8.92986ZM8.25 8.92986H9.75V7.57272H8.25V8.92986Z'
+            fill='white'
+        />
     </svg>
-)
+);
 
 const placeIcon = (
     <svg
@@ -149,28 +172,79 @@ const placeIcon = (
 );
 
 const placeIconMob = (
-    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 1.35718C6.0975 1.35718 3.75 3.48111 3.75 6.10718C3.75 9.66968 9 14.9286 9 14.9286C9 14.9286 14.25 9.66968 14.25 6.10718C14.25 3.48111 11.9025 1.35718 9 1.35718ZM5.25 6.10718C5.25 4.23432 6.93 2.71432 9 2.71432C11.07 2.71432 12.75 4.23432 12.75 6.10718C12.75 8.06146 10.59 10.9861 9 12.8115C7.44 10.9997 5.25 8.04111 5.25 6.10718Z" fill="white" />
-        <path d="M9 7.80362C10.0355 7.80362 10.875 7.04411 10.875 6.1072C10.875 5.17028 10.0355 4.41077 9 4.41077C7.96447 4.41077 7.125 5.17028 7.125 6.1072C7.125 7.04411 7.96447 7.80362 9 7.80362Z" fill="white" />
+    <svg
+        width='18'
+        height='17'
+        viewBox='0 0 18 17'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M9 1.35718C6.0975 1.35718 3.75 3.48111 3.75 6.10718C3.75 9.66968 9 14.9286 9 14.9286C9 14.9286 14.25 9.66968 14.25 6.10718C14.25 3.48111 11.9025 1.35718 9 1.35718ZM5.25 6.10718C5.25 4.23432 6.93 2.71432 9 2.71432C11.07 2.71432 12.75 4.23432 12.75 6.10718C12.75 8.06146 10.59 10.9861 9 12.8115C7.44 10.9997 5.25 8.04111 5.25 6.10718Z'
+            fill='white'
+        />
+        <path
+            d='M9 7.80362C10.0355 7.80362 10.875 7.04411 10.875 6.1072C10.875 5.17028 10.0355 4.41077 9 4.41077C7.96447 4.41077 7.125 5.17028 7.125 6.1072C7.125 7.04411 7.96447 7.80362 9 7.80362Z'
+            fill='white'
+        />
     </svg>
-
-)
+);
 
 const closeBtn = (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" fill="white" />
-        <circle cx="20" cy="20" r="19" stroke="white" stroke-opacity="0.4" stroke-width="2" />
-        <path d="M25 15L14 26" stroke="#8E8E8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M14 15L25 26" stroke="#8E8E8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <svg
+        width='40'
+        height='40'
+        viewBox='0 0 40 40'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <circle cx='20' cy='20' r='20' fill='white' />
+        <circle
+            cx='20'
+            cy='20'
+            r='19'
+            stroke='white'
+            strokeOpacity='0.4'
+            strokeWidth='2'
+        />
+        <path
+            d='M25 15L14 26'
+            stroke='#8E8E8E'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M14 15L25 26'
+            stroke='#8E8E8E'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
     </svg>
-
 );
 
 const closeBtnMob = (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="10" fill="white" />
-        <circle cx="10" cy="10" r="9.5" stroke="#8E8E8E" stroke-opacity="0.4" />
-        <path d="M12.5 7.5L7 13" stroke="#8E8E8E" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M7 7.5L12.5 13" stroke="#8E8E8E" stroke-linecap="round" stroke-linejoin="round" />
+    <svg
+        width='20'
+        height='20'
+        viewBox='0 0 20 20'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <circle cx='10' cy='10' r='10' fill='white' />
+        <circle cx='10' cy='10' r='9.5' stroke='#8E8E8E' strokeOpacity='0.4' />
+        <path
+            d='M12.5 7.5L7 13'
+            stroke='#8E8E8E'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M7 7.5L12.5 13'
+            stroke='#8E8E8E'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
     </svg>
 );
