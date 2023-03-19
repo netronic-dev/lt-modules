@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Banner = (props) => {
     return (
         <div className={`${style.banner} fade-down-animation`}>
-            <div className={style.banner_logo}>
+            {/* <div className={style.banner_logo}>
                 <Image src={bannerLogo} width='379' height={134} alt='logo' />
             </div>
             <EventInfo
@@ -14,7 +14,23 @@ const Banner = (props) => {
                 date={props.date}
                 placeName={props.placeName}
                 place={props.place}
-            />
+            /> */}
+            <div className={style.logo_event_info_mob}>
+                <div className={style.banner_logo}>
+                    <Image
+                        src={bannerLogo}
+                        width='379'
+                        height={134}
+                        alt='logo'
+                    />
+                </div>
+                <EventInfo
+                    dateName={props.dateName}
+                    date={props.date}
+                    placeName={props.placeName}
+                    place={props.place}
+                />
+            </div>
             <div className={style.descr_row}>
                 <div className={style.button_submit_wrap}>
                     <Link href='/laser-tag-convention-2023#utm_source=site&utm_medium=banner%2Fpop-up&utm_campaign=exhibition_las_vegas_2023'>
@@ -74,7 +90,9 @@ function EventInfo(props) {
                     <div className={style.event_info__place_icon_outer_mob}>
                         {calendarIconMob}
                     </div>
-                    <div className={`${style.event_info__title} ${style.event_info__title_date}`}>
+                    <div
+                        className={`${style.event_info__title} ${style.event_info__title_date}`}
+                    >
                         {props.dateName}
                     </div>
                 </div>
