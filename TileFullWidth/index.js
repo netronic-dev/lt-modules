@@ -111,10 +111,10 @@ export function TileFullWidthReverse(props) {
                 inView && sectionWasInView(`Card ${props.title || ''}`)
             }
         >
-            <LinkComponent href={props.external ? null : props.link}>
+            <Link href={props.link}>
                 <a
-                    href={props.external ? props.link : null}
-                    target={props.external ? '_blank' : null}
+                    // href={props.external ? props.link : null}
+                    // target={props.external ? '_blank' : null}
                     onClick={() =>
                         GAEvents.buttonClick('Card', 'Link Click', props.link)
                     }
@@ -188,7 +188,7 @@ export function TileFullWidthReverse(props) {
                         </div>
                     </div>
                 </a>
-            </LinkComponent>
+            </Link>
         </InView>
     );
 }
