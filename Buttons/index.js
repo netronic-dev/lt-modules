@@ -14,7 +14,8 @@ const fillButtonStyles = {
   "bigBlue": style.button_big_blue,
   "whiteArrowBorder": style.white_arrow_border,
   "blackArrowBorder": style.black_arrow_border,
-  "blueBlackMainBannerWithGirl": style.button_blue_black_main_banner_with_girl
+  "blueBlackMainBannerWithGirl": style.button_blue_black_main_banner_with_girl,
+  "transparentGranade": style.button_transparentGranade
 };
 
 const videoButtonTheme = {

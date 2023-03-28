@@ -507,6 +507,26 @@
 	}
 }
 
+.button_transparentGranade {
+	display: block;
+	box-sizing: border-box;
+	width: 301px;
+	height: 80px;
+	background: rgba(222, 222, 222, 0.45);
+	border: 2px solid #F9F9F9;
+	border-radius: 66px;
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 49px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: #F9F9F9;
+	z-index: 40;
+}
+
 @media (max-width: 575px) {
 	.button_big_black {
 		height: auto;
