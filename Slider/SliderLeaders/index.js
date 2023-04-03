@@ -194,8 +194,8 @@ const prevButton = (
     </g>
     <path d="M43 22L32.8284 32.1716C31.2663 33.7337 31.2663 36.2663 32.8284 37.8284L43 48" stroke="black" strokeWidth="2" />
     <defs>
-      <filter id="filter0_d" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+      <filter id="filter0_d" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
         <feOffset dy="4" />
         <feGaussianBlur stdDeviation="2" />
@@ -213,8 +213,8 @@ const nextButton = (
     </g>
     <path d="M34 22L44.1716 32.1716C45.7337 33.7337 45.7337 36.2663 44.1716 37.8284L34 48" stroke="black" strokeWidth="2" />
     <defs>
-      <filter id="filter0_d" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+      <filter id="filter0_d" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
         <feOffset dy="4" />
         <feGaussianBlur stdDeviation="2" />
