@@ -32,9 +32,14 @@ export async function postData(
                 BXName: 'ADDRESS_COUNTRY',
             },
             {
+                name: 'Город',
+                value: locationInfo.city,
+                BXName: 'ADDRESS_CITY',
+            },
+            {
                 name: 'Регион',
                 value: locationInfo.region,
-                BXName: 'ADDRESS_CITY',
+                BXName: 'UF_CRM_1517920515',
             },
             {
                 name: 'IP',
@@ -87,6 +92,7 @@ async function getLocationData() {
         ip: '',
         region: '',
         country: '',
+        city: '',
     };
     await axios
         .get(
@@ -95,7 +101,8 @@ async function getLocationData() {
         .then((response: any) => {
             locationData = {
                 ip: response.data.ip,
-                region: response.data.continent_name,
+                city: response.data.city,
+                region: response.data.state_prov,
                 country: response.data.country_name,
             };
         })
