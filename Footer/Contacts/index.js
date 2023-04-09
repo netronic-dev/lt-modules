@@ -76,14 +76,14 @@ export function Contacts(props) {
                                     }
                                 >
                                     <p className={style.contacts__link}>
-                                        +48 573 58 10 44
+                                        +4 857 358 10 44
                                     </p>
                                 </a>
                             </Link>
                         </div>
                     </div>
                     <div className={style.contacts__icons}>
-                        <div className={style.icon_item}>
+                        {/* <div className={style.icon_item}>
                             <Link href='skype:chiefsales?chat'>
                                 <a
                                     target='_blank'
@@ -98,7 +98,7 @@ export function Contacts(props) {
                                     {skypeLogo}
                                 </a>
                             </Link>
-                        </div>
+                        </div> */}
                         <div className={style.icon_item}>
                             <Link href='https://wa.me/37258662265'>
                                 <a
@@ -181,8 +181,10 @@ export function Contacts(props) {
                             </Link>
                         </div>
                     </div>
-                    <div className={style.contacts__icons}>
-                        <div className={style.icon_item}>
+                    <div
+                        className={`${style.contacts__icons} ${style.contacts__icons_left}`}
+                    >
+                        {/* <div className={style.icon_item}>
                             <Link href='skype:chiefsales?chat'>
                                 <a
                                     target='_blank'
@@ -197,7 +199,7 @@ export function Contacts(props) {
                                     {skypeLogo}
                                 </a>
                             </Link>
-                        </div>
+                        </div> */}
                         <div className={style.icon_item}>
                             <Link href='https://wa.me/16464802917'>
                                 <a
