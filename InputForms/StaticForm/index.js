@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
 import { postData } from '../../functions/postData.ts';
 import { useValidation } from '../../../context/ValidationProvider';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../../store/actions/userData';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -25,6 +27,7 @@ const themeFormTheme = {
 export function ThemeForm(props) {
     const validate = useValidation();
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -33,6 +36,7 @@ export function ThemeForm(props) {
         },
         validate,
         onSubmit: (values) => {
+            dispatch(setUserData(values.name));
             postData(
                 values,
                 props.destinationURL,
@@ -40,7 +44,7 @@ export function ThemeForm(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(router.push('/thank-you/pres'));
+            ).then(router.push('/thanks-pres'));
         },
     });
 
