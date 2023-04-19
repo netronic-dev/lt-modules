@@ -7,6 +7,8 @@ import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
 import { useModals } from '../../../context/ModalsProvider';
 import { useValidation } from '../../../context/ValidationProvider';
 import { postData } from '../../functions/postData.ts';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../../store/actions/userData';
 
 function turnOnScroll() {
     document.body.className = '';
@@ -16,6 +18,7 @@ export function PopUpNamePhone(props) {
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
+    const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
 
     function onAgreementChange() {
@@ -28,6 +31,7 @@ export function PopUpNamePhone(props) {
         },
         validate,
         onSubmit: (values) => {
+            dispatch(setUserData(values.name));
             postData(
                 values,
                 props.destinationURL,
@@ -214,6 +218,7 @@ export function PopUpEvent(props) {
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
+    const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
 
     function onAgreementChange() {
@@ -228,6 +233,7 @@ export function PopUpEvent(props) {
         },
         validate,
         onSubmit: (values) => {
+            dispatch(setUserData(values.name));
             postData(
                 values,
                 props.destinationURL,
@@ -315,6 +321,7 @@ export function PopUpNameEmail(props) {
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
+    const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
 
     function onAgreementChange() {
@@ -328,6 +335,7 @@ export function PopUpNameEmail(props) {
         },
         validate,
         onSubmit: (values) => {
+            dispatch(setUserData(values.name));
             postData(
                 values,
                 props.destinationURL,
