@@ -36,6 +36,7 @@ const FormModal: FunctionComponent<FormModalProps> = (props) => {
 
     const router = useRouter();
     const dispatch = useDispatch();
+    console.log(dispatch)
 
     function onAgreementChange() {
         formik.setFieldValue(
