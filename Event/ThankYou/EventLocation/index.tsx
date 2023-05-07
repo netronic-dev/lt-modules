@@ -9,8 +9,8 @@ interface EventLocationProps {
     mapImage: string;
     dateName: string;
     dateText: string;
-    timeName: string;
-    timeText: string;
+    timeName?: string;
+    timeText?: string;
     bg_figure?: string;
     lt_convention?: boolean;
 }
