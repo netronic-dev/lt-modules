@@ -175,14 +175,13 @@
 	font-family: "Manrope";
 	font-weight: 500;
 	font-size: 18px;
-	line-height: 28px;
+	line-height: 1.55em;
 	color: #fff;
 	max-width: 322px;
 
 	span {
 		color: #0090ff;
 	}
-
 }
 
 @media (max-width: 1450px) {
@@ -199,6 +198,7 @@
 
 @media (max-width: 1220px) {
 	.wrapper {
+		width: 100%;
 		padding: 65px 20px 104px;
 	}
 
@@ -231,16 +231,18 @@
 
 	.wrapper {
 		margin: 0;
+		padding: 35px 12px 104px;
 	}
 
 	.title {
 		padding: 0 15px;
-		font-size: 35px;
-		line-height: 43px;
+		font-size: 32px;
+		line-height: 44px;
 		max-width: none;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		padding: 0;
 
 		br {
 			display: none;
@@ -252,12 +254,16 @@
 	}
 
 	.event_info {
-		padding: 0 15px 30px;
+		padding: 0;
 		grid-template-columns: 1fr;
 	}
 
+	.event_info__top {
+		width: 81px;
+	}
+
 	.event_info_cell {
-		grid-template-columns: 1fr;
+		grid-gap: 33px;
 	}
 
 	.button_outer {
@@ -287,5 +293,9 @@
 
 	.background {
 		display: none;
+	}
+
+	.event_info__text_white {
+		font-size: 14px;
 	}
 }

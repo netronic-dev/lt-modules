@@ -33,7 +33,6 @@ const Main: FunctionComponent<MainProps> = (props) => {
                     />
                 </div>
                 <h1 className={style.title}>{props.title || ''}</h1>
-
                 <EventInfo
                     dateName={props.dateName}
                     date={props.date}

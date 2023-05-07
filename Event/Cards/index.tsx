@@ -49,7 +49,12 @@ const Cell: FunctionComponent<Cell> = (props) => {
         <div className={style.cell}>
             <div className={style.cell_image}>
                 {props.image && (
-                    <Image src={props.image} layout='fill' objectFit='cover' />
+                    <Image
+                        src={props.image}
+                        layout='fill'
+                        objectFit='cover'
+                        quality={100}
+                    />
                 )}
             </div>
             <div className={style.cell_content}>
