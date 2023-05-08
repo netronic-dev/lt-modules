@@ -8,3 +8,15 @@
 	@extend %page_grid, %title;
 	margin-bottom: 100px;
 }
+
+@media (max-width: 600px) {
+	.section {
+		padding: 38px 0 115px;
+	}
+	.title {
+		font-size: 30px;
+		line-height: 41px;
+		margin-bottom: 30px;
+	}
+}
+

@@ -4,40 +4,60 @@
 	background-color: #fff;
 	padding: 50px 0 38px;
 }
+
 .title {
 	@extend %title;
 	margin-bottom: 30px;
+	text-align: center;
 }
+
+.text {
+	margin-top: 25px;
+	margin-bottom: 45px;
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 1.375em;
+	text-align: center;
+}
+
 .wrapper {
 	@extend %page_grid;
 	margin-bottom: 35px;
 }
+
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 20px;
 }
+
 .cell {
 	background: #f0f0f2;
 	border-radius: 20px;
 	overflow: hidden;
 }
+
 .cell_image {
 	position: relative;
 	min-height: 230px;
 	height: 313px;
 }
+
 .cell_content {
-	padding: 10px 22px 27px 28px;
+	padding: 24px 22px 27px 28px;
 }
+
 .cell_title {
 	font-family: $font-1;
 	font-weight: 500;
 	font-size: 35px;
-	line-height: 50px;
+	line-height: 1.42em;
 	text-transform: uppercase;
 	margin: 0 0 7px;
 }
+
 .cell_text {
 	font-family: $font-1;
 	font-weight: 500;
@@ -45,14 +65,28 @@
 	line-height: 26px;
 	color: #000000;
 }
+
 @media (max-width: 800px) {
 	.grid {
 		grid-template-columns: 1fr;
 	}
+
+	.title {
+		font-size: 30px;
+	}
+
+	.text {
+		font-size: 18px;
+	}
 }
+
 @media (max-width: 500px) {
 	.cell_text {
 		font-size: 14px;
 		line-height: 20px;
+	}
+
+	.cell_title {
+		font-size: 24px;
 	}
 }

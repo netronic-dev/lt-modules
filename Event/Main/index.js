@@ -7,7 +7,7 @@ export default function IAAPAMain(props) {
     return (
         <section className={style.main}>
             <div className={style.breadcrumb}>
-                <BreadCrumbs breadcrumbData={breadcrumbData} color='white' />
+                {props.seoExpo ? <BreadCrumbs breadcrumbData={breadcrumbData} color='white' /> : <BreadCrumbs breadcrumbData={breadcrumbData} color='black' />}
             </div>
             <div className={style.wrapper}>
                 <div className={style.event_logo}>
@@ -21,9 +21,21 @@ export default function IAAPAMain(props) {
                     />
                 </div>
                 <h1 className={style.title}>{props.title || ''}</h1>
+                {props.seoExpo
+                    ? null
+                    : <div className={style.image_responsive}>
+                        <Image
+                            src={props.imageResponsive}
+                            layout='fill'
+                            objectFit='cover'
+                            height={740}
+                            width={360}
+                            objectPosition={props.resObjectPosition}
+                        />
+                    </div>}
                 <EventInfo
-                    iconsBlue='1'
-                    textWhite='1'
+                    iconsBlue={props.iconsBlue}
+                    textWhite={props.textWhite}
                     timeName={props.timeName}
                     time={props.time}
                     dateName={props.dateName}
@@ -31,6 +43,7 @@ export default function IAAPAMain(props) {
                     placeName={props.placeName}
                     place={props.place}
                 />
+
                 {props.text ? (
                     <div className={style.text}>{props.text}</div>
                 ) : null}
@@ -54,7 +67,7 @@ export default function IAAPAMain(props) {
                     objectPosition={props.objectPosition}
                 />
             </div>
-            <div className={style.image_responsive}>
+            {props.seoExpo ? <div className={style.image_responsive_new}>
                 <Image
                     src={props.imageResponsive}
                     layout='fill'
@@ -63,7 +76,8 @@ export default function IAAPAMain(props) {
                     width={360}
                     objectPosition={props.resObjectPosition}
                 />
-            </div>
+            </div> : null}
+
         </section>
     );
 }
@@ -96,7 +110,7 @@ function EventInfo(props) {
                     {props.date}
                 </div>
             </div>
-            <div className={style.event_info_cell}>
+            {props.time ? <div className={style.event_info_cell}>
                 <div className={style.event_info__top}>
                     <div className={style.event_info__place_icon_outer}>
                         {props.iconsBlue ? timeIconBlue : timeIcon}
@@ -120,7 +134,7 @@ function EventInfo(props) {
                 >
                     {props.time}
                 </div>
-            </div>
+            </div> : null}
             <div className={style.event_info_cell}>
                 <div className={style.event_info__top}>
                     <div className={style.event_info__place_icon_outer}>

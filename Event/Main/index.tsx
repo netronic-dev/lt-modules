@@ -18,6 +18,9 @@ interface MainProps {
     place: ReactNode | string;
     text?: ReactNode | string;
     onClick: () => void;
+    seoExpo?: string;
+    iconsBlue?: string
+    textWhite?: string
 }
 
 const Main: FunctionComponent<MainProps> = (props) => {
@@ -53,7 +56,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
                     objectPosition={props.objectPosition}
                 />
             </div>
-            <div className={style.image_responsive}>
+            <div className={style.image_responsive_new}>
                 <Image
                     src={props.imageResponsive}
                     layout='fill'

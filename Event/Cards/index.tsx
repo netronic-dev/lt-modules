@@ -9,6 +9,7 @@ interface CardsProps {
     cta_text: ReactNode | string;
     cta_buttonText: string;
     cta_button_onClick: () => void;
+    text?: string
 }
 
 const Cards: FunctionComponent<CardsProps> = (props) => {
@@ -16,6 +17,7 @@ const Cards: FunctionComponent<CardsProps> = (props) => {
         <section className={style.section}>
             <div className={style.wrapper}>
                 {props.title && <h2 className={style.title}>{props.title}</h2>}
+                {props.text ? <p className={style.text}>{props.text}</p> : null}
                 {props.data && (
                     <div className={style.grid}>
                         {props.data.map((item, index) => (
