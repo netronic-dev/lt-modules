@@ -44,7 +44,7 @@ export function ThemeForm(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(router.push('/thanks-pres'));
+            ).then(gaEvents.sentRequest("", "", true)).then(router.push('/thanks-pres'));
         },
     });
 
@@ -106,7 +106,7 @@ export function ThemeFormAll(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(router.push('/thanks-pres'));
+            ).then(gaEvents.sentRequest("", "", true)).then(router.push('/thanks-pres'));
         },
     });
 

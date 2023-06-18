@@ -39,7 +39,7 @@ export function PopUpNamePhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            );
+            ).then(gaEvents.sentRequest("", "", true));
             modals.NamePhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -97,13 +97,12 @@ export function PopUpNamePhone(props) {
                         </div>
                         <button
                             type={agreement ? 'submit' : 'button'}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
+                            className={`${agreement
+                                ? Object.keys(formik.errors).length == 0
+                                    ? style.general_button_active
                                     : style.general_button_inactive
-                            } "button-submit"`}
+                                : style.general_button_inactive
+                                } "button-submit"`}
                         >
                             {props.buttonText}
                         </button>
@@ -138,7 +137,7 @@ export function PopUpEmailPhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            );
+            ).then(gaEvents.sentRequest("", "", true));
             modals.EmailPhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -197,13 +196,12 @@ export function PopUpEmailPhone(props) {
                         </div>
                         <button
                             type={agreement ? 'submit' : 'button'}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
+                            className={`${agreement
+                                ? Object.keys(formik.errors).length == 0
+                                    ? style.general_button_active
                                     : style.general_button_inactive
-                            } "button-submit"`}
+                                : style.general_button_inactive
+                                } "button-submit"`}
                         >
                             {props.buttonText || 'Get catalog'}
                         </button>
@@ -241,7 +239,7 @@ export function PopUpEvent(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            );
+            ).then(gaEvents.sentRequest("", "", true));
             modals.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -300,13 +298,12 @@ export function PopUpEvent(props) {
                         </div>
                         <button
                             type={agreement ? 'submit' : 'button'}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
+                            className={`${agreement
+                                ? Object.keys(formik.errors).length == 0
+                                    ? style.general_button_active
                                     : style.general_button_inactive
-                            } "button-submit"`}
+                                : style.general_button_inactive
+                                } "button-submit"`}
                         >
                             {props.buttonText}
                         </button>
@@ -343,7 +340,7 @@ export function PopUpNameEmail(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            );
+            ).then(gaEvents.sentRequest("", "", true));
             modals.NameEmailModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -397,13 +394,12 @@ export function PopUpNameEmail(props) {
                         </div>
                         <button
                             type={agreement ? 'submit' : 'button'}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
+                            className={`${agreement
+                                ? Object.keys(formik.errors).length == 0
+                                    ? style.general_button_active
                                     : style.general_button_inactive
-                            } "button-submit"`}
+                                : style.general_button_inactive
+                                } "button-submit"`}
                         >
                             {props.buttonText || 'Get'}
                         </button>
