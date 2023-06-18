@@ -9,6 +9,7 @@ import { useValidation } from '../../../context/ValidationProvider';
 import { postData } from '../../functions/postData.ts';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
+import { useGAEvents } from '../../../context/GAEventsProvider';
 
 function turnOnScroll() {
     document.body.className = '';
@@ -20,6 +21,7 @@ export function PopUpNamePhone(props) {
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
+    const GAEvents = useGAEvents()
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -39,7 +41,7 @@ export function PopUpNamePhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true));
+            ).then(GAEvents.sentRequest("", "", true));
             modals.NamePhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -118,6 +120,7 @@ export function PopUpEmailPhone(props) {
     const router = useRouter();
     const modals = useModals();
     const [agreement, changeAgreement] = useState(false);
+    const GAEvents = useGAEvents()
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -137,7 +140,7 @@ export function PopUpEmailPhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true));
+            ).then(GAEvents.sentRequest("", "", true));
             modals.EmailPhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -218,6 +221,7 @@ export function PopUpEvent(props) {
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
+    const GAEvents = useGAEvents()
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -239,7 +243,7 @@ export function PopUpEvent(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true));
+            ).then(GAEvents.sentRequest("", "", true));
             modals.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -320,6 +324,7 @@ export function PopUpNameEmail(props) {
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
+    const GAEvents = useGAEvents()
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -340,7 +345,7 @@ export function PopUpNameEmail(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true));
+            ).then(GAEvents.sentRequest("", "", true));
             modals.NameEmailModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
