@@ -12,13 +12,11 @@ import { validate } from "../../InputForms/validate/validate";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../store/actions/userData";
-import { useGAEvents } from "../../../context/GAEventsProvider";
 
 export function PopUpForm(props) {
 	const router = useRouter();
 	const gaEvents = useGAEvents();
 	const dispatch = useDispatch();
-	const GAEvents = useGAEvents()
 
 	function onAgreementChange() {
 		formik.setFieldValue(
@@ -48,7 +46,7 @@ export function PopUpForm(props) {
 				window.location.hostname,
 				router.query
 			)
-				.then(GAEvents.sentRequest("modal"))
+				.then(gaEvents.sentRequest("modal"))
 				.then(router.push(props.thank_you_page_url));
 		},
 	});
