@@ -1,0 +1,185 @@
+@import "../default";
+
+.slider {
+	position: relative;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.slider_left {
+	position: absolute;
+	z-index: -1;
+	top: 170px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-left;
+
+	* {
+		user-select: none;
+	}
+}
+
+@keyframes infiniteslide-left {
+	0% {
+		transform: translate3d(-100%, 0, 0);
+	}
+
+	100% {
+		transform: translate3d(500%, 0, 0);
+	}
+}
+
+.slider_right {
+	position: absolute;
+	top: 733px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-right;
+	z-index: -1;
+
+	* {
+		user-select: none;
+	}
+}
+
+@keyframes infiniteslide-left-one {
+	0% {
+		transform: translateX(-100%);
+	}
+
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+.slider_left_one {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	animation-duration: 18s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-left-one;
+	z-index: -1;
+}
+
+.slider_right_one {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	animation-duration: 18s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-right-one;
+	z-index: -1;
+}
+
+@keyframes infiniteslide-right-one {
+	0% {
+		transform: translateX(100%);
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes infiniteslide-right {
+	0% {
+		transform: translate3d(500%, 0, 0);
+	}
+
+	100% {
+		transform: translate3d(-100%, 0, 0);
+	}
+}
+
+.blueText {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 170px;
+	line-height: 165px;
+	text-transform: uppercase;
+	color: #00000000;
+	-webkit-text-stroke: 1px #0090ff;
+}
+
+.text {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 170px;
+	line-height: 165px;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #00000000;
+	-webkit-text-stroke: 1px #737373;
+}
+
+@media (max-width: 750px) {
+	.text {
+		font-size: 80px;
+		line-height: 78px;
+	}
+
+	.slider_left {
+		bottom: 0;
+		margin-bottom: 180px;
+	}
+
+	.slider_right {
+		top: 0;
+	}
+
+	@keyframes infiniteslide-right {
+		0% {
+			transform: translate3d(750px, 0, 0);
+		}
+
+		100% {
+			transform: translate3d(-500px, 0, 0);
+		}
+	}
+
+	@keyframes infiniteslide-left {
+		0% {
+			transform: translate3d(-500px, 0, 0);
+		}
+
+		100% {
+			transform: translate3d(750px, 0, 0);
+		}
+	}
+}

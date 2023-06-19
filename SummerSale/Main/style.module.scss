@@ -1,0 +1,90 @@
+@import "../default";
+
+.main_inner {
+    @extend %page_grid;
+    position: relative;
+}
+
+.content {
+    position: relative;
+    z-index: 5;
+    padding: 85px 0 0 0;
+
+    .title {
+        font-family: $font-1;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 86px;
+        line-height: 97px;
+        text-transform: uppercase;
+        color: #0E0E0E;
+    }
+
+    .text {
+        margin-top: 25px;
+        font-family: $font-1;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.25rem;
+        line-height: 1.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #000000;
+        max-width: 700px;
+    }
+
+    .upper_text_slider {
+        position: relative;
+        position: absolute;
+        top: 100px;
+    }
+
+    .button {
+        margin-top: 25px;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        font-family: $font-1;
+        font-weight: 600;
+        font-size: .875rem;
+        line-height: 1.18rem;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #f1f4f6;
+        padding: 18px 40px;
+        background: #0090FF;
+        border-radius: 60px;
+        outline: 0;
+        border: 0;
+        animation: radial-pulse 1.5s infinite;
+
+        &:hover {
+            background: #000000;
+            color: $color-2;
+            animation: none;
+        }
+    }
+}
+
+.image_outer {
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    height: 498px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    * {
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+@keyframes radial-pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.03);
+    }
+}
