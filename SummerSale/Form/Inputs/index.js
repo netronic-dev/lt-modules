@@ -1,23 +1,16 @@
+import Link from 'next/link';
+
 import style from './style.module.scss';
 
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useInView } from 'react-hook-inview';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../../store/actions/userData';
-
-import { useValidation } from '../../../../context/ValidationProvider';
 import { postData } from '../../../../lt-modules/functions/postData.ts';
 import { useGAEvents } from '../../../../context/GAEventsProvider';
 
-const inputsLandTheme = {
-    default: style.input_land,
-    light: style.input_land_light,
-};
-
 export function InputsWName(props) {
-    // const validate = useValidation();
     const router = useRouter();
     const dispatch = useDispatch();
     const GAEvents = useGAEvents();
@@ -27,7 +20,7 @@ export function InputsWName(props) {
             name: '',
             email: '',
             phone: '',
-            agreement: '',
+            agreement: true,
         },
         validate,
         onSubmit: (values) => {
