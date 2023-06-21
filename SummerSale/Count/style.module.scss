@@ -139,19 +139,19 @@
 
     .right_ribbons {
         position: absolute;
-        top: 0;
+        bottom: 0;
         right: 0;
         width: 953px;
-        height: 679px;
+        height: 685px;
         z-index: 0
     }
 
     .left_ribbons {
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         width: 1133px;
-        height: 679px;
+        height: 685px;
         z-index: 0;
     }
 
