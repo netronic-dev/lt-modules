@@ -193,7 +193,7 @@ export const validate = (values) => {
     if (values.phone !== undefined) {
         if (values.phone === "") {
             errors.phone = "Required field";
-        } else if (!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(values.phoneNumber)) {
+        } else if (!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(values.phone)) {
             errors.phone = "Wrong phone number";
         }
     }
