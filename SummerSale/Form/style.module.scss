@@ -22,7 +22,7 @@
             font-style: normal;
             font-weight: 600;
             font-size: 48px;
-            line-height: 50px;
+            line-height: 1em;
             text-align: center;
             text-transform: uppercase;
             color: #040E18;
@@ -35,7 +35,7 @@
             font-style: normal;
             font-weight: 600;
             font-size: 20px;
-            line-height: 27px;
+            line-height: 1.35em;
             text-align: center;
             text-transform: uppercase;
             color: #000000;
@@ -69,9 +69,68 @@
 
 @media (max-width: 1950px) {
     .right_blue_ribbon {
-        right: 50%;
-        transform: translate(150%);
+        transform: translate(45%);
     }
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1450px) {
+    .right_ribbon {
+        transform: translate(45%);
+    }
+}
+
+@media (max-width: 1300px) {
+    .main {
+        position: relative;
+        margin: 72px 20px 0 20px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .right_blue_ribbon {
+        transform: translate(60%);
+    }
+
+    .left_ribbon {
+        transform: translate(-20%);
+    }
+}
+
+@media (max-width: 1024px) {
+    .right_blue_ribbon {
+        display: none;
+    }
+
+    .left_ribbon {
+        display: none;
+    }
+
+    .right_ribbon {
+        display: none;
+    }
+
+    .main {
+        .content {
+            padding: 75px 20px;
+
+            .title {
+                font-size: 36px;
+            }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .main {
+        .content {
+
+            .title {
+                font-size: 30px;
+            }
+
+            .text {
+                font-size: 16px;
+            }
+        }
+    }
+}

@@ -8,13 +8,6 @@ export default function Slider(props) {
 			}`}
 		>
 			<div
-				// className={
-				// 	props.even
-				// 		? style.slider_right_item
-				// 		: !props.even
-				// 		? style.slider_left_item
-				// 		: style.slider_left
-				// }
 				className={
 					props.one
 						? props.second
@@ -25,7 +18,7 @@ export default function Slider(props) {
 			>
 				<p
 					className={
-						props.blueText || props.even
+						props.second
 							? style.blueText
 							: style.text
 					}

@@ -9,17 +9,19 @@ const SaleKitsList = (props) => {
 				<h2 className={style.title}>{props.title}</h2>
 				{props.data.map((item, index) => (
 					<div
-						className={`${style.item} ${
+						className={` ${
 							item.second
 								? style.item_second
 								: item.eclipse
 								? style.item_third
 								: null
-						}`}
+						} ${style.item}`}
 						key={index}
 					>
 						<div className={style.item_content}>
-							<p className={style.text}>{item.text}</p>
+							<div>
+								<p className={style.text}>{item.text}</p>
+							</div>
 							<div
 								className={
 									item.second

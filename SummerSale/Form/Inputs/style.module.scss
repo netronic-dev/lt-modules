@@ -126,7 +126,7 @@
 
 .button {
 	display: block;
-	padding: 25px 58px;
+	padding: 24px 130px;
 	margin: 37px auto 0 auto;
 	background: #0090FF;
 	border-radius: 60px;
@@ -197,7 +197,7 @@
 @media (max-width: 800px) {
 
 	.input_land_out {
-		margin-top: 18px;
+		margin-top: 60px;
 	}
 
 	.button {
@@ -208,11 +208,8 @@
 
 @media (max-width: 500px) {
 
-	.input_land_out {
-		margin-top: 18px;
-	}
-
 	.button {
+		padding: 16px 0;
 		width: 100%;
 	}
 }

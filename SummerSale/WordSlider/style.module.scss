@@ -7,6 +7,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
+	z-index: -1;
 }
 
 .slider_left {
@@ -16,10 +17,10 @@
 	height: max-content;
 	overflow-y: hidden;
 	width: max-content;
-	display: flex !important;
+	display: flex;
 	flex-flow: row nowrap !important;
-	align-items: initial !important;
-	animation-duration: 13s;
+	align-items: initial;
+	animation-duration: 22s;
 	animation-timing-function: linear;
 	animation-delay: 0s;
 	animation-iteration-count: infinite;
@@ -49,10 +50,10 @@
 	height: max-content;
 	overflow-y: hidden;
 	width: max-content;
-	display: flex !important;
+	display: flex;
 	flex-flow: row nowrap !important;
-	align-items: initial !important;
-	animation-duration: 13s;
+	align-items: initial;
+	animation-duration: 22s;
 	animation-timing-function: linear;
 	animation-delay: 0s;
 	animation-iteration-count: infinite;
@@ -131,7 +132,7 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 170px;
-	line-height: 165px;
+	line-height: .97em;
 	text-transform: uppercase;
 	color: #00000000;
 	-webkit-text-stroke: 1px #0090ff;
@@ -141,45 +142,63 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 170px;
-	line-height: 165px;
+	line-height: .97em;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
 	color: #00000000;
 	-webkit-text-stroke: 1px #737373;
 }
 
-@media (max-width: 750px) {
-	.text {
-		font-size: 80px;
-		line-height: 78px;
+@media (max-width: 1200px) {
+	.slider_right {
+		display: none;
 	}
 
 	.slider_left {
-		bottom: 0;
-		margin-bottom: 180px;
-	}
+		top: 160px;
 
-	.slider_right {
-		top: 0;
-	}
-
-	@keyframes infiniteslide-right {
-		0% {
-			transform: translate3d(750px, 0, 0);
-		}
-
-		100% {
-			transform: translate3d(-500px, 0, 0);
+		.text {
+			font-size: 140px;
 		}
 	}
+}
 
-	@keyframes infiniteslide-left {
-		0% {
-			transform: translate3d(-500px, 0, 0);
+@media (max-width: 1024px) {
+
+	.slider_right_one {
+		.text {
+			font-size: 100px;
 		}
+		.blueText {
+			font-size: 100px;
+		}
+	}
 
-		100% {
-			transform: translate3d(750px, 0, 0);
+	.slider_left_one {
+		.text {
+			font-size: 100px;
+		}
+	}
+
+}
+
+@media (max-width: 768px) {
+	.slider_left {
+		display: none;
+	}
+
+	.slider_right_one {
+		.text {
+			font-size: 75px;
+		}
+		.blueText {
+			font-size: 75px;
+		}
+	}
+
+	.slider_left_one {
+		.text {
+			font-size: 75px;
 		}
 	}
 }

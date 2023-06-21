@@ -39,6 +39,14 @@ const Count = (props) => {
 					objectFit='cover'
 				/>
 			</div>
+			<div className={style.left_ribbon_mob}>
+				<Image
+					src={props.left_ribon_mob}
+					alt='ribbons'
+					layout='fill'
+					objectFit='cover'
+				/>
+			</div>
 		</section>
 	);
 };

@@ -17,12 +17,30 @@ const Main = (props) => {
 						</button>
 					</AnchorLink>
 				</div>
-				<div className={`${style.image_outer} ${style.desktop}`}>
+				<div className={style.image_outer}>
 					<Image
 						src={props.image}
 						layout='fill'
 						objectFit='cover'
 						objectPosition={props.objectPosition}
+						priority={true}
+					/>
+				</div>
+				<div className={style.image_outer_lap}>
+					<Image
+						src={props.image_lap}
+						layout='fill'
+						objectFit='cover'
+						objectPosition={props.objectPosition}
+						priority={true}
+					/>
+				</div>
+				<div className={style.image_outer_mob}>
+					<Image
+						src={props.image_mob}
+						layout='fill'
+						objectFit='cover'
+						objectPosition='0 0'
 						priority={true}
 					/>
 				</div>
