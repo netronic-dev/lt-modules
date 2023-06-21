@@ -33,6 +33,35 @@
         max-width: 700px;
     }
 
+    .us_block {
+        position: relative;
+        background: #FF9900;
+        border-radius: 10px;
+        margin-top: 17px;
+        max-width: 654px;
+        padding: 20px 7px 20px 37px;
+
+        .us_text {
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 1.375em;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+        .flag {
+            position: absolute;
+            top: 0;
+            left: -30px;
+            width: 65px;
+            height: 65px;
+        }
+
+    }
+
     .upper_text_slider {
         position: relative;
         position: absolute;
@@ -169,6 +198,12 @@
         * {
             user-select: none;
             pointer-events: none;
+        }
+    }
+
+    .us_block {
+        .us_text {
+            font-size: 16px;
         }
     }
 }

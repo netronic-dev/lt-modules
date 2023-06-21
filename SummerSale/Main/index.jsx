@@ -11,6 +11,19 @@ const Main = (props) => {
 				<div className={style.content}>
 					<h1 className={style.title}>{props.title}</h1>
 					<p className={style.text}>{props.text}</p>
+					{props.textUS ? (
+						<div className={style.us_block}>
+							<p className={style.us_text}>{props.textUS}</p>
+							<div className={style.flag}>
+								<Image
+									src={props.flag}
+									alt='usa flag'
+									layout='fill'
+									objectFit='cover'
+								/>
+							</div>
+						</div>
+					) : null}
 					<AnchorLink href='#sale' offset='200'>
 						<button className={style.button}>
 							{props.buttonText}

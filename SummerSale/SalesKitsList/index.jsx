@@ -21,6 +21,11 @@ const SaleKitsList = (props) => {
 						<div className={style.item_content}>
 							<div>
 								<p className={style.text}>{item.text}</p>
+								{item.text_usa ? (
+									<div className={style.usa_text}>
+										{item.text_usa}
+									</div>
+								) : null}
 							</div>
 							<div
 								className={
@@ -32,7 +37,11 @@ const SaleKitsList = (props) => {
 								}
 							>
 								<Image
-									src={item.image}
+									src={
+										item.image_usa
+											? item.image_usa
+											: item.image
+									}
 									alt={item.image_alt}
 									layout='fill'
 									objectFit='cover'
