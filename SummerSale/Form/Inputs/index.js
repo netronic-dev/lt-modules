@@ -39,7 +39,7 @@ export function InputsWName(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true)).then(router.push('/thanks-call'));
+            ).then(GAEvents.sentRequest("", "", true)).then(router.push('/summer-2023/thank-you'));
         },
     });
 
