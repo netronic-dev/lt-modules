@@ -23,7 +23,7 @@ const Form = (props) => {
 					src={props.left_ribbon}
 					alt='left ribbon'
 					width={883}
-					height={622}
+					height={632}
 				/>
 			</div>
 			<div className={style.right_ribbon}>
@@ -31,7 +31,7 @@ const Form = (props) => {
 					src={props.right_ribbon}
 					alt='left ribbon'
 					height={622}
-					width={530}
+					width={550}
 				/>
 			</div>
 			<div className={style.right_blue_ribbon}>
@@ -39,7 +39,7 @@ const Form = (props) => {
 					src={props.right_blue_ribbon}
 					alt='left ribbon'
 					width={723}
-					height={612}
+					height={622}
 				/>
 			</div>
 		</section>

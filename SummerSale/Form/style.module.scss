@@ -46,7 +46,7 @@
 .right_ribbon {
     position: absolute;
     height: 100%;
-    top: 0;
+    bottom: -30px;
     right: 0;
     z-index: -1;
 }
@@ -54,7 +54,7 @@
 .left_ribbon {
     position: absolute;
     height: 100%;
-    top: 0;
+    bottom: -30px;
     left: 0;
     z-index: -1;
 }
@@ -62,7 +62,7 @@
 .right_blue_ribbon {
     position: absolute;
     height: 100%;
-    top: 0;
+    bottom: 0;
     right: 0;
     z-index: -1;
 }
