@@ -16,6 +16,7 @@ const Form = (props) => {
 					orderName={props.orderName}
 					namePlaceholder={props.namePlaceholder}
 					callPlaceholder={props.callPlaceholder}
+					thankYouPage={props.thankYouPage}
 				/>
 			</div>
 			<div className={style.left_ribbon}>
