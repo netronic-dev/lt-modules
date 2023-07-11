@@ -14,6 +14,32 @@
 	transition: all 0.4s ease-in-out;
 }
 
+.partnershipMainBtn {
+	margin-top: 42px;
+	outline: 0;
+	border: none;
+	padding: 16px 40px;
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 1.38em;
+	text-align: center;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	background-color: #0090FF;
+	border-radius: 60px;
+	cursor: pointer;
+	transition: all .3s ease;
+
+	&:hover {
+		transition: all .3s ease;
+		background-color: #fff;
+		color: #000;
+	}
+}
+
 .button_big_black {
 	@extend %button;
 	height: 58px;
@@ -590,6 +616,8 @@
 			}
 		}
 	}
+
+
 }
 
 @media (max-width: 500px) {
@@ -606,5 +634,9 @@
 		height: 47px;
 		font-weight: 700;
 		font-size: 24px;
+	}
+
+	.partnershipMainBtn {
+		width: 100%;
 	}
 }

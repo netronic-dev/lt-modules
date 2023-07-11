@@ -1,0 +1,274 @@
+@import "../default";
+
+.main {
+    padding: 113px 0 0 0;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+
+
+    .title {
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 48px;
+        line-height: 1.04em;
+        text-align: center;
+        text-transform: uppercase;
+        color: #040E18;
+    }
+
+    .item {
+        position: relative;
+        padding: 110px 0 204px 0;
+        display: flex;
+        position: relative;
+
+        .item_content {
+            @extend %page_grid;
+
+            .text {
+                max-width: 580px;
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 40px;
+                line-height: 1.375em;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #000000;
+            }
+
+            .usa_text {
+                margin-top: 20px;
+                background: #FF9900;
+                border-radius: 10px;
+                max-width: 445px;
+                padding: 15px;
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 16px;
+                line-height: 1.375em;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #FFFFFF;
+            }
+
+            .item_image {
+                position: absolute;
+                width: 733px;
+                height: 489px;
+                top: 50%;
+                left: 50%;
+                transform: translate(0%, -50%);
+            }
+
+            .item_image_eclipse {
+                position: absolute;
+                width: 490px;
+                height: 521px;
+                top: 50%;
+                left: 50%;
+                transform: translate(0%, -50%);
+            }
+        }
+    }
+
+    .item_second {
+        position: relative;
+        z-index: -1;
+        display: flex;
+        background: #EEF8FF;
+
+        .item_content {
+            @extend %page_grid;
+            margin-top: 90px;
+            display: flex;
+            justify-content: flex-end;
+
+            .text {
+                max-width: 600px;
+            }
+        }
+
+        .item_image_second {
+            width: 780px;
+            height: 450px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-110%, -50%);
+        }
+
+
+    }
+
+    .item_third {
+        padding: 190px 0 204px 0;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .content {
+        .item_second {
+
+            .item_content {
+                width: 100%;
+                margin-top: 90px;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .content {
+        .item {
+            .item_content {
+                .text {
+                    font-size: 30px;
+
+                }
+
+                .usa_text {
+                    font-size: 14px;
+                }
+
+                .item_image {
+                    width: 440px;
+                    height: 293px;
+                    transform: translate(0%, -40%);
+
+                }
+
+                .item_image_eclipse {
+                    width: 294px;
+                    height: 312px;
+                    transform: translate(15%, -40%);
+                }
+            }
+        }
+
+        .item_second {
+            .item_content {
+                .text {
+                    max-width: 450px;
+                }
+            }
+
+            .item_image_second {
+                width: 420px;
+                height: 240px;
+                transform: translate(-120%, -40%);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 67px 0 0 0;
+    }
+
+    .content {
+
+        .title {
+            font-size: 42px;
+        }
+
+        .item {
+            padding: 41px 0 268px 0;
+
+            .item_content {
+                .text {
+                    max-width: max-content;
+                    font-size: 30px;
+                }
+
+                .item_image {
+                    width: 400px;
+                    height: 253px;
+                    transform: translate(-50%, -20%);
+                }
+
+                .item_image_eclipse {
+                    width: 220px;
+                    height: 235px;
+                    transform: translate(0, -15%);
+                }
+            }
+        }
+
+        .item_second {
+            padding: 72px 0 296px 0;
+
+            .item_content {
+                margin-top: 0;
+                width: auto;
+
+                .text {
+                    max-width: max-content;
+                }
+            }
+
+            .item_image_second {
+                width: 350px;
+                height: 200px;
+                transform: translate(-50%, -20%);
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .content {
+
+        .title {
+            font-size: 30px;
+        }
+
+        .item {
+            .item_content {
+                margin: 0 10px;
+
+                .text {
+                    font-size: 20px;
+                }
+
+                .usa_text {
+                    padding: 7px 13px;
+                    max-width: 260px;
+                }
+
+                .item_image {
+                    width: 312px;
+                    height: 203px;
+                    transform: translate(-50%, -30%);
+                }
+
+                .item_image_eclipse {
+                    transform: translate(-40%, -20%);
+                }
+            }
+        }
+
+        .item_second {
+            .item_image_second {
+                width: 300px;
+                height: 170px;
+                transform: translate(-50%, -20%);
+            }
+        }
+
+        .item_third {
+            padding: 41px 0 294px 0;
+        }
+
+    }
+}
