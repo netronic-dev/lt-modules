@@ -8,8 +8,8 @@ const Count = (props) => {
 			<div className={style.content}>
 				<h2 className={style.title}>{props.title}</h2>
 				<div className={style.counter_wrapper}>
-					<div className={style.counter_item}>9</div>
-					<div className={style.counter_item}>8</div>
+					<div className={style.counter_item}>3</div>
+					<div className={style.counter_item}>6</div>
 				</div>
 				<span className={style.text}>{props.text}</span>
 				<AnchorLink href='#sale' offset='200'>
