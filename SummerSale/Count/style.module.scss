@@ -1,9 +1,9 @@
-@import "../default";
+@import '../default';
 
 .main {
     position: relative;
     margin: 0 40px 76px 40px;
-    background: #0090FF;
+    background: #0090ff;
     border-radius: 20px;
     overflow: hidden;
 
@@ -24,7 +24,7 @@
             line-height: 1.37em;
             text-transform: uppercase;
 
-            color: #FFFFFF;
+            color: #ffffff;
         }
 
         .counter_wrapper {
@@ -42,8 +42,8 @@
                 letter-spacing: 0.02em;
                 text-transform: uppercase;
                 color: #000000;
-                background: #FFFFFF;
-                border: 3px solid #9ED5FF;
+                background: #ffffff;
+                border: 3px solid #9ed5ff;
                 border-radius: 10px;
                 padding: 14px 42px;
             }
@@ -58,7 +58,7 @@
             line-height: 1.375em;
             letter-spacing: 0.02em;
             text-transform: uppercase;
-            color: #FFFFFF;
+            color: #ffffff;
         }
 
         .button {
@@ -109,18 +109,18 @@
             text-align: center;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #FFFFFF;
+            color: #ffffff;
             z-index: 2;
 
             &:after {
                 z-index: -2;
-                content: "";
+                content: '';
                 position: absolute;
                 top: -15px;
                 left: -20px;
                 width: 600px;
                 height: 111.33px;
-                background: #FF9900;
+                background: #ff9900;
                 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
                 transform: rotate(-1.73deg);
             }
@@ -132,7 +132,6 @@
         left: 0;
         bottom: 0;
 
-
         * {
             user-select: none;
         }
@@ -141,7 +140,7 @@
             font-style: normal;
             font-weight: bold;
             font-size: 170px;
-            line-height: .97em;
+            line-height: 0.97em;
             text-transform: uppercase;
             letter-spacing: 0.02em;
             color: #00000000;
@@ -155,7 +154,7 @@
         right: 0;
         width: 953px;
         height: 685px;
-        z-index: 0
+        z-index: 0;
     }
 
     .left_ribbons {
@@ -185,7 +184,6 @@
 @media (max-width: 1700px) {
     .main {
         .bacground_text_wrap {
-
             .bacground_text {
                 font-size: 140px;
             }
@@ -235,7 +233,6 @@
         }
 
         .content {
-
             .title {
                 font-size: 40px;
             }
@@ -250,7 +247,7 @@
 
                 &:after {
                     z-index: -2;
-                    content: "";
+                    content: '';
                     top: -22px;
                 }
             }
@@ -284,15 +281,11 @@
 
 @media (max-width: 600px) {
     .main {
-
         .content {
-            
-
             .under_button_text {
-
                 &:after {
                     z-index: -2;
-                    content: "";
+                    content: '';
                     top: -14px;
                     left: -30px;
                     width: 575.37px;
@@ -303,10 +296,8 @@
     }
 }
 
-
 @media (max-width: 500px) {
     .main {
-
         .content {
             padding: 142px 0 130px 0;
 
@@ -336,7 +327,7 @@
 
                 &:after {
                     z-index: -2;
-                    content: "";
+                    content: '';
                     top: -20px;
                     left: -50px;
                     width: 575.37px;

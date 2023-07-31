@@ -32,7 +32,9 @@ export function InputsWName(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true)).then(router.push(props.thankYouPage));
+            )
+                .then(GAEvents.sentRequest('', '', true))
+                .then(router.push(props.thankYouPage));
         },
     });
 
@@ -46,64 +48,62 @@ export function InputsWName(props) {
 
     return (
         <div className={style.input_land_out}>
-            <form
-                onSubmit={formik.handleSubmit}
-                className='form_submit_land'
-            >
+            <form onSubmit={formik.handleSubmit} className='form_submit_land'>
                 <div className={style.content}>
                     <div className={style.input_out__outer}>
                         <div className={style.input_out}>
                             <input
-                                className={formik.errors.name ? `${style.input} ${style.input_error}` : style.input}
+                                className={
+                                    formik.errors.name
+                                        ? `${style.input} ${style.input_error}`
+                                        : style.input
+                                }
                                 name='name'
                                 maxLength='30'
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
-                                placeholder={
-                                    props.namePlaceholder || 'Name *'
-                                }
+                                placeholder={props.namePlaceholder || 'Name *'}
                             />
                         </div>
-                        <div className={style.error}>
-                            {formik.errors.name}
-                        </div>
+                        <div className={style.error}>{formik.errors.name}</div>
                     </div>
                     <div className={style.input_out__outer}>
                         <div className={style.input_out}>
                             <input
-                                className={formik.errors.email ? `${style.input} ${style.input_error}` : style.input}
+                                className={
+                                    formik.errors.email
+                                        ? `${style.input} ${style.input_error}`
+                                        : style.input
+                                }
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
                                 maxLength='40'
                                 name='email'
                                 type='email'
-                                placeholder={
-                                    props.placeholder || 'Email *'
-                                }
+                                placeholder={props.placeholder || 'Email *'}
                             />
                         </div>
-                        <div className={style.error}>
-                            {formik.errors.email}
-                        </div>
+                        <div className={style.error}>{formik.errors.email}</div>
                     </div>
                     <div className={style.input_out__outer}>
                         <div className={style.input_out}>
                             <input
-                                className={formik.errors.phone ? `${style.input} ${style.input_error}` : style.input}
+                                className={
+                                    formik.errors.phone
+                                        ? `${style.input} ${style.input_error}`
+                                        : style.input
+                                }
                                 type='tel'
                                 name='phone'
                                 maxLength='30'
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 placeholder={
-                                    props.callPlaceholder ||
-                                    'Phone number *'
+                                    props.callPlaceholder || 'Phone number *'
                                 }
                             />
                         </div>
-                        <div className={style.error}>
-                            {formik.errors.phone}
-                        </div>
+                        <div className={style.error}>{formik.errors.phone}</div>
                     </div>
                 </div>
                 <Agreement
@@ -115,8 +115,8 @@ export function InputsWName(props) {
                 />
                 <button
                     className={style.button}
-                    id={props.id ? props.id : ""}
-                    type="submit"
+                    id={props.id ? props.id : ''}
+                    type='submit'
                     onClick={props.onClick}
                     disabled
                 >
@@ -143,12 +143,13 @@ function Agreement(props) {
                 </div>
                 <p className={style.agreement__text}>
                     <span onClick={props.onAgreementChange}>
-                        {props.agreementText || 
+                        {props.agreementText ||
                             'Подтверждаю, что ознакомился и согласен с условиями '}
                     </span>{' '}
                     <Link href='/privacy-policy'>
                         <a>
-                            {props.agreementSpanText || 'политики конфиденциальности'}
+                            {props.agreementSpanText ||
+                                'политики конфиденциальности'}
                         </a>
                     </Link>
                 </p>
@@ -169,32 +170,36 @@ export const validate = (values) => {
     const errors = {};
 
     if (values.name !== undefined) {
-        if (values.name === "") {
-            errors.name = "Required field";
+        if (values.name === '') {
+            errors.name = 'Required field';
         }
     }
 
     if (values.email !== undefined) {
-        if (values.email === "") {
-            errors.email = "Required field";
+        if (values.email === '') {
+            errors.email = 'Required field';
         } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
         ) {
-            errors.email = "Wrong E-mail";
+            errors.email = 'Wrong E-mail';
         }
     }
 
     if (values.phone !== undefined) {
-        if (values.phone === "") {
-            errors.phone = "Required field";
-        } else if (!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(values.phone)) {
-            errors.phone = "Wrong phone number";
+        if (values.phone === '') {
+            errors.phone = 'Required field';
+        } else if (
+            !/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(
+                values.phone
+            )
+        ) {
+            errors.phone = 'Wrong phone number';
         }
     }
 
     if (values.agreement !== undefined) {
         if (values.agreement === false) {
-            errors.agreement = "Required";
+            errors.agreement = 'Required';
         }
     }
 
