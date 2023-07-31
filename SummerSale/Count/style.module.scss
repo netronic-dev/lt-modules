@@ -79,6 +79,18 @@
             border: 0;
             animation: radial-pulse 1.5s infinite;
 
+            &:disabled {
+                cursor: auto;
+                background-color: #edeef0;
+                color: #8e8e8e;
+                animation: none;
+
+                &:hover {
+                    background-color: #edeef0;
+                    color: #8e8e8e;
+                }
+            }
+
             &:hover {
                 background: #fff;
                 color: #000000;

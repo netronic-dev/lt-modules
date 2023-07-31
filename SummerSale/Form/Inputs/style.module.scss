@@ -143,6 +143,17 @@
 	outline: none;
 	cursor: pointer;
 
+	&:disabled {
+        cursor: auto;
+        background-color: #edeef0;
+        color: #8e8e8e;
+
+        &:hover {
+            background-color: #edeef0;
+            color: #8e8e8e;
+        }
+    }
+
 	&:hover {
 		transition: all .4s ease;
 		background-color: #000;

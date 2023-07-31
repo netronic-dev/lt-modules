@@ -9,7 +9,18 @@ const Main = (props) => {
 		<section className={style.main}>
 			<div className={style.main_inner}>
 				<div className={style.content}>
-					<h1 className={style.title}>{props.title}</h1>
+					<div className={style.title_block}>
+                        <h1 className={style.title}>{props.title}</h1>
+                        <div className={style.image_sold_out}>
+                            <Image
+                                src={props.image_sold_out}
+                                alt='Sold-out'
+                                layout='fill'
+                                objectFit='contain'
+                                priority={true}
+                            />
+                        </div>
+                    </div>
 					<p className={style.text}>{props.text}</p>
 					{props.textUS ? (
 						<div className={style.us_block}>
@@ -25,7 +36,7 @@ const Main = (props) => {
 						</div>
 					) : null}
 					<AnchorLink href='#sale' offset='200'>
-						<button className={style.button}>
+						<button className={style.button} disabled>
 							{props.buttonText}
 						</button>
 					</AnchorLink>
