@@ -125,29 +125,40 @@
 }
 
 .button {
-	display: block;
-	padding: 24px 130px;
-	margin: 37px auto 0 auto;
-	background: #0090FF;
-	border-radius: 60px;
-	font-family: 'Manrope';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 25px;
-	text-align: center;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
-	color: #FFFFFF;
-	border: 0;
-	outline: none;
-	cursor: pointer;
+    display: block;
+    padding: 24px 130px;
+    margin: 37px auto 0 auto;
+    background: #0090ff;
+    border-radius: 60px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 0;
+    outline: none;
+    cursor: pointer;
 
-	&:hover {
-		transition: all .4s ease;
-		background-color: #000;
-		color: #fff;
-	}
+    &:disabled {
+        cursor: auto;
+        background-color: #edeef0;
+        color: #8e8e8e;
+
+        &:hover {
+            background-color: #edeef0;
+            color: #8e8e8e;
+        }
+    }
+
+    &:hover {
+        transition: all 0.4s ease;
+        background-color: #000;
+        color: #fff;
+    }
 }
 
 @media (max-width: 1024px) {
