@@ -1,0 +1,118 @@
+.main {
+    padding: 140px 0;
+    background-color: #F5F5F5;
+
+    .content_wrapper {
+        width: 1170px;
+        margin: 0 auto;
+
+        .title {
+            color: #000;
+            text-align: center;
+            font-family: Manrope;
+            font-size: 45px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-transform: uppercase;
+        }
+
+        .cells_wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 85px;
+
+            .cell {
+                display: flex;
+                width: 350px;
+                flex-direction: column;
+
+                .image_block {
+                    margin: 0 auto;
+                    position: relative;
+                    height: 86px;
+                    width: 86px;
+                }
+
+                .devider {
+                    margin: 35px 0;
+                    max-width: 294px;
+                    width: 100%;
+                    height: 1px;
+                    background: #D9D9D9;
+                }
+
+                .cell_text {
+                    color: #000;
+                    text-align: center;
+                    font-family: Manrope;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .main {
+        padding: 140px 20px;
+
+        .content_wrapper {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .main {
+        padding: 75px 20px;
+
+        .content_wrapper {
+            width: 100%;
+
+            .cells_wrapper {
+                gap: 52px;
+
+                .cell {
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .main {
+        padding: 45px 15px;
+
+        .content_wrapper {
+
+            .title {
+                font-size: 35px;
+            }
+
+            .cells_wrapper {
+                margin-top: 30px;
+                gap: 52px;
+
+                .cell {
+                    width: 290px;
+                }
+
+                .devider {
+                    margin: 47px 0 35px 0;
+                }
+
+                .cell_text {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,313 @@
+.main {
+    padding-top: 152px;
+    width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+        color: #040E18;
+        font-family: Manrope;
+        font-size: 45px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+        max-width: 877px;
+        margin-bottom: 40px;
+        text-align: center;
+
+        span {
+            color: #0090FF;
+        }
+    }
+
+    .text {
+        color: #000;
+        text-align: center;
+        font-family: Manrope;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        max-width: 972px;
+    }
+
+    .devider {
+        width: 156px;
+        height: 4px;
+        flex-shrink: 0;
+        border-radius: 50px;
+        background: #0090FF;
+        margin: 30px auto;
+    }
+
+    .cells_wrapper {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: 1fr 455px;
+        gap: 41px;
+
+        .cards_cell {
+            display: grid;
+            gap: 30px;
+
+            .cell {
+                display: grid;
+                grid-template-columns: 93px 1fr;
+                gap: 45px;
+                align-items: center;
+                padding: 0 65px 0 47px;
+                border-radius: 20px;
+                border: 1px solid rgba(196, 196, 196, 0.80);
+
+                .image_wrap {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .cell_text {
+                    color: #000;
+                    font-family: Manrope;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    letter-spacing: 0.48px;
+                    padding: 40px 0;
+
+                    span {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+        .image_cell {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .image_cell_lap {
+            display: none;
+        }
+    }
+
+    .under_cells_text {
+        margin-top: 40px;
+    }
+
+    .register_block {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 36px;
+        margin-top: 75px;
+        padding: 35px 120px 35px 70px;
+        border-radius: 20px;
+        background: #0090FF;
+
+        .register_text {
+            color: #FFF;
+            font-family: Manrope;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-transform: uppercase;
+            max-width: 500px;
+
+            span {
+                color: #000;
+            }
+        }
+
+        .register_button {
+            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 278px;
+            box-sizing: border-box;
+            border-radius: 60px;
+            background: #FFF;
+            color: #000;
+            text-align: center;
+            font-family: Manrope;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.36px;
+            text-transform: uppercase;
+            padding: 16px 0;
+
+            transition: all .4s ease;
+
+            &:hover {
+                background: #000;
+                color: #FFF;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .main {
+        width: 100%;
+        padding: 152px 30px 0 30px;
+
+        .cells_wrapper {
+            margin-top: 91px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+
+            .image_cell {
+                display: none;
+
+            }
+
+            .image_cell_lap {
+                display: block;
+                height: 410px;
+                position: relative;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+        }
+
+        .register_block {
+            padding: 35px 50px 35px 70px;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .main {
+        .register_block {
+            padding: 35px;
+
+            .register_text {
+                max-width: 450px;
+            }
+        }
+    }
+}
+
+@media (max-width: 820px) {
+    .main {
+        .register_block {
+            flex-direction: column;
+            align-items: center;
+            padding: 35px;
+
+            .register_text {
+                max-width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding-top: 97px;
+
+        .title {
+            font-size: 35px;
+            margin-bottom: 30px;
+        }
+
+        .text {
+            font-size: 20px;
+        }
+
+        .cells_wrapper {
+            margin-top: 30px;
+
+            .image_cell_lap {
+                height: 240px;
+            }
+
+            .cards_cell {
+                display: grid;
+                gap: 15px;
+
+                .cell {
+                    grid-template-columns: 60px 1fr;
+                    gap: 15px;
+                    padding: 0 33px 0 24px;
+
+                    .cell_text {
+                        font-size: 20px;
+                        padding: 20px 0;
+                    }
+
+                    .image_wrap {
+                        width: 47px;
+                    }
+                }
+            }
+        }
+
+        .register_block {
+            padding: 50px 27px;
+            margin-top: 30px;
+
+            .register_text {
+                max-width: 100%;
+                text-align: center;
+            }
+        }
+
+        .under_cells_text {
+            margin-top: 30px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .main {
+        padding: 97px 15px 0 15px;
+
+        .text {
+            font-size: 16px;
+        }
+
+        .cells_wrapper {
+
+            .cards_cell {
+
+                .cell {
+
+                    .cell_text {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .register_block {
+            padding: 50px 27px;
+            margin-top: 30px;
+
+            .register_text {
+                max-width: 100%;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .register_button {
+                font-size: 16px;
+            }
+        }
+
+        .under_cells_text {
+            margin-top: 30px;
+        }
+    }
+}

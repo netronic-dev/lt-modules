@@ -1,0 +1,349 @@
+@import "../../default";
+
+.main {
+	position: relative;
+}
+
+.wrapper {
+	width: 1170px;
+	margin: 0 auto;
+	position: relative;
+	@extend %page_grid_lasertag_convension;
+	padding: 45px 0 104px;
+}
+
+.title {
+	color: #040E18;
+	font-family: "Manrope";
+	font-size: 45px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 144.444%;
+	/* 144.444% */
+	text-transform: uppercase;
+	max-width: 586px;
+	margin-top: 57px;
+
+	span {
+		color: #0090ff;
+	}
+}
+
+.text {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 18px;
+	line-height: 25px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	margin-top: 40px;
+}
+
+.line {
+	width: 0;
+	height: 56px;
+	border: 1px solid #89a2c8;
+}
+
+.event_text {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #89a2c8;
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	background: #0090ff;
+	border-radius: 60px;
+	padding: 16px;
+	width: 100%;
+	max-width: 280px;
+	border: 0;
+	font-family: "Manrope";
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #ffffff;
+
+	&:hover {
+		background-color: #101010;
+		color: #ffffff;
+	}
+}
+
+.image_responsive {
+	position: relative;
+	display: none;
+	height: 265px;
+	width: 100%;
+	margin-bottom: 35px;
+}
+
+.image_responsive_lap {
+	display: none;
+}
+
+.image_responsive_mob {
+	display: none;
+}
+
+.background {
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.event_logo {
+	position: relative;
+	width: 100%;
+	width: 108px;
+	height: 52px;
+}
+
+.event_info {
+	width: 100%;
+	max-width: 575px;
+	margin: 50px 0;
+	display: grid;
+	gap: 10px;
+}
+
+.event_info_cell {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	grid-gap: 10px;
+}
+
+.event_info__top {
+	display: flex;
+	gap: 14px;
+}
+
+.event_info__place_icon_outer {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.event_info__title {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #8e8e8e;
+	margin-bottom: 6px;
+}
+
+.event_info__title_blue {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 19px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #0090FF;
+}
+
+.event_info__text {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 25px;
+	color: #040e18;
+
+	span {
+		color: #0090ff;
+	}
+}
+
+.event_info__text_white {
+	font-family: "Manrope";
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 1.55em;
+	color: #fff;
+	max-width: 322px;
+
+	span {
+		color: #0090ff;
+	}
+}
+
+@media (max-width: 1220px) {
+	.wrapper {
+		width: 100%;
+		padding: 15px 20px 104px;
+	}
+
+	.button_outer_2023 {
+		margin-left: 5%;
+	}
+}
+
+@media (max-width: 1000px) {
+
+	.button_outer_2023 {
+		margin-left: 0;
+	}
+
+	.background {
+		display: none;
+	}
+
+	.image_responsive_lap {
+		display: block;
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+	.event_info__text {
+		br {
+			display: none;
+		}
+	}
+
+	.main {
+		height: auto;
+	}
+
+	.wrapper {
+		margin: 0;
+		padding: 15px 12px 104px;
+	}
+
+	.title {
+		padding: 0 15px;
+		font-size: 32px;
+		line-height: 44px;
+		max-width: none;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+
+		br {
+			display: none;
+		}
+	}
+
+	.event_info {
+		padding: 0;
+		grid-template-columns: 1fr;
+	}
+
+	.event_info__top {
+		width: 81px;
+	}
+
+	.event_info_cell {
+		grid-gap: 13px;
+	}
+
+	.button {
+		font-size: 16px;
+		line-height: 22px;
+	}
+
+	.image_responsive {
+		display: block;
+	}
+
+	.image_responsive_new {
+		display: block;
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.background {
+		display: none;
+	}
+
+	.event_info__text {
+		font-size: 16px;
+		max-width: 200px;
+	}
+
+	.event_info__text_white {
+		font-size: 14px;
+	}
+
+	.button_outer_2023_sea_expo {
+		margin-top: 93px;
+	}
+}
+
+@media (max-width: 550px) {
+	.wrapper {
+		margin: 0;
+		padding: 15px 12px 350px;
+	}
+
+	.title {
+		margin-top: 17px;
+		font-size: 35px;
+		line-height: 125.714%;
+	}
+
+	.event_info {
+		margin: 17px 0 110px 0;
+		grid-template-columns: 1fr 1fr;
+
+		.event_info_cell {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	.button_outer_2023 {
+		display: flex;
+		justify-content: center;
+
+		.button{
+			background: #fff;
+			color: #000
+		}
+	}
+
+	
+
+	.image_responsive_lap {
+		display: none;
+	}
+
+	.image_responsive_mob {
+		display: block;
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+}

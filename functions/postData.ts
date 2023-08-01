@@ -50,12 +50,7 @@ export async function postData(
 	if (fields) {
 		data.fields = [...data.fields, ...fields];
 	}
-	return await axios.post(url, data, {
-		headers: {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json',
-		}
-	});
+	return await axios.post(url, data);
 }
 
 export interface field {

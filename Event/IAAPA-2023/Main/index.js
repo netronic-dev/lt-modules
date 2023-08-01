@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import style from './style.module.scss';
-import CountDownModule from '../CountDownModule';
-import { BreadCrumbs } from '../../BreadCrumbs';
+import { BreadCrumbs } from '../../../BreadCrumbs';
+import Link from 'next/link';
 
 export default function IAAPAMain(props) {
     return (
@@ -15,24 +15,10 @@ export default function IAAPAMain(props) {
                         src={props.eventLogo}
                         layout='fill'
                         objectFit='contain'
-                        width={108}
-                        height={52}
                         alt='laser tag convetion'
                     />
                 </div>
                 <h1 className={style.title}>{props.title || ''}</h1>
-                {props.seoExpo
-                    ? null
-                    : <div className={style.image_responsive}>
-                        <Image
-                            src={props.imageResponsive}
-                            layout='fill'
-                            objectFit='cover'
-                            height={740}
-                            width={360}
-                            objectPosition={props.resObjectPosition}
-                        />
-                    </div>}
                 <EventInfo
                     iconsBlue={props.iconsBlue}
                     textWhite={props.textWhite}
@@ -54,9 +40,9 @@ export default function IAAPAMain(props) {
                             : style.button_outer_2023
                     }
                 >
-                    <button className={style.button} onClick={props.onClick}>
-                        {props.buttonText}
-                    </button>
+                    <Link href='/iaapa-vienna-2023/#register' scroll={false}>
+                        <a className={style.button}>{props.buttonText}</a>
+                    </Link>
                 </div>
             </div>
             <div className={style.background}>
@@ -65,18 +51,27 @@ export default function IAAPAMain(props) {
                     layout='fill'
                     objectFit='cover'
                     objectPosition={props.objectPosition}
+                    priority
                 />
             </div>
-            {props.seoExpo ? <div className={style.image_responsive_new}>
+            <div className={style.image_responsive_lap}>
                 <Image
-                    src={props.imageResponsive}
+                    src={props.image_lap}
                     layout='fill'
                     objectFit='cover'
-                    height={740}
-                    width={360}
                     objectPosition={props.resObjectPosition}
+                    priority
                 />
-            </div> : null}
+            </div>
+            <div className={style.image_responsive_mob}>
+                <Image
+                    src={props.image_mob}
+                    layout='fill'
+                    objectFit='cover'
+                    objectPosition="0 60%"
+                    priority
+                />
+            </div>
 
         </section>
     );
@@ -288,7 +283,7 @@ const breadcrumbData = [
     {
         '@type': 'ListItem',
         position: 3,
-        name: 'SEA EXPO 2023',
+        name: 'IAAPA VIENNA 2023',
         item: '',
     },
 ];
