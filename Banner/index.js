@@ -17,7 +17,7 @@ const Banner = (props) => {
                     place={props.place}
                 />
             </div>
-            <Link href=''>
+            <Link href='https://lasertag.net/iaapa-vienna-2023?utm_source=site&utm_medium=banner&utm_campaign=iaapa+vienna+2023'>
                 <button
                     type='submit'
                     className={style.button_submit}

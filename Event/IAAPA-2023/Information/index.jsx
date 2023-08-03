@@ -35,8 +35,10 @@ const Page = (props) => {
 						</div>
 					))}
 				</div>
-				<Link href='/iaapa-vienna-2023/#register' scroll={false}>
-					<a className={style.button}>{props.buttonText}</a>
+				<Link href={props.button_link}>
+					<a className={style.button} rel='nofollow' target='_blank'>
+						{props.buttonText}
+					</a>
 				</Link>
 			</div>
 		</section>
