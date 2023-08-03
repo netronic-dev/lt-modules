@@ -106,7 +106,7 @@ const placeIcon = (
 const closeBtn = (
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
         <circle cx="20" cy="20" r="20" fill="white" />
-        <path d="M26 14L15 25" stroke="#8E8E8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M15 14L26 25" stroke="#8E8E8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M26 14L15 25" stroke="#8E8E8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M15 14L26 25" stroke="#8E8E8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
