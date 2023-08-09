@@ -27,7 +27,7 @@ const Page = (props) => {
 						alt='heroImage'
 						layout='fill'
 						objectFit='cover'
-						objectPosition='50% 0'
+						objectPosition='100% 0'
 					/>
 				</div>
 				<div className={style.image_cell_lap}>
