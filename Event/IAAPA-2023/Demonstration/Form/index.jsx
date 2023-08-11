@@ -12,6 +12,7 @@ import style from './style.module.scss';
 import Agreement from '../Agreement';
 import { postData } from '../../../../functions/postData';
 import { setUserData } from '../../../../../store/actions/userData';
+import ReactGA from 'react-ga4';
 
 const Form = (props) => {
 	let validate = validation;
@@ -62,6 +63,11 @@ const Form = (props) => {
 						BXName: 'UF_CRM_1624974650',
 					},
 				],
+			).then(
+				ReactGA.event('generate_lead', {
+					event_category: 'button',
+					event_label: 'generate_lead',
+				}),
 			);
 			document.body.className = '';
 			router.push(props.thank_you_page_url);
