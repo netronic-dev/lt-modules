@@ -10,6 +10,7 @@ import { postData } from '../../functions/postData.ts';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import { useGAEvents } from '../../../context/GAEventsProvider';
+import ReactGA from 'react-ga4';
 
 function turnOnScroll() {
     document.body.className = '';
@@ -41,7 +42,12 @@ export function PopUpNamePhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            );
             modals.NamePhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -140,7 +146,12 @@ export function PopUpEmailPhone(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            );
             modals.EmailPhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -243,7 +254,12 @@ export function PopUpEvent(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            );
             modals.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
@@ -345,7 +361,12 @@ export function PopUpNameEmail(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(GAEvents.sentRequest("", "", true));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            );
             modals.NameEmailModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();

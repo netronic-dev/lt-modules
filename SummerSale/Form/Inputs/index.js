@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import ReactGA from 'react-ga4';
 import style from './style.module.scss';
 
 import { useFormik } from 'formik';
@@ -33,7 +33,12 @@ export function InputsWName(props) {
                 window.location.hostname,
                 router.query
             )
-                .then(GAEvents.sentRequest('', '', true))
+                .then(
+                    ReactGA.event('generate_lead', {
+                        event_category: 'button',
+                        event_label: 'generate_lead',
+                    })
+                )
                 .then(router.push(props.thankYouPage));
         },
     });

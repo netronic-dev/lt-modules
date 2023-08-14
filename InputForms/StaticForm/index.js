@@ -6,6 +6,7 @@ import { postData } from '../../functions/postData.ts';
 import { useValidation } from '../../../context/ValidationProvider';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
+import ReactGA from 'react-ga4';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -44,7 +45,12 @@ export function ThemeForm(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true)).then(router.push('/thanks-pres'));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            ).then(router.push('/thanks-pres'));
         },
     });
 
@@ -106,7 +112,12 @@ export function ThemeFormAll(props) {
                 props.lang,
                 window.location.hostname,
                 router.query
-            ).then(gaEvents.sentRequest("", "", true)).then(router.push('/thanks-pres'));
+            ).then(
+                ReactGA.event('generate_lead', {
+                    event_category: 'button',
+                    event_label: 'generate_lead',
+                })
+            ).then(router.push('/thanks-pres'));
         },
     });
 

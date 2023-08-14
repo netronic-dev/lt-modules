@@ -1,6 +1,7 @@
 import style from "./style.module.scss";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
+import ReactGA from 'react-ga4';
 import {
 	InputEmail,
 	InputCall,
@@ -46,7 +47,12 @@ export function PopUpForm(props) {
 				window.location.hostname,
 				router.query
 			)
-				.then(gaEvents.sentRequest("modal"))
+			then(
+				ReactGA.event('generate_lead', {
+					event_category: 'button',
+					event_label: 'generate_lead',
+				})
+			)
 				.then(router.push(props.thank_you_page_url));
 		},
 	});
