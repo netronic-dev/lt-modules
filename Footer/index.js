@@ -22,7 +22,7 @@ export default function Footer(props) {
                 }
             >
                 <div className={style.footer_desktop}>
-                    (<FooterMenu data={props.data} />)
+                    <FooterMenu data={props.data} />
                 </div>
                 <div className={style.footer_mobile}>
                     <FooterMobile data={props.dataResponsive} />
