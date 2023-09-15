@@ -87,7 +87,7 @@ export function SeoCTA(props) {
                 sectionWasInView(`Seo Module CTA ${props.buttonText || ''}`)
             }
         >
-            <div className={style.cta}>
+            <div className={style.cta} id="consultation">
                 <FooterButtons
                     theme={props.theme}
                     logoName={props.logoName}
