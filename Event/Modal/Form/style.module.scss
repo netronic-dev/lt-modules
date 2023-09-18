@@ -14,11 +14,35 @@
 	grid-template-areas: ". form-block .";
 	padding-top: 100px;
 }
+
+.pop_up_form_blog {
+	position: fixed;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	z-index: 101;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.37);
+	display: grid;
+	grid-template-columns: 0.5fr 8fr 0.5fr;
+	grid-template-areas: ". form-block .";
+	padding-top: 100px;
+}
+
 .submit_wrapper {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
+
+.submit_wrapper_blog {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 17px;
+}
+
 .button_submit {
 	cursor: pointer;
 	font-family: "Manrope";
@@ -33,10 +57,12 @@
 	max-width: 255px;
 	width: 100%;
 	padding: 15px;
+
 	&:hover {
 		opacity: 0.7;
 	}
 }
+
 .quit_block {
 	cursor: pointer;
 	position: absolute;
@@ -45,7 +71,8 @@
 	z-index: 1;
 	width: 100%;
 	height: 100%;
-	&:hover ~ .wrapper {
+
+	&:hover~.wrapper {
 		.quit_button {
 			.bordered_cross {
 				path {
@@ -55,9 +82,15 @@
 		}
 	}
 }
+
 .form {
 	max-width: 770px;
 }
+
+.form_blog {
+	width: 100%;
+}
+
 .wrapper {
 	position: relative;
 	z-index: 2;
@@ -71,15 +104,37 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
 	&::-webkit-scrollbar {
 		height: 2px;
 		width: 0;
 		background-color: #00000000;
 	}
 }
+
+.wrapper_blog {
+	position: relative;
+	z-index: 2;
+	background: #202020;
+	border-radius: 20px;
+	width: 100%;
+	height: max-content;
+	grid-area: form-block;
+	padding: 100px 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.inputs_wrapper_blog {
+	display: grid;
+}
+
 .title_cell {
 	margin-bottom: 40px;
 }
+
 .title {
 	font-family: $font-1;
 	font-weight: 600;
@@ -89,10 +144,12 @@
 	text-transform: uppercase;
 	color: #ffffff;
 	margin-bottom: 20px;
+
 	span {
 		color: #0090ff;
 	}
 }
+
 .text {
 	font-family: $font-1;
 	font-weight: 500;
@@ -102,22 +159,38 @@
 	letter-spacing: 0.02em;
 	color: #ffffff;
 }
+
 .inputs_wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 0 40px;
 	margin-bottom: 30px;
 }
+
 .cell {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
+
+.blog_form_agreement {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.cell_blog {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 15px;
+}
+
 .quit_button {
 	cursor: pointer;
 	background-color: #00000000;
 	border: 0;
 	outline: 0;
+
 	&:hover {
 		.bordered_cross {
 			path {
@@ -126,6 +199,22 @@
 		}
 	}
 }
+
+.quit_button_round {
+	cursor: pointer;
+	background-color: #00000000;
+	border: 0;
+	outline: 0;
+
+	&:hover {
+		.bordered_cross {
+			path {
+				fill: #8e8e8e;
+			}
+		}
+	}
+}
+
 .quit_button_out {
 	position: absolute;
 	width: 100%;
@@ -135,25 +224,46 @@
 	justify-content: center;
 }
 
+.quit_button_out_right {
+	position: absolute;
+	width: 100%;
+	top: 30px;
+	right: 30px;
+	display: flex;
+	justify-content: flex-end;
+}
+
 @media (max-width: 1279px) {
 	.pop_up_form {
 		grid-template-columns: auto 8fr auto;
 	}
 }
+
 @media (max-width: 1000px) {
 	.title {
 		font-size: 40px;
 		line-height: 45px;
 		margin-bottom: 15px;
 	}
+
 	.text {
 		font-size: 14px;
 		line-height: 20px;
 	}
+
 	.inputs_wrapper {
 		grid-template-columns: 1fr;
 	}
 }
+
+@media (max-width: 850px) {
+	.cell_blog {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+}
+
 @media (max-width: 550px) {
 	.pop_up_form {
 		grid-template-columns: 1fr;
@@ -161,27 +271,50 @@
 		padding: 0;
 		overflow-y: scroll;
 	}
+
+	.pop_up_form_blog {
+		grid-template-columns: 1fr;
+		grid-template-areas: "form-block";
+		padding: 0;
+	}
+
 	.quit_block {
 		display: none;
 	}
+
 	.title {
 		text-align: left;
 		font-size: 30px;
 	}
+
 	.text {
 		text-align: left;
 	}
+
 	.wrapper {
 		border-radius: 0;
 		padding: 75px 18px;
 		overflow-x: hidden;
 	}
+
+	.wrapper_blog {
+		height: 100vh;
+	}
+
 	.quit_button_out {
 		top: 15px;
 		right: 25px;
 		justify-content: flex-end;
 	}
+
 	.button_submit {
 		max-width: none;
+	}
+
+	.quit_button_round {
+		svg {
+			height: 32px;
+			width: 32px;
+		}
 	}
 }

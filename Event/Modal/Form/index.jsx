@@ -87,7 +87,7 @@ const FormModal = (props) => {
 				ReactGA.event('generate_lead', {
 					event_category: 'button',
 					event_label: 'generate_lead',
-				})
+				}),
 			);
 			document.body.className = '';
 			router.push(props.thank_you_page_url);
@@ -99,21 +99,47 @@ const FormModal = (props) => {
 	}
 
 	return (
-		<div className={style.pop_up_form}>
+		<div className={props.blogForm ? style.pop_up_form_blog : style.pop_up_form}>
 			<div className={style.quit_block} onClick={onQuitClick}></div>
-			<div className={`${style.wrapper} fade-up-animation`}>
-				<div className={style.quit_button_out}>
-					<button className={style.quit_button} onClick={onQuitClick}>
-						{borderedCross}
+			<div className={`${props.blogForm ? style.wrapper_blog : style.wrapper} fade-up-animation`}>
+				<div
+					className={
+						props.blogForm
+							? style.quit_button_out_right
+							: style.quit_button_out
+					}
+				>
+					<button
+						className={
+							props.blogForm
+								? style.quit_button_round
+								: style.quit_button
+						}
+						onClick={onQuitClick}
+					>
+						{props.blogForm ? borderedCrossRound : borderedCross}
 					</button>
 				</div>
 				<div className={style.title_cell}>
 					<h2 className={style.title}>{props.title}</h2>
 					<p className={style.text}>{props.text}</p>
 				</div>
-				<form className={style.form} onSubmit={formik.handleSubmit}>
-					<div className={style.inputs_wrapper}>
-						<div className={style.cell}>
+				<form
+					className={props.blogForm ? style.form_blog : style.form}
+					onSubmit={formik.handleSubmit}
+				>
+					<div
+						className={
+							props.blogForm
+								? style.inputs_wrapper_blog
+								: style.inputs_wrapper
+						}
+					>
+						<div
+							className={
+								props.blogForm ? style.cell_blog : style.cell
+							}
+						>
 							<InputName
 								onChange={formik.handleChange}
 								value={formik.values.name}
@@ -139,35 +165,55 @@ const FormModal = (props) => {
 								errorTheme='rounded_flat'
 							/>
 						</div>
-						<div className={style.cell}>
-							<DropDownList
-								onClick={(item) => {
-									onDateChange(item);
-								}}
-								error={formik.errors.date}
-								title={props.dateTitle}
-								data={props.datesData}
-								value={formik.values.date}
-							/>
-							<DropDownList
-								onClick={(item) => {
-									onEquipmentTypeChange(item);
-								}}
-								error={formik.errors.equipmentType}
-								title={props.equpmentTypeTitle}
-								data={props.equipmentTypeData}
-								value={formik.values.equipmentType}
-							/>
-							<Agreement
-								active={formik.values.isAgreePrivacyPolicy}
-								onClick={onAgreementChange}
-								text={props.agreement__text}
-								text_req={props.agreement__text_req}
-								error={formik.errors.isAgreePrivacyPolicy}
-							/>
-						</div>
+						{props.blogForm ? (
+							<div className={style.blog_form_agreement}>
+								<Agreement
+									active={formik.values.isAgreePrivacyPolicy}
+									onClick={onAgreementChange}
+									text={props.agreement__text}
+									text_req={props.agreement__text_req}
+									error={formik.errors.isAgreePrivacyPolicy}
+								/>
+							</div>
+						) : null}
+
+						{props.datesData ? (
+							<div className={style.cell}>
+								<DropDownList
+									onClick={(item) => {
+										onDateChange(item);
+									}}
+									error={formik.errors.date}
+									title={props.dateTitle}
+									data={props.datesData}
+									value={formik.values.date}
+								/>
+								<DropDownList
+									onClick={(item) => {
+										onEquipmentTypeChange(item);
+									}}
+									error={formik.errors.equipmentType}
+									title={props.equpmentTypeTitle}
+									data={props.equipmentTypeData}
+									value={formik.values.equipmentType}
+								/>
+								<Agreement
+									active={formik.values.isAgreePrivacyPolicy}
+									onClick={onAgreementChange}
+									text={props.agreement__text}
+									text_req={props.agreement__text_req}
+									error={formik.errors.isAgreePrivacyPolicy}
+								/>
+							</div>
+						) : null}
 					</div>
-					<div className={style.submit_wrapper}>
+					<div
+						className={
+							props.blogForm
+								? style.submit_wrapper_blog
+								: style.submit_wrapper
+						}
+					>
 						<button type='submit' className={style.button_submit}>
 							{props.buttonText}
 						</button>
@@ -181,19 +227,39 @@ const FormModal = (props) => {
 export default FormModal;
 const borderedCross = (
 	<svg
-		width='80'
+		width='35'
 		height='35'
-		viewBox='0 0 80 35'
+		viewBox='0 0 35 35'
 		fill='none'
 		className={style.bordered_cross}
 	>
-		<rect x='0.5' y='0.5' width='79' height='34' rx='17' stroke='#8E8E8E' />
+		<rect x='0.5' y='0.5' width='34' height='34' rx='17' stroke='#8E8E8E' />
 		<path
 			d='M47 12.41L45.59 11L40 16.59L34.41 11L33 12.41L38.59 18L33 23.59L34.41 25L40 19.41L45.59 25L47 23.59L41.41 18L47 12.41Z'
 			fill='white'
 		/>
 	</svg>
 );
+
+const borderedCrossRound = (
+	<svg
+		width='49'
+		height='49'
+		viewBox='0 0 49 49'
+		fill='none'
+		xmlns='http://www.w3.org/2000/svg'
+	>
+		<rect x='0.5' y='0.5' width='48' height='48' rx='24' stroke='#8E8E8E' />
+		<path
+			d='M16 16L33 33M16 33L33 16'
+			stroke='#8E8E8E'
+			stroke-width='2'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+);
+
 export const validation = (values) => {
 	const errors = {};
 
