@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { BreadCrumbs } from '../../../BreadCrumbs';
 import Link from 'next/link';
 
-export default function IAAPAMain(props) {
+export default function IAAPAMain (props) {
     return (
         <section className={style.main}>
             <div className={style.breadcrumb}>
@@ -40,8 +40,8 @@ export default function IAAPAMain(props) {
                             : style.button_outer_2023
                     }
                 >
-                    <Link href='/iaapa-vienna-2023/#register' scroll={false}>
-                        <a className={style.button}>{props.buttonText}</a>
+                    <Link href={props.link || '/iaapa-vienna-2023/#register'} scroll={false}>
+                        <a className={style.button} style={{}}>{props.buttonText}</a>
                     </Link>
                 </div>
             </div>
@@ -72,12 +72,20 @@ export default function IAAPAMain(props) {
                     priority
                 />
             </div>
-
+            {props.image_mob_new && <div className={style.new_image_responsive_mob}>
+                <Image
+                    src={props.image_mob_new}
+                    layout='fill'
+                    objectFit='cover'
+                    objectPosition="0 0"
+                    priority
+                />
+            </div>}
         </section>
     );
 }
 
-function EventInfo(props) {
+function EventInfo (props) {
     return (
         <div className={style.event_info}>
             <div className={style.event_info_cell}>
@@ -283,7 +291,7 @@ const breadcrumbData = [
     {
         '@type': 'ListItem',
         position: 3,
-        name: 'IAAPA VIENNA 2023',
+        name: 'IAAPA ORLANDO 2023',
         item: '',
     },
 ];

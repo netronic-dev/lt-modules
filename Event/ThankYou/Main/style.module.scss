@@ -1,4 +1,5 @@
 @import "../../default";
+
 .thank_you {
 	padding: 60px 50px 80px;
 	border-radius: 20px;
@@ -8,12 +9,14 @@
 	padding: 60px 50px 24px;
 	border-radius: 20px;
 }
+
 .main {
 	@extend %page_grid;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
+
 .title {
 	font-family: $font-1;
 	font-weight: 500;
@@ -22,20 +25,38 @@
 	text-align: center;
 	text-transform: uppercase;
 	color: #000;
+
 	span {
 		color: #0090ff;
 		font-weight: 700;
 	}
+
 	margin: 0 0 15px;
 }
+
 .subtitle {
 	font-family: $font-1;
 	font-weight: 500;
-	font-size: 18px;
-	line-height: 20px;
+	font-size: 24px;
+	line-height: 140%;
 	text-align: center;
 	color: #828282;
 	max-width: 730px;
+}
+
+.text {
+	margin-top: 30px;
+	color: #000;
+	text-align: center;
+	font-family: Manrope;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+
+	span {
+		color: #0090ff;
+	}
 }
 
 @media (max-width: 550px) {
@@ -43,12 +64,22 @@
 		padding: 0 20px 30px;
 		margin: 0;
 	}
+
 	.title {
 		font-size: 30px;
 		line-height: 40px;
 		margin: 0 0 20px;
 	}
+
+	.subtitle {
+		font-size: 16px;
+	}
+
+	.text {
+		font-size: 16px;
+	}
+
 	.thank_you {
-		padding: 0;
+		padding: 60px 20px 80px;
 	}
 }
