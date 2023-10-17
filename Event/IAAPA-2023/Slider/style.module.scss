@@ -1,0 +1,82 @@
+.slide {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+        height: 414px;
+    }
+
+    @media (max-width: 768px) {
+        height: 240px;
+    }
+}
+
+
+.prev_arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    z-index: 3;
+    transform: translateY(-50%);
+
+    @media (max-width: 1024px) {
+        left: 30px;
+    }
+
+    @media (max-width: 768px) {
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &:hover {
+        svg {
+            circle {
+                fill: #FFF;
+                stroke: #0090ff;
+            }
+
+            path {
+                fill: #0090ff
+            }
+        }
+    }
+}
+
+.next_arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    z-index: 3;
+    transform: translateY(-50%);
+
+    @media (max-width: 1024px) {
+        right: 30px;
+    }
+
+    @media (max-width: 768px) {
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &:hover {
+        svg {
+            circle {
+                fill: #FFF;
+                stroke: #0090ff;
+            }
+
+            path {
+                fill: #0090ff
+            }
+        }
+    }
+}

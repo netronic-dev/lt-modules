@@ -2,15 +2,58 @@ import style from "./header.module.scss";
 import Link from "next/link";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
+import { PopupModal, useCalendlyEventListener } from 'react-calendly';
+import { useEffect, useState } from "react";
 
-export default function Header(props) {
+export default function Header (props) {
+  const [isOpen, setState] = useState(false);
+  const [eventData, setEventData] = useState(null);
+  const [isCalendly, setIsCaledly] = useState(false);
+  const modals = useModals();
+  const GAEvents = useGAEvents();
 
-  const modals = useModals()
-  const GAEvents = useGAEvents()
-
-  function onGAEventSend(link) {
-    GAEvents.buttonClick("Header", "link click", link)
+  function onGAEventSend (link) {
+    GAEvents.buttonClick("Header", "link click", link);
   }
+
+  useCalendlyEventListener({
+    onEventScheduled: e => {
+      e.data.payload ? setEventData(e.data.payload) : null;
+      console.log(e.data.payload);
+    },
+  });
+
+  useEffect(() => {
+    setIsCaledly(true);
+  }, []);
+
+  useEffect(() => {
+    eventData &&
+      fetch('/api/getDataFromCalendly', {
+        method: 'POST',
+        body: JSON.stringify(eventData),
+      })
+        .then(res => res.json())
+        .then(data => {
+          dispatch(addUserData({ name: data.name }));
+          postData(
+            data,
+            'https://dev.lasertag.net/forms',
+            `Call  order | LT NET USA (Call ${data.time})`,
+            props.lang,
+            window.location.hostname,
+            router.query,
+          )
+            .then(
+              ReactGA.event('generate_lead', {
+                event_category: 'button',
+                event_label: 'generate_lead',
+              }),
+            )
+            .then(router.push('/thanks/call'));
+        })
+        .catch(error => console.log(error));
+  }, [eventData]);
 
   return (
     <>
@@ -51,12 +94,21 @@ export default function Header(props) {
             ))}
             <li
               className={`${style.phone_icon} ${style.nav__item}`}
-              onClick={modals.NamePhoneModalChangeVisibility}
+              onClick={() => setState(true)}
             >
               {phoneIcon}
             </li>
           </ul>
         </nav>
+        {isCalendly && <PopupModal
+          url="https://calendly.com/lasertag_net/30min"
+          pageSettings={props.pageSettings}
+          utm={props.utm}
+          prefill={props.prefill}
+          onModalClose={() => setState(false)}
+          open={isOpen}
+          rootElement={document.getElementById('__next')}
+        />}
       </div>
     </>
   );
@@ -76,9 +128,9 @@ const phoneIcon = (
       fill="#070707"
     />
   </svg>
-)
+);
 
-function HeaderSingleItem(props) {
+function HeaderSingleItem (props) {
   return (
     <li
       className={style.nav__item}
@@ -95,10 +147,10 @@ function HeaderSingleItem(props) {
         </a>
       </Link>
     </li >
-  )
+  );
 }
 
-function HeaderHoverItem(props) {
+function HeaderHoverItem (props) {
   return (
     <li className={`${style.drop} ${style.nav__item_main}`}>
       {props.link ?
@@ -126,10 +178,10 @@ function HeaderHoverItem(props) {
         ))}
       </ul>
     </li >
-  )
+  );
 }
 
-function HeaderSingleItemMain(props) {
+function HeaderSingleItemMain (props) {
   return (
     <li
       className={style.nav__item_main}
@@ -146,5 +198,5 @@ function HeaderSingleItemMain(props) {
         </a>
       </Link>
     </li >
-  )
+  );
 }

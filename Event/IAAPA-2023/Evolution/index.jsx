@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import style from './style.module.scss';
 import Link from 'next/link';
+import JoinUs from '../JoinUs';
 
 const Evolution = props => {
 	const setClassName = index => {
@@ -73,22 +74,12 @@ const Evolution = props => {
 					</div>
 				</div>
 			</div>
-			<div className={style.join_us}>
-				<div className={style.wrapper}>
-					<div className={style.join_us_content}>
-						<p className={style.join_us__text}>
-							{props.joinUsText}
-						</p>
-						<Link
-							href='/blog/iaapa-orlando-2023/#register'
-							scroll={false}>
-							<a className={style.register__button}>
-								{props.button_text}
-							</a>
-						</Link>
-					</div>
-				</div>
-			</div>
+			<JoinUs
+				button_text={props.button_text}
+				joinUsText={props.joinUsText}
+				link='/blog/iaapa-orlando-2023/#register'
+				margin={true}
+			/>
 		</section>
 	);
 };
