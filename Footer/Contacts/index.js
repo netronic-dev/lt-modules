@@ -2,7 +2,7 @@ import { useGAEvents } from '../../../context/GAEventsProvider';
 import style from '../footer.module.scss';
 import Link from 'next/link';
 
-export function Contacts(props) {
+export function Contacts (props) {
     const GAEvents = useGAEvents();
 
     return (
@@ -64,19 +64,19 @@ export function Contacts(props) {
                             <p className={style.title}>
                                 {props.phoneTitle || 'Phone'}
                             </p>
-                            <Link href='tel:+48573581044'>
+                            <Link href='tel:+48459567801'>
                                 <a
                                     target='_blank'
                                     onClick={() =>
                                         GAEvents.buttonClick(
                                             'Footer',
                                             'Link click',
-                                            'tel:+48573581044'
+                                            'tel:+48459567801'
                                         )
                                     }
                                 >
                                     <p className={style.contacts__link}>
-                                        +4 857 358 10 44
+                                        +4 845 956 78 01
                                     </p>
                                 </a>
                             </Link>
@@ -163,19 +163,19 @@ export function Contacts(props) {
                             <p className={style.title}>
                                 {props.phoneTitle || 'Phone'}
                             </p>
-                            <Link href='tel:+13479192246'>
+                            <Link href='tel:+16572201660'>
                                 <a
                                     target='_blank'
                                     onClick={() =>
                                         GAEvents.buttonClick(
                                             'Footer',
                                             'Link click',
-                                            'tel:+13479192246'
+                                            'tel:+16572201660'
                                         )
                                     }
                                 >
                                     <p className={style.contacts__link}>
-                                        +1 347 919 2246
+                                        +1 657 220 1660
                                     </p>
                                 </a>
                             </Link>

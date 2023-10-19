@@ -94,13 +94,14 @@ export default function Header (props) {
             ))}
             <li
               className={`${style.phone_icon} ${style.nav__item}`}
-              onClick={() => setState(true)}
+              // onClick={() => setState(true)}
+              onClick={modals.NamePhoneModalChangeVisibility}
             >
               {phoneIcon}
             </li>
           </ul>
         </nav>
-        {isCalendly && <PopupModal
+        {/* {isCalendly && <PopupModal
           url="https://calendly.com/lasertag_net/30min"
           pageSettings={props.pageSettings}
           utm={props.utm}
@@ -108,7 +109,7 @@ export default function Header (props) {
           onModalClose={() => setState(false)}
           open={isOpen}
           rootElement={document.getElementById('__next')}
-        />}
+        />} */}
       </div>
     </>
   );
