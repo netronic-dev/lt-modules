@@ -38,6 +38,7 @@ export default function Header (props) {
 
   useEffect(() => {
     const obj = {
+      host: "lasertag.net",
       ClientID,
       ClientSecret,
       ...eventData
