@@ -4,13 +4,23 @@ import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
 import { PopupModal, useCalendlyEventListener } from 'react-calendly';
 import { useEffect, useState } from "react";
+import ReactGA from 'react-ga4';
+import { useDispatch } from "react-redux";
+import { addUserData } from "../../store/userSlice";
+import { postData } from "../functions/postData";
+import { useRouter } from "next/router";
 
 export default function Header (props) {
   const [isOpen, setState] = useState(false);
   const [eventData, setEventData] = useState(null);
-  const [isCalendly, setIsCaledly] = useState(false);
+  const [isCalendly, setIsCalendly] = useState(false);
+  const dispatch = useDispatch();
   const modals = useModals();
   const GAEvents = useGAEvents();
+  const router = useRouter();
+
+  const ClientID = "zwS7Dl8yo4TRvwEKRYhr3iot9BgC-ErZYwL6n-oW-a8";
+  const ClientSecret = "laU5if5m0GErA-ryFW72AhIh0slLFmKrP2TDu4JsZug";
 
   function onGAEventSend (link) {
     GAEvents.buttonClick("Header", "link click", link);
@@ -19,27 +29,34 @@ export default function Header (props) {
   useCalendlyEventListener({
     onEventScheduled: e => {
       e.data.payload ? setEventData(e.data.payload) : null;
-      console.log(e.data.payload);
     },
   });
 
   useEffect(() => {
-    setIsCaledly(true);
+    setIsCalendly(true);
   }, []);
 
   useEffect(() => {
+    const obj = {
+      ClientID,
+      ClientSecret,
+      ...eventData
+    };
     eventData &&
-      fetch('/api/getDataFromCalendly', {
+      fetch('https://api.netronic.net/calendly', {
         method: 'POST',
-        body: JSON.stringify(eventData),
+        body: JSON.stringify(obj),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
         .then(res => res.json())
         .then(data => {
-          dispatch(addUserData({ name: data.name }));
+          dispatch(addUserData(data.name));
           postData(
             data,
             'https://dev.lasertag.net/forms',
-            `Call  order | LT NET USA (Call ${data.time})`,
+            `Call  order | LT NET (Call ${data.time})`,
             props.lang,
             window.location.hostname,
             router.query,
@@ -50,7 +67,7 @@ export default function Header (props) {
                 event_label: 'generate_lead',
               }),
             )
-            .then(router.push('/thanks/call'));
+            .then(router.push('/thanks-call'));
         })
         .catch(error => console.log(error));
   }, [eventData]);
@@ -94,14 +111,14 @@ export default function Header (props) {
             ))}
             <li
               className={`${style.phone_icon} ${style.nav__item}`}
-              // onClick={() => setState(true)}
-              onClick={modals.NamePhoneModalChangeVisibility}
+              onClick={() => setState(true)}
+            // onClick={modals.NamePhoneModalChangeVisibility}
             >
               {phoneIcon}
             </li>
           </ul>
         </nav>
-        {/* {isCalendly && <PopupModal
+        {isCalendly && <PopupModal
           url="https://calendly.com/lasertag_net/30min"
           pageSettings={props.pageSettings}
           utm={props.utm}
@@ -109,7 +126,7 @@ export default function Header (props) {
           onModalClose={() => setState(false)}
           open={isOpen}
           rootElement={document.getElementById('__next')}
-        />} */}
+        />}
       </div>
     </>
   );
