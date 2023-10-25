@@ -9,69 +9,20 @@ import { useDispatch } from "react-redux";
 import { addUserData } from "../../store/userSlice";
 import { postData } from "../functions/postData";
 import { useRouter } from "next/router";
+import Calendly from '../Calendly';
 
 export default function Header (props) {
   const [isOpen, setState] = useState(false);
-  const [eventData, setEventData] = useState(null);
   const [isCalendly, setIsCalendly] = useState(false);
   const dispatch = useDispatch();
   const modals = useModals();
   const GAEvents = useGAEvents();
   const router = useRouter();
 
-  const ClientID = "zwS7Dl8yo4TRvwEKRYhr3iot9BgC-ErZYwL6n-oW-a8";
-  const ClientSecret = "laU5if5m0GErA-ryFW72AhIh0slLFmKrP2TDu4JsZug";
 
   function onGAEventSend (link) {
     GAEvents.buttonClick("Header", "link click", link);
   }
-
-  useCalendlyEventListener({
-    onEventScheduled: e => {
-      e.data.payload ? setEventData(e.data.payload) : null;
-    },
-  });
-
-  useEffect(() => {
-    setIsCalendly(true);
-  }, []);
-
-  useEffect(() => {
-    const obj = {
-      host: "lasertag.net",
-      ClientID,
-      ClientSecret,
-      ...eventData
-    };
-    eventData &&
-      fetch('https://api.netronic.net/calendly', {
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(res => res.json())
-        .then(data => {
-          dispatch(addUserData(data.name));
-          postData(
-            data,
-            'https://dev.lasertag.net/forms',
-            `Call  order | LT NET (Call ${data.time})`,
-            props.lang,
-            window.location.hostname,
-            router.query,
-          )
-            .then(
-              ReactGA.event('generate_lead', {
-                event_category: 'button',
-                event_label: 'generate_lead',
-              }),
-            )
-            .then(router.push('/thanks-call'));
-        })
-        .catch(error => console.log(error));
-  }, [eventData]);
 
   return (
     <>
@@ -110,13 +61,14 @@ export default function Header (props) {
                   onLinkClick={(link) => onGAEventSend(link)}
                 />
             ))}
-            <li
+            {/* <li
               className={`${style.phone_icon} ${style.nav__item}`}
               onClick={() => setState(true)}
             // onClick={modals.NamePhoneModalChangeVisibility}
             >
               {phoneIcon}
-            </li>
+            </li> */}
+            <Calendly setIsCalendly={setIsCalendly} setState={setState} />
           </ul>
         </nav>
         {isCalendly && <PopupModal

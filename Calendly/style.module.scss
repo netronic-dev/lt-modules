@@ -1,0 +1,36 @@
+.phone_icon {
+    cursor: pointer !important;
+    display: flex;
+    justify-content: center;
+
+    .phone_icon__circle {
+        transform-origin: 13px 13px;
+        animation: radial-pulse 1.5s infinite;
+    }
+}
+
+.phone_icon:hover {
+    .phone_icon__circle {
+        fill: #c5c5c5;
+        animation: none;
+    }
+}
+
+.nav__item:last-child {
+    .nav__item_a {
+        padding-bottom: 25px;
+    }
+}
+
+.nav__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: default;
+    list-style: none;
+    border: 0;
+    line-height: 16px;
+    color: white;
+    font-size: 14px;
+    margin: 0 auto;
+}

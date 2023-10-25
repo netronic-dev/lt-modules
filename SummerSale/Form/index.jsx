@@ -2,9 +2,11 @@ import Image from 'next/image';
 import { InputsWName } from '../Form/Inputs';
 import style from './style.module.scss';
 
-const Form = (props) => {
+const Form = props => {
 	return (
-		<section className={style.main} id='sale'>
+		<section
+			className={style.main}
+			id='sale'>
 			<div className={style.content}>
 				<h2 className={style.title}>{props.title}</h2>
 				<p className={style.text}>{props.text}</p>

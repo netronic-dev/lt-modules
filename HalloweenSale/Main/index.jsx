@@ -1,0 +1,96 @@
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import style from './style.module.scss';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const Main = props => {
+	return (
+		<section className={style.main}>
+			<div className={style.main_inner}>
+				<div className={style.content}>
+					<h1 className={style.title}>{props.title}</h1>
+					<p className={style.sub_title}>{props.sub_title}</p>
+					<p className={style.text}>{props.text}</p>
+					<AnchorLink
+						href='#sale'
+						offset='200'>
+						<button
+							className={style.button}
+							// disabled={true}
+						>
+							{props.buttonText}
+						</button>
+					</AnchorLink>
+				</div>
+			</div>
+			<div className={style.image_bg}>
+				<Image
+					src={props.image_bg}
+					layout='fill'
+					objectFit='cover'
+					objectPosition='50% 50%'
+					priority={true}
+				/>
+			</div>
+			<div className={style.image_bg_lap}>
+				<Image
+					src={props.image_bg_lap}
+					layout='fill'
+					objectFit='cover'
+					objectPosition='50% 50%'
+					priority={true}
+				/>
+			</div>
+			<div className={style.image_bg_mob}>
+				<Image
+					src={props.image_bg_mob}
+					layout='fill'
+					objectFit='cover'
+					objectPosition='50% 50%'
+					priority={true}
+				/>
+			</div>
+			<div className={style.main_ribbon}>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer -{' '}
+				</span>
+
+				<span className={style.ribbon__text}>
+					{' '}
+					Halloween Special Offer
+				</span>
+			</div>
+		</section>
+	);
+};
+
+export default Main;

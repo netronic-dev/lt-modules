@@ -3,16 +3,20 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useModals } from '../../context/ModalsProvider';
 import { useGAEvents } from '../../context/GAEventsProvider';
+import Calendly from '../Calendly';
+import { PopupModal } from 'react-calendly';
 
-export function HeaderMobile(props) {
+export function HeaderMobile (props) {
     const [isBurgerOpen, setBurgerOpen] = useState(false);
+    const [isOpen, setState] = useState(false);
+    const [isCalendly, setIsCalendly] = useState(false);
     const modals = useModals();
 
-    function onInputFormOpen() {
+    function onInputFormOpen () {
         modals.NamePhoneModalChangeVisibility();
     }
 
-    function openBurgerMenu() {
+    function openBurgerMenu () {
         setBurgerOpen(!isBurgerOpen);
         isBurgerOpen === false
             ? (document.body.className = 'popUp')
@@ -20,15 +24,14 @@ export function HeaderMobile(props) {
     }
     const GAEvents = useGAEvents();
 
-    function onGAEventSend(link) {
+    function onGAEventSend (link) {
         GAEvents.buttonClick('Header', 'link click', link);
     }
     return (
         <>
             <nav
-                className={`${style.navigation_mobile} ${
-                    isBurgerOpen ? style.burgerOpen : undefined
-                }`}
+                className={`${style.navigation_mobile} ${isBurgerOpen ? style.burgerOpen : undefined
+                    }`}
             >
                 <div className={style.header_mobile}>
                     <button
@@ -44,7 +47,7 @@ export function HeaderMobile(props) {
                             </a>
                         </Link>
                     </div>
-                    <button
+                    {/* <button
                         onClick={onInputFormOpen}
                         className={style.header_mobile__call}
                         style={
@@ -52,7 +55,8 @@ export function HeaderMobile(props) {
                         }
                     >
                         {phoneIcon}
-                    </button>
+                    </button> */}
+                    <Calendly setIsCalendly={setIsCalendly} setState={setState} />
                 </div>
                 {isBurgerOpen ? (
                     <div className={style.mobile__burger_menu}>
@@ -82,12 +86,21 @@ export function HeaderMobile(props) {
                     ''
                 )}
             </nav>
+            {isCalendly && <PopupModal
+                url="https://calendly.com/lasertag_net/30min"
+                pageSettings={props.pageSettings}
+                utm={props.utm}
+                prefill={props.prefill}
+                onModalClose={() => setState(false)}
+                open={isOpen}
+                rootElement={document.getElementById('__next')}
+            />}
         </>
     );
 }
 
-export function HeaderAccordion(props) {
-    function onMenuButtonClick() {
+export function HeaderAccordion (props) {
+    function onMenuButtonClick () {
         document.body.className = '';
     }
     return (
@@ -131,8 +144,8 @@ export function HeaderAccordion(props) {
     );
 }
 
-export function HeaderAccordionItem(props) {
-    function onMenuButtonClick() {
+export function HeaderAccordionItem (props) {
+    function onMenuButtonClick () {
         document.body.className = '';
     }
     return (
@@ -152,8 +165,8 @@ export function HeaderAccordionItem(props) {
     );
 }
 
-function NonBurgerItem(props) {
-    function onMenuButtonClick() {
+function NonBurgerItem (props) {
+    function onMenuButtonClick () {
         document.body.className = '';
     }
     return (
@@ -170,7 +183,7 @@ function NonBurgerItem(props) {
     );
 }
 
-function BurgerVector(props) {
+function BurgerVector (props) {
     return (
         <svg
             width='20'
