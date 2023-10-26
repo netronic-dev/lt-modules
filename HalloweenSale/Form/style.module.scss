@@ -10,6 +10,165 @@
     justify-content: center;
     overflow: hidden;
 
+    .main_ribbon {
+        position: absolute;
+        top: -350px;
+        right: 430px;
+        transform: rotate(25deg);
+        text-wrap: nowrap;
+        width: 1180px;
+        background: #070707;
+        height: 57px;
+
+
+        @media (max-width: 1335px) {
+            top: -40px;
+            transform: rotate(15deg);
+        }
+
+        @media (max-width: 1100px) {
+            top: -40px;
+            transform: rotate(12deg);
+        }
+
+        @media (max-width: 840px) {
+            display: none;
+        }
+
+        .ribbon__text {
+            position: absolute;
+            top: 22.5%;
+            left: -50px;
+            color: #F90;
+            font-family: $font-1;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            text-transform: uppercase;
+            padding: 0 3px;
+            animation: moveText 12s linear infinite;
+        }
+
+        .ribbon__text_1 {
+            animation-delay: 0s;
+        }
+
+        .ribbon__text_2 {
+            animation-delay: 3s;
+        }
+
+        .ribbon__text_3 {
+            animation-delay: 6s;
+        }
+
+        .ribbon__text_4 {
+            animation-delay: 9s;
+        }
+    }
+
+    .main_ribbon_2 {
+        position: absolute;
+        bottom: -650px;
+        right: 150px;
+        transform: rotate(-55deg);
+        text-wrap: nowrap;
+        width: 1180px;
+        background: #F90;
+        height: 57px;
+        z-index: -1;
+
+        @media (max-width: 1335px) {
+            transform: rotate(-45deg);
+        }
+
+        @media (max-width: 1100px) {
+            right: -400px;
+        }
+
+        @media (max-width: 840px) {
+            display: none;
+        }
+
+        .ribbon__text {
+            position: absolute;
+            top: 22.5%;
+            left: -50px;
+            color: #070707;
+            font-family: $font-1;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            text-transform: uppercase;
+            padding: 0 3px;
+            animation: moveText 12s linear infinite;
+        }
+
+        .ribbon__text_1 {
+            animation-delay: 0s;
+        }
+
+        .ribbon__text_2 {
+            animation-delay: 3s;
+        }
+
+        .ribbon__text_3 {
+            animation-delay: 6s;
+        }
+
+        .ribbon__text_4 {
+            animation-delay: 9s;
+        }
+    }
+
+    .main_ribbon_3 {
+        position: absolute;
+        bottom: 820px;
+        left: -950px;
+        transform: rotate(55deg);
+        text-wrap: nowrap;
+        width: 1180px;
+        background: #F90;
+        height: 57px;
+        z-index: -1;
+
+        @media (max-width: 840px) {
+            display: none;
+        }
+
+        .ribbon__text {
+            position: absolute;
+            top: 22.5%;
+            left: -300px;
+            color: #070707;
+            font-family: $font-1;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            text-transform: uppercase;
+            padding: 0 3px;
+            animation: moveText 12s linear infinite;
+        }
+
+        .ribbon__text_1 {
+            animation-delay: 0s;
+        }
+
+        .ribbon__text_2 {
+            animation-delay: 3s;
+        }
+
+        .ribbon__text_3 {
+            animation-delay: 6s;
+        }
+
+        .ribbon__text_4 {
+            animation-delay: 9s;
+        }
+    }
+
     .content {
         display: flex;
         flex-direction: column;
@@ -40,6 +199,64 @@
             text-transform: uppercase;
             color: #000000;
         }
+    }
+}
+
+.animation_ribbon_1 {
+    animation: moveTextBlock_1 1s linear forwards;
+}
+
+.animation_ribbon_2 {
+    animation: moveTextBlock_2 1s linear forwards;
+}
+
+.animation_ribbon_3 {
+    animation: moveTextBlock_3 1s linear forwards;
+}
+
+@keyframes moveTextBlock_1 {
+    0% {
+        top: -350px;
+        right: 430px;
+    }
+
+    100% {
+        top: -40px;
+        right: -280px;
+    }
+}
+
+@keyframes moveTextBlock_2 {
+    0% {
+        bottom: -650px;
+        right: 150px;
+    }
+
+    100% {
+        bottom: -10px;
+        right: -300px;
+    }
+}
+
+@keyframes moveTextBlock_3 {
+    0% {
+        bottom: 820px;
+        left: -950px;
+    }
+
+    100% {
+        bottom: 100px;
+        left: -450px;
+    }
+}
+
+@keyframes moveText {
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: 1420px;
     }
 }
 

@@ -9,48 +9,6 @@
     position: relative;
 }
 
-.main_ribbon {
-    position: absolute;
-    top: 80px;
-    right: -100px;
-    transform: rotate(25deg);
-    width: 1180px;
-    background: #070707;
-    padding: 8px 0;
-    white-space: nowrap;
-
-    @media (max-width: 1024px) {
-        top: 20px;
-        right: -240px;
-    }
-
-    @media (max-width: 768px) {
-        display: none;
-    }
-
-    .ribbon__text {
-        display: inline-flex;
-        color: #F90;
-        font-family: $font-1;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 800;
-        line-height: normal;
-        text-transform: uppercase;
-        padding: 0 3px;
-    }
-}
-
-@keyframes moveText {
-    0% {
-        transform: translateX(-45%);
-    }
-
-    100% {
-        transform: translateX(130%);
-    }
-}
-
 @keyframes animation_scale {
     0% {
         opacity: 0;

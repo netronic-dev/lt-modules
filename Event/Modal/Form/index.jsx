@@ -1,12 +1,7 @@
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { FunctionComponent, ReactNode } from 'react';
-import {
-	DropDownList,
-	InputCall,
-	InputEmail,
-	InputName,
-} from '../../../InputForms/Inputs/Inputs';
+import { DropDownList, InputCall, InputEmail, InputName } from '../../../InputForms/Inputs/Inputs';
 import style from './style.module.scss';
 import Agreement from '../../Form/Agreement';
 import { postData } from '../../../functions/postData copy';
@@ -41,10 +36,7 @@ const FormModal = (props) => {
 	console.log(dispatch);
 
 	function onAgreementChange() {
-		formik.setFieldValue(
-			'isAgreePrivacyPolicy',
-			!formik.values.isAgreePrivacyPolicy,
-		);
+		formik.setFieldValue('isAgreePrivacyPolicy', !formik.values.isAgreePrivacyPolicy);
 	}
 	function onDateChange(item) {
 		formik.setFieldValue('date', item.myName);
@@ -100,23 +92,14 @@ const FormModal = (props) => {
 
 	return (
 		<div className={props.blogForm ? style.pop_up_form_blog : style.pop_up_form}>
-			<div className={style.quit_block} onClick={onQuitClick}></div>
+			<div
+				className={style.quit_block}
+				onClick={onQuitClick}></div>
 			<div className={`${props.blogForm ? style.wrapper_blog : style.wrapper} fade-up-animation`}>
-				<div
-					className={
-						props.blogForm
-							? style.quit_button_out_right
-							: style.quit_button_out
-					}
-				>
+				<div className={props.blogForm ? style.quit_button_out_right : style.quit_button_out}>
 					<button
-						className={
-							props.blogForm
-								? style.quit_button_round
-								: style.quit_button
-						}
-						onClick={onQuitClick}
-					>
+						className={props.blogForm ? style.quit_button_round : style.quit_button}
+						onClick={onQuitClick}>
 						{props.blogForm ? borderedCrossRound : borderedCross}
 					</button>
 				</div>
@@ -126,20 +109,9 @@ const FormModal = (props) => {
 				</div>
 				<form
 					className={props.blogForm ? style.form_blog : style.form}
-					onSubmit={formik.handleSubmit}
-				>
-					<div
-						className={
-							props.blogForm
-								? style.inputs_wrapper_blog
-								: style.inputs_wrapper
-						}
-					>
-						<div
-							className={
-								props.blogForm ? style.cell_blog : style.cell
-							}
-						>
+					onSubmit={formik.handleSubmit}>
+					<div className={props.blogForm ? style.inputs_wrapper_blog : style.inputs_wrapper}>
+						<div className={props.blogForm ? style.cell_blog : style.cell}>
 							<InputName
 								onChange={formik.handleChange}
 								value={formik.values.name}
@@ -207,14 +179,10 @@ const FormModal = (props) => {
 							</div>
 						) : null}
 					</div>
-					<div
-						className={
-							props.blogForm
-								? style.submit_wrapper_blog
-								: style.submit_wrapper
-						}
-					>
-						<button type='submit' className={style.button_submit}>
+					<div className={props.blogForm ? style.submit_wrapper_blog : style.submit_wrapper}>
+						<button
+							type='submit'
+							className={style.button_submit}>
 							{props.buttonText}
 						</button>
 					</div>
@@ -231,9 +199,15 @@ const borderedCross = (
 		height='35'
 		viewBox='0 0 35 35'
 		fill='none'
-		className={style.bordered_cross}
-	>
-		<rect x='0.5' y='0.5' width='34' height='34' rx='17' stroke='#8E8E8E' />
+		className={style.bordered_cross}>
+		<rect
+			x='0.5'
+			y='0.5'
+			width='34'
+			height='34'
+			rx='17'
+			stroke='#8E8E8E'
+		/>
 		<path
 			d='M47 12.41L45.59 11L40 16.59L34.41 11L33 12.41L38.59 18L33 23.59L34.41 25L40 19.41L45.59 25L47 23.59L41.41 18L47 12.41Z'
 			fill='white'
@@ -247,15 +221,21 @@ const borderedCrossRound = (
 		height='49'
 		viewBox='0 0 49 49'
 		fill='none'
-		xmlns='http://www.w3.org/2000/svg'
-	>
-		<rect x='0.5' y='0.5' width='48' height='48' rx='24' stroke='#8E8E8E' />
+		xmlns='http://www.w3.org/2000/svg'>
+		<rect
+			x='0.5'
+			y='0.5'
+			width='48'
+			height='48'
+			rx='24'
+			stroke='#8E8E8E'
+		/>
 		<path
 			d='M16 16L33 33M16 33L33 16'
 			stroke='#8E8E8E'
 			stroke-width='2'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 );
@@ -271,9 +251,7 @@ export const validation = (values) => {
 	if (values.email !== undefined) {
 		if (values.email === '') {
 			errors.email = 'Required';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 			errors.email = 'Wrong email';
 		}
 	}
@@ -281,9 +259,7 @@ export const validation = (values) => {
 		if (values.phone === '') {
 			errors.phone = 'Required';
 		} else if (
-			!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(
-				values.phone,
-			)
+			!/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(values.phone)
 		) {
 			errors.phone = 'Wrong phone number';
 		}

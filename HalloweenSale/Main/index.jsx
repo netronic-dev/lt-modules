@@ -1,9 +1,16 @@
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import style from './style.module.scss';
 import Image from 'next/image';
-import Link from 'next/link';
+import RunningText from './RunningText';
 
-const Main = props => {
+const parentStyles = {
+	position: 'absolute',
+	top: '80px',
+	right: '-100px',
+	transform: 'rotate(25deg)',
+};
+
+const Main = (props) => {
 	return (
 		<section className={style.main}>
 			<div className={style.main_inner}>
@@ -14,12 +21,7 @@ const Main = props => {
 					<AnchorLink
 						href='#sale'
 						offset='200'>
-						<button
-							className={style.button}
-							// disabled={true}
-						>
-							{props.buttonText}
-						</button>
+						<button className={style.button}>{props.buttonText}</button>
 					</AnchorLink>
 				</div>
 			</div>
@@ -51,45 +53,7 @@ const Main = props => {
 					priority={true}
 				/>
 			</div>
-			<div className={style.main_ribbon}>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer -{' '}
-				</span>
-
-				<span className={style.ribbon__text}>
-					{' '}
-					Halloween Special Offer
-				</span>
-			</div>
+			<RunningText styles={parentStyles} />
 		</section>
 	);
 };

@@ -1,0 +1,62 @@
+@import '../../default';
+
+.main_ribbon {
+    position: absolute;
+    top: 80px;
+    right: -100px;
+    transform: rotate(25deg);
+    text-wrap: nowrap;
+    width: 1180px;
+    background: #070707;
+    height: 57px;
+
+    @media (max-width: 1024px) {
+        top: 20px;
+        right: -240px;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
+    .ribbon__text {
+        position: absolute;
+        top: 22.5%;
+        left: -50px;
+        color: #F90;
+        font-family: $font-1;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        text-transform: uppercase;
+        padding: 0 3px;
+        animation: moveText 12s linear infinite;
+    }
+
+    .ribbon__text_1 {
+        animation-delay: 0s;
+    }
+
+    .ribbon__text_2 {
+        animation-delay: 3s;
+    }
+
+    .ribbon__text_3 {
+        animation-delay: 6s;
+    }
+
+    .ribbon__text_4 {
+        animation-delay: 9s;
+    }
+}
+
+@keyframes moveText {
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: 1420px;
+    }
+}

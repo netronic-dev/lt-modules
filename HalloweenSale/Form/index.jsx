@@ -2,9 +2,12 @@ import Image from 'next/image';
 import { InputsWName } from '../Form/Inputs';
 import style from './style.module.scss';
 import { useInView } from 'react-intersection-observer';
+import RunningText from '../Main/RunningText';
 
-const Form = props => {
-	const [ref, inView] = useInView();
+const Form = (props) => {
+	const [ref, inView] = useInView({
+		triggerOnce: true,
+	});
 	const spiderWebSVG = (
 		<svg
 			width='350'
@@ -117,15 +120,17 @@ const Form = props => {
 
 	return (
 		<section className={style.main}>
-			<div
-				className={style.content}
-				ref={ref}>
+			<div className={style.content}>
 				<h2
 					className={style.title}
 					id='sale'>
 					{props.title}
 				</h2>
-				<p className={style.text}>{props.text}</p>
+				<p
+					className={style.text}
+					ref={ref}>
+					{props.text}
+				</p>
 				<InputsWName
 					buttonText={props.buttonText}
 					agreementText={props.agreementText}
@@ -136,46 +141,32 @@ const Form = props => {
 					thankYouPage={props.thankYouPage}
 				/>
 			</div>
-			<div className={style.left_ribbon}>
-				<Image
-					src={props.left_ribbon}
-					alt='left ribbon'
-					width={883}
-					height={632}
-				/>
-			</div>
-			<div className={style.right_ribbon}>
-				<Image
-					src={props.right_ribbon}
-					alt='left ribbon'
-					height={622}
-					width={550}
-				/>
-			</div>
-			<div className={style.right_blue_ribbon}>
-				<Image
-					src={props.right_blue_ribbon}
-					alt='left ribbon'
-					width={723}
-					height={622}
-				/>
-			</div>
-			<div
-				className={`${style.spider_web} ${
-					inView ? style.scaleAnimation : ''
-				}`}>
-				{spiderWebSVG}
-			</div>
-			<div
-				className={`${style.spider} ${
-					inView ? style.scaleAnimationAndMove : ''
-				}`}>
-				{spiderSVG}
-			</div>
-			<div
-				className={`${style.thread__of__web} ${
-					inView ? style.moveThread : ''
-				}`}></div>
+
+			<div className={`${style.spider_web} ${inView ? style.scaleAnimation : ''}`}>{spiderWebSVG}</div>
+			<div className={`${style.spider} ${inView ? style.scaleAnimationAndMove : ''}`}>{spiderSVG}</div>
+			<div className={`${style.thread__of__web} ${inView ? style.moveThread : ''}`}></div>
+			{inView ? (
+				<>
+					<div className={`${style.main_ribbon} ${inView ? style.animation_ribbon_1 : ''}`}>
+						<div className={`${style.ribbon__text} ${style.ribbon__text_1}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_2}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_3}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_4}`}>Halloween Special Offer</div>
+					</div>
+					<div className={`${style.main_ribbon_2} ${inView ? style.animation_ribbon_2 : ''}`}>
+						F<div className={`${style.ribbon__text} ${style.ribbon__text_1}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_2}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_3}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_4}`}>Halloween Special Offer</div>
+					</div>
+					<div className={`${style.main_ribbon_3} ${inView ? style.animation_ribbon_3 : ''}`}>
+						<div className={`${style.ribbon__text} ${style.ribbon__text_1}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_2}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_3}`}>Halloween Special Offer</div>
+						<div className={` ${style.ribbon__text} ${style.ribbon__text_4}`}>Halloween Special Offer</div>
+					</div>
+				</>
+			) : null}
 		</section>
 	);
 };
