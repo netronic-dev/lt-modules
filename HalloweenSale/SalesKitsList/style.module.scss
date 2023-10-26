@@ -400,7 +400,7 @@
         .item__image {
             position: absolute;
             right: 0;
-            bottom: 0;
+            bottom: -2px;
             z-index: 1;
             width: 984px;
             height: 820px;
@@ -510,7 +510,7 @@
 
         .item__image {
             position: absolute;
-            right: 0;
+            bottom: -3px;
             left: 0;
             z-index: 1;
             width: 854px;

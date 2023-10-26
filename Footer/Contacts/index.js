@@ -127,7 +127,8 @@ export function Contacts (props) {
                             <p
                                 className={`${style.contacts__link} ${style.default}`}
                             >
-                                7567 Brightwater Pl, Oviedo, FL 32765
+                                3259 Progress Drive STE 175C
+                                Orlando, FL 32826
                             </p>
                         </div>
                         <div

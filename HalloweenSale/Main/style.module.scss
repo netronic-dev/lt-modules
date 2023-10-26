@@ -24,6 +24,10 @@
         right: -240px;
     }
 
+    @media (max-width: 768px) {
+        display: none;
+    }
+
     .ribbon__text {
         display: inline-flex;
         color: #F90;

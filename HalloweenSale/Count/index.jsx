@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 
 const Count = props => {
 	const [dayText, setDayText] = useState('days');
-	const targetDate = new Date('2023-11-03T00:00:00').getTime();
+	const targetDate = new Date('2023-11-04T00:00:00').getTime();
 	const [ref, inView] = useInView({
 		triggerOnce: true,
 	});

@@ -30,6 +30,7 @@ const Main = props => {
 					objectFit='cover'
 					objectPosition='50% 50%'
 					priority={true}
+					quality={100}
 				/>
 			</div>
 			<div className={style.image_bg_lap}>
