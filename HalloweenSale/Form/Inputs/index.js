@@ -122,6 +122,7 @@ export function InputsWName (props) {
                     className={style.button}
                     id={props.id ? props.id : ''}
                     type='submit'
+                    disabled
                     onClick={props.onClick}
                 >
                     {props.buttonText}
