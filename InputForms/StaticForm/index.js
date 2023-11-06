@@ -7,6 +7,9 @@ import { useValidation } from '../../../context/ValidationProvider';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import ReactGA from 'react-ga4';
+import PhoneInput from 'react-phone-number-input';
+import { useEffect, useState } from 'react';
+import { icons } from '../icons/icons.js';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -25,7 +28,8 @@ const themeFormTheme = {
     mobile: style.theme_form_mobile,
 };
 
-export function ThemeForm(props) {
+export function ThemeForm (props) {
+    const [value, setValue] = useState('');
     const validate = useValidation();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -54,6 +58,11 @@ export function ThemeForm(props) {
         },
     });
 
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        formik.setFieldValue('phone', newValue);
+    };
+
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -63,28 +72,39 @@ export function ThemeForm(props) {
         >
             <div className={style.inputs}>
                 <InputName
+                    noIcons
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     error={formik.errors.name}
                     placeholder={props.namePlaceholder}
                 />
-                <InputCall
+                <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
+                    <PhoneInput
+                        className='business__input'
+                        initialValueFormat='national'
+                        international
+                        placeholder={props.callPlaceholder || "Phone *"}
+                        value={value}
+                        onChange={handleChange}
+                    />
+                    {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                </div>
+                {/* <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.phone}
                     error={formik.errors.phone}
                     placeholder={props.callPlaceholder}
-                />
+                /> */}
             </div>
             <button
                 type='submit'
                 className={`
-        ${
-            Object.keys(formik.errors).length == 0
-                ? buttonActiveTheme[props.buttonActiveTheme]
-                : buttonTheme[props.buttonTheme]
-        }
+        ${Object.keys(formik.errors).length == 0
+                        ? buttonActiveTheme[props.buttonActiveTheme]
+                        : buttonTheme[props.buttonTheme]
+                    }
         `}
             >
                 {props.buttonText}
@@ -93,7 +113,8 @@ export function ThemeForm(props) {
     );
 }
 
-export function ThemeFormAll(props) {
+export function ThemeFormAll (props) {
+    const [value, setValue] = useState('');
     const validate = useValidation();
     const router = useRouter();
 
@@ -121,6 +142,16 @@ export function ThemeFormAll(props) {
         },
     });
 
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        formik.setFieldValue('phone', newValue);
+    };
+
+    const icon = {
+        error: icons.error,
+        agree: icons.agree,
+    };
+
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -143,22 +174,37 @@ export function ThemeFormAll(props) {
                     error={formik.errors.email}
                     placeholder={props.placeholderEmail}
                 />
-                <InputCall
+                <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
+                    <PhoneInput
+                        className='business__input'
+                        initialValueFormat='national'
+                        international
+                        placeholder={props.callPlaceholder || "Phone *"}
+                        value={value}
+                        onChange={handleChange}
+                    />
+                    {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                    {formik.errors.phone ? <div className={style.error_icon}>
+                        {icon.error}
+                    </div> : value?.length >= 13 ? <div className={style.error_icon}>
+                        {icon.agree}
+                    </div> : null}
+                </div>
+                {/* <InputCall
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.phone}
                     error={formik.errors.phone}
                     placeholder={props.placeholderCall}
-                />
+                /> */}
             </div>
             <button
                 type='submit'
                 className={`
-        ${
-            Object.keys(formik.errors).length == 0
-                ? buttonActiveTheme[props.buttonActiveTheme]
-                : buttonTheme[props.buttonTheme]
-        }
+        ${Object.keys(formik.errors).length == 0
+                        ? buttonActiveTheme[props.buttonActiveTheme]
+                        : buttonTheme[props.buttonTheme]
+                    }
         `}
             >
                 {props.buttonText}

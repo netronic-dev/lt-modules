@@ -17,7 +17,7 @@ const errorTheme = {
     rounded_flat: style.error_rounded_flat,
 };
 
-export function InputEmail(props) {
+export function InputEmail (props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -60,8 +60,8 @@ export function InputEmail(props) {
                         {props.error
                             ? icon.error
                             : props.value === ''
-                            ? ''
-                            : icon.agree}
+                                ? ''
+                                : icon.agree}
                     </div>
                 )}
             </div>
@@ -76,7 +76,7 @@ export function InputEmail(props) {
     );
 }
 
-export function InputCall(props) {
+export function InputCall (props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -90,12 +90,7 @@ export function InputCall(props) {
                 <input
                     minLength='5'
                     maxLength='30'
-                    className={`
-            ${style.input}
-            ${props.error ? style.input_error : ''}
-            ${props.correct ? style.input_correct : ''}
-            ${props.className}
-           `}
+                    className={`${style.input} ${props.error ? style.input_error : ''} ${props.correct ? style.input_correct : ''} ${props.className}`}
                     type='tel'
                     name='phone'
                     placeholder={props.placeholder || 'Phone number *'}
@@ -121,8 +116,8 @@ export function InputCall(props) {
                         {props.error
                             ? icon.error
                             : props.value === ''
-                            ? ''
-                            : icon.agree}
+                                ? ''
+                                : icon.agree}
                     </div>
                 )}
             </div>
@@ -137,7 +132,7 @@ export function InputCall(props) {
     );
 }
 
-export function InputName(props) {
+export function InputName (props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -182,8 +177,8 @@ export function InputName(props) {
                         {props.error
                             ? icon.error
                             : props.value === ''
-                            ? ''
-                            : icon.agree}
+                                ? ''
+                                : icon.agree}
                     </div>
                 )}
             </div>
@@ -198,11 +193,11 @@ export function InputName(props) {
     );
 }
 
-export function DropDownList(props) {
+export function DropDownList (props) {
     const [listIsActive, changeListActivity] = useState(false);
     const [listTitle, changeListTitle] = useState('');
 
-    function onItemClick(item, name, index) {
+    function onItemClick (item, name, index) {
         let itemData = {
             myIndex: index,
             myName: name,
@@ -227,9 +222,8 @@ export function DropDownList(props) {
             )}
             <div className={style.input_block_out}>
                 <div
-                    className={`${style.dropdownlist}  ${
-                        listIsActive ? style.dropdownlist_active : ''
-                    } ${props.className}`}
+                    className={`${style.dropdownlist}  ${listIsActive ? style.dropdownlist_active : ''
+                        } ${props.className}`}
                 >
                     <div
                         className={style.dropdownlist_title_out}
@@ -246,11 +240,10 @@ export function DropDownList(props) {
                         {props.data.map((item, index) => (
                             <li
                                 key={index}
-                                className={`${style.dropdownlist_item} ${
-                                    listTitle === item.name
-                                        ? style.dropdownlist_item_active
-                                        : ''
-                                }`}
+                                className={`${style.dropdownlist_item} ${listTitle === item.name
+                                    ? style.dropdownlist_item_active
+                                    : ''
+                                    }`}
                                 onClick={() => {
                                     onItemClick(item, item.name, index);
                                 }}
@@ -276,8 +269,8 @@ export function DropDownList(props) {
         </>
     );
 }
-export function CheckBox(props) {
-    function onItemClick() {
+export function CheckBox (props) {
+    function onItemClick () {
         props.onClick();
     }
     return (
@@ -311,16 +304,15 @@ export function CheckBox(props) {
     );
 }
 
-function Arrow(props) {
+function Arrow (props) {
     return (
         <svg
             width='12'
             height='8'
             viewBox='0 0 12 8'
             fill='none'
-            className={`${style.arrow} ${
-                props.active ? style.arrow_active : ''
-            }`}
+            className={`${style.arrow} ${props.active ? style.arrow_active : ''
+                }`}
         >
             <path
                 d='M1.41 0.589844L6 5.16984L10.59 0.589844L12 1.99984L6 7.99984L0 1.99984L1.41 0.589844Z'
@@ -329,7 +321,7 @@ function Arrow(props) {
         </svg>
     );
 }
-function CheckBoxArrow(props) {
+function CheckBoxArrow (props) {
     return (
         <svg
             width='18'
@@ -348,7 +340,7 @@ function CheckBoxArrow(props) {
         </svg>
     );
 }
-function AddingPlaceholder(props) {
+function AddingPlaceholder (props) {
     return (
         <p
             className={`${style.placeholder} 
@@ -359,7 +351,7 @@ function AddingPlaceholder(props) {
     );
 }
 
-export function Input(props) {
+export function Input (props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -414,8 +406,8 @@ export function Input(props) {
                         {props.error
                             ? icon.error
                             : props.value === ''
-                            ? ''
-                            : icon.agree}
+                                ? ''
+                                : icon.agree}
                     </div>
                 )}
             </div>

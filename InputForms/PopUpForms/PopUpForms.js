@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from '../forms.module.scss';
 import { useRouter } from 'next/router';
 import { icons } from '../icons/icons';
@@ -11,22 +11,30 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import { useGAEvents } from '../../../context/GAEventsProvider';
 import ReactGA from 'react-ga4';
+import PhoneInput from 'react-phone-number-input';
 
-function turnOnScroll() {
+function turnOnScroll () {
     document.body.className = '';
 }
 
-export function PopUpNamePhone(props) {
+export function PopUpNamePhone (props) {
+    const [value, setValue] = useState('');
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents()
+    const GAEvents = useGAEvents();
 
-    function onAgreementChange() {
+    function onAgreementChange () {
         changeAgreement(!agreement);
     }
+
+    const icon = {
+        error: icons.error,
+        agree: icons.agree,
+    };
+
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -54,6 +62,15 @@ export function PopUpNamePhone(props) {
         },
     });
 
+    // useEffect(() => {
+    //     formik.setFieldValue('phone', value);
+    // }, []);
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        formik.setFieldValue('phone', newValue);
+    };
+
     return (
         <div className={style.inputs_block_out}>
             <div className={style.close_block} onClick={props.closeClick}></div>
@@ -78,12 +95,27 @@ export function PopUpNamePhone(props) {
                                 error={formik.errors.name}
                                 placeholder={props.namePlaceholder}
                             />
-                            <InputCall
+                            <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                                <PhoneInput
+                                    initialValueFormat='national'
+                                    international
+                                    placeholder={props.callPlaceholder || "Phone*"}
+                                    value={value}
+                                    onChange={handleChange}
+                                />
+                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                                {formik.errors.phone ? <div className={style.error_icon}>
+                                    {icon.error}
+                                </div> : value?.length >= 13 ? <div className={style.error_icon}>
+                                    {icon.agree}
+                                </div> : null}
+                            </div>
+                            {/* <InputCall
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 error={formik.errors.phone}
                                 placeholder={props.callPlaceholder}
-                            />
+                            /> */}
                         </div>
                         <div className={style.agreement}>
                             <div
@@ -121,14 +153,20 @@ export function PopUpNamePhone(props) {
     );
 }
 
-export function PopUpEmailPhone(props) {
+export function PopUpEmailPhone (props) {
+    const [value, setValue] = useState(null);
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
     const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents()
+    const GAEvents = useGAEvents();
 
-    function onAgreementChange() {
+    const icon = {
+        error: icons.error,
+        agree: icons.agree,
+    };
+
+    function onAgreementChange () {
         changeAgreement(!agreement);
     }
 
@@ -158,6 +196,26 @@ export function PopUpEmailPhone(props) {
         },
     });
 
+    // useEffect(() => {
+    //     console.log(value === undefined);
+    //     if (value !== null) {
+    //         formik.setFieldValue('phone', value);
+    //     } else if (value === undefined) {
+    //         console.log(6 + 6);
+    //         formik.setFieldValue('phone', " ");
+    //     } else if (value === '+') {
+    //         console.log("+");
+    //         formik.setFieldValue('phone', value);
+    //     }
+    // }, [value]);
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        formik.setFieldValue('phone', newValue);
+    };
+
+    // console.log(value);
+
     return (
         <div className={style.inputs_block_out}>
             <div className={style.close_block} onClick={props.closeClick}></div>
@@ -183,12 +241,30 @@ export function PopUpEmailPhone(props) {
                                 error={formik.errors.email}
                                 placeholder={props.emailPlaceholder}
                             />
-                            <InputCall
+                            <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                                <PhoneInput
+                                    className={formik.errors.phone ? style.fd : ''}
+                                    initialValueFormat='national'
+                                    international
+                                    placeholder={props.callPlaceholder || "Phone*"}
+                                    value={value}
+                                    onChange={handleChange}
+                                />
+                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                                {formik.errors.phone ? <div className={style.error_icon}>
+                                    {icon.error}
+                                </div> : value === "" ? <div className={style.error_icon}>
+                                    {icon.error}
+                                </div> : value !== null ? <div className={style.error_icon}>
+                                    {icon.agree}
+                                </div> : null}
+                            </div>
+                            {/* <InputCall
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 error={formik.errors.phone}
                                 placeholder={props.callPlaceholder}
-                            />
+                            /> */}
                         </div>
                         <div className={style.agreement}>
                             <div
@@ -226,17 +302,28 @@ export function PopUpEmailPhone(props) {
     );
 }
 
-export function PopUpEvent(props) {
+export function PopUpEvent (props) {
+    onst[value, setValue] = useState('');
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents()
+    const GAEvents = useGAEvents();
 
-    function onAgreementChange() {
+    const icon = {
+        error: icons.error,
+        agree: icons.agree,
+    };
+
+    function onAgreementChange () {
         changeAgreement(!agreement);
     }
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+        formik.setFieldValue('phone', newValue);
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -292,11 +379,29 @@ export function PopUpEvent(props) {
                                 value={formik.values.email}
                                 error={formik.errors.email}
                             />
-                            <InputCall
+                            <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                                <PhoneInput
+                                    className={formik.errors.phone ? style.fd : ''}
+                                    initialValueFormat='national'
+                                    international
+                                    placeholder={props.callPlaceholder || "Phone*"}
+                                    value={value}
+                                    onChange={handleChange}
+                                />
+                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                                {formik.errors.phone ? <div className={style.error_icon}>
+                                    {icon.error}
+                                </div> : value === "" ? <div className={style.error_icon}>
+                                    {icon.error}
+                                </div> : value !== null ? <div className={style.error_icon}>
+                                    {icon.agree}
+                                </div> : null}
+                            </div>
+                            {/* <InputCall
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 error={formik.errors.phone}
-                            />
+                            /> */}
                         </div>
                         <div className={style.agreement}>
                             <div
@@ -334,15 +439,15 @@ export function PopUpEvent(props) {
     );
 }
 
-export function PopUpNameEmail(props) {
+export function PopUpNameEmail (props) {
     const validate = useValidation();
     const router = useRouter();
     const modals = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents()
+    const GAEvents = useGAEvents();
 
-    function onAgreementChange() {
+    function onAgreementChange () {
         changeAgreement(!agreement);
     }
 
