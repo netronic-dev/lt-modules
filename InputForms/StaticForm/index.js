@@ -7,8 +7,10 @@ import { useValidation } from '../../../context/ValidationProvider';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import ReactGA from 'react-ga4';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { useEffect, useState } from 'react';
+import { useModals } from '../../../context/ModalsProvider.js';
 import { icons } from '../icons/icons.js';
 
 const buttonTheme = {
@@ -29,21 +31,45 @@ const themeFormTheme = {
 };
 
 export function ThemeForm (props) {
-    const [value, setValue] = useState('');
-    const validate = useValidation();
+    const [valid, setValid] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [regionCode, setRegionCode] = useState();
+    // const validate = useValidation();
     const router = useRouter();
     const dispatch = useDispatch();
+    const modal = useModals();
+
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.name) {
+            errors.name = 'Required';
+
+        } else if (values.name.length < 2) {
+            errors.name = 'The name must have at least 2 characters';
+        }
+
+        if (!values.phone) {
+            errors.phone = 'Required';
+        }
+
+        return errors;
+    };
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            phone: '',
+            phone: false,
         },
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
+            const data = {
+                ...values,
+                phone: `+${phone}`,
+            };
             postData(
-                values,
+                data,
                 props.destinationURL,
                 props.orderName,
                 props.lang,
@@ -58,10 +84,10 @@ export function ThemeForm (props) {
         },
     });
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-        formik.setFieldValue('phone', newValue);
-    };
+    useEffect(() => {
+        console.log(modal?.region);
+        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+    }, [modal.region]);
 
     return (
         <form
@@ -81,14 +107,29 @@ export function ThemeForm (props) {
                 />
                 <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
                     <PhoneInput
-                        className='business__input'
-                        initialValueFormat='national'
-                        international
-                        placeholder={props.callPlaceholder || "Phone *"}
-                        value={value}
-                        onChange={handleChange}
+                        containerClass='business_input__phone_container'
+                        inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                        buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                        country={regionCode}
+                        enableSearch
+                        placeholder="Phone *"
+                        onChange={(value, country, e, formattedValue) => {
+                            const { format, dialCode } = country;
+                            setPhone(value);
+                            if (
+                                format?.length === formattedValue?.length &&
+                                (value.startsWith(dialCode) || dialCode.startsWith(value))
+                            ) {
+                                formik.setFieldValue('phone', true);
+                                setValid(true);
+                            } else {
+                                formik.setFieldValue('phone', false);
+                                setValid(false);
+                            }
+                        }}
+                        isValid
                     />
-                    {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
+                    {!valid && <span className={style.error__message}>Invalid phone number</span>}
                 </div>
                 {/* <InputCall
                     theme={props.theme}
@@ -114,9 +155,37 @@ export function ThemeForm (props) {
 }
 
 export function ThemeFormAll (props) {
-    const [value, setValue] = useState('');
-    const validate = useValidation();
+    const [valid, setValid] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [regionCode, setRegionCode] = useState();
+    // const validate = useValidation();
     const router = useRouter();
+    const modal = useModals();
+
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.name) {
+            errors.name = 'Required';
+
+        } else if (values.name.length < 2) {
+            errors.name = 'The name must have at least 2 characters';
+        }
+
+        if (!values.phone) {
+            errors.phone = 'Required';
+        }
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = 'Invalid email address';
+        }
+
+        return errors;
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -126,8 +195,12 @@ export function ThemeFormAll (props) {
         },
         validate,
         onSubmit: (values) => {
+            const data = {
+                ...values,
+                phone: `+${phone}`,
+            };
             postData(
-                values,
+                data,
                 props.destinationURL,
                 props.orderName,
                 props.lang,
@@ -142,15 +215,10 @@ export function ThemeFormAll (props) {
         },
     });
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-        formik.setFieldValue('phone', newValue);
-    };
-
-    const icon = {
-        error: icons.error,
-        agree: icons.agree,
-    };
+    useEffect(() => {
+        console.log(modal?.region);
+        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+    }, [modal.region]);
 
     return (
         <form
@@ -161,6 +229,7 @@ export function ThemeFormAll (props) {
         >
             <div className={style.inputs}>
                 <InputName
+                    noIcons
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.name}
@@ -168,6 +237,7 @@ export function ThemeFormAll (props) {
                     placeholder={props.placeholderName}
                 />
                 <InputEmail
+                    noIcons
                     theme={props.theme}
                     onChange={formik.handleChange}
                     value={formik.values.email}
@@ -176,19 +246,29 @@ export function ThemeFormAll (props) {
                 />
                 <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
                     <PhoneInput
-                        className='business__input'
-                        initialValueFormat='national'
-                        international
-                        placeholder={props.callPlaceholder || "Phone *"}
-                        value={value}
-                        onChange={handleChange}
+                        containerClass='input__phone_container'
+                        inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                        buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                        country={regionCode}
+                        enableSearch
+                        placeholder={props.placeholderCall}
+                        onChange={(value, country, e, formattedValue) => {
+                            const { format, dialCode } = country;
+                            setPhone(value);
+                            if (
+                                format?.length === formattedValue?.length &&
+                                (value.startsWith(dialCode) || dialCode.startsWith(value))
+                            ) {
+                                formik.setFieldValue('phone', true);
+                                setValid(true);
+                            } else {
+                                formik.setFieldValue('phone', false);
+                                setValid(false);
+                            }
+                        }}
+                        isValid
                     />
-                    {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
-                    {formik.errors.phone ? <div className={style.error_icon}>
-                        {icon.error}
-                    </div> : value?.length >= 13 ? <div className={style.error_icon}>
-                        {icon.agree}
-                    </div> : null}
+                    {!valid && <span className={style.error__message}>Invalid phone number</span>}
                 </div>
                 {/* <InputCall
                     theme={props.theme}

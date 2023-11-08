@@ -11,17 +11,20 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import { useGAEvents } from '../../../context/GAEventsProvider';
 import ReactGA from 'react-ga4';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 function turnOnScroll () {
     document.body.className = '';
 }
 
 export function PopUpNamePhone (props) {
-    const [value, setValue] = useState('');
-    const validate = useValidation();
+    const [valid, setValid] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [regionCode, setRegionCode] = useState();
+    // const validate = useValidation();
     const router = useRouter();
-    const modals = useModals();
+    const modal = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
@@ -30,21 +33,37 @@ export function PopUpNamePhone (props) {
         changeAgreement(!agreement);
     }
 
-    const icon = {
-        error: icons.error,
-        agree: icons.agree,
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.name) {
+            errors.name = 'Required';
+
+        } else if (values.name.length < 2) {
+            errors.name = 'The name must have at least 2 characters';
+        }
+
+        if (!values.phone) {
+            errors.phone = 'Required';
+        }
+
+        return errors;
     };
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            phone: '',
+            phone: false,
         },
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
+            const data = {
+                ...values,
+                phone: `+${phone}`,
+            };
             postData(
-                values,
+                data,
                 props.destinationURL,
                 props.orderName,
                 props.lang,
@@ -56,20 +75,16 @@ export function PopUpNamePhone (props) {
                     event_label: 'generate_lead',
                 })
             );
-            modals.NamePhoneModalChangeVisibility();
+            modal.NamePhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
         },
     });
 
-    // useEffect(() => {
-    //     formik.setFieldValue('phone', value);
-    // }, []);
-
-    const handleChange = (newValue) => {
-        setValue(newValue);
-        formik.setFieldValue('phone', newValue);
-    };
+    useEffect(() => {
+        console.log(modal?.region);
+        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+    }, [modal.region]);
 
     return (
         <div className={style.inputs_block_out}>
@@ -90,6 +105,7 @@ export function PopUpNamePhone (props) {
                     <form onSubmit={formik.handleSubmit}>
                         <div className={style.inputs_block__input}>
                             <InputName
+                                noIcons
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
                                 error={formik.errors.name}
@@ -97,25 +113,30 @@ export function PopUpNamePhone (props) {
                             />
                             <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
                                 <PhoneInput
-                                    initialValueFormat='national'
-                                    international
-                                    placeholder={props.callPlaceholder || "Phone*"}
-                                    value={value}
-                                    onChange={handleChange}
+                                    containerClass='catalog_input__phone_container'
+                                    inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                                    buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                    country={regionCode}
+                                    enableSearch
+                                    placeholder={props.callPlaceholder}
+                                    onChange={(value, country, e, formattedValue) => {
+                                        const { format, dialCode } = country;
+                                        setPhone(value);
+                                        if (
+                                            format?.length === formattedValue?.length &&
+                                            (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                        ) {
+                                            formik.setFieldValue('phone', true);
+                                            setValid(true);
+                                        } else {
+                                            formik.setFieldValue('phone', false);
+                                            setValid(false);
+                                        }
+                                    }}
+                                    isValid
                                 />
-                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
-                                {formik.errors.phone ? <div className={style.error_icon}>
-                                    {icon.error}
-                                </div> : value?.length >= 13 ? <div className={style.error_icon}>
-                                    {icon.agree}
-                                </div> : null}
+                                {!valid && <span className={style.error__message}>Invalid phone number</span>}
                             </div>
-                            {/* <InputCall
-                                onChange={formik.handleChange}
-                                value={formik.values.phone}
-                                error={formik.errors.phone}
-                                placeholder={props.callPlaceholder}
-                            /> */}
                         </div>
                         <div className={style.agreement}>
                             <div
@@ -154,31 +175,50 @@ export function PopUpNamePhone (props) {
 }
 
 export function PopUpEmailPhone (props) {
-    const [value, setValue] = useState(null);
-    const validate = useValidation();
+    const [valid, setValid] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [regionCode, setRegionCode] = useState();
+    // const validate = useValidation();
     const router = useRouter();
-    const modals = useModals();
+    const modal = useModals();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
-
-    const icon = {
-        error: icons.error,
-        agree: icons.agree,
-    };
 
     function onAgreementChange () {
         changeAgreement(!agreement);
     }
 
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.phone) {
+            errors.phone = 'Required';
+        }
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = 'Invalid email address';
+        }
+
+        return errors;
+    };
+
     const formik = useFormik({
         initialValues: {
             email: '',
-            phone: '',
+            phone: false,
         },
         validate,
         onSubmit: (values) => {
+            const data = {
+                ...values,
+                phone: `+${phone}`,
+            };
             postData(
-                values,
+                data,
                 props.destinationURL,
                 props.orderName,
                 props.lang,
@@ -190,31 +230,17 @@ export function PopUpEmailPhone (props) {
                     event_label: 'generate_lead',
                 })
             );
-            modals.EmailPhoneModalChangeVisibility();
+            modal.EmailPhoneModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
         },
     });
 
-    // useEffect(() => {
-    //     console.log(value === undefined);
-    //     if (value !== null) {
-    //         formik.setFieldValue('phone', value);
-    //     } else if (value === undefined) {
-    //         console.log(6 + 6);
-    //         formik.setFieldValue('phone', " ");
-    //     } else if (value === '+') {
-    //         console.log("+");
-    //         formik.setFieldValue('phone', value);
-    //     }
-    // }, [value]);
+    useEffect(() => {
+        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+    }, [modal.region]);
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-        formik.setFieldValue('phone', newValue);
-    };
-
-    // console.log(value);
+    console.log(formik.errors);
 
     return (
         <div className={style.inputs_block_out}>
@@ -236,6 +262,7 @@ export function PopUpEmailPhone (props) {
                     <form onSubmit={formik.handleSubmit}>
                         <div className={style.inputs_block__input}>
                             <InputEmail
+                                noIcons
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
                                 error={formik.errors.email}
@@ -243,21 +270,29 @@ export function PopUpEmailPhone (props) {
                             />
                             <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
                                 <PhoneInput
-                                    className={formik.errors.phone ? style.fd : ''}
-                                    initialValueFormat='national'
-                                    international
-                                    placeholder={props.callPlaceholder || "Phone*"}
-                                    value={value}
-                                    onChange={handleChange}
+                                    containerClass='catalog_input__phone_container'
+                                    inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                                    buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                    country={regionCode}
+                                    enableSearch
+                                    placeholder="Phone *"
+                                    onChange={(value, country, e, formattedValue) => {
+                                        const { format, dialCode } = country;
+                                        setPhone(value);
+                                        if (
+                                            format?.length === formattedValue?.length &&
+                                            (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                        ) {
+                                            formik.setFieldValue('phone', true);
+                                            setValid(true);
+                                        } else {
+                                            formik.setFieldValue('phone', false);
+                                            setValid(false);
+                                        }
+                                    }}
+                                    isValid
                                 />
-                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
-                                {formik.errors.phone ? <div className={style.error_icon}>
-                                    {icon.error}
-                                </div> : value === "" ? <div className={style.error_icon}>
-                                    {icon.error}
-                                </div> : value !== null ? <div className={style.error_icon}>
-                                    {icon.agree}
-                                </div> : null}
+                                {!valid && <span className={style.error__message}>Invalid phone number</span>}
                             </div>
                             {/* <InputCall
                                 onChange={formik.handleChange}
@@ -303,39 +338,65 @@ export function PopUpEmailPhone (props) {
 }
 
 export function PopUpEvent (props) {
-    onst[value, setValue] = useState('');
-    const validate = useValidation();
+    const [valid, setValid] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [regionCode, setRegionCode] = useState();
+    // const validate = useValidation();
     const router = useRouter();
-    const modals = useModals();
+    const modal = useModals();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
-
-    const icon = {
-        error: icons.error,
-        agree: icons.agree,
-    };
 
     function onAgreementChange () {
         changeAgreement(!agreement);
     }
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-        formik.setFieldValue('phone', newValue);
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.name) {
+            errors.name = 'Required';
+
+        } else if (values.name.length < 2) {
+            errors.name = 'The name must have at least 2 characters';
+        }
+
+        if (!values.phone) {
+            errors.phone = 'Required';
+        }
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = 'Invalid email address';
+        }
+
+        return errors;
     };
+
+    useEffect(() => {
+        console.log(modal?.region);
+        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+    }, [modal.region]);
 
     const formik = useFormik({
         initialValues: {
             email: '',
-            phone: '',
+            phone: false,
             name: '',
         },
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
+            const data = {
+                ...values,
+                phone: `+${phone}`,
+            };
             postData(
-                values,
+                data,
                 props.destinationURL,
                 props.orderName,
                 props.lang,
@@ -347,7 +408,7 @@ export function PopUpEvent (props) {
                     event_label: 'generate_lead',
                 })
             );
-            modals.EventModalChangeVisibility();
+            modal.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
         },
@@ -381,21 +442,29 @@ export function PopUpEvent (props) {
                             />
                             <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
                                 <PhoneInput
-                                    className={formik.errors.phone ? style.fd : ''}
-                                    initialValueFormat='national'
-                                    international
-                                    placeholder={props.callPlaceholder || "Phone*"}
-                                    value={value}
-                                    onChange={handleChange}
+                                    containerClass='input__phone_container'
+                                    inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                                    buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                    country={regionCode}
+                                    enableSearch
+                                    placeholder={props.phonePlaceholder}
+                                    onChange={(value, country, e, formattedValue) => {
+                                        const { format, dialCode } = country;
+                                        setPhone(value);
+                                        if (
+                                            format?.length === formattedValue?.length &&
+                                            (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                        ) {
+                                            formik.setFieldValue('phone', true);
+                                            setValid(true);
+                                        } else {
+                                            formik.setFieldValue('phone', false);
+                                            setValid(false);
+                                        }
+                                    }}
+                                    isValid
                                 />
-                                {formik.errors.phone ? <span className={style.error__message}>{formik.errors.phone}</span> : null}
-                                {formik.errors.phone ? <div className={style.error_icon}>
-                                    {icon.error}
-                                </div> : value === "" ? <div className={style.error_icon}>
-                                    {icon.error}
-                                </div> : value !== null ? <div className={style.error_icon}>
-                                    {icon.agree}
-                                </div> : null}
+                                {!valid && <span className={style.error__message}>Invalid phone number</span>}
                             </div>
                             {/* <InputCall
                                 onChange={formik.handleChange}
@@ -442,7 +511,7 @@ export function PopUpEvent (props) {
 export function PopUpNameEmail (props) {
     const validate = useValidation();
     const router = useRouter();
-    const modals = useModals();
+    const modal = usemodal();
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
@@ -472,7 +541,7 @@ export function PopUpNameEmail (props) {
                     event_label: 'generate_lead',
                 })
             );
-            modals.NameEmailModalChangeVisibility();
+            modal.NameEmailModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
         },
@@ -540,3 +609,4 @@ export function PopUpNameEmail (props) {
         </div>
     );
 }
+
