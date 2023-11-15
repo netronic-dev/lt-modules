@@ -1,0 +1,285 @@
+@import '../default';
+
+.main {
+    position: relative;
+    padding: 128px 0 87px 0;
+
+    @media (max-width: 1200px) {
+        padding: 128px 20px 87px 20px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 38px 20px 57px 20px;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 1170px;
+        margin: 0 auto;
+        z-index: 2;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+
+            .title {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: 104.167%;
+                max-width: 990px;
+                text-transform: uppercase;
+
+                span {
+                    color: #0090ff;
+                }
+
+                @media (max-width: 768px) {
+                    font-size: 30px;
+                }
+            }
+
+            .countdown {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                display: flex;
+                margin-top: 40px;
+                border-radius: 10px;
+                border: 3px solid #0090FF;
+                background: #FFF;
+                width: max-content;
+
+                @media (max-width: 768px) {
+                    margin-top: 48px;
+                }
+
+                .countdown_number {
+                    color: #000;
+                    text-align: center;
+                    font-family: Manrope;
+                    font-size: 50px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                    letter-spacing: 1px;
+                    padding: 17px 53px;
+
+                    @media (max-width: 768px) {
+                        font-size: 38px;
+                    }
+                }
+            }
+
+            .days__text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                margin-top: 12px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 4.8px;
+                text-transform: uppercase;
+
+                @media (max-width: 768px) {
+                    margin-top: 9px;
+                    font-size: 18px;
+                }
+            }
+
+            .text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                margin-top: 40px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                text-transform: uppercase;
+                max-width: 674px;
+
+                @media (max-width: 768px) {
+                    margin-top: 48px;
+                    font-size: 18px;
+                }
+            }
+
+            .button {
+                cursor: pointer;
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                margin-top: 49px;
+                border-radius: 60px;
+                background: linear-gradient(91deg, #0090FF 8.49%, #00F18A 139.86%);
+                padding: 25px 104px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+                border: none;
+                outline: 3px solid transparent;
+                transition: all .4s ease;
+
+                @media (max-width: 768px) {
+                    margin-top: 48px;
+                    font-size: 16px;
+                    padding: 12px 104px;
+                }
+
+                @media (max-width: 520px) {
+                    width: 100%;
+                    padding: 12px 0;
+                }
+
+                &:hover {
+                    transition: all .4s ease;
+                    outline: 3px solid #0090ff;
+                    background: #fff;
+                    color: #000;
+                }
+            }
+
+            .content__image {
+                position: relative;
+                opacity: 0;
+                transform: scale(0);
+                margin-top: 83px;
+            }
+        }
+    }
+
+    .bg_image {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        width: 100vw;
+        z-index: 0;
+    }
+}
+
+.animation__title__up {
+    animation: animation_move_up 0.5s ease-in 1s forwards;
+}
+
+.animation__countdown__up {
+    animation: animation_move_up 0.5s ease-in 1.5s forwards;
+}
+
+.animation__countdown_text__up {
+    animation: animation_move_up 0.5s ease-in 2s forwards;
+}
+
+.animation__text__up {
+    animation: animation_move_up 0.5s ease-in 2.5s forwards;
+}
+
+.animation__btn__up {
+    animation: animation_move_up 0.5s ease-in 3s forwards;
+}
+
+@keyframes animation_move_up {
+    0% {
+        opacity: 0;
+        top: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0
+    }
+}
+
+.animation__halloween_logo__up {
+    animation: animation_scale 0.5s ease-in 3s forwards, animation_rotate 2.5s ease-in 3.5s infinite;
+}
+
+@keyframes animation_scale {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes animation_rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.animation_rtl {
+    animation: animation_rtl 0.8s ease-in 3s forwards;
+}
+
+@keyframes animation_rtl {
+    0% {
+        opacity: 0;
+        transform: translateX(200%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(30%);
+    }
+}
+
+.animation_rotate_and_scale {
+    animation: animation_rotate_and_scale 1.2s ease-in 3s forwards;
+}
+
+@keyframes animation_rotate_and_scale {
+    0% {
+        transform: translateX(-150%) rotate(45deg) scale(0);
+    }
+
+    100% {
+        transform: translateX(-150%) rotate(0) scale(1)
+    }
+}

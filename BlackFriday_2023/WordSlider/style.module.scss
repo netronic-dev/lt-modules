@@ -1,0 +1,128 @@
+@import "../default";
+
+.slider {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 800px;
+
+	@media (max-width: 1200px) {
+		display: none;
+	}
+}
+
+.slider_left {
+	position: relative;
+	z-index: 1;
+	bottom: 350px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-left;
+
+	* {
+		user-select: none;
+	}
+}
+
+@keyframes infiniteslide-left {
+	0% {
+		transform: translate3d(-1000px, 0, 0);
+	}
+
+	100% {
+		transform: translate3d(2000px, 0, 0);
+	}
+}
+
+.slider_right {
+	position: relative;
+	top: -50px;
+	height: max-content;
+	overflow-y: hidden;
+	width: max-content;
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: initial !important;
+	animation-duration: 13s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: infiniteslide-right;
+
+	* {
+		user-select: none;
+	}
+}
+
+@keyframes infiniteslide-right {
+	0% {
+		transform: translate3d(2000px, 0, 0);
+	}
+
+	100% {
+		transform: translate3d(-1000px, 0, 0);
+	}
+}
+
+.text {
+	font-style: normal;
+	font-family: GothamPro-Black;
+	font-weight: bold;
+	font-size: 200px;
+	line-height: 96.6%;
+	text-transform: uppercase;
+	color: #00000000;
+	-webkit-text-stroke: 1px #fff;
+	// text-shadow: 0px 0px 2px #fff;
+}
+
+@media (max-width: 750px) {
+	.text {
+		font-size: 80px;
+		line-height: 78px;
+	}
+
+	.slider_left {
+		bottom: 0;
+		margin-bottom: 180px;
+	}
+
+	.slider_right {
+		top: 0;
+	}
+
+	@keyframes infiniteslide-right {
+		0% {
+			transform: translate3d(750px, 0, 0);
+		}
+
+		100% {
+			transform: translate3d(-500px, 0, 0);
+		}
+	}
+
+	@keyframes infiniteslide-left {
+		0% {
+			transform: translate3d(-500px, 0, 0);
+		}
+
+		100% {
+			transform: translate3d(750px, 0, 0);
+		}
+	}
+}

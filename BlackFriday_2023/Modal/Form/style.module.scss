@@ -1,0 +1,112 @@
+.form__block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 46px;
+    z-index: 2;
+
+    @media screen and (max-width: 1200px) {
+        gap: 35px;
+    }
+
+    .form__title {
+        color: #000;
+        font-family: var(--font-Manrope);
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 120%;
+        text-align: center;
+
+        span {
+            color: #0090ff;
+        }
+    }
+
+    .form__text {
+        margin-top: 10px;
+        color: #000;
+        text-align: center;
+        font-family: Manrope;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 144%;
+        max-width: 450px;
+        /* 143.75% */
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        z-index: 2;
+
+        .submit__button {
+            cursor: pointer;
+            background: linear-gradient(91deg, #0090FF 8.49%, #00F18A 139.86%);
+            border-radius: 8px;
+            padding: 16.5px 14px;
+            color: #fff;
+            font-family: var(--font-Manrope);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 140%;
+            border: none;
+            outline: 3px solid transparent;
+            transition: all .4s ease;
+
+            &:disabled {
+                cursor: default;
+                opacity: .6;
+                pointer-events: none;
+            }
+
+            &:hover {
+                transition: all .4s ease;
+                color: #000;
+                background: #fff;
+                outline: 3px solid #0090ff;
+                pointer-events: auto;
+            }
+        }
+
+        .phone__input_block {
+            position: relative;
+
+            .error__message {
+                position: absolute;
+                left: 12px;
+                bottom: -17px;
+                color: #D22E2E;
+                font-family: var(--font-Manrope);
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%;
+            }
+        }
+    }
+}
+
+.form__block_modal {
+    left: 0;
+    opacity: 1;
+}
+
+.animation_ltr {
+    animation: animation_ltr 1s ease 1.8s forwards;
+}
+
+@keyframes animation_ltr {
+    from {
+        left: 100%;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
