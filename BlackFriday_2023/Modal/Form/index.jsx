@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import ReactGA from 'react-ga4';
-import { validate } from './validate';
 
 import style from './style.module.scss';
 
@@ -19,6 +18,69 @@ const ConsultationForm = (props) => {
 	const [regionCode, setRegionCode] = useState();
 	const router = useRouter();
 	const modal = useModals();
+
+	const setErrorText = () => {
+		const errorMessages = {};
+		switch (true) {
+			case props.lang === 'de':
+				errorMessages.required = 'Erforderlich';
+				errorMessages.email = 'Ungültige E-Mail-Adresse';
+				errorMessages.nameLength = 'Der Name muss mindestens 2 Zeichen lang sein';
+				return errorMessages;
+			case props.lang === 'fr':
+				errorMessages.required = 'Requis';
+				errorMessages.email = 'Adresse e-mail invalide';
+				errorMessages.nameLength = 'El nombre debe tener al menos 2 caracteres.';
+				return errorMessages;
+			case props.lang === 'es':
+				errorMessages.required = 'Necesariamente';
+				errorMessages.email = 'Dirección de correo electrónico no válida';
+				errorMessages.nameLength = 'El nombre debe tener al menos 2 caracteres.';
+				return errorMessages;
+			case props.lang === 'it':
+				errorMessages.required = 'Obbligatorio';
+				errorMessages.email = 'indirizzo email non valido';
+				errorMessages.nameLength = 'Il nome deve contenere almeno 2 caratteri.';
+				return errorMessages;
+			case props.lang === 'us':
+				errorMessages.required = 'Required';
+				errorMessages.email = 'Invalid email address';
+				errorMessages.nameLength = 'The name must have at least 2 characters';
+				return errorMessages;
+			default:
+				errorMessages.required = 'Required';
+				errorMessages.email = 'Invalid email address';
+				errorMessages.nameLength = 'The name must have at least 2 characters';
+				return errorMessages;
+		}
+	};
+
+	const validate = (values) => {
+		const errors = {};
+
+		const errorMessages = setErrorText();
+
+		if (!values.name) {
+			errors.name = errorMessages.required;
+		} else if (values.name.length < 2) {
+			errors.name = errorMessages.nameLength;
+		}
+
+		if (!values.phone) {
+			errors.phone = errorMessages.required;
+		}
+
+		if (!values.email) {
+			errors.email = errorMessages.required;
+		} else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)) {
+			errors.email = errorMessages.email;
+		}
+
+		if (!values.agreement) {
+			errors.agreement = errorMessages.required;
+		}
+		return errors;
+	};
 
 	const formik = useFormik({
 		initialValues: {
@@ -107,7 +169,7 @@ const ConsultationForm = (props) => {
 						}}
 						isValid
 					/>
-					{!valid && <span className={style.error__message}>Invalid phone number</span>}
+					{!valid && <span className={style.error__message}>{props.errorPhoneText}</span>}
 				</div>
 				<Input
 					error={formik.errors.email}

@@ -2,6 +2,8 @@ import { useInView } from 'react-intersection-observer';
 import style from './style.module.scss';
 import Image from 'next/image';
 import Slider from '../../BlackFriday_2023/WordSlider';
+import RunningText from '../Main/RunningText';
+import { useModals } from '../../../context/ModalsProvider';
 
 const Deals = (props) => {
 	const [ref, inView] = useInView({
@@ -16,6 +18,8 @@ const Deals = (props) => {
 	const [ref3, inView3] = useInView({
 		triggerOnce: true,
 	});
+
+	const modal = useModals();
 
 	const setInview = (index) => {
 		switch (true) {
@@ -49,6 +53,18 @@ const Deals = (props) => {
 				return ref3;
 		}
 	};
+
+	const setModal = (index) => {
+		switch (true) {
+			case index === 0:
+				return modal.openPremiumModal;
+			case index === 1:
+				return modal.openLuxModal;
+			case index === 2:
+				return modal.openEclipseModal;
+		}
+	};
+
 	return (
 		<section className={style.deals}>
 			<div className={style.wrapper}>
@@ -59,7 +75,9 @@ const Deals = (props) => {
 						ref={ref}>
 						{props.text}
 					</p>
-					<div className={style.deals_grid}>
+					<div
+						className={style.deals_grid}
+						id='set'>
 						{props.deals_data.map((item, index) => (
 							<div
 								className={`${style.deal_card} ${item.image_right ? '' : style.deal_card_right} ${
@@ -107,7 +125,7 @@ const Deals = (props) => {
 										className={`${style.card_button} ${
 											setInview(index) ? style.animation__scale : ''
 										}`}
-										onClick={props.onClick}>
+										onClick={setModal(index)}>
 										{item.btn_text}
 									</button>
 								</div>
@@ -141,6 +159,7 @@ const Deals = (props) => {
 										}`}>
 										{item.upper_ribbon_text}
 									</div>
+									<RunningText className={item.image_right ? 'bottom' : 'bottom_right'} />
 								</div>
 							</div>
 						))}

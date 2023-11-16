@@ -59,6 +59,37 @@
     }
 }
 
+.ribbon__text_bottom {
+    top: auto;
+    bottom: 40px;
+    right: -180px;
+
+    @media (max-width: 1200px) {
+        right: 60px;
+    }
+}
+
+.ribbon__text_bottom_right {
+    top: auto;
+    bottom: 40px;
+    left: -200px;
+    transform: rotate(-45deg);
+
+    @media (max-width: 1200px) {
+        left: 60px;
+    }
+}
+
+.ribbon__text_bottom_right_count {
+    top: auto;
+    bottom: 40px;
+    left: -200px;
+
+    @media (max-width: 1200px) {
+        left: -400px;
+    }
+}
+
 @keyframes moveText {
     0% {
         left: -50px;

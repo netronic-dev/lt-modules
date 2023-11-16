@@ -18,11 +18,11 @@ const Main = (props) => {
 					<h1 className={style.title}>{props.title}</h1>
 					<p className={style.sub_title}>{props.sub_title}</p>
 					<p className={style.text}>{props.text}</p>
-					<button
-						className={style.button}
-						onClick={props.onClick}>
-						{props.buttonText}
-					</button>
+					<AnchorLink
+						href='#set'
+						offset='80'>
+						<button className={style.button}>{props.buttonText}</button>
+					</AnchorLink>
 				</div>
 			</div>
 			<div className={style.image_blur_top}>

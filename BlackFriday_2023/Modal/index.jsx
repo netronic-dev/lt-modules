@@ -14,7 +14,11 @@ const Modal = (props) => {
 
 	return (
 		<div
-			className={modal?.isCatalogOpen ? style.background_blur : style.closed__modal}
+			className={
+				modal?.isLuxOpen || modal?.isPremiumOpen || modal?.isEclipseOpen
+					? style.background_blur
+					: style.closed__modal
+			}
 			onClick={(e) => handleCloseModal(e)}
 			ref={ref}>
 			<div className={`${style.modal} ${style.animation_scale}`}>
@@ -34,6 +38,7 @@ const Modal = (props) => {
 					destinationURL={props.destinationURL}
 					orderName={props.orderName}
 					lang={props.lang}
+					errorPhoneText={props.errorPhoneText}
 					thank_you_page={props.thank_you_page}
 				/>
 				<button

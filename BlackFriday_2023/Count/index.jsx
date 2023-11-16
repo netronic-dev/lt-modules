@@ -5,16 +5,17 @@ import Countdown, { CountdownCircleTimer } from 'react-countdown';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
+import RunningText from '../Main/RunningText';
 
 const Count = (props) => {
-	const [dayText, setDayText] = useState('days');
+	const [dayText, setDayText] = useState(props.days);
 	const targetDate = new Date('2023-12-01T00:00:00').getTime();
 	const [ref, inView] = useInView({
 		triggerOnce: true,
 	});
 
 	const renderer = ({ days, completed }) => {
-		days === 1 ? setDayText('day') : null;
+		days === 1 ? setDayText(props.day) : null;
 		if (completed) {
 			return <span className={style.countdown_number}>0</span>;
 		} else {
@@ -40,11 +41,13 @@ const Count = (props) => {
 						{dayText}
 					</span>
 					<p className={`${style.text} ${inView ? style.animation__text__up : ''}`}>{props.text}</p>
-					<button
-						className={`${style.button} ${inView ? style.animation__btn__up : ''}`}
-						onClick={props.onClick}>
-						{props.buttonText}
-					</button>
+					<AnchorLink
+						href='#set'
+						offset='80'>
+						<button className={`${style.button} ${inView ? style.animation__btn__up : ''}`}>
+							{props.buttonText}
+						</button>
+					</AnchorLink>
 				</div>
 			</div>
 			<div className={style.bg_image}>
@@ -55,6 +58,7 @@ const Count = (props) => {
 					objectFit='cover'
 				/>
 			</div>
+			<RunningText className='count_bottom' />
 		</section>
 	);
 };
