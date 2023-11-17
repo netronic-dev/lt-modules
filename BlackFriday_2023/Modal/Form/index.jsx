@@ -152,42 +152,7 @@ const ConsultationForm = (props) => {
 						buttonClass={valid ? 'drop_down' : 'drop_down_error'}
 						country={regionCode}
 						enableSearch
-						masks={{
-							ae: '.. ... ....',
-							ro: '.. ... ....',
-							pt: '.. ... ....',
-							nl: '.. ... ....',
-							cl: '... ... ...',
-							sa: '... ... ...',
-							lt: '... .. ...',
-							jo: '. ... ....',
-							hr: '.. ... ...',
-							gr: '... ... ....',
-							sk: '. ... ... ..',
-							hu: '... ... ...',
-							at: '... ... ...',
-							za: '.. ... ....',
-							ye: '... .. ....',
-							ba: '.. ... ...',
-							ee: '.... ....',
-							rs: '.. ... ....',
-							si: '. ... .. ..',
-							lb: '. ... ...',
-							mk: '.. ... ...',
-							kw: '... ... ..',
-							bg: '.. ... ...',
-							qa: '... ... ..',
-							mt: '.. ... ...',
-							ve: '... ... ....',
-							eg: '.. .... ....',
-							ec: '.. ... ....',
-							ng: '.. .... ....',
-							mo: '... ... ....',
-							al: '. .... ...',
-							th: '... ... ...',
-							lu: '... ... ...',
-							pf: '.. .. .. ..',
-						}}
+						masks={phoneMasks}
 						placeholder={props.phonePlaceholder}
 						onChange={(value, country, e, formattedValue) => {
 							const { format, dialCode } = country;

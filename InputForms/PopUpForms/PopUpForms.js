@@ -10,6 +10,7 @@ import { postData } from '../../functions/postData.ts';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../../store/actions/userData';
 import { useGAEvents } from '../../../context/GAEventsProvider';
+import { phoneMasks } from '../../../Data/phoneMasks';
 import ReactGA from 'react-ga4';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -118,6 +119,7 @@ export function PopUpNamePhone (props) {
                                     buttonClass={valid ? 'drop_down' : 'drop_down_error'}
                                     country={regionCode}
                                     enableSearch
+                                    masks={phoneMasks}
                                     placeholder={props.callPlaceholder}
                                     onChange={(value, country, e, formattedValue) => {
                                         const { format, dialCode } = country;
@@ -275,6 +277,7 @@ export function PopUpEmailPhone (props) {
                                     buttonClass={valid ? 'drop_down' : 'drop_down_error'}
                                     country={regionCode}
                                     enableSearch
+                                    masks={phoneMasks}
                                     placeholder="Phone *"
                                     onChange={(value, country, e, formattedValue) => {
                                         const { format, dialCode } = country;
@@ -447,6 +450,7 @@ export function PopUpEvent (props) {
                                     buttonClass={valid ? 'drop_down' : 'drop_down_error'}
                                     country={regionCode}
                                     enableSearch
+                                    masks={phoneMasks}
                                     placeholder={props.phonePlaceholder}
                                     onChange={(value, country, e, formattedValue) => {
                                         const { format, dialCode } = country;
