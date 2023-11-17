@@ -125,46 +125,57 @@
                 }
             }
 
-            .button {
-                cursor: pointer;
-                position: relative;
-                opacity: 0;
-                top: 100px;
-                margin-top: 49px;
-                border-radius: 60px;
-                background: linear-gradient(91deg, #0090FF 8.49%, #00F18A 139.86%);
-                padding: 25px 104px;
-                color: #FFF;
-                text-align: center;
-                font-family: Manrope;
-                font-size: 20px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-                letter-spacing: 0.4px;
-                text-transform: uppercase;
-                border: none;
-                outline: 3px solid transparent;
-                transition: all .4s ease;
-
-                @media (max-width: 768px) {
-                    margin-top: 48px;
-                    font-size: 16px;
-                    padding: 12px 104px;
-                }
+            a {
 
                 @media (max-width: 520px) {
+                    max-width: 300px;
                     width: 100%;
-                    padding: 12px 0;
                 }
 
-                &:hover {
+                .button {
+                    cursor: pointer;
+                    position: relative;
+                    opacity: 0;
+                    top: 100px;
+                    margin-top: 49px;
+                    border-radius: 60px;
+                    background: linear-gradient(91deg, #0090FF 8.49%, #00F18A 139.86%);
+                    padding: 25px 104px;
+                    color: #FFF;
+                    text-align: center;
+                    font-family: Manrope;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    letter-spacing: 0.4px;
+                    text-transform: uppercase;
+                    border: none;
+                    outline: 3px solid transparent;
                     transition: all .4s ease;
-                    outline: 3px solid #0090ff;
-                    background: #fff;
-                    color: #000;
+
+                    @media (max-width: 768px) {
+                        margin-top: 48px;
+                        font-size: 16px;
+                        padding: 12px 104px;
+                    }
+
+                    @media (max-width: 520px) {
+                        padding: 12px 0;
+                        max-width: 300px;
+                        width: 100%;
+                    }
+
+                    &:hover {
+                        transition: all .4s ease;
+                        outline: 3px solid #0090ff;
+                        background: #fff;
+                        color: #000;
+                    }
                 }
             }
+
+
 
             .content__image {
                 position: relative;
