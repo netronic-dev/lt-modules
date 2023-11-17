@@ -12,6 +12,7 @@ import 'react-phone-input-2/lib/style.css';
 import { useEffect, useState } from 'react';
 import { useModals } from '../../../context/ModalsProvider.js';
 import { icons } from '../icons/icons.js';
+import { phoneMasks } from '../../../Data/phoneMasks.js';
 
 const buttonTheme = {
     general: style.general_button_inactive,
