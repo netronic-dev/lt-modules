@@ -159,9 +159,10 @@
     .banner_heroes {
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: -10px;
         width: 424px;
         height: 100%;
+        z-index: -1;
 
         @media (max-width: 1580px) {
             width: 370px;
@@ -237,11 +238,12 @@
 
     .banner_ribbon {
         position: absolute;
-        width: 455px;
-        height: 100%;
+        width: 180px;
+        height: 115px;
         left: 0;
         bottom: 0;
         transform: scale(1.1);
+        z-index: -1;
 
         @media (max-width: 1200px) {
             bottom: -42px;
