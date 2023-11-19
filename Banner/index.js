@@ -1,32 +1,31 @@
 import Image from 'next/image';
 import style from './style.module.scss';
-import bannerLogo from '../../public/iaapa-vienna-2023/logo.png';
+import bannerHeroes from '../../public/black-friday-2023/banner_heroes.png';
+import bannerBg from '../../public/black-friday-2023/banner_bg.jpg';
+import bannerRibbon from '../../public/black-friday-2023/banner_ribbon.png';
 import Link from 'next/link';
 
 const Banner = (props) => {
     return (
         <div className={`${style.banner} fade-down-animation`}>
-            <div className={style.banner_logo}>
-                <Image src={bannerLogo} width='379' height={134} alt='logo' />
+            <div className={style.bg__image}>
+                <Image src={bannerBg} layout='fill' alt="bg image" objectFit='cover' />
             </div>
-            <div className={style.banner_info}>
-                <EventInfo
-                    dateName={props.dateName}
-                    date={props.date}
-                    placeName={props.placeName}
-                    place={props.place}
-                />
+            <div className={style.banner_heroes}>
+                <Image src={bannerHeroes} layout='fill' objectFit='contain' alt='heroes' />
             </div>
-            <Link href='/blog/iaapa-orlando-2023/'>
-                <button
-                    type='submit'
-                    className={style.button_submit}
-                    onClick={() => props.toggleActivity()}
-                >
-                    {props.buttonText}
-                </button>
+            <div className={style.banner_ribbon}>
+                <Image src={bannerRibbon} layout='fill' objectFit='contain' alt='ribbon' />
+            </div>
+            <h2 className={style.banner_title}>{props.title}</h2>
+            <div className={style.text_block}>
+                <span className={style.sub_title}>{props.sub_title}</span>
+                <span className={style.text}>{props.text}</span>
+            </div>
+            <Link href='/black-friday-2023-usd/'>
+                <a className={style.button_submit}
+                    onClick={() => props.toggleActivity()}>{props.buttonText}</a>
             </Link>
-            <p className={style.text}>{props.text}</p>
 
             <button
                 className={style.button_close}
