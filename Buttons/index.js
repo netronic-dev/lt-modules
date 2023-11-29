@@ -42,16 +42,16 @@ const videoButtonTheme = {
   },
 };
 
-export function BUTTON(props) {
+export function BUTTON (props) {
 
-  const modals = useModals()
+  const modals = useModals();
 
   const modalType = {
     "call": modals.NamePhoneModalChangeVisibility,
     "catalog": modals.EmailPhoneModalChangeVisibility,
     "event": modals.EventModalChangeVisibility,
     "nameEmail": modals.NameEmailModalChangeVisibility
-  }
+  };
 
   return (
     <>
@@ -65,30 +65,30 @@ export function BUTTON(props) {
           : ""}
       </button>
     </>
-  )
+  );
 }
 
-export function Button(props) {
-  const modals = useModals()
+export function Button (props) {
+  const modals = useModals();
 
   const modalType = {
     "call": modals.NamePhoneModalChangeVisibility,
     "catalog": modals.EmailPhoneModalChangeVisibility,
     "event": modals.EventModalChangeVisibility,
     "nameEmail": modals.NameEmailModalChangeVisibility
-  }
+  };
 
   return (
     <button
       onClick={modalType[props.type || "call"]}
       className={`${fillButtonStyles[props.style || "blueBlack"]} ${props.uniqueClass}`}
     >
-      {props.text || "Check price"}
+      {props.text || "Get catalog"}
     </button>
   );
 }
 
-export function FillButton(props) {
+export function FillButton (props) {
   return (
     <button
       className={`${fillButtonStyles[props.style || "blueBlack"]}
@@ -105,9 +105,9 @@ export function FillButton(props) {
   );
 }
 
-export function VideoButton(props) {
+export function VideoButton (props) {
 
-  const modals = useModals()
+  const modals = useModals();
 
   return (
     <>
@@ -128,7 +128,7 @@ export function VideoButton(props) {
   );
 }
 
-export function DefaultButton(props) {
+export function DefaultButton (props) {
   return (
     <button className={style.default_button}>
       <span>{props.text}</span>
@@ -169,10 +169,10 @@ const playIcon = (
       fill="white"
     />
   </svg>
-)
+);
 const playIconCircleFill = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className={style.play_icon_circle_fill}>
     <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 16.5V7.5L16 12L10 16.5Z" fill="#0090FF" />
   </svg>
 
-)
+);
