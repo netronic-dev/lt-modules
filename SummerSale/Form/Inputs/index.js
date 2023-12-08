@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ReactGA from 'react-ga4';
 import style from './style.module.scss';
+import axios from 'axios';
 
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
@@ -10,7 +11,7 @@ import { setUserData } from '../../../../store/actions/userData';
 import { postData } from '../../../../lt-modules/functions/postData.ts';
 import { useGAEvents } from '../../../../context/GAEventsProvider';
 
-export function InputsWName(props) {
+export function InputsWName (props) {
     const router = useRouter();
     const dispatch = useDispatch();
     const GAEvents = useGAEvents();
@@ -25,7 +26,15 @@ export function InputsWName(props) {
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
-            postData(
+            const options = {
+                method: 'POST',
+                url: `https://api.netronic.net/send-email`,
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+            };
+            axios.request(options).then(postData(
                 values,
                 props.destinationURL,
                 props.orderName,
@@ -39,11 +48,12 @@ export function InputsWName(props) {
                         event_label: 'generate_lead',
                     })
                 )
-                .then(router.push(props.thankYouPage));
+                .then(router.push(props.thankYouPage)))
+                ;
         },
     });
 
-    function onAgreementChange() {
+    function onAgreementChange () {
         formik.setFieldValue('agreement', !formik.values.agreement);
     }
 
@@ -132,7 +142,7 @@ export function InputsWName(props) {
     );
 }
 
-function Agreement(props) {
+function Agreement (props) {
     return (
         <div className={style.agreement__outer}>
             <div className={style.agreement}>

@@ -11,8 +11,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { useEffect, useState } from 'react';
 import { useModals } from '../../../context/ModalsProvider.js';
-import { icons } from '../icons/icons.js';
 import { phoneMasks } from '../../../Data/phoneMasks.js';
+import axios from 'axios';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -74,14 +74,15 @@ export function ThemeForm (props) {
                 props.destinationURL,
                 props.orderName,
                 props.lang,
-                window.location.hostname,
-                router.query
-            ).then(
-                ReactGA.event('generate_lead', {
-                    event_category: 'button',
-                    event_label: 'generate_lead',
-                })
-            ).then(router.push('/thanks-pres'));
+                window.location.href,
+                router.query,
+            )
+                .then(router.push('/thanks-pres'))
+                .catch(console.log);
+            ReactGA.event('generate_lead', {
+                category: 'form',
+                action: 'submit',
+            });
         },
     });
 
@@ -201,7 +202,15 @@ export function ThemeFormAll (props) {
                 ...values,
                 phone: `+${phone}`,
             };
-            postData(
+            const options = {
+                method: 'POST',
+                url: `https://api.netronic.net/send-email`,
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+            };
+            axios.request(options).then(postData(
                 data,
                 props.destinationURL,
                 props.orderName,
@@ -213,7 +222,7 @@ export function ThemeFormAll (props) {
                     event_category: 'button',
                     event_label: 'generate_lead',
                 })
-            ).then(router.push('/thanks-pres'));
+            ).then(router.push('/thanks-pres')));
         },
     });
 

@@ -14,6 +14,7 @@ import { phoneMasks } from '../../../Data/phoneMasks';
 import ReactGA from 'react-ga4';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import axios from 'axios';
 
 function turnOnScroll () {
     document.body.className = '';
@@ -219,21 +220,34 @@ export function PopUpEmailPhone (props) {
                 ...values,
                 phone: `+${phone}`,
             };
-            postData(
-                data,
-                props.destinationURL,
-                props.orderName,
-                props.lang,
-                window.location.hostname,
-                router.query
-            ).then(
-                ReactGA.event('generate_lead', {
-                    event_category: 'button',
-                    event_label: 'generate_lead',
-                })
-            );
+            const options = {
+                method: 'POST',
+                url: `https://api.netronic.net/send-email`,
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+            };
+            axios
+                .request(options)
+                .then(console.log)
+                .then(
+                    postData(
+                        data,
+                        props.destinationURL,
+                        props.orderName,
+                        props.lang,
+                        window.location.href,
+                        router.query,
+                    ),
+                )
+                .then(router.push(props.thank_you_page))
+                .catch(console.log);
+            ReactGA.event('generate_lead', {
+                category: 'form',
+                action: 'submit',
+            });
             modal.EmailPhoneModalChangeVisibility();
-            router.push(props.thank_you_page);
             turnOnScroll();
         },
     });
@@ -398,7 +412,15 @@ export function PopUpEvent (props) {
                 ...values,
                 phone: `+${phone}`,
             };
-            postData(
+            const options = {
+                method: 'POST',
+                url: `https://api.netronic.net/send-email`,
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+            };
+            axios.request(options).then(postData(
                 data,
                 props.destinationURL,
                 props.orderName,
@@ -410,10 +432,11 @@ export function PopUpEvent (props) {
                     event_category: 'button',
                     event_label: 'generate_lead',
                 })
-            );
+            ));
             modal.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
+
         },
     });
 
@@ -532,21 +555,33 @@ export function PopUpNameEmail (props) {
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
-            postData(
-                values,
-                props.destinationURL,
-                props.orderName,
-                props.lang,
-                window.location.hostname,
-                router.query
-            ).then(
-                ReactGA.event('generate_lead', {
-                    event_category: 'button',
-                    event_label: 'generate_lead',
-                })
-            );
-            modal.NameEmailModalChangeVisibility();
-            router.push(props.thank_you_page);
+            const options = {
+                method: 'POST',
+                url: `https://api.netronic.net/send-email`,
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+            };
+            axios
+                .request(options)
+                .then(console.log)
+                .then(
+                    postData(
+                        data,
+                        props.destinationURL,
+                        props.orderName,
+                        props.lang,
+                        window.location.href,
+                        router.query,
+                    ),
+                )
+                .then(router.push(props.thank_you_page))
+                .catch(console.log);
+            ReactGA.event('generate_lead', {
+                category: 'form',
+                action: 'submit',
+            });
             turnOnScroll();
         },
     });
