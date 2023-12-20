@@ -1,28 +1,32 @@
 import Image from 'next/image';
 import style from './style.module.scss';
-import bannerHeroes from '../../public/black-friday-2023/banner_heroes.png';
-import bannerBg from '../../public/black-friday-2023/banner_bg.jpg';
-import bannerRibbon from '../../public/black-friday-2023/banner_ribbon.png';
+// import bannerHeroes from '../../public/xmas-2023/banner_bg.jpg';
+import bannerBg from '../../public/xmas-2023/banner_bg.jpg';
+import bannerBg_lap from '../../public/xmas-2023/banner_bg_lap.jpg';
+// import bannerRibbon from '../../public/black-friday-2023/banner_ribbon.png';
 import Link from 'next/link';
 
 const Banner = (props) => {
     return (
         <div className={`${style.banner} fade-down-animation`}>
             <div className={style.bg__image}>
-                <Image src={bannerBg} layout='fill' alt="bg image" objectFit='cover' />
+                <Image src={bannerBg} layout='fill' alt="bg image" objectFit='fill' />
             </div>
-            <div className={style.banner_heroes}>
-                <Image src={bannerHeroes} layout='fill' objectFit='contain' alt='heroes' />
+            <div className={style.bg__image_lap}>
+                <Image src={bannerBg_lap} layout='fill' alt="bg image" objectFit='cover' objectPosition="0 100%" />
             </div>
-            <div className={style.banner_ribbon}>
+            {/* <div className={style.banner_heroes}>
+                <Image src={bannerHeroes} layout='fill' objectFit='fill' alt='heroes' />
+            </div> */}
+            {/* <div className={style.banner_ribbon}>
                 <Image src={bannerRibbon} layout='fill' objectFit='contain' alt='ribbon' />
-            </div>
+            </div> */}
             <h2 className={style.banner_title}>{props.title}</h2>
             <div className={style.text_block}>
                 <span className={style.sub_title}>{props.sub_title}</span>
                 <span className={style.text}>{props.text}</span>
             </div>
-            <Link href='/black-friday-2023-usd/'>
+            <Link href='/blog/xmas-2023'>
                 <a className={style.button_submit}
                     onClick={() => props.toggleActivity()}>{props.buttonText}</a>
             </Link>

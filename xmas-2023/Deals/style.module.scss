@@ -1,0 +1,400 @@
+.deals {
+    position: relative;
+    padding: 71px 0 44px 0;
+    overflow: hidden;
+
+    @media (max-width: 1200px) {
+        padding: 71px 20px 44px 20px;
+    }
+
+    .wrapper {
+        margin: 0 auto;
+        width: 1170px;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .title {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 47px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                text-transform: uppercase;
+                max-width: 931px;
+
+                span {
+                    color: #0090ff;
+                }
+
+                @media (max-width: 600px) {
+                    padding: 0 15px;
+                    font-size: 33px;
+                }
+            }
+
+            .text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                margin-top: 37px;
+                color: #FFF;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                max-width: 774px;
+
+                @media (max-width: 600px) {
+                    margin-top: 27px;
+                }
+            }
+
+            .deals_grid {
+                margin-top: 67px;
+                display: flex;
+                flex-direction: column;
+                gap: 50px;
+                z-index: 2;
+                width: 100%;
+
+                @media (max-width: 600px) {
+                    margin-top: 20px;
+                }
+
+                .deal_card {
+                    display: grid;
+                    grid-template-columns: 1.6fr 1fr;
+                    border-radius: 20px;
+                    box-shadow: 0px 0px 0px rgba(0, 144, 255, 0.80);
+                    overflow: hidden;
+
+                    @media (max-width: 1060px) {
+                        grid-template-columns: 1fr 1fr;
+                    }
+
+                    @media (max-width: 800px) {
+                        grid-template-columns: 1fr;
+                        grid-template-rows: 1fr 400px;
+                    }
+
+                    .card_content {
+                        position: relative;
+                        opacity: 0;
+                        left: -300px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                        background-color: #fff;
+                        padding: 63px 53px 77px 47px;
+
+                        @media (max-width: 1060px) {
+                            padding: 63px 33px 77px 33px;
+                        }
+
+                        @media (max-width: 800px) {
+                            padding: 60px 15px 55px 20px;
+                        }
+
+                        @media (max-width: 600px) {
+                            align-items: center;
+                        }
+
+                        .card_title {
+                            position: relative;
+                            opacity: 0;
+                            top: 100px;
+                            color: #000;
+                            text-align: center;
+                            font-family: Manrope;
+                            font-size: 36px;
+                            font-style: normal;
+                            font-weight: 800;
+                            line-height: normal;
+                            text-align: left;
+
+                            span {
+                                color: #0090ff;
+                            }
+
+                            @media (max-width: 600px) {
+                                text-align: center;
+                            }
+                        }
+
+                        .card_text {
+                            position: relative;
+                            opacity: 0;
+                            top: 100px;
+                            color: #000;
+                            font-family: Manrope;
+                            font-size: 20px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: normal;
+                            max-width: 473px;
+
+                            span {
+                                color: #0090ff;
+                            }
+
+                            @media (max-width: 600px) {
+                                font-size: 16px;
+                                text-align: center;
+                            }
+                        }
+
+                        .card_button {
+                            margin-top: 30px;
+                            position: relative;
+                            opacity: 0;
+                            transform: scale(0);
+                            cursor: pointer;
+                            padding: 25px 0;
+                            border-radius: 60px;
+                            background: linear-gradient(91deg, #0090FF 8.49%, #00F18A 139.86%);
+                            color: #FFF;
+                            text-align: center;
+                            font-family: Manrope;
+                            font-size: 20px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            letter-spacing: 0.4px;
+                            text-transform: uppercase;
+                            outline: 3px solid transparent;
+                            border: none;
+                            max-width: 440px;
+                            filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+                            transition: all .4s ease;
+
+                            &:hover {
+                                background: #fff;
+                                color: #0090ff;
+                                outline: 3px solid #0090ff;
+                                transition: all .4s ease;
+                            }
+
+                            @media (max-width: 600px) {
+                                width: 100%;
+                                font-size: 16px;
+                            }
+                        }
+                    }
+
+                    .card_image {
+                        position: relative;
+                        opacity: 0;
+                        right: -300px;
+                        overflow: hidden;
+
+                        .taggers_image_1 {
+                            position: absolute;
+                            bottom: 0px;
+                            left: 50%;
+                            transform: translateX(-75%);
+                            width: 400px;
+                            height: 481px;
+
+                            @media (max-width: 800px) {
+                                width: 300px;
+                                height: 381px;
+                            }
+                        }
+
+                        .taggers_image_2 {
+                            position: absolute;
+                            bottom: 0px;
+                            left: 50%;
+                            transform: translateX(-40%);
+                            width: 409px;
+                            height: 423px;
+
+                            @media (max-width: 800px) {
+                                width: 340px;
+                                height: 341px;
+                            }
+                        }
+
+                        .taggers_image_3 {
+                            position: absolute;
+                            bottom: 0px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 439px;
+                            height: 535px;
+
+                            @media (max-width: 800px) {
+                                width: 390px;
+                                height: 400px;
+                            }
+                        }
+                    }
+                }
+
+                .deal_card_right {
+                    grid-template-columns: 1fr 1.6fr;
+
+                    @media (max-width: 1060px) {
+                        grid-template-columns: 1fr 1fr;
+                    }
+
+                    @media (max-width: 800px) {
+                        grid-template-columns: 1fr;
+                        grid-template-rows: 1fr 400px;
+                    }
+
+                    .card_content {
+                        left: auto;
+                        right: -300px;
+                        order: 2;
+                        padding: 63px 105px 77px 73px;
+
+                        @media (max-width: 800px) {
+                            order: 1;
+                        }
+
+                        @media (max-width: 768px) {
+                            padding: 60px 15px 55px 20px;
+                        }
+
+                        .card_text {
+                            max-width: 100%;
+                        }
+                    }
+
+                    .card_image {
+                        left: auto;
+                        right: -300px;
+                        order: 1;
+
+                        @media (max-width: 800px) {
+                            order: 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.animation_main_title {
+    animation: animation_title .8s ease-in forwards;
+}
+
+.animation_main_text {
+    animation: animation_title .8s ease-in .5s forwards;
+}
+
+.animation__left {
+    animation: animation__left .8s ease-in .5s forwards;
+}
+
+.animation__right {
+    animation: animation__right .8s ease-in .5s forwards;
+}
+
+.animation_title {
+    animation: animation_title .7s ease-in 1.7s forwards;
+}
+
+.animation_text {
+    animation: animation_title .7s ease-in 2s forwards;
+}
+
+.animation__scale {
+    animation: animation_scale 0.8s ease-in 2.8s forwards;
+}
+
+.animation__scale_through {
+    animation: animation_scale 0.8s ease-in 2.9s forwards;
+}
+
+.animation__through {
+    animation: animation_through 0.8s ease-in 3.6s forwards;
+}
+
+.animation__box_shadow {
+    animation: animation__box_shadow .8s ease-in 4.1s forwards;
+}
+
+@keyframes animation_title {
+    0% {
+        opacity: 0;
+        top: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0px;
+    }
+}
+
+@keyframes animation__box_shadow {
+    0% {
+        box-shadow: 0px 0px 0 0px rgba(0, 144, 255, 0.80);
+    }
+
+    100% {
+        box-shadow: 0px 0px 30px 0px rgba(0, 144, 255, 0.80);
+    }
+}
+
+@keyframes animation__left {
+    0% {
+        opacity: 0;
+        left: -300px;
+    }
+
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+@keyframes animation__right {
+    0% {
+        opacity: 0;
+        right: -300px;
+    }
+
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+@keyframes animation_through {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes animation_scale {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
