@@ -38,7 +38,7 @@ const Count = (props) => {
 						/>
 					</div>
 					<span className={`${style.days__text} ${inView ? style.animation__countdown_text__up : ''}`}>
-						{dayText}
+						{`${dayText} ${props.underCountText ? props.underCountText : ''}`}
 					</span>
 					<p className={`${style.text} ${inView ? style.animation__text__up : ''}`}>{props.text}</p>
 					<AnchorLink
