@@ -188,6 +188,17 @@
                                 transition: all .4s ease;
                             }
 
+                            &:disabled {
+                                cursor: auto;
+                                background: #edeef0;
+                                color: #8e8e8e;
+
+                                &:hover {
+                                    background: #edeef0;
+                                    color: #8e8e8e;
+                                }
+                            }
+
                             @media (max-width: 600px) {
                                 width: 100%;
                                 font-size: 16px;

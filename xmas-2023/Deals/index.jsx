@@ -122,7 +122,8 @@ const Deals = (props) => {
 										className={`${style.card_button} ${
 											setInview(index) ? style.animation__scale : ''
 										}`}
-										onClick={setModal(index)}>
+										onClick={setModal(index)}
+										disabled>
 										{item.btn_text}
 									</button>
 								</div>
