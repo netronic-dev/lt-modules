@@ -25,6 +25,7 @@ export async function postData(
 					utm_term: routerQuerry.utm_term || '',
 			  }
 			: {},
+		comment: values.comment,
 		fields: [
 			{
 				name: 'Страна',
@@ -44,6 +45,21 @@ export async function postData(
 			{
 				name: 'IP',
 				value: locationInfo.ip,
+			},
+			{
+				name: 'Бюджет клиента',
+				value: values.budget,
+				BXName: 'UF_CRM_1706884779219',
+			},
+			{
+				name: 'Предпочтительный способ коммуникации',
+				value: values.contactMethod,
+				BXName: 'UF_CRM_1706884832536',
+			},
+			{
+				name: 'Бизнес',
+				value: values.planToUse,
+				BXName: 'UF_CRM_1706885168137',
 			},
 		],
 	};
@@ -95,9 +111,7 @@ async function getLocationData() {
 		city: '',
 	};
 	await axios
-		.get(
-			'https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee',
-		)
+		.get('https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee')
 		.then((response: any) => {
 			locationData = {
 				ip: response.data.ip,

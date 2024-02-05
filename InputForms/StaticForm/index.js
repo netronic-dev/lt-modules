@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useModals } from '../../../context/ModalsProvider.js';
 import { phoneMasks } from '../../../Data/phoneMasks.js';
 import axios from 'axios';
+import Dropdown from 'react-dropdown';
 
 const buttonTheme = {
     general: style.general_button_inactive,
@@ -35,10 +36,40 @@ export function ThemeForm (props) {
     const [valid, setValid] = useState(null);
     const [phone, setPhone] = useState(null);
     const [regionCode, setRegionCode] = useState();
+    const [budgetRange, setBudgetRange] = useState(null);
+    const [contactMethod, setContactMethod] = useState(null);
+    const [planToUse, setPlanToUse] = useState(null);
+    const [comment, setComment] = useState(null);
     // const validate = useValidation();
     const router = useRouter();
     const dispatch = useDispatch();
     const modal = useModals();
+
+    const budgetRangeValues = ['$10,000 - $25,000', '$25,000 - $50,000', 'more than $50,000'];
+    const defaultBudgetRangeOption = budgetRange;
+
+    const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
+    const defaultContactMethodOption = contactMethod;
+
+    const planToUseValues = ['for an existing business', 'to start a new business+'];
+    const defaultPlanToUseOption = planToUse;
+
+    const onSelectBudgetRange = (option) => {
+        setBudgetRange(option.value);
+        formik.setFieldValue('budget', option.value);
+    };
+    const onSelectContactMethod = (option) => {
+        setContactMethod(option.value);
+        formik.setFieldValue('contactMethod', option.value);
+    };
+    const onSelectPlanToUse = (option) => {
+        setPlanToUse(option.value);
+        formik.setFieldValue('planToUse', option.value);
+    };
+    const onChangeComment = (e) => {
+        setComment(e.target.value);
+        formik.setFieldValue('comment', e.target.value);
+    };
 
     const validate = (values) => {
         const errors = {};
@@ -54,6 +85,10 @@ export function ThemeForm (props) {
             errors.phone = 'Required';
         }
 
+        if (!values.contactMethod) errors.contactMethod = "Required";
+        if (!values.planToUse) errors.planToUse = "Required";
+        if (!values.budget) errors.budget = "Required";
+
         return errors;
     };
 
@@ -61,6 +96,10 @@ export function ThemeForm (props) {
         initialValues: {
             name: '',
             phone: false,
+            contactMethod: '',
+            planToUse: '',
+            budget: '',
+            comment: '',
         },
         validate,
         onSubmit: (values) => {
@@ -99,48 +138,90 @@ export function ThemeForm (props) {
             }
         >
             <div className={style.inputs}>
-                <InputName
-                    noIcons
-                    theme={props.theme}
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    error={formik.errors.name}
-                    placeholder={props.namePlaceholder}
-                />
-                <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
-                    <PhoneInput
-                        containerClass='business_input__phone_container'
-                        inputClass={valid ? 'input__phone' : 'input__phone_error'}
-                        buttonClass={valid ? 'drop_down' : 'drop_down_error'}
-                        country={regionCode}
-                        enableSearch
-                        masks={phoneMasks}
-                        placeholder="Phone *"
-                        onChange={(value, country, e, formattedValue) => {
-                            const { format, dialCode } = country;
-                            setPhone(value);
-                            if (
-                                format?.length === formattedValue?.length &&
-                                (value.startsWith(dialCode) || dialCode.startsWith(value))
-                            ) {
-                                formik.setFieldValue('phone', true);
-                                setValid(true);
-                            } else {
-                                formik.setFieldValue('phone', false);
-                                setValid(false);
-                            }
-                        }}
-                        isValid
+                <div className={style.inputs_cell}>
+                    <InputName
+                        noIcons
+                        theme={props.theme}
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                        error={formik.errors.name}
+                        placeholder={props.namePlaceholder}
                     />
-                    {!valid && <span className={style.error__message}>Invalid phone number</span>}
+                    <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error__business' : ''}`}>
+                        <PhoneInput
+                            containerClass='business_input__phone_container'
+                            inputClass={valid ? 'input__phone' : 'input__phone_error'}
+                            buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                            country={regionCode}
+                            enableSearch
+                            masks={phoneMasks}
+                            placeholder="Phone *"
+                            onChange={(value, country, e, formattedValue) => {
+                                const { format, dialCode } = country;
+                                setPhone(value);
+                                if (
+                                    format?.length === formattedValue?.length &&
+                                    (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                ) {
+                                    formik.setFieldValue('phone', true);
+                                    setValid(true);
+                                } else {
+                                    formik.setFieldValue('phone', false);
+                                    setValid(false);
+                                }
+                            }}
+                            isValid
+                        />
+                        {!valid && <span className={style.error}>Invalid phone number</span>}
+                    </div>
+                    <div className={style.input_block_out}>
+                        <Dropdown
+                            className={`Dropdown-blue_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
+                            options={budgetRangeValues}
+                            onChange={onSelectBudgetRange}
+                            value={defaultBudgetRangeOption}
+                            placeholder={props.budgetPlaceholder}
+                        />
+                        {formik.errors.budget && (
+                            <span className={style.error}>{formik.errors.budget}</span>
+                        )}
+                    </div>
                 </div>
-                {/* <InputCall
-                    theme={props.theme}
-                    onChange={formik.handleChange}
-                    value={formik.values.phone}
-                    error={formik.errors.phone}
-                    placeholder={props.callPlaceholder}
-                /> */}
+                <div className={style.inputs_cell}>
+                    <div className={style.input_block_out}>
+                        <Dropdown
+                            className={`Dropdown-blue_form  ${formik.errors.contactMethod ? 'Dropdown-error' : ''}`}
+                            options={contactMethodValues}
+                            onChange={onSelectContactMethod}
+                            value={defaultContactMethodOption}
+                            placeholder={props.contactMethodPlaceholder}
+                        />
+                        {formik.errors.contactMethod && (
+                            <span className={style.error}>{formik.errors.contactMethod}</span>
+                        )}
+                    </div>
+                    <div className={style.input_block_out}>
+                        <Dropdown
+                            className={`Dropdown-blue_form  ${formik.errors.planToUse ? 'Dropdown-error' : ''}`}
+                            options={planToUseValues}
+                            onChange={onSelectPlanToUse}
+                            value={defaultPlanToUseOption}
+                            placeholder={props.planToUsePlaceholder}
+                        />
+                        {formik.errors.planToUse && (
+                            <span className={style.error}>{formik.errors.planToUse}</span>
+                        )}
+                    </div>
+                    <div className={style.input_block_out}>
+                        <Input
+                            onChange={onChangeComment}
+                            type='text'
+                            value={formik.values.comment}
+                            placeholder={props.commentPlaceholder}
+                            name='comment'
+                        />
+                    </div>
+                </div>
             </div>
             <button
                 type='submit'
@@ -304,3 +385,19 @@ export function ThemeFormAll (props) {
         </form>
     );
 }
+
+const Input = (props) => {
+    return (
+        <label className={style.input__label}>
+            <input
+                name={props.name}
+                className={`${style.input_white} ${props.error ? style.input__error : ''}`}
+                type={props.type}
+                onChange={props.onChange}
+                value={props.value}
+                placeholder={props.placeholder}
+            />
+            {props.error ? <span className={style.error__message}>{props.error}</span> : null}
+        </label>
+    );
+};
