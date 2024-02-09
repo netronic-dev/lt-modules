@@ -288,6 +288,13 @@ export function PopUpEmailPhone (props) {
     const validate = (values) => {
         const errors = {};
 
+        if (!values.name) {
+            errors.name = 'Required';
+
+        } else if (values.name.length < 2) {
+            errors.name = 'The name must have at least 2 characters';
+        }
+
         if (!values.phone) {
             errors.phone = 'Required';
         }
@@ -309,6 +316,7 @@ export function PopUpEmailPhone (props) {
 
     const formik = useFormik({
         initialValues: {
+            name: '',
             email: '',
             phone: false,
             contactMethod: '',
@@ -404,6 +412,13 @@ export function PopUpEmailPhone (props) {
                     <form onSubmit={formik.handleSubmit}>
                         <div className={style.inputs_block__input}>
                             <div className={style.inputs_block__input_cell}>
+                                <InputName
+                                    noIcons
+                                    onChange={formik.handleChange}
+                                    value={formik.values.name}
+                                    error={formik.errors.name}
+                                    placeholder={props.namePlaceholder}
+                                />
                                 <InputEmail
                                     noIcons
                                     onChange={formik.handleChange}
