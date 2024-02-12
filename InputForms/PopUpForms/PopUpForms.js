@@ -29,7 +29,7 @@ export function PopUpNamePhone (props) {
     const [contactMethod, setContactMethod] = useState(null);
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
-    // const validate = useValidation();
+
     const router = useRouter();
     const modal = useModals();
     const dispatch = useDispatch();
@@ -275,7 +275,7 @@ export function PopUpEmailPhone (props) {
     const [contactMethod, setContactMethod] = useState(null);
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
-    // const validate = useValidation();
+
     const router = useRouter();
     const modal = useModals();
     const [agreement, changeAgreement] = useState(false);
@@ -546,7 +546,7 @@ export function PopUpEvent (props) {
     const [contactMethod, setContactMethod] = useState(null);
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
-    // const validate = useValidation();
+
     const router = useRouter();
     const modal = useModals();
     const dispatch = useDispatch();
@@ -711,11 +711,6 @@ export function PopUpEvent (props) {
                                 />
                                 {!valid && <span className={style.error__message}>Invalid phone number</span>}
                             </div>
-                            {/* <InputCall
-                                onChange={formik.handleChange}
-                                value={formik.values.phone}
-                                error={formik.errors.phone}
-                            /> */}
                             <div className={style.input_block_out}>
                                 <Dropdown
                                     className={`Dropdown-black_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
@@ -799,7 +794,7 @@ export function PopUpEvent (props) {
 }
 
 export function PopUpNameEmail (props) {
-    // const validate = useValidation();
+
     const router = useRouter();
     const modal = useModals();
     const dispatch = useDispatch();
