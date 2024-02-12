@@ -51,7 +51,7 @@ export function ThemeForm (props) {
     const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
     const defaultContactMethodOption = contactMethod;
 
-    const planToUseValues = ['for an existing business', 'to start a new business+'];
+    const planToUseValues = ['for an existing business', 'to start a new business'];
     const defaultPlanToUseOption = planToUse;
 
     const onSelectBudgetRange = (option) => {
