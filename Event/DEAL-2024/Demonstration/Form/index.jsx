@@ -46,32 +46,31 @@ const Form = (props) => {
         onSubmit: (values) => {
             console.log(values.name);
             dispatch(addUserData(values.name));
-            // dispatch(setUserData(values.name));
-            // postData(
-            // 	values,
-            // 	props.destinationURL,
-            // 	props.orderName,
-            // 	props.lang,
-            // 	window.location.hostname,
-            // 	router.query,
-            // 	[
-            // 		{
-            // 			name: 'date',
-            // 			value: values.date,
-            // 			BXName: 'UF_CRM_1599805349',
-            // 		},
-            // 		{
-            // 			name: 'Type of Equipment',
-            // 			value: values.equipmentType,
-            // 			BXName: 'UF_CRM_1624974650',
-            // 		},
-            // 	],
-            // ).then(
-            // 	ReactGA.event('generate_lead', {
-            // 		event_category: 'button',
-            // 		event_label: 'generate_lead',
-            // 	}),
-            // );
+            postData(
+                values,
+                props.destinationURL,
+                props.orderName,
+                props.lang,
+                window.location.hostname,
+                router.query,
+                [
+                    {
+                        name: "date",
+                        value: values.date,
+                        BXName: "UF_CRM_1599805349",
+                    },
+                    {
+                        name: "Type of Equipment",
+                        value: values.equipmentType,
+                        BXName: "UF_CRM_1624974650",
+                    },
+                ]
+            ).then(
+                ReactGA.event("generate_lead", {
+                    event_category: "button",
+                    event_label: "generate_lead",
+                })
+            );
             document.body.className = "";
             router.push(props.thank_you_page_url);
         },
