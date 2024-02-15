@@ -1,0 +1,182 @@
+.benefits {
+    padding: 41px 0 96px 0;
+    background-color: #f3faff;
+
+    @media (max-width: 1200px) {
+        padding: 41px 20px 96px;
+    }
+
+    @media (max-width: 550px) {
+        padding: 41px 20px 38px;
+    }
+
+    .container {
+        width: 1170px;
+        margin: 0 auto;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+            color: #000;
+            text-align: center;
+            font-family: Manrope;
+            font-size: 45px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 144.444%;
+            text-transform: uppercase;
+
+            @media (max-width: 1200px) {
+                font-size: 40px;
+            }
+
+            @media (max-width: 880px) {
+                font-size: 28.495px;
+            }
+
+            @media (max-width: 550px) {
+                font-size: 30px;
+            }
+        }
+
+        .text {
+            margin-top: 12px;
+            text-align: center;
+            color: #000;
+            text-align: center;
+            font-family: Manrope;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            @media (max-width: 1200px) {
+                margin-top: 10px;
+                font-size: 20.786px;
+            }
+
+            @media (max-width: 880px) {
+                margin-top: 8px;
+                font-size: 15.197px;
+            }
+
+            @media (max-width: 550px) {
+                margin-top: 15px;
+                nt-size: 13px;
+            }
+        }
+
+        .benefits_grid {
+            margin-top: 77px;
+            display: flex;
+            flex-direction: column;
+            gap: 74px;
+
+            @media (max-width: 1024px) {
+                margin-top: 62px;
+                gap: 62px;
+            }
+
+            @media (max-width: 880px) {
+                margin-top: 48px;
+                gap: 50px;
+            }
+
+            @media (max-width: 550px) {
+                margin-top: 60px;
+                gap: 48px;
+            }
+
+            .grid_cell {
+                margin: 0 auto;
+                max-width: 305px;
+            }
+
+            .upper_row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                justify-content: center;
+                gap: 28px;
+
+                @media (max-width: 1024px) {
+                    gap: 23px;
+                }
+
+                @media (max-width: 550px) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .bottom_row {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+
+                @media (max-width: 550px) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .icon_image {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80px;
+
+                @media (max-width: 1200px) {
+                    height: 65px;
+                }
+
+                @media (max-width: 880px) {
+                    height: 55px;
+                }
+
+                @media (max-width: 700px) {
+                    height: 40px;
+                }
+            }
+
+            .divider {
+                margin: 24px 20px 38px;
+                height: 1px;
+                width: 80%;
+                background: #d9d9d9;
+
+                @media (max-width: 1200px) {
+                    margin: 15px auto 24px auto;
+                }
+
+                @media (max-width: 550px) {
+                    margin: 41px auto 36px auto;
+                }
+            }
+
+            .text {
+                color: #000;
+                font-family: Manrope;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+
+                @media (max-width: 1200px) {
+                    font-size: 15.59px;
+                }
+
+                @media (max-width: 880px) {
+                    font-size: 11.398px;
+                }
+
+                @media (max-width: 550px) {
+                    font-size: 17.041px;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,9 @@
 .main {
     position: relative;
     padding: 94px 0 125px 0;
-    background-color: #F3FAFF;
+    background-color: #f3faff;
     z-index: 2;
+    overflow: hidden;
 
     .content {
         width: 1170px;
@@ -46,8 +47,8 @@
 
                 &:nth-child(2) {
                     padding: 0 70px;
-                    border-left: 1px solid #D9D9D9;
-                    border-right: 1px solid #D9D9D9;
+                    border-left: 1px solid #d9d9d9;
+                    border-right: 1px solid #d9d9d9;
                 }
 
                 .cell_title {
@@ -63,8 +64,7 @@
                     width: 33px;
                     height: 3px;
                     border-radius: 50px;
-                    background: #0090FF;
-
+                    background: #0090ff;
                 }
 
                 .link {
@@ -82,10 +82,10 @@
     .background_image {
         position: relative;
         position: absolute;
-        top: -50px;
+        top: 20px;
         left: 50%;
-        width: 454px;
-        height: 484px;
+        width: 404px;
+        height: 424px;
         z-index: -1;
         transform: translateX(100%);
     }
@@ -148,7 +148,6 @@
     .main {
         .content {
             .cell_wrapper {
-
                 .cell {
                     width: 150px;
                 }

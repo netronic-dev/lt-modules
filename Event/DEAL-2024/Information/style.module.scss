@@ -1,0 +1,172 @@
+.main {
+    padding: 0 0 60px;
+    width: 1170px;
+    margin: 0 auto;
+
+    .title {
+        color: #000;
+        text-align: center;
+        font-family: Manrope;
+        font-size: 45px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+    .even_block {
+        margin-top: 95px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 75px;
+
+        .logo_and_button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 88px;
+
+            .image_block {
+                position: relative;
+                height: 183px;
+                width: 309px;
+            }
+
+            .button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                width: 278px;
+                height: 57px;
+                border-radius: 60px;
+                background: #0090ff;
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.36px;
+                text-transform: uppercase;
+                transition: background 0.4s ease;
+
+                &:hover {
+                    background: #000;
+                    color: #fff;
+                }
+            }
+        }
+
+        .event_info {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+
+            .info_row {
+                display: grid;
+                gap: 4px;
+
+                .icon_cell {
+                    display: flex;
+                    gap: 12px;
+
+                    .icon_text {
+                        color: #8e8e8e;
+                        text-align: center;
+                        font-family: Manrope;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+                        text-transform: uppercase;
+                    }
+                }
+
+                .empty_icon_cell {
+                    width: 24px;
+                    height: 28px;
+                }
+
+                .cell_text {
+                    color: #040e18;
+                    font-family: Manrope;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 155.556%;
+                    margin-left: 45px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .main {
+        padding: 0 20px 150px 20px;
+        width: 100%;
+
+        .even_block {
+            gap: 70px 154px;
+            justify-content: center;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .main {
+        .even_block {
+            gap: 70px;
+        }
+    }
+}
+
+@media (max-width: 735px) {
+    .main {
+        padding: 50px 15px 50px 15px;
+
+        .title {
+            font-size: 35px;
+        }
+
+        .even_block {
+            gap: 30px;
+            margin-top: 30px;
+            grid-template-columns: 1fr;
+
+            .image_block {
+                position: relative;
+                height: 90px;
+            }
+
+            .event_info {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                .info_row {
+                    flex: 1 1 30%;
+                    max-width: 400px;
+
+                    .icon_cell {
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 4px;
+                    }
+
+                    .empty_icon_cell {
+                        display: none;
+                    }
+
+                    .cell_text {
+                        font-size: 12px;
+                        margin-left: 0;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
