@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import style from "./style.module.scss";
+import { useModals } from "../../../../context/ModalsProvider";
 
 const Customers = (props) => {
+    const modals = useModals();
+
     const getLInk = (index) => {
         switch (index) {
             case 0:
-                return "https://www.youtube.com/watch?v=SCeoOnjKmMY&list=PLLQp1pbhB3oMqpIgBQKnw-zmtMvtV6Vpz&index=1";
+                return "SCeoOnjKmMY";
             case 1:
-                return "https://www.youtube.com/watch?v=Fd9_F5lmOYg&list=PLLQp1pbhB3oMqpIgBQKnw-zmtMvtV6Vpz&index=3";
+                return "Fd9_F5lmOYg";
             case 2:
-                return "https://www.youtube.com/watch?v=VGkBFgFQ8aw&list=PLLQp1pbhB3oMqpIgBQKnw-zmtMvtV6Vpz&index=5";
+                return "VGkBFgFQ8aw";
             default:
                 break;
         }
@@ -25,7 +28,9 @@ const Customers = (props) => {
                         <div className={style.cell} key={index}>
                             <a
                                 className={style.cell_image}
-                                href={getLInk(index)}
+                                onClick={() =>
+                                    modals.VideoModalOpen(getLInk(index))
+                                }
                                 target="_blank"
                             >
                                 <Image
@@ -46,7 +51,9 @@ const Customers = (props) => {
                             </a>
                             <div className={style.divider}></div>
                             <a
-                                href={getLInk(index)}
+                                onClick={() =>
+                                    modals.VideoModalOpen(getLInk(index))
+                                }
                                 target="_blank"
                                 className={style.cell_text}
                             >
