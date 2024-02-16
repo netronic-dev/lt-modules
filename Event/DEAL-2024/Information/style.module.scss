@@ -64,6 +64,10 @@
             flex-direction: column;
             gap: 14px;
 
+            @media (max-width: 450px) {
+                gap: 4px;
+            }
+
             .info_row {
                 display: grid;
                 gap: 4px;
