@@ -163,19 +163,19 @@ export function Contacts(props) {
                             <p className={style.title}>
                                 {props.phoneTitle || "Phone"}
                             </p>
-                            <Link href="tel:+5276273533347">
+                            <Link href="tel:+17087891050">
                                 <a
                                     target="_blank"
                                     onClick={() =>
                                         GAEvents.buttonClick(
                                             "Footer",
                                             "Link click",
-                                            "tel:+5276273533347"
+                                            "tel:+17087891050"
                                         )
                                     }
                                 >
                                     <p className={style.contacts__link}>
-                                        +5 276 273 533 347
+                                        +1 (708) 789-1050
                                     </p>
                                 </a>
                             </Link>
@@ -201,14 +201,14 @@ export function Contacts(props) {
                             </Link>
                         </div> */}
                         <div className={style.icon_item}>
-                            <Link href="https://wa.me/5276273533347">
+                            <Link href="https://wa.me/17087891050">
                                 <a
                                     target="_blank"
                                     onClick={() =>
                                         GAEvents.buttonClick(
                                             "Footer",
                                             "Link click",
-                                            "https://wa.me/5276273533347"
+                                            "https://wa.me/17087891050"
                                         )
                                     }
                                 >
