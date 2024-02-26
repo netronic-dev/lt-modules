@@ -1,27 +1,27 @@
-import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
-import style from '../forms.module.scss';
-import { useRouter } from 'next/router';
-import { icons } from '../icons/icons';
-import { InputName, InputCall, InputEmail } from '../Inputs/Inputs';
-import { useModals } from '../../../context/ModalsProvider';
-import { useValidation } from '../../../context/ValidationProvider';
-import { postData } from '../../functions/postData.ts';
-import { useDispatch } from 'react-redux';
-import { setUserData } from '../../../store/actions/userData';
-import { useGAEvents } from '../../../context/GAEventsProvider';
-import { phoneMasks } from '../../../Data/phoneMasks';
-import ReactGA from 'react-ga4';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-import axios from 'axios';
-import Dropdown from 'react-dropdown';
+import { useFormik } from "formik";
+import { useEffect, useState } from "react";
+import style from "../forms.module.scss";
+import { useRouter } from "next/router";
+import { icons } from "../icons/icons";
+import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
+import { useModals } from "../../../context/ModalsProvider";
+import { useValidation } from "../../../context/ValidationProvider";
+import { postData } from "../../functions/postData.ts";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../../store/actions/userData";
+import { useGAEvents } from "../../../context/GAEventsProvider";
+import { phoneMasks } from "../../../Data/phoneMasks";
+import ReactGA from "react-ga4";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import axios from "axios";
+import Dropdown from "react-dropdown";
 
-function turnOnScroll () {
-    document.body.className = '';
+function turnOnScroll() {
+    document.body.className = "";
 }
 
-export function PopUpNamePhone (props) {
+export function PopUpNamePhone(props) {
     const [valid, setValid] = useState(null);
     const [phone, setPhone] = useState(null);
     const [regionCode, setRegionCode] = useState();
@@ -36,52 +36,57 @@ export function PopUpNamePhone (props) {
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
 
-    function onAgreementChange () {
+    function onAgreementChange() {
         changeAgreement(!agreement);
     }
 
-    const budgetRangeValues = ['$10,000 - $25,000', '$25,000 - $50,000', 'more than $50,000'];
+    const budgetRangeValues = [
+        "$10,000 - $25,000",
+        "$25,000 - $50,000",
+        "more than $50,000",
+    ];
     const defaultBudgetRangeOption = budgetRange;
 
-    const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
+    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
     const defaultContactMethodOption = contactMethod;
 
-    const planToUseValues = ['for an existing business', 'to start a new business'];
+    const planToUseValues = [
+        "for an existing business",
+        "to start a new business",
+    ];
     const defaultPlanToUseOption = planToUse;
 
     const onSelectBudgetRange = (option) => {
         setBudgetRange(option.value);
-        formik.setFieldValue('budget', option.value);
+        formik.setFieldValue("budget", option.value);
     };
     const onSelectContactMethod = (option) => {
         setContactMethod(option.value);
-        formik.setFieldValue('contactMethod', option.value);
+        formik.setFieldValue("contactMethod", option.value);
     };
     const onSelectPlanToUse = (option) => {
         setPlanToUse(option.value);
-        formik.setFieldValue('planToUse', option.value);
+        formik.setFieldValue("planToUse", option.value);
     };
     const onChangeComment = (e) => {
         setComment(e.target.value);
-        formik.setFieldValue('comment', e.target.value);
+        formik.setFieldValue("comment", e.target.value);
     };
 
     const validate = (values) => {
         const errors = {};
 
         if (!values.name) {
-            errors.name = 'Required';
-
+            errors.name = "Required";
         } else if (values.name.length < 2) {
-            errors.name = 'The name must have at least 2 characters';
+            errors.name = "The name must have at least 2 characters";
         }
 
         if (!values.phone) {
-            errors.phone = 'Required';
+            errors.phone = "Required";
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.planToUse) errors.planToUse = "Required";
         if (!values.budget) errors.budget = "Required";
 
         return errors;
@@ -89,12 +94,12 @@ export function PopUpNamePhone (props) {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
+            name: "",
             phone: false,
-            contactMethod: '',
-            planToUse: '',
-            budget: '',
-            comment: '',
+            contactMethod: "",
+            planToUse: "",
+            budget: "",
+            comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -111,9 +116,9 @@ export function PopUpNamePhone (props) {
                 window.location.hostname,
                 router.query
             ).then(
-                ReactGA.event('generate_lead', {
-                    event_category: 'button',
-                    event_label: 'generate_lead',
+                ReactGA.event("generate_lead", {
+                    event_category: "button",
+                    event_label: "generate_lead",
                 })
             );
             modal.NamePhoneModalChangeVisibility();
@@ -124,7 +129,9 @@ export function PopUpNamePhone (props) {
 
     useEffect(() => {
         console.log(modal?.region);
-        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+        modal?.region
+            ? setRegionCode(modal?.region.toLowerCase())
+            : setRegionCode("us");
     }, [modal.region]);
 
     return (
@@ -136,10 +143,10 @@ export function PopUpNamePhone (props) {
                 </div>
                 <div className={style.text_block}>
                     <p className={style.title}>
-                        {props.title || 'Fill in the form below'}
+                        {props.title || "Fill in the form below"}
                     </p>
                     <p className={style.paragraph}>
-                        {props.subtitle || 'Our manager will contact you'}
+                        {props.subtitle || "Our manager will contact you"}
                     </p>
                 </div>
                 <div className={style.inputs_block__inputs}>
@@ -153,42 +160,82 @@ export function PopUpNamePhone (props) {
                                     error={formik.errors.name}
                                     placeholder={props.namePlaceholder}
                                 />
-                                <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                                <div
+                                    className={`${style.phone__input_block} ${
+                                        formik.errors.phone
+                                            ? "phone__input__error"
+                                            : ""
+                                    }`}
+                                >
                                     <PhoneInput
-                                        containerClass='catalog_input__phone_container'
-                                        inputClass={valid ? 'input__phone' : 'input__phone_error'}
-                                        buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                        containerClass="catalog_input__phone_container"
+                                        inputClass={
+                                            valid
+                                                ? "input__phone"
+                                                : "input__phone_error"
+                                        }
+                                        buttonClass={
+                                            valid
+                                                ? "drop_down"
+                                                : "drop_down_error"
+                                        }
                                         country={regionCode}
                                         enableSearch
                                         masks={phoneMasks}
                                         placeholder={props.callPlaceholder}
-                                        onChange={(value, country, e, formattedValue) => {
-                                            const { format, dialCode } = country;
+                                        onChange={(
+                                            value,
+                                            country,
+                                            e,
+                                            formattedValue
+                                        ) => {
+                                            const { format, dialCode } =
+                                                country;
                                             setPhone(value);
                                             if (
-                                                format?.length === formattedValue?.length &&
-                                                (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                                format?.length ===
+                                                    formattedValue?.length &&
+                                                (value.startsWith(dialCode) ||
+                                                    dialCode.startsWith(value))
                                             ) {
-                                                formik.setFieldValue('phone', true);
+                                                formik.setFieldValue(
+                                                    "phone",
+                                                    true
+                                                );
                                                 setValid(true);
                                             } else {
-                                                formik.setFieldValue('phone', false);
+                                                formik.setFieldValue(
+                                                    "phone",
+                                                    false
+                                                );
                                                 setValid(false);
                                             }
                                         }}
                                         isValid
                                     />
-                                    {!valid && <span className={style.error__message}>Invalid phone number</span>}
+                                    {!valid && (
+                                        <span className={style.error__message}>
+                                            Invalid phone number
+                                        </span>
+                                    )}
                                     <div className={style.input_block_out}>
                                         <Dropdown
-                                            className={`Dropdown-black_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
+                                            className={`Dropdown-black_form  ${
+                                                formik.errors.budget
+                                                    ? "Dropdown-error"
+                                                    : ""
+                                            }`}
                                             options={budgetRangeValues}
                                             onChange={onSelectBudgetRange}
                                             value={defaultBudgetRangeOption}
-                                            placeholder={props.budgetPlaceholder}
+                                            placeholder={
+                                                props.budgetPlaceholder
+                                            }
                                         />
                                         {formik.errors.budget && (
-                                            <span className={style.error}>{formik.errors.budget}</span>
+                                            <span className={style.error}>
+                                                {formik.errors.budget}
+                                            </span>
                                         )}
                                     </div>
                                 </div>
@@ -196,67 +243,81 @@ export function PopUpNamePhone (props) {
                             <div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.contactMethod ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.contactMethod
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={contactMethodValues}
                                         onChange={onSelectContactMethod}
                                         value={defaultContactMethodOption}
-                                        placeholder={props.contactMethodPlaceholder}
+                                        placeholder={
+                                            props.contactMethodPlaceholder
+                                        }
                                     />
                                     {formik.errors.contactMethod && (
-                                        <span className={style.error__message}>{formik.errors.contactMethod}</span>
+                                        <span className={style.error__message}>
+                                            {formik.errors.contactMethod}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.planToUse ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.planToUse
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={planToUseValues}
                                         onChange={onSelectPlanToUse}
                                         value={defaultPlanToUseOption}
                                         placeholder={props.planToUsePlaceholder}
                                     />
                                     {formik.errors.planToUse && (
-                                        <span className={style.error__message}>{formik.errors.planToUse}</span>
+                                        <span className={style.error__message}>
+                                            {formik.errors.planToUse}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Input
                                         onChange={onChangeComment}
-                                        type='text'
+                                        type="text"
                                         value={formik.values.comment}
                                         placeholder={props.commentPlaceholder}
-                                        name='comment'
+                                        name="comment"
                                     />
+                                </div>
+                                <div className={style.agreement}>
+                                    <div
+                                        className={
+                                            agreement === true
+                                                ? style.agreement_dot_button_active
+                                                : style.agreement_dot_button
+                                        }
+                                        onClick={onAgreementChange}
+                                    >
+                                        {icons.dot}
+                                    </div>
+                                    <p className={style.agreement__text}>
+                                        <span onClick={onAgreementChange}>
+                                            {props.agreement_text}
+                                        </span>{" "}
+                                        {props.agreement_link}
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{' '}
-                                {props.agreement_link}
-                            </p>
-                        </div>
                         <button
-                            type={agreement ? 'submit' : 'button'}
-                            className={`${agreement
-                                ? Object.keys(formik.errors).length == 0
-                                    ? style.general_button_active
+                            type={agreement ? "submit" : "button"}
+                            className={`${
+                                agreement
+                                    ? Object.keys(formik.errors).length == 0
+                                        ? style.general_button_active
+                                        : style.general_button_inactive
                                     : style.general_button_inactive
-                                : style.general_button_inactive
-                                } "button-submit"`}
+                            } "button-submit"`}
                         >
                             {props.buttonText}
                         </button>
@@ -267,7 +328,7 @@ export function PopUpNamePhone (props) {
     );
 }
 
-export function PopUpEmailPhone (props) {
+export function PopUpEmailPhone(props) {
     const [valid, setValid] = useState(null);
     const [phone, setPhone] = useState(null);
     const [regionCode, setRegionCode] = useState();
@@ -281,7 +342,7 @@ export function PopUpEmailPhone (props) {
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
 
-    function onAgreementChange () {
+    function onAgreementChange() {
         changeAgreement(!agreement);
     }
 
@@ -289,26 +350,26 @@ export function PopUpEmailPhone (props) {
         const errors = {};
 
         if (!values.name) {
-            errors.name = 'Required';
-
+            errors.name = "Required";
         } else if (values.name.length < 2) {
-            errors.name = 'The name must have at least 2 characters';
+            errors.name = "The name must have at least 2 characters";
         }
 
         if (!values.phone) {
-            errors.phone = 'Required';
+            errors.phone = "Required";
         }
 
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = "Required";
         } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
+                values.email
+            )
         ) {
-            errors.email = 'Invalid email address';
+            errors.email = "Invalid email address";
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.planToUse) errors.planToUse = "Required";
         if (!values.budget) errors.budget = "Required";
 
         return errors;
@@ -316,13 +377,13 @@ export function PopUpEmailPhone (props) {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            email: '',
+            name: "",
+            email: "",
             phone: false,
-            contactMethod: '',
-            planToUse: '',
-            budget: '',
-            comment: '',
+            contactMethod: "",
+            planToUse: "",
+            budget: "",
+            comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -331,12 +392,16 @@ export function PopUpEmailPhone (props) {
                 phone: `+${phone}`,
             };
             const options = {
-                method: 'POST',
+                method: "POST",
                 url: `https://api.netronic.net/send-email`,
                 headers: {
-                    'content-type': 'application/json',
+                    "content-type": "application/json",
                 },
-                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+                data: {
+                    email: values.email,
+                    fromName: props.fromName,
+                    letterId: props.letterId,
+                },
             };
             axios
                 .request(options)
@@ -348,14 +413,14 @@ export function PopUpEmailPhone (props) {
                         props.orderName,
                         props.lang,
                         window.location.href,
-                        router.query,
-                    ),
+                        router.query
+                    )
                 )
                 .then(router.push(props.thank_you_page))
                 .catch(console.log);
-            ReactGA.event('generate_lead', {
-                category: 'form',
-                action: 'submit',
+            ReactGA.event("generate_lead", {
+                category: "form",
+                action: "submit",
             });
             modal.EmailPhoneModalChangeVisibility();
             turnOnScroll();
@@ -363,33 +428,42 @@ export function PopUpEmailPhone (props) {
     });
 
     useEffect(() => {
-        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+        modal?.region
+            ? setRegionCode(modal?.region.toLowerCase())
+            : setRegionCode("us");
     }, [modal.region]);
 
-    const budgetRangeValues = ['$10,000 - $25,000', '$25,000 - $50,000', 'more than $50,000'];
+    const budgetRangeValues = [
+        "$10,000 - $25,000",
+        "$25,000 - $50,000",
+        "more than $50,000",
+    ];
     const defaultBudgetRangeOption = budgetRange;
 
-    const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
+    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
     const defaultContactMethodOption = contactMethod;
 
-    const planToUseValues = ['for an existing business', 'to start a new business'];
+    const planToUseValues = [
+        "for an existing business",
+        "to start a new business",
+    ];
     const defaultPlanToUseOption = planToUse;
 
     const onSelectBudgetRange = (option) => {
         setBudgetRange(option.value);
-        formik.setFieldValue('budget', option.value);
+        formik.setFieldValue("budget", option.value);
     };
     const onSelectContactMethod = (option) => {
         setContactMethod(option.value);
-        formik.setFieldValue('contactMethod', option.value);
+        formik.setFieldValue("contactMethod", option.value);
     };
     const onSelectPlanToUse = (option) => {
         setPlanToUse(option.value);
-        formik.setFieldValue('planToUse', option.value);
+        formik.setFieldValue("planToUse", option.value);
     };
     const onChangeComment = (e) => {
         setComment(e.target.value);
-        formik.setFieldValue('comment', e.target.value);
+        formik.setFieldValue("comment", e.target.value);
     };
 
     return (
@@ -401,11 +475,11 @@ export function PopUpEmailPhone (props) {
                 </div>
                 <div className={style.text_block}>
                     <p className={style.title}>
-                        {props.title || 'Fill in the form below'}
+                        {props.title || "Fill in the form below"}
                     </p>
                     <p className={style.paragraph}>
                         {props.subTitle ||
-                            'Get an equipment catalog with prices'}
+                            "Get an equipment catalog with prices"}
                     </p>
                 </div>
                 <div className={style.inputs_block__inputs}>
@@ -426,110 +500,164 @@ export function PopUpEmailPhone (props) {
                                     error={formik.errors.email}
                                     placeholder={props.emailPlaceholder}
                                 />
-                                <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                                <div
+                                    className={`${style.phone__input_block} ${
+                                        formik.errors.phone
+                                            ? "phone__input__error"
+                                            : ""
+                                    }`}
+                                >
                                     <PhoneInput
-                                        containerClass='catalog_input__phone_container'
-                                        inputClass={valid ? 'input__phone' : 'input__phone_error'}
-                                        buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                        containerClass="catalog_input__phone_container"
+                                        inputClass={
+                                            valid
+                                                ? "input__phone"
+                                                : "input__phone_error"
+                                        }
+                                        buttonClass={
+                                            valid
+                                                ? "drop_down"
+                                                : "drop_down_error"
+                                        }
                                         country={regionCode}
                                         enableSearch
                                         masks={phoneMasks}
                                         placeholder="Phone *"
-                                        onChange={(value, country, e, formattedValue) => {
-                                            const { format, dialCode } = country;
+                                        onChange={(
+                                            value,
+                                            country,
+                                            e,
+                                            formattedValue
+                                        ) => {
+                                            const { format, dialCode } =
+                                                country;
                                             setPhone(value);
                                             if (
-                                                format?.length === formattedValue?.length &&
-                                                (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                                format?.length ===
+                                                    formattedValue?.length &&
+                                                (value.startsWith(dialCode) ||
+                                                    dialCode.startsWith(value))
                                             ) {
-                                                formik.setFieldValue('phone', true);
+                                                formik.setFieldValue(
+                                                    "phone",
+                                                    true
+                                                );
                                                 setValid(true);
                                             } else {
-                                                formik.setFieldValue('phone', false);
+                                                formik.setFieldValue(
+                                                    "phone",
+                                                    false
+                                                );
                                                 setValid(false);
                                             }
                                         }}
                                         isValid
                                     />
-                                    {!valid && <span className={style.error_Phone}>Invalid phone number</span>}
+                                    {!valid && (
+                                        <span className={style.error_Phone}>
+                                            Invalid phone number
+                                        </span>
+                                    )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.budget
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={budgetRangeValues}
                                         onChange={onSelectBudgetRange}
                                         value={defaultBudgetRangeOption}
                                         placeholder={props.budgetPlaceholder}
                                     />
                                     {formik.errors.budget && (
-                                        <span className={style.error}>{formik.errors.budget}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.budget}
+                                        </span>
                                     )}
                                 </div>
                             </div>
                             <div className={style.inputs_block__input_cell}>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.contactMethod ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.contactMethod
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={contactMethodValues}
                                         onChange={onSelectContactMethod}
                                         value={defaultContactMethodOption}
-                                        placeholder={props.contactMethodPlaceholder}
+                                        placeholder={
+                                            props.contactMethodPlaceholder
+                                        }
                                     />
                                     {formik.errors.contactMethod && (
-                                        <span className={style.error}>{formik.errors.contactMethod}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.contactMethod}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.planToUse ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.planToUse
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={planToUseValues}
                                         onChange={onSelectPlanToUse}
                                         value={defaultPlanToUseOption}
                                         placeholder={props.planToUsePlaceholder}
                                     />
                                     {formik.errors.planToUse && (
-                                        <span className={style.error}>{formik.errors.planToUse}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.planToUse}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Input
                                         onChange={onChangeComment}
-                                        type='text'
+                                        type="text"
                                         value={formik.values.comment}
                                         placeholder={props.commentPlaceholder}
-                                        name='comment'
+                                        name="comment"
                                     />
+                                </div>
+                                <div className={style.agreement}>
+                                    <div
+                                        className={
+                                            agreement === true
+                                                ? style.agreement_dot_button_active
+                                                : style.agreement_dot_button
+                                        }
+                                        onClick={onAgreementChange}
+                                    >
+                                        {icons.dot}
+                                    </div>
+                                    <p className={style.agreement__text}>
+                                        <span onClick={onAgreementChange}>
+                                            {props.agreement_text}
+                                        </span>{" "}
+                                        {props.agreement_link}
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{' '}
-                                {props.agreement_link}
-                            </p>
-                        </div>
+
                         <button
-                            type={agreement ? 'submit' : 'button'}
-                            className={`${agreement
-                                ? Object.keys(formik.errors).length == 0
-                                    ? style.general_button_active
+                            type={agreement ? "submit" : "button"}
+                            className={`${
+                                agreement
+                                    ? Object.keys(formik.errors).length == 0
+                                        ? style.general_button_active
+                                        : style.general_button_inactive
                                     : style.general_button_inactive
-                                : style.general_button_inactive
-                                } "button-submit"`}
+                            } "button-submit"`}
                         >
-                            {props.buttonText || 'Get catalog'}
+                            {props.buttonText || "Get catalog"}
                         </button>
                     </form>
                 </div>
@@ -538,7 +666,7 @@ export function PopUpEmailPhone (props) {
     );
 }
 
-export function PopUpEvent (props) {
+export function PopUpEvent(props) {
     const [valid, setValid] = useState(null);
     const [phone, setPhone] = useState(null);
     const [regionCode, setRegionCode] = useState();
@@ -553,7 +681,7 @@ export function PopUpEvent (props) {
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
 
-    function onAgreementChange () {
+    function onAgreementChange() {
         changeAgreement(!agreement);
     }
 
@@ -561,67 +689,77 @@ export function PopUpEvent (props) {
         const errors = {};
 
         if (!values.name) {
-            errors.name = 'Required';
-
+            errors.name = "Required";
         } else if (values.name.length < 2) {
-            errors.name = 'The name must have at least 2 characters';
+            errors.name = "The name must have at least 2 characters";
         }
 
         if (!values.phone) {
-            errors.phone = 'Required';
+            errors.phone = "Required";
         }
 
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = "Required";
         } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
+                values.email
+            )
         ) {
-            errors.email = 'Invalid email address';
+            errors.email = "Invalid email address";
         }
 
         return errors;
     };
 
-    const budgetRangeValues = ['$10,000 - $25,000', '$25,000 - $50,000', 'more than $50,000'];
+    const budgetRangeValues = [
+        "$10,000 - $25,000",
+        "$25,000 - $50,000",
+        "more than $50,000",
+    ];
     const defaultBudgetRangeOption = budgetRange;
 
-    const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
+    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
     const defaultContactMethodOption = contactMethod;
 
-    const planToUseValues = ['for an existing business', 'to start a new business'];
+    const planToUseValues = [
+        "for an existing business",
+        "to start a new business",
+    ];
     const defaultPlanToUseOption = planToUse;
 
     const onSelectBudgetRange = (option) => {
         setBudgetRange(option.value);
-        formik.setFieldValue('budget', option.value);
+        formik.setFieldValue("budget", option.value);
     };
     const onSelectContactMethod = (option) => {
         setContactMethod(option.value);
-        formik.setFieldValue('contactMethod', option.value);
+        formik.setFieldValue("contactMethod", option.value);
     };
     const onSelectPlanToUse = (option) => {
         setPlanToUse(option.value);
-        formik.setFieldValue('planToUse', option.value);
+        formik.setFieldValue("planToUse", option.value);
     };
     const onChangeComment = (e) => {
         setComment(e.target.value);
-        formik.setFieldValue('comment', e.target.value);
+        formik.setFieldValue("comment", e.target.value);
     };
 
     useEffect(() => {
         console.log(modal?.region);
-        modal?.region ? setRegionCode(modal?.region.toLowerCase()) : setRegionCode('us');
+        modal?.region
+            ? setRegionCode(modal?.region.toLowerCase())
+            : setRegionCode("us");
     }, [modal.region]);
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            email: "",
             phone: false,
-            name: '',
-            contactMethod: '',
-            planToUse: '',
-            budget: '',
-            comment: '',
+            name: "",
+            contactMethod: "",
+            planToUse: "",
+            budget: "",
+            comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -631,30 +769,35 @@ export function PopUpEvent (props) {
                 phone: `+${phone}`,
             };
             const options = {
-                method: 'POST',
+                method: "POST",
                 url: `https://api.netronic.net/send-email`,
                 headers: {
-                    'content-type': 'application/json',
+                    "content-type": "application/json",
                 },
-                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+                data: {
+                    email: values.email,
+                    fromName: props.fromName,
+                    letterId: props.letterId,
+                },
             };
-            axios.request(options).then(postData(
-                data,
-                props.destinationURL,
-                props.orderName,
-                props.lang,
-                window.location.hostname,
-                router.query
-            ).then(
-                ReactGA.event('generate_lead', {
-                    event_category: 'button',
-                    event_label: 'generate_lead',
-                })
-            ));
+            axios.request(options).then(
+                postData(
+                    data,
+                    props.destinationURL,
+                    props.orderName,
+                    props.lang,
+                    window.location.hostname,
+                    router.query
+                ).then(
+                    ReactGA.event("generate_lead", {
+                        event_category: "button",
+                        event_label: "generate_lead",
+                    })
+                )
+            );
             modal.EventModalChangeVisibility();
             router.push(props.thank_you_page);
             turnOnScroll();
-
         },
     });
 
@@ -667,7 +810,7 @@ export function PopUpEvent (props) {
                 </div>
                 <div className={style.text_block}>
                     <p className={style.title}>
-                        {props.title || 'Fill in the form below'}
+                        {props.title || "Fill in the form below"}
                     </p>
                     <p className={style.paragraph}>{props.subTitle}</p>
                 </div>
@@ -684,76 +827,120 @@ export function PopUpEvent (props) {
                                 value={formik.values.email}
                                 error={formik.errors.email}
                             />
-                            <div className={`${style.phone__input_block} ${formik.errors.phone ? 'phone__input__error' : ''}`}>
+                            <div
+                                className={`${style.phone__input_block} ${
+                                    formik.errors.phone
+                                        ? "phone__input__error"
+                                        : ""
+                                }`}
+                            >
                                 <PhoneInput
-                                    containerClass='input__phone_container'
-                                    inputClass={valid ? 'input__phone' : 'input__phone_error'}
-                                    buttonClass={valid ? 'drop_down' : 'drop_down_error'}
+                                    containerClass="input__phone_container"
+                                    inputClass={
+                                        valid
+                                            ? "input__phone"
+                                            : "input__phone_error"
+                                    }
+                                    buttonClass={
+                                        valid ? "drop_down" : "drop_down_error"
+                                    }
                                     country={regionCode}
                                     enableSearch
                                     masks={phoneMasks}
                                     placeholder={props.phonePlaceholder}
-                                    onChange={(value, country, e, formattedValue) => {
+                                    onChange={(
+                                        value,
+                                        country,
+                                        e,
+                                        formattedValue
+                                    ) => {
                                         const { format, dialCode } = country;
                                         setPhone(value);
                                         if (
-                                            format?.length === formattedValue?.length &&
-                                            (value.startsWith(dialCode) || dialCode.startsWith(value))
+                                            format?.length ===
+                                                formattedValue?.length &&
+                                            (value.startsWith(dialCode) ||
+                                                dialCode.startsWith(value))
                                         ) {
-                                            formik.setFieldValue('phone', true);
+                                            formik.setFieldValue("phone", true);
                                             setValid(true);
                                         } else {
-                                            formik.setFieldValue('phone', false);
+                                            formik.setFieldValue(
+                                                "phone",
+                                                false
+                                            );
                                             setValid(false);
                                         }
                                     }}
                                     isValid
                                 />
-                                {!valid && <span className={style.error__message}>Invalid phone number</span>}
+                                {!valid && (
+                                    <span className={style.error__message}>
+                                        Invalid phone number
+                                    </span>
+                                )}
                             </div>
                             <div className={style.input_block_out}>
                                 <Dropdown
-                                    className={`Dropdown-black_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
+                                    className={`Dropdown-black_form  ${
+                                        formik.errors.budget
+                                            ? "Dropdown-error"
+                                            : ""
+                                    }`}
                                     options={budgetRangeValues}
                                     onChange={onSelectBudgetRange}
                                     value={defaultBudgetRangeOption}
                                     placeholder={props.budgetPlaceholder}
                                 />
                                 {formik.errors.budget && (
-                                    <span className={style.error}>{formik.errors.budget}</span>
+                                    <span className={style.error}>
+                                        {formik.errors.budget}
+                                    </span>
                                 )}
                             </div>
                             <div className={style.input_block_out}>
                                 <Dropdown
-                                    className={`Dropdown-black_form  ${formik.errors.contactMethod ? 'Dropdown-error' : ''}`}
+                                    className={`Dropdown-black_form  ${
+                                        formik.errors.contactMethod
+                                            ? "Dropdown-error"
+                                            : ""
+                                    }`}
                                     options={contactMethodValues}
                                     onChange={onSelectContactMethod}
                                     value={defaultContactMethodOption}
                                     placeholder={props.contactMethodPlaceholder}
                                 />
                                 {formik.errors.contactMethod && (
-                                    <span className={style.error__message}>{formik.errors.contactMethod}</span>
+                                    <span className={style.error__message}>
+                                        {formik.errors.contactMethod}
+                                    </span>
                                 )}
                             </div>
                             <div className={style.input_block_out}>
                                 <Dropdown
-                                    className={`Dropdown-black_form  ${formik.errors.planToUse ? 'Dropdown-error' : ''}`}
+                                    className={`Dropdown-black_form  ${
+                                        formik.errors.planToUse
+                                            ? "Dropdown-error"
+                                            : ""
+                                    }`}
                                     options={planToUseValues}
                                     onChange={onSelectPlanToUse}
                                     value={defaultPlanToUseOption}
                                     placeholder={props.planToUsePlaceholder}
                                 />
                                 {formik.errors.planToUse && (
-                                    <span className={style.error__message}>{formik.errors.planToUse}</span>
+                                    <span className={style.error__message}>
+                                        {formik.errors.planToUse}
+                                    </span>
                                 )}
                             </div>
                             <div className={style.input_block_out}>
                                 <Input
                                     onChange={onChangeComment}
-                                    type='text'
+                                    type="text"
                                     value={formik.values.comment}
                                     placeholder={props.commentPlaceholder}
-                                    name='comment'
+                                    name="comment"
                                 />
                             </div>
                         </div>
@@ -771,18 +958,19 @@ export function PopUpEvent (props) {
                             <p className={style.agreement__text}>
                                 <span onClick={onAgreementChange}>
                                     {props.agreement_text}
-                                </span>{' '}
+                                </span>{" "}
                                 {props.agreement_link}
                             </p>
                         </div>
                         <button
-                            type={agreement ? 'submit' : 'button'}
-                            className={`${agreement
-                                ? Object.keys(formik.errors).length == 0
-                                    ? style.general_button_active
+                            type={agreement ? "submit" : "button"}
+                            className={`${
+                                agreement
+                                    ? Object.keys(formik.errors).length == 0
+                                        ? style.general_button_active
+                                        : style.general_button_inactive
                                     : style.general_button_inactive
-                                : style.general_button_inactive
-                                } "button-submit"`}
+                            } "button-submit"`}
                         >
                             {props.buttonText}
                         </button>
@@ -793,8 +981,7 @@ export function PopUpEvent (props) {
     );
 }
 
-export function PopUpNameEmail (props) {
-
+export function PopUpNameEmail(props) {
     const router = useRouter();
     const modal = useModals();
     const dispatch = useDispatch();
@@ -805,83 +992,94 @@ export function PopUpNameEmail (props) {
     const [comment, setComment] = useState(null);
     const GAEvents = useGAEvents();
 
-    function onAgreementChange () {
+    function onAgreementChange() {
         changeAgreement(!agreement);
     }
 
-    const budgetRangeValues = ['$10,000 - $25,000', '$25,000 - $50,000', 'more than $50,000'];
+    const budgetRangeValues = [
+        "$10,000 - $25,000",
+        "$25,000 - $50,000",
+        "more than $50,000",
+    ];
     const defaultBudgetRangeOption = budgetRange;
 
-    const contactMethodValues = ['phone', 'e-mail', 'whatsapp'];
+    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
     const defaultContactMethodOption = contactMethod;
 
-    const planToUseValues = ['for an existing business', 'to start a new business'];
+    const planToUseValues = [
+        "for an existing business",
+        "to start a new business",
+    ];
     const defaultPlanToUseOption = planToUse;
 
     const onSelectBudgetRange = (option) => {
         setBudgetRange(option.value);
-        formik.setFieldValue('budget', option.value);
+        formik.setFieldValue("budget", option.value);
     };
     const onSelectContactMethod = (option) => {
         setContactMethod(option.value);
-        formik.setFieldValue('contactMethod', option.value);
+        formik.setFieldValue("contactMethod", option.value);
     };
     const onSelectPlanToUse = (option) => {
         setPlanToUse(option.value);
-        formik.setFieldValue('planToUse', option.value);
+        formik.setFieldValue("planToUse", option.value);
     };
     const onChangeComment = (e) => {
         setComment(e.target.value);
-        formik.setFieldValue('comment', e.target.value);
+        formik.setFieldValue("comment", e.target.value);
     };
 
     const validate = (values) => {
         const errors = {};
 
         if (!values.name) {
-            errors.name = 'Required';
-
+            errors.name = "Required";
         } else if (values.name.length < 2) {
-            errors.name = 'The name must have at least 2 characters';
+            errors.name = "The name must have at least 2 characters";
         }
 
         if (!values.phone) {
-            errors.phone = 'Required';
+            errors.phone = "Required";
         }
 
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = "Required";
         } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(values.email)
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
+                values.email
+            )
         ) {
-            errors.email = 'Invalid email address';
+            errors.email = "Invalid email address";
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.planToUse) errors.planToUse = "Required";
         if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
     const formik = useFormik({
         initialValues: {
-            name: '',
-            email: '',
-            contactMethod: '',
-            planToUse: '',
-            budget: '',
-            comment: '',
+            name: "",
+            email: "",
+            contactMethod: "",
+            planToUse: "",
+            budget: "",
+            comment: "",
         },
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
             const options = {
-                method: 'POST',
+                method: "POST",
                 url: `https://api.netronic.net/send-email`,
                 headers: {
-                    'content-type': 'application/json',
+                    "content-type": "application/json",
                 },
-                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+                data: {
+                    email: values.email,
+                    fromName: props.fromName,
+                    letterId: props.letterId,
+                },
             };
             axios
                 .request(options)
@@ -893,14 +1091,14 @@ export function PopUpNameEmail (props) {
                         props.orderName,
                         props.lang,
                         window.location.href,
-                        router.query,
-                    ),
+                        router.query
+                    )
                 )
                 .then(router.push(props.thank_you_page))
                 .catch(console.log);
-            ReactGA.event('generate_lead', {
-                category: 'form',
-                action: 'submit',
+            ReactGA.event("generate_lead", {
+                category: "form",
+                action: "submit",
             });
             turnOnScroll();
         },
@@ -935,81 +1133,103 @@ export function PopUpNameEmail (props) {
                                 />
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.budget ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.budget
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={budgetRangeValues}
                                         onChange={onSelectBudgetRange}
                                         value={defaultBudgetRangeOption}
                                         placeholder={props.budgetPlaceholder}
                                     />
                                     {formik.errors.budget && (
-                                        <span className={style.error}>{formik.errors.budget}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.budget}
+                                        </span>
                                     )}
                                 </div>
                             </div>
                             <div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.contactMethod ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.contactMethod
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={contactMethodValues}
                                         onChange={onSelectContactMethod}
                                         value={defaultContactMethodOption}
-                                        placeholder={props.contactMethodPlaceholder}
+                                        placeholder={
+                                            props.contactMethodPlaceholder
+                                        }
                                     />
                                     {formik.errors.contactMethod && (
-                                        <span className={style.error}>{formik.errors.contactMethod}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.contactMethod}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
-                                        className={`Dropdown-black_form  ${formik.errors.planToUse ? 'Dropdown-error' : ''}`}
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.planToUse
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
                                         options={planToUseValues}
                                         onChange={onSelectPlanToUse}
                                         value={defaultPlanToUseOption}
                                         placeholder={props.planToUsePlaceholder}
                                     />
                                     {formik.errors.planToUse && (
-                                        <span className={style.error}>{formik.errors.planToUse}</span>
+                                        <span className={style.error}>
+                                            {formik.errors.planToUse}
+                                        </span>
                                     )}
                                 </div>
                                 <div className={style.input_block_out}>
                                     <Input
                                         onChange={onChangeComment}
-                                        type='text'
+                                        type="text"
                                         value={formik.values.comment}
                                         placeholder={props.commentPlaceholder}
-                                        name='comment'
+                                        name="comment"
                                     />
+                                </div>
+                                <div className={style.agreement}>
+                                    <div
+                                        className={
+                                            agreement === true
+                                                ? style.agreement_dot_button_active
+                                                : style.agreement_dot_button
+                                        }
+                                        onClick={onAgreementChange}
+                                    >
+                                        {icons.dot}
+                                    </div>
+                                    <p className={style.agreement__text}>
+                                        <span onClick={onAgreementChange}>
+                                            {props.agreement_text}
+                                        </span>{" "}
+                                        {props.agreement_link}
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{' '}
-                                {props.agreement_link}
-                            </p>
-                        </div>
+
                         <button
-                            type={agreement ? 'submit' : 'button'}
-                            className={`${agreement
-                                ? Object.keys(formik.errors).length == 0
-                                    ? style.general_button_active
+                            type={agreement ? "submit" : "button"}
+                            className={`${
+                                agreement
+                                    ? Object.keys(formik.errors).length == 0
+                                        ? style.general_button_active
+                                        : style.general_button_inactive
                                     : style.general_button_inactive
-                                : style.general_button_inactive
-                                } "button-submit"`}
+                            } "button-submit"`}
                         >
-                            {props.buttonText || 'Get'}
+                            {props.buttonText || "Get"}
                         </button>
                     </form>
                 </div>
@@ -1018,19 +1238,22 @@ export function PopUpNameEmail (props) {
     );
 }
 
-
 const Input = (props) => {
     return (
         <label className={style.input__label}>
             <input
                 name={props.name}
-                className={`${style.input} ${props.error ? style.input__error : ''}`}
+                className={`${style.input} ${
+                    props.error ? style.input__error : ""
+                }`}
                 type={props.type}
                 onChange={props.onChange}
                 value={props.value}
                 placeholder={props.placeholder}
             />
-            {props.error ? <span className={style.error__message}>{props.error}</span> : null}
+            {props.error ? (
+                <span className={style.error__message}>{props.error}</span>
+            ) : null}
         </label>
     );
 };
