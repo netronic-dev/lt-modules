@@ -1,10 +1,10 @@
-import { Contacts } from './Contacts';
-import FooterSocial from './Social';
-import style from './footer.module.scss';
-import FooterMobile from './Mobile';
-import FooterMenu from './Menu';
-import { InView } from 'react-intersection-observer';
-import { useGAEvents } from '../../context/GAEventsProvider';
+import { Contacts } from "./Contacts";
+import FooterSocial from "./Social";
+import style from "./footer.module.scss";
+import FooterMobile from "./Mobile";
+import FooterMenu from "./Menu";
+import { InView } from "react-intersection-observer";
+import { useGAEvents } from "../../context/GAEventsProvider";
 
 export default function Footer(props) {
     const GAEvents = useGAEvents();
@@ -16,9 +16,9 @@ export default function Footer(props) {
     return (
         <div className={style.footer}>
             <InView
-                as='div'
+                as="div"
                 onChange={(inView, entry) =>
-                    inView && sectionWasInView('Footer Menu')
+                    inView && sectionWasInView("Footer Menu")
                 }
             >
                 <div className={style.footer_desktop}>
@@ -29,28 +29,25 @@ export default function Footer(props) {
                 </div>
             </InView>
             <InView
-                as='div'
+                as="div"
                 onChange={(inView, entry) =>
-                    inView && sectionWasInView('Footer Contacts')
+                    inView && sectionWasInView("Footer Contacts")
                 }
             >
-                <Contacts
-                    nameOfRegion={props.nameOfRegion}
-                    adressTitle={props.adressTitle}
-                    emailTitle={props.emailTitle}
-                    phoneTitle={props.phoneTitle}
-                />
+                <Contacts data={props.contactsData} />
             </InView>
             <InView
-                as='div'
+                as="div"
                 onChange={(inView, entry) =>
-                    inView && sectionWasInView('Footer social-media')
+                    inView && sectionWasInView("Footer social-media")
                 }
             >
                 <FooterSocial
+                    text={props.social_text}
                     facebook={props.facebook}
                     instagram={props.instagram}
                     youtube={props.youtube}
+                    linkedin={props.linkedin}
                     logo={props.logo}
                 />
             </InView>

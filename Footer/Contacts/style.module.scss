@@ -1,0 +1,181 @@
+.container {
+    width: 1170px;
+    margin: 0 auto;
+
+    @media (max-width: 1200px) {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .contacts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "europe usa support";
+        gap: 41px;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-areas:
+                "europe usa"
+                "support support";
+            justify-content: center;
+        }
+
+        @media (max-width: 743px) {
+            gap: 30px;
+        }
+
+        @media (max-width: 620px) {
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "europe"
+                "usa"
+                "support";
+        }
+
+        .cell {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-content: flex-start;
+            align-items: stretch;
+            gap: 24px;
+            padding: 41px 23px;
+            border-radius: 20px;
+            background: #101010;
+
+            .title {
+                color: #0090ff;
+                font-family: Roboto;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            .contact_block {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+
+                .contact__title {
+                    color: #8e8e8e;
+                    font-family: Roboto;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+
+                .contact__text {
+                    color: #fff;
+                    font-family: Roboto;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 116.667%;
+
+                    &:first-child {
+                        display: none;
+                    }
+
+                    a {
+                        color: #fff;
+                        text-decoration-line: underline;
+                    }
+
+                    &:hover {
+                        a {
+                            color: #606060;
+                        }
+                    }
+                }
+
+                .contact__text_phone {
+                    text-decoration: none;
+                }
+
+                .links_union {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 13px;
+                    align-items: center;
+
+                    .phone_link {
+                        a {
+                            color: #fff;
+                            font-family: Roboto;
+                            font-size: 24px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 116.667%;
+                        }
+
+                        &:hover {
+                            a {
+                                color: #606060;
+                            }
+                        }
+                    }
+                    .icon_link {
+                        &:hover {
+                            .whatsapp {
+                                path {
+                                    fill: #606060;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(1) {
+                grid-area: europe;
+            }
+
+            &:nth-child(2) {
+                grid-area: usa;
+            }
+
+            &:nth-child(3) {
+                grid-area: support;
+                max-width: 460px;
+                width: 100%;
+                margin: 0 auto;
+
+                @media (max-width: 743px) {
+                    max-width: 100%;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-areas:
+                        "title title"
+                        "email phone";
+
+                    .title {
+                        grid-area: title;
+                    }
+                }
+
+                @media (max-width: 600px) {
+                    max-width: 100%;
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "title "
+                        "email"
+                        " phone";
+
+                    .title {
+                        grid-area: title;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// grid-template-areas:
+//         "europe a a"
+//         "b c c"
+//         "b c c";
