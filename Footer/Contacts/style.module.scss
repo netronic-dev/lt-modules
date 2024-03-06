@@ -121,6 +121,8 @@
                         }
                     }
                     .icon_link {
+                        display: block;
+                        height: 22px;
                         &:hover {
                             .whatsapp {
                                 path {
@@ -174,8 +176,3 @@
         }
     }
 }
-
-// grid-template-areas:
-//         "europe a a"
-//         "b c c"
-//         "b c c";
