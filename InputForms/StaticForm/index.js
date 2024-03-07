@@ -192,7 +192,7 @@ export function ThemeForm(props) {
                         />
                         {!valid && (
                             <span className={style.error}>
-                                Invalid phone number
+                                Invalid mobile number
                             </span>
                         )}
                     </div>
@@ -420,7 +420,7 @@ export function ThemeFormAll(props) {
                     />
                     {!valid && (
                         <span className={style.error__message}>
-                            Invalid phone number
+                            Invalid mobile number
                         </span>
                     )}
                 </div>

@@ -215,7 +215,7 @@ export function PopUpNamePhone(props) {
                                     />
                                     {!valid && (
                                         <span className={style.error__message}>
-                                            Invalid phone number
+                                            Invalid mobile number
                                         </span>
                                     )}
                                     <div className={style.input_block_out}>
@@ -555,7 +555,7 @@ export function PopUpEmailPhone(props) {
                                     />
                                     {!valid && (
                                         <span className={style.error_Phone}>
-                                            Invalid phone number
+                                            Invalid mobile number
                                         </span>
                                     )}
                                 </div>
@@ -876,7 +876,7 @@ export function PopUpEvent(props) {
                                 />
                                 {!valid && (
                                     <span className={style.error__message}>
-                                        Invalid phone number
+                                        Invalid mobile number
                                     </span>
                                 )}
                             </div>
