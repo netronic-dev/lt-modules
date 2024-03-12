@@ -171,16 +171,13 @@ export function ThemeForm(props) {
                             }
                             country={regionCode}
                             enableSearch
-                            masks={phoneMasks}
-                            placeholder="Phone *"
+                            excludeCountries={["ru"]}
+                            autoFormat={false}
+                            placeholder={props.phonePlaceholder}
                             onChange={(value, country, e, formattedValue) => {
                                 const { format, dialCode } = country;
                                 setPhone(value);
-                                if (
-                                    format?.length === formattedValue?.length &&
-                                    (value.startsWith(dialCode) ||
-                                        dialCode.startsWith(value))
-                                ) {
+                                if (value.length > 5 && value.length < 20) {
                                     formik.setFieldValue("phone", true);
                                     setValid(true);
                                 } else {
@@ -188,7 +185,6 @@ export function ThemeForm(props) {
                                     setValid(false);
                                 }
                             }}
-                            isValid
                         />
                         {!valid && (
                             <span className={style.error}>
@@ -399,16 +395,13 @@ export function ThemeFormAll(props) {
                         buttonClass={valid ? "drop_down" : "drop_down_error"}
                         country={regionCode}
                         enableSearch
-                        masks={phoneMasks}
-                        placeholder={props.placeholderCall}
+                        excludeCountries={["ru"]}
+                        autoFormat={false}
+                        placeholder={props.phonePlaceholder}
                         onChange={(value, country, e, formattedValue) => {
                             const { format, dialCode } = country;
                             setPhone(value);
-                            if (
-                                format?.length === formattedValue?.length &&
-                                (value.startsWith(dialCode) ||
-                                    dialCode.startsWith(value))
-                            ) {
+                            if (value.length > 5 && value.length < 20) {
                                 formik.setFieldValue("phone", true);
                                 setValid(true);
                             } else {
@@ -416,7 +409,6 @@ export function ThemeFormAll(props) {
                                 setValid(false);
                             }
                         }}
-                        isValid
                     />
                     {!valid && (
                         <span className={style.error__message}>

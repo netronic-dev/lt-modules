@@ -181,8 +181,9 @@ export function PopUpNamePhone(props) {
                                         }
                                         country={regionCode}
                                         enableSearch
-                                        masks={phoneMasks}
-                                        placeholder={props.callPlaceholder}
+                                        excludeCountries={["ru"]}
+                                        autoFormat={false}
+                                        placeholder={props.phonePlaceholder}
                                         onChange={(
                                             value,
                                             country,
@@ -193,10 +194,8 @@ export function PopUpNamePhone(props) {
                                                 country;
                                             setPhone(value);
                                             if (
-                                                format?.length ===
-                                                    formattedValue?.length &&
-                                                (value.startsWith(dialCode) ||
-                                                    dialCode.startsWith(value))
+                                                value.length > 5 &&
+                                                value.length < 20
                                             ) {
                                                 formik.setFieldValue(
                                                     "phone",
@@ -211,7 +210,6 @@ export function PopUpNamePhone(props) {
                                                 setValid(false);
                                             }
                                         }}
-                                        isValid
                                     />
                                     {!valid && (
                                         <span className={style.error__message}>
@@ -521,8 +519,9 @@ export function PopUpEmailPhone(props) {
                                         }
                                         country={regionCode}
                                         enableSearch
-                                        masks={phoneMasks}
-                                        placeholder="Phone *"
+                                        excludeCountries={["ru"]}
+                                        autoFormat={false}
+                                        placeholder={props.phonePlaceholder}
                                         onChange={(
                                             value,
                                             country,
@@ -533,10 +532,8 @@ export function PopUpEmailPhone(props) {
                                                 country;
                                             setPhone(value);
                                             if (
-                                                format?.length ===
-                                                    formattedValue?.length &&
-                                                (value.startsWith(dialCode) ||
-                                                    dialCode.startsWith(value))
+                                                value.length > 5 &&
+                                                value.length < 20
                                             ) {
                                                 formik.setFieldValue(
                                                     "phone",
@@ -551,7 +548,6 @@ export function PopUpEmailPhone(props) {
                                                 setValid(false);
                                             }
                                         }}
-                                        isValid
                                     />
                                     {!valid && (
                                         <span className={style.error_Phone}>
@@ -846,7 +842,8 @@ export function PopUpEvent(props) {
                                     }
                                     country={regionCode}
                                     enableSearch
-                                    masks={phoneMasks}
+                                    excludeCountries={["ru"]}
+                                    autoFormat={false}
                                     placeholder={props.phonePlaceholder}
                                     onChange={(
                                         value,
@@ -857,10 +854,8 @@ export function PopUpEvent(props) {
                                         const { format, dialCode } = country;
                                         setPhone(value);
                                         if (
-                                            format?.length ===
-                                                formattedValue?.length &&
-                                            (value.startsWith(dialCode) ||
-                                                dialCode.startsWith(value))
+                                            value.length > 5 &&
+                                            value.length < 20
                                         ) {
                                             formik.setFieldValue("phone", true);
                                             setValid(true);
@@ -872,7 +867,6 @@ export function PopUpEvent(props) {
                                             setValid(false);
                                         }
                                     }}
-                                    isValid
                                 />
                                 {!valid && (
                                     <span className={style.error__message}>

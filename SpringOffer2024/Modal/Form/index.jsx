@@ -210,7 +210,8 @@ const ConsultationForm = (props) => {
                                 }
                                 country={regionCode}
                                 enableSearch
-                                masks={phoneMasks}
+                                excludeCountries={["ru"]}
+                                autoFormat={false}
                                 placeholder={props.phonePlaceholder}
                                 onChange={(
                                     value,
@@ -219,15 +220,8 @@ const ConsultationForm = (props) => {
                                     formattedValue
                                 ) => {
                                     const { format, dialCode } = country;
-                                    console.log("format", format);
-                                    console.log("country", country);
                                     setPhone(value);
-                                    if (
-                                        format?.length ===
-                                            formattedValue?.length &&
-                                        (value.startsWith(dialCode) ||
-                                            dialCode.startsWith(value))
-                                    ) {
+                                    if (value.length > 5 && value.length < 20) {
                                         formik.setFieldValue("phone", true);
                                         setValid(true);
                                     } else {
@@ -235,7 +229,6 @@ const ConsultationForm = (props) => {
                                         setValid(false);
                                     }
                                 }}
-                                isValid
                             />
                             {!valid && (
                                 <span className={style.error__message}>
