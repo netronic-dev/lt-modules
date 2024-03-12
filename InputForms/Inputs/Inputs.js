@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import style from '../forms.module.scss';
-import { icons } from '../icons/icons';
+import { useEffect, useState } from "react";
+import style from "../forms.module.scss";
+import { icons } from "../icons/icons";
 
 const theme = {
     standard: style.input_block,
@@ -17,7 +17,7 @@ const errorTheme = {
     rounded_flat: style.error_rounded_flat,
 };
 
-export function InputEmail (props) {
+export function InputEmail(props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -27,47 +27,47 @@ export function InputEmail (props) {
     }
     return (
         <div className={style.input_block_out}>
-            <div className={theme[props.theme ? props.theme : 'standard']}>
+            <div className={theme[props.theme ? props.theme : "standard"]}>
                 <input
                     className={`
                         ${style.input}
-                        ${props.error ? style.input_error : ''}
-                        ${props.correct ? style.input_correct : ''}
+                        ${props.error ? style.input_error : ""}
+                        ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
-                    type='email'
+                    type="email"
                     onChange={props.onChange}
                     value={props.value}
-                    name='email'
+                    name="email"
                     style={{
                         backgroundColor: props.bg_color,
                         color: props.color,
                     }}
-                    placeholder={props.placeholder || 'Email *'}
+                    placeholder={props.placeholder || "Email *"}
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
-                        text={props.anotherPlace || 'Email *'}
+                        text={props.anotherPlace || "Email *"}
                         value={props.value}
                     />
                 ) : (
-                    ''
+                    ""
                 )}
                 {props.noIcons ? (
-                    ''
+                    ""
                 ) : (
                     <div className={style.error_icon}>
                         {props.error
                             ? icon.error
-                            : props.value === ''
-                                ? ''
-                                : icon.agree}
+                            : props.value === ""
+                            ? ""
+                            : icon.agree}
                     </div>
                 )}
             </div>
             <div
                 className={
-                    errorTheme[props.errorTheme ? props.errorTheme : 'standard']
+                    errorTheme[props.errorTheme ? props.errorTheme : "standard"]
                 }
             >
                 {props.error}
@@ -76,7 +76,7 @@ export function InputEmail (props) {
     );
 }
 
-export function InputCall (props) {
+export function InputCall(props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -86,14 +86,18 @@ export function InputCall (props) {
     }
     return (
         <div className={style.input_block_out}>
-            <div className={theme[props.theme ? props.theme : 'standard']}>
+            <div className={theme[props.theme ? props.theme : "standard"]}>
                 <input
-                    minLength='5'
-                    maxLength='30'
-                    className={`${style.input} ${props.error ? style.input_error : ''} ${props.correct ? style.input_correct : ''} ${props.className}`}
-                    type='tel'
-                    name='phone'
-                    placeholder={props.placeholder || 'Phone number *'}
+                    minLength="5"
+                    maxLength="30"
+                    className={`${style.input} ${
+                        props.error ? style.input_error : ""
+                    } ${props.correct ? style.input_correct : ""} ${
+                        props.className
+                    }`}
+                    type="tel"
+                    name="phone"
+                    placeholder={props.placeholder || "Phone number *"}
                     style={{
                         backgroundColor: props.bg_color,
                         color: props.color,
@@ -103,27 +107,27 @@ export function InputCall (props) {
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
-                        text={props.anotherPlace || 'Phone number *'}
+                        text={props.anotherPlace || "Phone number *"}
                         value={props.value}
                     />
                 ) : (
-                    ''
+                    ""
                 )}
                 {props.noIcons ? (
-                    ''
+                    ""
                 ) : (
                     <div className={style.error_icon}>
                         {props.error
                             ? icon.error
-                            : props.value === ''
-                                ? ''
-                                : icon.agree}
+                            : props.value === ""
+                            ? ""
+                            : icon.agree}
                     </div>
                 )}
             </div>
             <div
                 className={
-                    errorTheme[props.errorTheme ? props.errorTheme : 'standard']
+                    errorTheme[props.errorTheme ? props.errorTheme : "standard"]
                 }
             >
                 {props.error}
@@ -132,7 +136,7 @@ export function InputCall (props) {
     );
 }
 
-export function InputName (props) {
+export function InputName(props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -140,51 +144,50 @@ export function InputName (props) {
     if (props.error_1) {
         icon.error = icons.error_1;
     }
-
+    console.log("props.error", props.error);
     return (
         <div className={style.input_block_out}>
-            <div className={theme[props.theme ? props.theme : 'standard']}>
+            <div className={theme[props.theme ? props.theme : "standard"]}>
                 <input
-                    maxLength='30'
-                    className={`
-                        ${style.input}
-                        ${props.error ? style.input_error : ''}
-                        ${props.correct ? style.input_correct : ''}
-                        ${props.className}
-                    `}
+                    maxLength="30"
+                    className={`${style.input} ${
+                        props.error ? style.input_error : ""
+                    } ${props.correct ? style.input_correct : ""} ${
+                        props.className
+                    }`}
                     style={{
                         backgroundColor: props.bg_color,
                         color: props.color,
                     }}
-                    name='name'
-                    type='name'
-                    placeholder={props.placeholder || 'Name *'}
+                    name="name"
+                    type="name"
+                    placeholder={props.placeholder || "Name *"}
                     onChange={props.onChange}
                     value={props.value}
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
-                        text={props.anotherPlace || 'Name *'}
+                        text={props.anotherPlace || "Name *"}
                         value={props.value}
                     />
                 ) : (
-                    ''
+                    ""
                 )}
                 {props.noIcons ? (
-                    ''
+                    ""
                 ) : (
                     <div className={style.error_icon}>
                         {props.error
                             ? icon.error
-                            : props.value === ''
-                                ? ''
-                                : icon.agree}
+                            : props.value === ""
+                            ? ""
+                            : icon.agree}
                     </div>
                 )}
             </div>
             <div
                 className={
-                    errorTheme[props.errorTheme ? props.errorTheme : 'standard']
+                    errorTheme[props.errorTheme ? props.errorTheme : "standard"]
                 }
             >
                 {props.error}
@@ -193,11 +196,11 @@ export function InputName (props) {
     );
 }
 
-export function DropDownList (props) {
+export function DropDownList(props) {
     const [listIsActive, changeListActivity] = useState(false);
-    const [listTitle, changeListTitle] = useState('');
+    const [listTitle, changeListTitle] = useState("");
 
-    function onItemClick (item, name, index) {
+    function onItemClick(item, name, index) {
         let itemData = {
             myIndex: index,
             myName: name,
@@ -218,12 +221,13 @@ export function DropDownList (props) {
                     }}
                 ></div>
             ) : (
-                ''
+                ""
             )}
             <div className={style.input_block_out}>
                 <div
-                    className={`${style.dropdownlist}  ${listIsActive ? style.dropdownlist_active : ''
-                        } ${props.className}`}
+                    className={`${style.dropdownlist}  ${
+                        listIsActive ? style.dropdownlist_active : ""
+                    } ${props.className}`}
                 >
                     <div
                         className={style.dropdownlist_title_out}
@@ -240,10 +244,11 @@ export function DropDownList (props) {
                         {props.data.map((item, index) => (
                             <li
                                 key={index}
-                                className={`${style.dropdownlist_item} ${listTitle === item.name
-                                    ? style.dropdownlist_item_active
-                                    : ''
-                                    }`}
+                                className={`${style.dropdownlist_item} ${
+                                    listTitle === item.name
+                                        ? style.dropdownlist_item_active
+                                        : ""
+                                }`}
                                 onClick={() => {
                                     onItemClick(item, item.name, index);
                                 }}
@@ -258,19 +263,19 @@ export function DropDownList (props) {
            `}
                         defaultChecked
                         name={props.value || listTitle}
-                        type='radio'
+                        type="radio"
                         value={props.value || listTitle}
                     />
                 </div>
-                <div className={errorTheme[props.errorTheme || 'standard']}>
+                <div className={errorTheme[props.errorTheme || "standard"]}>
                     {props.error}
                 </div>
             </div>
         </>
     );
 }
-export function CheckBox (props) {
-    function onItemClick () {
+export function CheckBox(props) {
+    function onItemClick() {
         props.onClick();
     }
     return (
@@ -279,13 +284,13 @@ export function CheckBox (props) {
                 <div
                     className={`
         ${style.checkbox} 
-        ${props.error ? style.checkbox_error : ''}
-        ${props.correct ? style.checkbox_correct : ''}
+        ${props.error ? style.checkbox_error : ""}
+        ${props.correct ? style.checkbox_correct : ""}
         ${props.className}
         `}
                 >
                     <div className={style.checkbox__square}>
-                        {props.active ? <CheckBoxArrow /> : ''}
+                        {props.active ? <CheckBoxArrow /> : ""}
                     </div>
                     <p className={style.checkbox_title}>{props.title}</p>
                     <input
@@ -293,7 +298,7 @@ export function CheckBox (props) {
             ${style.checkbox__input}
            `}
                         name={props.title}
-                        type='checkbox'
+                        type="checkbox"
                         checked={props.active}
                         onChange={onItemClick}
                         value={props.title}
@@ -304,54 +309,55 @@ export function CheckBox (props) {
     );
 }
 
-function Arrow (props) {
+function Arrow(props) {
     return (
         <svg
-            width='12'
-            height='8'
-            viewBox='0 0 12 8'
-            fill='none'
-            className={`${style.arrow} ${props.active ? style.arrow_active : ''
-                }`}
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            className={`${style.arrow} ${
+                props.active ? style.arrow_active : ""
+            }`}
         >
             <path
-                d='M1.41 0.589844L6 5.16984L10.59 0.589844L12 1.99984L6 7.99984L0 1.99984L1.41 0.589844Z'
-                fill='white'
+                d="M1.41 0.589844L6 5.16984L10.59 0.589844L12 1.99984L6 7.99984L0 1.99984L1.41 0.589844Z"
+                fill="white"
             />
         </svg>
     );
 }
-function CheckBoxArrow (props) {
+function CheckBoxArrow(props) {
     return (
         <svg
-            width='18'
-            height='14'
-            viewBox='0 0 18 14'
-            fill='none'
+            width="18"
+            height="14"
+            viewBox="0 0 18 14"
+            fill="none"
             className={`
       ${style.checkbox_arrow} 
-      ${props.active ? style.checkbox_arrow_active : ''}
+      ${props.active ? style.checkbox_arrow_active : ""}
       `}
         >
             <path
-                d='M5.99967 11.1698L1.82967 6.99984L0.409668 8.40984L5.99967 13.9998L17.9997 1.99984L16.5897 0.589844L5.99967 11.1698Z'
-                fill='white'
+                d="M5.99967 11.1698L1.82967 6.99984L0.409668 8.40984L5.99967 13.9998L17.9997 1.99984L16.5897 0.589844L5.99967 11.1698Z"
+                fill="white"
             />
         </svg>
     );
 }
-function AddingPlaceholder (props) {
+function AddingPlaceholder(props) {
     return (
         <p
             className={`${style.placeholder} 
-      ${props.value ? style.placeholder_active : ''}`}
+      ${props.value ? style.placeholder_active : ""}`}
         >
             {props.text}
         </p>
     );
 }
 
-export function Input (props) {
+export function Input(props) {
     const icon = {
         error: icons.error,
         agree: icons.agree,
@@ -374,22 +380,22 @@ export function Input (props) {
     // errorTheme=""
     return (
         <div className={style.input_block_out}>
-            <div className={theme[props.theme ? props.theme : 'standard']}>
+            <div className={theme[props.theme ? props.theme : "standard"]}>
                 <input
                     className={`
              ${style.input}
-             ${props.error ? style.input_error : ''}
-             ${props.correct ? style.input_correct : ''}
+             ${props.error ? style.input_error : ""}
+             ${props.correct ? style.input_correct : ""}
              ${props.className}
             `}
                     style={
-                        props.uppercase ? { textTransform: 'uppercase' } : null
+                        props.uppercase ? { textTransform: "uppercase" } : null
                     }
                     type={props.type}
                     onChange={props.onChange}
                     value={props.value}
                     name={props.name}
-                    placeholder={props.noPlace ? '' : props.placeholder}
+                    placeholder={props.noPlace ? "" : props.placeholder}
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
@@ -397,23 +403,23 @@ export function Input (props) {
                         value={props.value}
                     />
                 ) : (
-                    ''
+                    ""
                 )}
                 {props.noIcons ? (
-                    ''
+                    ""
                 ) : (
                     <div className={style.error_icon}>
                         {props.error
                             ? icon.error
-                            : props.value === ''
-                                ? ''
-                                : icon.agree}
+                            : props.value === ""
+                            ? ""
+                            : icon.agree}
                     </div>
                 )}
             </div>
             <div
                 className={
-                    errorTheme[props.errorTheme ? props.errorTheme : 'standard']
+                    errorTheme[props.errorTheme ? props.errorTheme : "standard"]
                 }
             >
                 {props.error}
