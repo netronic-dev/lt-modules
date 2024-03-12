@@ -1,35 +1,63 @@
 import Image from "next/image";
 import style from "./style.module.scss";
-import bannerLogo from "../../public/blog/deal-2024/logo.png";
-import Link from "next/link";
+import bannerLogo from "../../public/spring-offer-2024/banner_dev.png";
+import bannerLogoLap from "../../public/spring-offer-2024/banner_dev_lap.png";
+import bannerBg from "../../public/spring-offer-2024/banner_bg.jpg";
+import bannerFlowers from "../../public/spring-offer-2024/banner_flowers.png";
+import bannerLeftFlowers from "../../public/spring-offer-2024/banner_left_flowers.png";
+import bannerRightFlowers from "../../public/spring-offer-2024/banner_right_flowers.png";
+import { useRouter } from "next/router";
 
 const Banner = (props) => {
+    const router = useRouter();
     return (
         <div className={`${style.banner} fade-down-animation`}>
-            <div className={style.banner_logo}>
-                <Image src={bannerLogo} width={208} height={118} alt="logo" />
+            <div className={style.bannerBg}>
+                <Image
+                    src={bannerBg}
+                    layout="fill"
+                    alt="bannerBg"
+                    objectPosition="50% 0"
+                />
             </div>
-            <div className={style.banner_info}>
+            <div className={style.banner_logo}>
+                <Image src={bannerLogo} layout="fill" alt="logo" />
+            </div>
+            <div className={style.banner_logo_lap}>
+                <Image src={bannerLogoLap} layout="fill" alt="logo" />
+            </div>
+            <div className={style.banner_flowers}>
+                <Image src={bannerFlowers} layout="fill" alt="logo" />
+            </div>
+            <div className={style.banner_left_flowers}>
+                <Image src={bannerLeftFlowers} layout="fill" alt="logo" />
+            </div>
+            <div className={style.banner_right_flowers}>
+                <Image src={bannerRightFlowers} layout="fill" alt="logo" />
+            </div>
+            <p className={style.text_bold}>{props.text_bold}</p>
+            {/* <div className={style.banner_info}>
                 <EventInfo
                     dateName={props.dateName}
                     date={props.date}
                     placeName={props.placeName}
                     place={props.place}
                 />
-            </div>
-            <Link href="/blog/deal-2024/">
-                <button
-                    type="submit"
-                    className={style.button_submit}
-                    onClick={() => props.toggleActivity()}
-                >
-                    {props.buttonText}
-                </button>
-            </Link>
+            </div> */}
             <div className={style.block_text}>
-                <p className={style.text_bold}>{props.text_bold}</p>
                 <p className={style.text}>{props.text}</p>
+                <p className={style.endDate}>{props.endDate}</p>
             </div>
+            <button
+                type="submit"
+                className={style.button_submit}
+                onClick={() => {
+                    props.toggleActivity();
+                    router.push("/blog/spring-offer-24");
+                }}
+            >
+                {props.buttonText}
+            </button>
 
             <button
                 className={style.button_close}

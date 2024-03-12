@@ -23,7 +23,7 @@ const EventSlider = (props) => {
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <circle cx="25" cy="25" r="25" fill="#0090FF" />
-                    <g clip-path="url(#clip0_63_128)">
+                    <g clipPath="url(#clip0_63_128)">
                         <path
                             d="M27 31L28.41 29.59L23.83 25L28.41 20.41L27 19L21 25L27 31Z"
                             fill="white"
@@ -55,7 +55,7 @@ const EventSlider = (props) => {
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <circle cx="25" cy="25" r="25" fill="#0090FF" />
-                    <g clip-path="url(#clip0_63_134)">
+                    <g clipPath="url(#clip0_63_134)">
                         <path
                             d="M23 19L21.59 20.41L26.17 25L21.59 29.59L23 31L29 25L23 19Z"
                             fill="white"

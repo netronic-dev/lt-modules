@@ -1,0 +1,366 @@
+@import "../default";
+
+.main {
+    position: relative;
+    padding: 117px 0 155px 0;
+    overflow: hidden;
+
+    @media (max-width: 1200px) {
+        padding: 128px 20px 87px 20px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 38px 20px 57px 20px;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 1170px;
+        margin: 0 auto;
+        z-index: 2;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+
+            .title {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: 104.167%;
+                max-width: 990px;
+                text-transform: uppercase;
+
+                span {
+                    color: #0090ff;
+                }
+
+                @media (max-width: 768px) {
+                    font-size: 30px;
+                }
+            }
+
+            .countdown {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                display: flex;
+                margin-top: 45px;
+                border-radius: 10px;
+                border: 3px solid #0090ff;
+                background: #fff;
+                width: max-content;
+
+                @media (max-width: 768px) {
+                    margin-top: 48px;
+                }
+
+                .countdown_number {
+                    color: #000;
+                    text-align: center;
+                    font-family: Manrope;
+                    font-size: 50px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                    letter-spacing: 1px;
+                    padding: 17px 53px;
+
+                    @media (max-width: 768px) {
+                        font-size: 38px;
+                    }
+                }
+            }
+
+            .days__text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+                margin-top: 12px;
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 4.8px;
+                text-transform: uppercase;
+
+                @media (max-width: 768px) {
+                    margin-top: 9px;
+                    font-size: 18px;
+                }
+            }
+
+            .text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+
+                margin-top: 40px;
+
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                max-width: 674px;
+
+                span {
+                    color: #0090ff;
+                }
+
+                @media (max-width: 768px) {
+                    margin-top: 48px;
+                    font-size: 18px;
+                }
+            }
+
+            a {
+                @media (max-width: 520px) {
+                    max-width: 300px;
+                    width: 100%;
+                }
+
+                .button {
+                    margin-top: 40px;
+                    position: relative;
+
+                    cursor: pointer;
+                    padding: 20px 25px;
+                    border-radius: 7px;
+                    max-width: 200px;
+
+                    color: #fff;
+                    text-align: center;
+                    font-family: Manrope;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                    letter-spacing: 0.36px;
+                    text-transform: uppercase;
+
+                    background: linear-gradient(
+                        81.25deg,
+                        #0090ff 18.31%,
+                        #00f18a 126.68%
+                    );
+                    border: 2px solid #050a1b;
+                    outline: 0;
+                    transition: all 0.4s ease;
+                    opacity: 0;
+                    top: 100px;
+
+                    @media (max-width: 600px) {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 20px 25px;
+                        max-width: 400px;
+                        width: 100%;
+                        border: none;
+                    }
+
+                    &:disabled {
+                        cursor: auto;
+                        background-color: #edeef0;
+                        color: #8e8e8e;
+                        animation: none;
+
+                        &:hover {
+                            background-color: #edeef0;
+                            color: #8e8e8e;
+                        }
+                    }
+
+                    &:hover {
+                        color: #0090ff;
+                        border: 2px solid transparent;
+                        transition: all 0.4s ease;
+                        box-shadow: inset 0px 0px 0px 50vw #fff;
+                    }
+                }
+            }
+
+            .content__image {
+                position: relative;
+                opacity: 0;
+                transform: scale(0);
+                margin-top: 83px;
+            }
+        }
+    }
+
+    .bg_image {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        width: 100vw;
+        z-index: 0;
+    }
+
+    .right_flower {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 351px;
+        height: 526px;
+
+        @media (max-width: 1080px) {
+            width: 253px;
+            height: 379px;
+        }
+
+        @media (max-width: 960px) {
+            width: 160px;
+            height: 245px;
+        }
+
+        @media (max-width: 660px) {
+            width: 130px;
+            height: 196px;
+        }
+    }
+
+    .left_flower {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 351px;
+        height: 526px;
+
+        @media (max-width: 1080px) {
+            width: 253px;
+            height: 379px;
+        }
+
+        @media (max-width: 960px) {
+            width: 160px;
+            height: 245px;
+        }
+
+        @media (max-width: 660px) {
+            width: 130px;
+            height: 196px;
+        }
+    }
+}
+
+.animation__title__up {
+    animation: animation_move_up 0.5s ease-in 1s forwards;
+}
+
+.animation__countdown__up {
+    animation: animation_move_up 0.5s ease-in 1.5s forwards;
+}
+
+.animation__countdown_text__up {
+    animation: animation_move_up 0.5s ease-in 2s forwards;
+}
+
+.animation__text__up {
+    animation: animation_move_up 0.5s ease-in 2.5s forwards;
+}
+
+.animation__btn__up {
+    animation: animation_move_up 0.5s ease-in 3s forwards;
+}
+
+@keyframes animation_move_up {
+    0% {
+        opacity: 0;
+        top: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+.animation__halloween_logo__up {
+    animation: animation_scale 0.5s ease-in 3s forwards,
+        animation_rotate 2.5s ease-in 3.5s infinite;
+}
+
+@keyframes animation_scale {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes animation_rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.animation_rtl {
+    animation: animation_rtl 0.8s ease-in 3s forwards;
+}
+
+@keyframes animation_rtl {
+    0% {
+        opacity: 0;
+        transform: translateX(200%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(30%);
+    }
+}
+
+.animation_rotate_and_scale {
+    animation: animation_rotate_and_scale 1.2s ease-in 3s forwards;
+}
+
+@keyframes animation_rotate_and_scale {
+    0% {
+        transform: translateX(-150%) rotate(45deg) scale(0);
+    }
+
+    100% {
+        transform: translateX(-150%) rotate(0) scale(1);
+    }
+}

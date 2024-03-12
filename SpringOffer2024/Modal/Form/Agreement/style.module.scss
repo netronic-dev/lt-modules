@@ -1,0 +1,60 @@
+.agreement {
+    position: relative;
+    display: grid;
+    grid-template-columns: 18.5px 1fr;
+    align-items: center;
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    .agreement__error {
+        position: absolute;
+        top: 70%;
+        left: 35px;
+        color: #d22e2e;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 23px;
+    }
+
+    .agreement__dot {
+        position: relative;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid #000;
+        outline: 2px solid #fff;
+
+        .agreement__dot_active {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #0090ff;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #0090ff;
+        }
+    }
+
+    .agreement__text {
+        color: #000;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 23px;
+        padding-left: 10px;
+
+        a {
+            color: #0090ff;
+        }
+    }
+
+    .agreement__text_white {
+        color: #fff;
+    }
+}

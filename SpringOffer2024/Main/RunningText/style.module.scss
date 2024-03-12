@@ -1,0 +1,106 @@
+@import "../../default";
+
+.main_ribbon {
+    position: absolute;
+    top: -40px;
+    right: -180px;
+    transform: rotate(35deg);
+    text-wrap: nowrap;
+    width: 1180px;
+    background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+    height: 57px;
+    z-index: 5;
+
+    @media (max-width: 1024px) {
+        top: 20px;
+        right: -240px;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
+    .ribbon__text {
+        position: absolute;
+        top: 22.5%;
+        left: -50px;
+        color: #000;
+        font-family: $font-1;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        text-transform: uppercase;
+        padding: 0 3px;
+        animation: moveText 10.5s linear infinite;
+    }
+
+    .ribbon__text_1 {
+        animation-delay: 0s;
+    }
+
+    .ribbon__text_2 {
+        animation-delay: 2.65s;
+    }
+
+    .ribbon__text_3 {
+        animation-delay: 5.3s;
+    }
+
+    .ribbon__text_4 {
+        animation-delay: 7.9s;
+    }
+
+    .ribbon__text_5 {
+        animation-delay: 8s;
+    }
+
+    .ribbon__text_6 {
+        animation-delay: 10s;
+    }
+}
+
+.ribbon__text_bottom {
+    top: auto;
+    bottom: 40px;
+    right: -180px;
+
+    @media (max-width: 1200px) {
+        right: 60px;
+    }
+}
+
+.ribbon__text_bottom_right {
+    top: auto;
+    bottom: 40px;
+    left: -200px;
+    transform: rotate(-45deg);
+
+    @media (max-width: 1200px) {
+        left: 60px;
+    }
+}
+
+.ribbon__text_bottom_right_count {
+    top: auto;
+    bottom: 240px;
+    left: -600px;
+
+    @media (max-width: 1200px) {
+        left: -600px;
+    }
+
+    @media (max-width: 930px) {
+        left: -700px;
+    }
+}
+
+@keyframes moveText {
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: 1520px;
+    }
+}

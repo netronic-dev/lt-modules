@@ -1,0 +1,753 @@
+.deals {
+    position: relative;
+    background-color: #050a1b;
+
+    .top_blur {
+        position: absolute;
+        width: 2636px;
+        height: 434px;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .deal_bg_blur {
+        position: absolute;
+        width: 3000px;
+        height: 3000px;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+    }
+
+    .wrapper {
+        margin: 0 auto;
+        width: 1170px;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 113px 0 0 0;
+
+            @media (max-width: 1200px) {
+                padding: 71px 20px 0 20px;
+            }
+
+            .title {
+                position: relative;
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+
+                span {
+                    color: #0090ff;
+                }
+
+                @media (max-width: 600px) {
+                    padding: 0 15px;
+                    font-size: 33px;
+                }
+            }
+
+            .text {
+                position: relative;
+                opacity: 0;
+                top: 100px;
+
+                margin-top: 23px;
+                color: #fff;
+                text-align: center;
+                font-family: Manrope;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                max-width: 730px;
+
+                @media (max-width: 600px) {
+                    margin-top: 27px;
+                }
+            }
+
+            .deals_grid {
+                margin-top: 67px;
+                display: flex;
+                flex-direction: column;
+                gap: 50px;
+                z-index: 2;
+
+                @media (max-width: 600px) {
+                    margin-top: 20px;
+                }
+
+                .card {
+                    border-radius: 7px;
+                    box-shadow: 0px 0px 0px rgba(0, 144, 255, 0.8);
+                    overflow: hidden;
+
+                    .deal_card {
+                        display: grid;
+                        grid-template-columns: 1.4fr 1fr;
+
+                        @media (max-width: 1060px) {
+                            grid-template-columns: 1fr 1fr;
+                        }
+
+                        @media (max-width: 800px) {
+                            grid-template-columns: 1fr;
+                            grid-template-rows: 1fr 400px;
+                        }
+
+                        .card_content {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 25px;
+                            background-color: #fff;
+                            padding: 63px 53px 77px 47px;
+
+                            @media (max-width: 1060px) {
+                                padding: 63px 33px 77px 33px;
+                            }
+
+                            @media (max-width: 800px) {
+                                padding: 60px 15px 55px 20px;
+                            }
+
+                            @media (max-width: 600px) {
+                                padding: 50px 15px 25px 15px;
+                                align-items: center;
+                            }
+
+                            .card_title {
+                                color: #000;
+                                text-align: center;
+                                font-family: Manrope;
+                                font-size: 36px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: normal;
+                                text-align: left;
+
+                                span {
+                                    color: #0090ff;
+                                }
+
+                                @media (max-width: 600px) {
+                                    text-align: center;
+                                }
+                            }
+
+                            .includes_block {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 17px;
+                                width: 100%;
+
+                                .includes_title {
+                                    color: #0090ff;
+                                    font-family: Manrope;
+                                    font-size: 20px;
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    line-height: normal;
+                                    text-transform: uppercase;
+
+                                    @media (max-width: 500px) {
+                                        text-align: center;
+                                    }
+                                }
+
+                                .includes_grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(3, 1fr);
+
+                                    @media (max-width: 1024px) {
+                                        gap: 20px;
+                                    }
+
+                                    @media (max-width: 500px) {
+                                        grid-template-columns: repeat(2, 1fr);
+                                        grid-template-areas:
+                                            "first second"
+                                            "third third";
+                                        justify-content: center;
+                                        width: 100%;
+                                    }
+
+                                    .grid_cell {
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: flex-start;
+                                        justify-content: center;
+                                        gap: 13px;
+
+                                        @media (max-width: 500px) {
+                                            margin: 0 auto;
+                                        }
+
+                                        .cell_icon {
+                                            height: 45px;
+
+                                            @media (max-width: 500px) {
+                                                margin: 0 auto;
+                                            }
+                                        }
+
+                                        .grid_text {
+                                            color: #000;
+                                            font-family: Manrope;
+                                            font-size: 20px;
+                                            font-style: normal;
+                                            font-weight: 500;
+                                            line-height: 110%;
+                                            max-width: 126px;
+
+                                            @media (max-width: 500px) {
+                                                text-align: center;
+                                            }
+                                        }
+
+                                        @media (max-width: 500px) {
+                                            &:nth-child(1) {
+                                                grid-area: first;
+                                            }
+
+                                            &:nth-child(2) {
+                                                grid-area: second;
+                                            }
+
+                                            &:nth-child(3) {
+                                                grid-area: third;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .card_text {
+                                color: #000;
+                                font-family: Manrope;
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 500;
+                                line-height: normal;
+
+                                span {
+                                    color: #0090ff;
+                                }
+
+                                @media (max-width: 600px) {
+                                    font-size: 16px;
+                                    text-align: center;
+                                }
+                            }
+
+                            .card_price_wrapp {
+                                display: flex;
+                                gap: 12px;
+
+                                @media (max-width: 600px) {
+                                    justify-content: center;
+                                }
+
+                                .item_active_price {
+                                    color: #0090ff;
+                                    font-family: Manrope;
+                                    font-size: 48px;
+                                    font-style: normal;
+                                    font-weight: 800;
+                                    line-height: normal;
+                                    text-transform: uppercase;
+                                }
+
+                                .item_unactive_price {
+                                    display: block;
+                                    position: relative;
+                                    color: #000;
+                                    font-family: Manrope;
+                                    font-size: 23px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: normal;
+                                    text-transform: uppercase;
+                                    height: max-content;
+
+                                    .line__through {
+                                        position: absolute;
+                                        content: "";
+                                        width: 0;
+                                        height: 2px;
+                                        background-color: #000;
+                                        top: 50%;
+                                        left: 0;
+                                        transform: translateY(-50%);
+                                    }
+                                }
+                            }
+                        }
+
+                        .card_image {
+                            position: relative;
+                            overflow: hidden;
+
+                            .upper_ribbon {
+                                position: absolute;
+                                top: 45px;
+                                right: -75px;
+                                transform: rotate(45deg);
+                                padding: 6px 0;
+                                width: 300px;
+                                text-align: center;
+                                background: linear-gradient(
+                                    120deg,
+                                    #0090ff 45%,
+                                    #00f18a 85.51%
+                                );
+                                color: #fff;
+                                font-family: Manrope;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: 140%;
+                                text-transform: uppercase;
+                            }
+
+                            .upper_ribbon_left {
+                                position: absolute;
+                                top: 45px;
+                                left: -75px;
+                                transform: rotate(-45deg);
+                                padding: 6px 0;
+                                width: 300px;
+                                text-align: center;
+                                background: linear-gradient(
+                                    120deg,
+                                    #0090ff 45%,
+                                    #00f18a 85.51%
+                                );
+                                color: #fff;
+                                font-family: Manrope;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: 140%;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+
+                    .bottom_block {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 25px;
+                        background: #eaecf2;
+                        padding: 25px 35px 50px;
+
+                        @media (max-width: 500px) {
+                            padding: 25px 15px 50px;
+                        }
+
+                        .upper_grid {
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 20px;
+
+                            @media (max-width: 650px) {
+                                grid-template-columns: repeat(2, 1fr);
+                            }
+
+                            @media (max-width: 500px) {
+                                grid-template-columns: 1fr;
+                                justify-content: center;
+                            }
+
+                            .cell {
+                                position: relative;
+
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-start;
+
+                                @media (max-width: 500px) {
+                                    align-items: center;
+                                }
+
+                                .top_line {
+                                    width: 60px;
+                                    height: 6px;
+                                    border-radius: 20px;
+                                    background: linear-gradient(
+                                        90deg,
+                                        #0090ff 0%,
+                                        #00f18a 100%
+                                    );
+                                    margin-bottom: 14px;
+                                }
+
+                                .title {
+                                    color: #0090ff;
+                                    font-family: Manrope;
+                                    font-size: 20px;
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    line-height: normal;
+                                    text-align-last: left;
+
+                                    @media (max-width: 500px) {
+                                        text-align: center;
+                                    }
+                                }
+
+                                .cell_text {
+                                    color: #000;
+                                    font-family: Manrope;
+                                    font-size: 20px;
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    line-height: normal;
+                                    text-align-last: left;
+
+                                    @media (max-width: 500px) {
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
+
+                        .card_price_wrapp {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            @media (max-width: 990px) {
+                                flex-direction: column;
+                                gap: 25px;
+                            }
+
+                            .before_price_text {
+                                position: relative;
+
+                                color: #000;
+                                font-family: Manrope;
+                                font-size: 25px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: normal;
+                                max-width: 584px;
+
+                                span {
+                                    color: #0090ff;
+                                }
+
+                                @media (max-width: 990px) {
+                                    text-align: center;
+                                }
+                            }
+
+                            .price_row {
+                                display: flex;
+                                justify-content: space-between;
+                                gap: 18px;
+
+                                @media (max-width: 500px) {
+                                    gap: 12px;
+                                }
+
+                                .item_active_price {
+                                    position: relative;
+
+                                    color: #0090ff;
+                                    font-family: Manrope;
+                                    font-size: 48px;
+                                    font-style: normal;
+                                    font-weight: 800;
+                                    line-height: normal;
+
+                                    @media (max-width: 500px) {
+                                        font-size: 40px;
+                                    }
+                                }
+
+                                .item_unactive_price {
+                                    display: block;
+                                    position: relative;
+
+                                    color: #000;
+                                    font-family: Manrope;
+                                    font-size: 23px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: normal;
+                                    text-transform: uppercase;
+                                    height: max-content;
+
+                                    @media (max-width: 500px) {
+                                        font-size: 18px;
+                                    }
+
+                                    .line__through {
+                                        position: absolute;
+                                        content: "";
+                                        width: 0;
+                                        height: 2px;
+                                        background-color: #000;
+                                        top: 50%;
+                                        left: 0;
+                                        transform: translateY(-50%);
+                                    }
+                                }
+                            }
+                        }
+
+                        .card_button {
+                            position: relative;
+
+                            cursor: pointer;
+                            padding: 20px 25px;
+                            border-radius: 7px;
+                            max-width: 200px;
+                            margin: 0px auto;
+
+                            color: #fff;
+                            text-align: center;
+                            font-family: Manrope;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: normal;
+                            letter-spacing: 0.36px;
+                            text-transform: uppercase;
+
+                            background: linear-gradient(
+                                81.25deg,
+                                #0090ff 18.31%,
+                                #00f18a 126.68%
+                            );
+                            border: 2px solid #eaecf2;
+                            outline: 0;
+                            transition: all 0.4s ease;
+
+                            @media (max-width: 600px) {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                padding: 20px 25px;
+                                max-width: 400px;
+                                width: 100%;
+                                border: none;
+                            }
+
+                            &:disabled {
+                                cursor: auto;
+                                pointer-events: none;
+                                background: #dbdbdb;
+                                color: #838383;
+                                animation: none;
+                                opacity: 1;
+                                transform: scale(1);
+                            }
+
+                            &:hover {
+                                color: #0090ff;
+                                border: 2px solid transparent;
+                                transition: all 0.4s ease;
+                                box-shadow: inset 0px 0px 0px 50vw #fff;
+                            }
+                        }
+                    }
+                }
+
+                .deal_card_right {
+                    grid-template-columns: 1fr 1.4fr;
+
+                    @media (max-width: 1060px) {
+                        grid-template-columns: 1fr 1fr;
+                    }
+
+                    @media (max-width: 800px) {
+                        grid-template-columns: 1fr;
+                        grid-template-rows: 1fr 400px;
+                    }
+
+                    .card_content {
+                        order: 2;
+
+                        @media (max-width: 800px) {
+                            order: 1;
+                        }
+                    }
+
+                    .card_image {
+                        order: 1;
+
+                        @media (max-width: 800px) {
+                            order: 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.animation_main_title {
+    animation: animation_title 0.8s ease-in forwards;
+}
+
+.animation_main_text {
+    animation: animation_title 0.8s ease-in 0.5s forwards;
+}
+
+// .animation__left {
+//     animation: animation__left 0.8s ease-in 0.5s forwards;
+// }
+
+// .animation__right {
+//     animation: animation__right 0.8s ease-in 0.5s forwards;
+// }
+
+// .animation_title {
+//     animation: animation_title 0.7s ease-in 1.5s forwards;
+// }
+
+// .includes_title_animation {
+//     animation: animation_title 0.7s ease-in 1.8s forwards;
+// }
+
+// .grid_cell_1 {
+//     animation: animation_title 0.7s ease-in 2s forwards;
+// }
+
+// .grid_cell_2 {
+//     animation: animation_title 0.7s ease-in 2.2s forwards;
+// }
+
+// .grid_cell_3 {
+//     animation: animation_title 0.7s ease-in 2.4s forwards;
+// }
+
+// .animation_text {
+//     animation: animation_title 0.7s ease-in 2.8s forwards;
+// }
+
+// .bottom_block_animation {
+//     animation: animation_title 0.8s ease-in 3s forwards;
+// }
+
+// .cell_1 {
+//     animation: animation__right 0.7s ease-in 3.6s forwards;
+// }
+
+// .cell_2 {
+//     animation: animation__right 0.7s ease-in 3.8s forwards;
+// }
+
+// .cell_3 {
+//     animation: animation__right 0.7s ease-in 4s forwards;
+// }
+
+// .cell_4 {
+//     animation: animation__right 0.7s ease-in 4.2s forwards;
+// }
+
+// .before_price_text_animation {
+//     animation: animation_title 0.7s ease-in 4.5s forwards;
+// }
+
+// .animation__scale {
+//     animation: animation_scale 0.8s ease-in 4.8s forwards;
+// }
+
+// .animation__scale_through {
+//     animation: animation_scale 0.8s ease-in 4.9s forwards;
+// }
+
+// .animation__through {
+//     animation: animation_through 0.8s ease-in 5.6s forwards;
+// }
+
+// .animation__scale_button {
+//     animation: animation_scale 0.8s ease-in 5.8s forwards;
+// }
+
+// .animation__box_shadow {
+//     animation: animation__box_shadow 0.8s ease-in 6.1s forwards;
+// }
+
+@keyframes animation_title {
+    0% {
+        opacity: 0;
+        top: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0px;
+    }
+}
+
+@keyframes animation__box_shadow {
+    0% {
+        box-shadow: 0px 0px 0 0px rgba(0, 144, 255, 0.8);
+    }
+
+    100% {
+        box-shadow: 0px 0px 30px 0px rgba(0, 144, 255, 0.8);
+    }
+}
+
+@keyframes animation__left {
+    0% {
+        opacity: 0;
+        left: -300px;
+    }
+
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+@keyframes animation__right {
+    0% {
+        opacity: 0;
+        right: -300px;
+    }
+
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+@keyframes animation_through {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes animation_scale {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
