@@ -12,8 +12,6 @@ import Agreement from "./Agreement";
 import Input from "./Inputs";
 import { postData } from "../../../functions/postData";
 import { useModals } from "../../../../context/ModalsProvider";
-import { phoneMasks } from "../../../../Data/phoneMasks";
-import { DropDownList } from "../../../InputForms/Inputs/Inputs";
 
 const ConsultationForm = (props) => {
     const [valid, setValid] = useState(null);
@@ -101,7 +99,19 @@ const ConsultationForm = (props) => {
         return errors;
     };
 
-    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
+    const contactMethodValues =
+        props.lang === "de"
+            ? ["Telefon  / E-Mail", "WhatsApp  / E-Mail"]
+            : props.lang === "fr"
+            ? ["téléphone  / E-mail", "WhatsApp  / E-mail"]
+            : props.lang === "it"
+            ? ["telefono  / E-mail", "WhatsApp  / E-mail"]
+            : props.lang === "es"
+            ? [
+                  "teléfono  / correo electrónico",
+                  "WhatsApp  / correo electrónico",
+              ]
+            : ["phone / e-mail", "whatsapp / e-mail"];
     const defaultContactMethodOption = contactMethod;
 
     const onSelectContactMethod = (option) => {
