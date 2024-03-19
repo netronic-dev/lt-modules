@@ -69,6 +69,11 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        max-width: 714px;
+
+        @media (max-width: 580px) {
+            font-size: 14px;
+        }
     }
 
     .social_links {
@@ -77,13 +82,17 @@
         list-style: none;
         gap: 72px;
 
-        @media (max-width: 520px) {
+        @media (max-width: 580px) {
             gap: 54px;
 
             svg {
                 width: 34px;
                 height: 34px;
             }
+        }
+
+        @media (max-width: 420px) {
+            gap: 34px;
         }
 
         svg {

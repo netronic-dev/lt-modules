@@ -326,6 +326,153 @@ export function PopUpNamePhone(props) {
     );
 }
 
+export function PopUpEmail(props) {
+    const [selectedLanguage, setSelectedLanguage] = useState(null);
+    const [agreement, changeAgreement] = useState(true);
+
+    const router = useRouter();
+    const modal = useModals();
+    const GAEvents = useGAEvents();
+
+    function onAgreementChange() {
+        changeAgreement(!agreement);
+        formik.setFieldValue("agreement", !agreement);
+    }
+
+    const languageValues = [
+        "Español",
+        "Deutsch",
+        "Italiano",
+        "Français",
+        "Українська",
+        "English",
+    ];
+
+    const onSelectLanguage = (option) => {
+        setSelectedLanguage(option.value);
+        formik.setFieldValue("language", option.value);
+    };
+
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.email) {
+            errors.email = "Required";
+        } else if (
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
+                values.email
+            )
+        ) {
+            errors.email = "Invalid email address";
+        }
+
+        if (!values.language) errors.language = "Required";
+        if (!values.agreement) errors.agreement = "Required";
+
+        return errors;
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            agreement: true,
+            language: "",
+        },
+        validate,
+        onSubmit: (values) => {
+            postData(
+                data,
+                props.destinationURL,
+                props.orderName,
+                props.lang,
+                window.location.hostname,
+                router.query
+            );
+            modal.closeModal();
+        },
+    });
+
+    return (
+        <div className={style.inputs_block_out}>
+            <div className={style.close_block} onClick={props.closeClick}></div>
+            <div className={`${style.inputs_block} fade-up-animation`}>
+                <div className={style.close}>
+                    <button onClick={props.closeClick}>{icons.cross}</button>
+                </div>
+                <div className={style.text_block}>
+                    <p className={style.title}>
+                        {props.title || "Fill in the form below"}
+                    </p>
+                </div>
+                <div className={style.inputs_block__inputs}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <InputEmail
+                            noIcons
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            error={formik.errors.email}
+                            placeholder={props.emailPlaceholder}
+                        />
+                        <div className={style.input_block_out}>
+                            <Dropdown
+                                className={`Dropdown-black_form  ${
+                                    formik.errors.language
+                                        ? "Dropdown-error"
+                                        : ""
+                                }`}
+                                options={languageValues}
+                                onChange={onSelectLanguage}
+                                value={selectedLanguage}
+                                placeholder={props.selectLanguagePlaceholder}
+                            />
+                            {formik.errors.language && (
+                                <span className={style.error}>
+                                    {formik.errors.language}
+                                </span>
+                            )}
+                        </div>
+                        <div className={style.agreement}>
+                            <div
+                                className={
+                                    agreement === true
+                                        ? style.agreement_dot_button_active
+                                        : style.agreement_dot_button
+                                }
+                                onClick={onAgreementChange}
+                            >
+                                {icons.dot}
+                            </div>
+                            <p className={style.agreement__text}>
+                                <span onClick={onAgreementChange}>
+                                    {props.agreement_text}
+                                </span>{" "}
+                                {props.agreement_link}
+                            </p>
+                            {formik.errors.agreement && (
+                                <span className={style.error}>
+                                    {formik.errors.agreement}
+                                </span>
+                            )}
+                        </div>
+                        <button
+                            type={agreement ? "submit" : "button"}
+                            className={`${
+                                agreement
+                                    ? Object.keys(formik.errors).length == 0
+                                        ? style.general_button_active
+                                        : style.general_button_inactive
+                                    : style.general_button_inactive
+                            } "button-submit"`}
+                        >
+                            {props.buttonText}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export function PopUpEmailPhone(props) {
     const [valid, setValid] = useState(null);
     const [phone, setPhone] = useState(null);

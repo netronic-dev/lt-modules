@@ -49,6 +49,7 @@ export default function Footer(props) {
                     youtube={props.youtube}
                     linkedin={props.linkedin}
                     logo={props.logo}
+                    onEmailIconCLick={props.onEmailIconCLick}
                 />
             </InView>
         </div>
