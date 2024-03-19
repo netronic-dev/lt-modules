@@ -20,7 +20,7 @@ function FooterSocial(props) {
             </div>
             <span className={style.social_text}>{props.text}</span>
             <ul className={style.social_links}>
-                <li onClick={() => props.onEmailIconCLick()}>{emailIcon}</li>
+                {/* <li onClick={() => props.onEmailIconCLick()}>{emailIcon}</li> */}
                 {/* facebook */}
                 <li>
                     <a
