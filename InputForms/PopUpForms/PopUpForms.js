@@ -87,7 +87,7 @@ export function PopUpNamePhone(props) {
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.budget) errors.budget = "Required";
+        // if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
@@ -97,9 +97,9 @@ export function PopUpNamePhone(props) {
             name: "",
             phone: false,
             contactMethod: "",
-            planToUse: "",
-            budget: "",
-            comment: "",
+            // planToUse: "",
+            // budget: "",
+            // comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -216,27 +216,25 @@ export function PopUpNamePhone(props) {
                                             Invalid mobile number
                                         </span>
                                     )}
-                                    <div className={style.input_block_out}>
-                                        <Dropdown
-                                            className={`Dropdown-black_form  ${
-                                                formik.errors.budget
-                                                    ? "Dropdown-error"
-                                                    : ""
-                                            }`}
-                                            options={budgetRangeValues}
-                                            onChange={onSelectBudgetRange}
-                                            value={defaultBudgetRangeOption}
-                                            placeholder={
-                                                props.budgetPlaceholder
-                                            }
-                                        />
-                                        {formik.errors.budget && (
-                                            <span className={style.error}>
-                                                {formik.errors.budget}
-                                            </span>
-                                        )}
-                                    </div>
                                 </div>
+                                {/* <div className={style.input_block_out}>
+                                    <Dropdown
+                                        className={`Dropdown-black_form  ${
+                                            formik.errors.budget
+                                                ? "Dropdown-error"
+                                                : ""
+                                        }`}
+                                        options={budgetRangeValues}
+                                        onChange={onSelectBudgetRange}
+                                        value={defaultBudgetRangeOption}
+                                        placeholder={props.budgetPlaceholder}
+                                    />
+                                    {formik.errors.budget && (
+                                        <span className={style.error}>
+                                            {formik.errors.budget}
+                                        </span>
+                                    )}
+                                </div> */}
                             </div>
                             <div>
                                 <div className={style.input_block_out}>
@@ -259,7 +257,7 @@ export function PopUpNamePhone(props) {
                                         </span>
                                     )}
                                 </div>
-                                <div className={style.input_block_out}>
+                                {/* <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
                                             formik.errors.planToUse
@@ -276,8 +274,8 @@ export function PopUpNamePhone(props) {
                                             {formik.errors.planToUse}
                                         </span>
                                     )}
-                                </div>
-                                <div className={style.input_block_out}>
+                                </div> */}
+                                {/* <div className={style.input_block_out}>
                                     <Input
                                         onChange={onChangeComment}
                                         type="text"
@@ -285,28 +283,27 @@ export function PopUpNamePhone(props) {
                                         placeholder={props.commentPlaceholder}
                                         name="comment"
                                     />
-                                </div>
-                                <div className={style.agreement}>
-                                    <div
-                                        className={
-                                            agreement === true
-                                                ? style.agreement_dot_button_active
-                                                : style.agreement_dot_button
-                                        }
-                                        onClick={onAgreementChange}
-                                    >
-                                        {icons.dot}
-                                    </div>
-                                    <p className={style.agreement__text}>
-                                        <span onClick={onAgreementChange}>
-                                            {props.agreement_text}
-                                        </span>{" "}
-                                        {props.agreement_link}
-                                    </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
-
+                        <div className={style.agreement}>
+                            <div
+                                className={
+                                    agreement === true
+                                        ? style.agreement_dot_button_active
+                                        : style.agreement_dot_button
+                                }
+                                onClick={onAgreementChange}
+                            >
+                                {icons.dot}
+                            </div>
+                            <p className={style.agreement__text}>
+                                <span onClick={onAgreementChange}>
+                                    {props.agreement_text}
+                                </span>{" "}
+                                {props.agreement_link}
+                            </p>
+                        </div>
                         <button
                             type={agreement ? "submit" : "button"}
                             className={`${
@@ -515,7 +512,7 @@ export function PopUpEmailPhone(props) {
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.budget) errors.budget = "Required";
+        // if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
@@ -526,9 +523,9 @@ export function PopUpEmailPhone(props) {
             email: "",
             phone: false,
             contactMethod: "",
-            planToUse: "",
-            budget: "",
-            comment: "",
+            // planToUse: "",
+            // budget: "",
+            // comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -638,13 +635,7 @@ export function PopUpEmailPhone(props) {
                                     error={formik.errors.name}
                                     placeholder={props.namePlaceholder}
                                 />
-                                <InputEmail
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    error={formik.errors.email}
-                                    placeholder={props.emailPlaceholder}
-                                />
+
                                 <div
                                     className={`${style.phone__input_block} ${
                                         formik.errors.phone
@@ -702,7 +693,7 @@ export function PopUpEmailPhone(props) {
                                         </span>
                                     )}
                                 </div>
-                                <div className={style.input_block_out}>
+                                {/* <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
                                             formik.errors.budget
@@ -719,9 +710,16 @@ export function PopUpEmailPhone(props) {
                                             {formik.errors.budget}
                                         </span>
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                             <div className={style.inputs_block__input_cell}>
+                                <InputEmail
+                                    noIcons
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    error={formik.errors.email}
+                                    placeholder={props.emailPlaceholder}
+                                />
                                 <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
@@ -742,7 +740,7 @@ export function PopUpEmailPhone(props) {
                                         </span>
                                     )}
                                 </div>
-                                <div className={style.input_block_out}>
+                                {/* <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
                                             formik.errors.planToUse
@@ -768,28 +766,27 @@ export function PopUpEmailPhone(props) {
                                         placeholder={props.commentPlaceholder}
                                         name="comment"
                                     />
-                                </div>
-                                <div className={style.agreement}>
-                                    <div
-                                        className={
-                                            agreement === true
-                                                ? style.agreement_dot_button_active
-                                                : style.agreement_dot_button
-                                        }
-                                        onClick={onAgreementChange}
-                                    >
-                                        {icons.dot}
-                                    </div>
-                                    <p className={style.agreement__text}>
-                                        <span onClick={onAgreementChange}>
-                                            {props.agreement_text}
-                                        </span>{" "}
-                                        {props.agreement_link}
-                                    </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
-
+                        <div className={style.agreement}>
+                            <div
+                                className={
+                                    agreement === true
+                                        ? style.agreement_dot_button_active
+                                        : style.agreement_dot_button
+                                }
+                                onClick={onAgreementChange}
+                            >
+                                {icons.dot}
+                            </div>
+                            <p className={style.agreement__text}>
+                                <span onClick={onAgreementChange}>
+                                    {props.agreement_text}
+                                </span>{" "}
+                                {props.agreement_link}
+                            </p>
+                        </div>
                         <button
                             type={agreement ? "submit" : "button"}
                             className={`${
@@ -900,9 +897,9 @@ export function PopUpEvent(props) {
             phone: false,
             name: "",
             contactMethod: "",
-            planToUse: "",
-            budget: "",
-            comment: "",
+            // planToUse: "",
+            // budget: "",
+            // comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -965,11 +962,7 @@ export function PopUpEvent(props) {
                                 value={formik.values.name}
                                 error={formik.errors.name}
                             />
-                            <InputEmail
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                                error={formik.errors.email}
-                            />
+
                             <div
                                 className={`${style.phone__input_block} ${
                                     formik.errors.phone
@@ -1021,7 +1014,12 @@ export function PopUpEvent(props) {
                                     </span>
                                 )}
                             </div>
-                            <div className={style.input_block_out}>
+                            <InputEmail
+                                onChange={formik.handleChange}
+                                value={formik.values.email}
+                                error={formik.errors.email}
+                            />
+                            {/* <div className={style.input_block_out}>
                                 <Dropdown
                                     className={`Dropdown-black_form  ${
                                         formik.errors.budget
@@ -1038,7 +1036,7 @@ export function PopUpEvent(props) {
                                         {formik.errors.budget}
                                     </span>
                                 )}
-                            </div>
+                            </div> */}
                             <div className={style.input_block_out}>
                                 <Dropdown
                                     className={`Dropdown-black_form  ${
@@ -1057,7 +1055,7 @@ export function PopUpEvent(props) {
                                     </span>
                                 )}
                             </div>
-                            <div className={style.input_block_out}>
+                            {/* <div className={style.input_block_out}>
                                 <Dropdown
                                     className={`Dropdown-black_form  ${
                                         formik.errors.planToUse
@@ -1083,7 +1081,7 @@ export function PopUpEvent(props) {
                                     placeholder={props.commentPlaceholder}
                                     name="comment"
                                 />
-                            </div>
+                            </div> */}
                         </div>
                         <div className={style.agreement}>
                             <div

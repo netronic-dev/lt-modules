@@ -131,7 +131,7 @@ const ConsultationForm = (props) => {
             email: "",
             agreement: true,
             contactMethod: "",
-            comment: "",
+            // comment: "",
         },
         validate,
         onSubmit: (values) => {
@@ -246,6 +246,8 @@ const ConsultationForm = (props) => {
                                 </span>
                             )}
                         </div>
+                    </div>
+                    <div className={style.grid_cell}>
                         <Input
                             error={formik.errors.email}
                             onChange={formik.handleChange}
@@ -254,8 +256,6 @@ const ConsultationForm = (props) => {
                             placeholder={props.emailPlaceholder}
                             name="email"
                         />
-                    </div>
-                    <div className={style.grid_cell}>
                         <div className={style.input_block_out}>
                             <Dropdown
                                 className={`Dropdown-white_form  ${
@@ -274,7 +274,7 @@ const ConsultationForm = (props) => {
                                 </span>
                             )}
                         </div>
-                        <div className={style.input_block_out}>
+                        {/* <div className={style.input_block_out}>
                             <Input
                                 onChange={onChangeComment}
                                 type="text"
@@ -282,18 +282,17 @@ const ConsultationForm = (props) => {
                                 placeholder={props.commentPlaceholder}
                                 name="comment"
                             />
-                        </div>
-                        <Agreement
-                            isModal={props.isModal}
-                            agreement={formik.values.agreement}
-                            agreementText={props.agreementText}
-                            error={formik.errors.agreement}
-                            onChange={formik.handleChange}
-                            onClick={handleAgreementChange}
-                        />
+                        </div> */}
                     </div>
                 </div>
-
+                <Agreement
+                    isModal={props.isModal}
+                    agreement={formik.values.agreement}
+                    agreementText={props.agreementText}
+                    error={formik.errors.agreement}
+                    onChange={formik.handleChange}
+                    onClick={handleAgreementChange}
+                />
                 <button
                     className={style.submit__button}
                     type="submit"
