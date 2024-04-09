@@ -113,7 +113,7 @@ export function PopUpNamePhone(props) {
                 props.destinationURL,
                 props.orderName,
                 props.lang,
-                window.location.hostname,
+                window.location.href,
                 router.query
             ).then(
                 ReactGA.event("generate_lead", {
@@ -382,7 +382,7 @@ export function PopUpEmail(props) {
                 props.destinationURL,
                 props.orderName,
                 props.lang,
-                window.location.hostname,
+                window.location.href,
                 router.query
             );
             modal.closeModal();
@@ -926,7 +926,7 @@ export function PopUpEvent(props) {
                     props.destinationURL,
                     props.orderName,
                     props.lang,
-                    window.location.hostname,
+                    window.location.href,
                     router.query
                 ).then(
                     ReactGA.event("generate_lead", {

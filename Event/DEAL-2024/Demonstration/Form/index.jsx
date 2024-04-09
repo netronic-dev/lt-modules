@@ -51,7 +51,7 @@ const Form = (props) => {
                 props.destinationURL,
                 props.orderName,
                 props.lang,
-                window.location.hostname,
+                window.location.href,
                 router.query,
                 [
                     {
