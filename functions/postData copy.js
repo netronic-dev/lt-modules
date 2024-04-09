@@ -24,7 +24,7 @@ export async function postData(
                   utm_source: routerQuerry.utm_source || "direct",
                   utm_term: routerQuerry.utm_term || "",
               }
-            : {},
+            : { utm_source: "direct" },
         fields: [
             {
                 name: "Страна",
