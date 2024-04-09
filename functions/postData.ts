@@ -22,7 +22,7 @@ export async function postData(
             ? {
                   utm_campaign: routerQuerry.utm_campaign || "",
                   utm_medium: routerQuerry.utm_medium || "",
-                  utm_source: routerQuerry.utm_source || "",
+                  utm_source: routerQuerry.utm_source || "direct",
                   utm_term: routerQuerry.utm_term || "",
               }
             : {},
