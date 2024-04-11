@@ -91,6 +91,16 @@ export function ThemeForm(props) {
             errors.phone = "Required";
         }
 
+        if (!values.email) {
+            errors.email = "Required";
+        } else if (
+            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
+                values.email
+            )
+        ) {
+            errors.email = "Invalid email address";
+        }
+
         if (!values.contactMethod) errors.contactMethod = "Required";
         // if (!values.budget) errors.budget = "Required";
 
@@ -100,6 +110,7 @@ export function ThemeForm(props) {
     const formik = useFormik({
         initialValues: {
             name: "",
+            email: "",
             phone: false,
             contactMethod: "",
             // planToUse: "",
@@ -154,6 +165,32 @@ export function ThemeForm(props) {
                         error={formik.errors.name}
                         placeholder={props.namePlaceholder}
                     />
+                    <InputEmail
+                        noIcons
+                        theme={props.theme}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        error={formik.errors.email}
+                    />
+
+                    {/* <div className={style.input_block_out}>
+                        <Dropdown
+                            className={`Dropdown-blue_form  ${
+                                formik.errors.budget ? "Dropdown-error" : ""
+                            }`}
+                            options={budgetRangeValues}
+                            onChange={onSelectBudgetRange}
+                            value={defaultBudgetRangeOption}
+                            placeholder={props.budgetPlaceholder}
+                        />
+                        {formik.errors.budget && (
+                            <span className={style.error}>
+                                {formik.errors.budget}
+                            </span>
+                        )}
+                    </div> */}
+                </div>
+                <div className={style.inputs_cell}>
                     <div
                         className={`${style.phone__input_block} ${
                             formik.errors.phone
@@ -192,24 +229,6 @@ export function ThemeForm(props) {
                             </span>
                         )}
                     </div>
-                    {/* <div className={style.input_block_out}>
-                        <Dropdown
-                            className={`Dropdown-blue_form  ${
-                                formik.errors.budget ? "Dropdown-error" : ""
-                            }`}
-                            options={budgetRangeValues}
-                            onChange={onSelectBudgetRange}
-                            value={defaultBudgetRangeOption}
-                            placeholder={props.budgetPlaceholder}
-                        />
-                        {formik.errors.budget && (
-                            <span className={style.error}>
-                                {formik.errors.budget}
-                            </span>
-                        )}
-                    </div> */}
-                </div>
-                <div className={style.inputs_cell}>
                     <div className={style.input_block_out}>
                         <Dropdown
                             className={`Dropdown-blue_form  ${
