@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getLocalStorage } from "../CookieBanner/storageHelper";
 
 export async function postData(
     values,
@@ -10,6 +11,7 @@ export async function postData(
     fields
 ) {
     let locationInfo = await getLocationData();
+    const storedCookieConsent = getLocalStorage("cookie_consent", null);
     let data = {
         siteName: siteDomain,
         orderName: orderName,
@@ -17,6 +19,8 @@ export async function postData(
         email: values.email || "",
         phone: values.phone || "",
         lang: lang,
+        cookies: storedCookieConsent,
+        comment: values.comment,
         query: routerQuerry
             ? {
                   utm_campaign: routerQuerry.utm_campaign || "",
