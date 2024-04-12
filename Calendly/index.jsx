@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import ReactGA from "react-ga4";
 import { postData } from "../functions/postData";
 import { useCalendlyEventListener } from "react-calendly";
-
+import ReactPixel from "react-facebook-pixel";
 import style from "./style.module.scss";
 import { addUserData } from "../../store/userSlice";
 
@@ -53,11 +53,13 @@ const Calendly = (props) => {
                     )
                         .then(
                             ReactGA.event("generate_lead", {
-                                event_category: "button",
-                                event_label: "generate_lead",
+                                category: "form",
+                                action: "submit",
                             })
                         )
-                        .then(router.push("/thanks-call"));
+                        .then(ReactPixel.track("Lead"))
+                        .then(router.push("/thanks-call"))
+                        .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
     }, [eventData]);

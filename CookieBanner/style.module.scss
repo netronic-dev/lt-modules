@@ -1,0 +1,114 @@
+.banner {
+    width: 100%;
+    height: max-content;
+    padding: 51px 0;
+    background-color: #202020;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1555550;
+
+    @media (max-width: 1200px) {
+        padding: 51px 9px;
+    }
+
+    @media (max-width: 950px) {
+        padding: 9px;
+    }
+
+    .container {
+        width: 1180px;
+        margin: 0 auto;
+        border: 1px solid #fff;
+        padding: 17px 100px;
+        display: grid;
+        grid-template-columns: 1fr 303px;
+        gap: 115px;
+        align-items: center;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+            padding: 17px;
+        }
+
+        @media (max-width: 1035px) {
+            gap: 30px;
+        }
+
+        @media (max-width: 950px) {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .banner_title {
+                color: #fff;
+                font-family: var(--font-DINPro);
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 175%;
+                text-transform: uppercase;
+
+                a {
+                    color: #0090ff;
+
+                    @media (max-width: 950px) {
+                        text-decoration: underline;
+                    }
+                }
+
+                @media (max-width: 650px) {
+                    font-size: 35px;
+                }
+            }
+
+            .banner_text {
+                color: #fff;
+                font-family: Manrope;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 142.857%;
+                letter-spacing: 0.28px;
+
+                @media (max-width: 650px) {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .buttons_block {
+            display: flex;
+            gap: 19px;
+
+            @media (max-width: 950px) {
+                justify-content: center;
+            }
+
+            .button {
+                background-color: transparent;
+                padding: 9px 28px;
+                border-radius: 40px;
+                border: 2px solid #0090ff;
+                color: #fff;
+                font-family: Manrope;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                transition: all 0.4s ease;
+
+                &:hover {
+                    cursor: pointer;
+                    transition: all 0.4s ease;
+                    background-color: #0090ff;
+                }
+            }
+        }
+    }
+}

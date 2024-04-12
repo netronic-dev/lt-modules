@@ -13,7 +13,7 @@ import { postData } from "../../../functions/postData copy";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../../store/actions/userData";
 import ReactGA from "react-ga4";
-
+import ReactPixel from "react-facebook-pixel";
 // interface FormModalProps {
 // 	thank_you_page_url: string;
 // 	text: string;
@@ -83,14 +83,19 @@ const FormModal = (props) => {
                         BXName: "UF_CRM_1624974650",
                     },
                 ]
-            ).then(
-                ReactGA.event("generate_lead", {
-                    event_category: "button",
-                    event_label: "generate_lead",
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(() => {
+                    document.body.className = "";
+                    router.push(props.thank_you_page_url);
                 })
-            );
-            document.body.className = "";
-            router.push(props.thank_you_page_url);
+                .catch(console.log);
         },
     });
 

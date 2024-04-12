@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ReactGA from "react-ga4";
 import style from "./style.module.scss";
-
+import ReactPixel from "react-facebook-pixel";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useInView } from "react-hook-inview";
@@ -35,11 +35,13 @@ export function InputsWName(props) {
             )
                 .then(
                     ReactGA.event("generate_lead", {
-                        event_category: "button",
-                        event_label: "generate_lead",
+                        category: "form",
+                        action: "submit",
                     })
                 )
-                .then(router.push(props.thankYouPage));
+                .then(ReactPixel.track("Lead"))
+                .then(router.push(props.thankYouPage))
+                .catch(console.log);
         },
     });
 

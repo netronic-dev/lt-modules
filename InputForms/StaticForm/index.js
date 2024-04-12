@@ -14,7 +14,7 @@ import { useModals } from "../../../context/ModalsProvider.js";
 import { phoneMasks } from "../../../Data/phoneMasks.js";
 import axios from "axios";
 import Dropdown from "react-dropdown";
-
+import ReactPixel from "react-facebook-pixel";
 const buttonTheme = {
     general: style.general_button_inactive,
     black: style.button_black_inactive,
@@ -132,17 +132,19 @@ export function ThemeForm(props) {
                 window.location.href,
                 router.query
             )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
                 .then(router.push("/thanks-pres"))
                 .catch(console.log);
-            ReactGA.event("generate_lead", {
-                category: "form",
-                action: "submit",
-            });
         },
     });
 
     useEffect(() => {
-        console.log(modal?.region);
         modal?.region
             ? setRegionCode(modal?.region.toLowerCase())
             : setRegionCode("us");
@@ -359,17 +361,18 @@ export function ThemeFormAll(props) {
                 )
                     .then(
                         ReactGA.event("generate_lead", {
-                            event_category: "button",
-                            event_label: "generate_lead",
+                            category: "form",
+                            action: "submit",
                         })
                     )
+                    .then(ReactPixel.track("Lead"))
                     .then(router.push("/thanks-pres"))
+                    .catch(console.log)
             );
         },
     });
 
     useEffect(() => {
-        console.log(modal?.region);
         modal?.region
             ? setRegionCode(modal?.region.toLowerCase())
             : setRegionCode("us");

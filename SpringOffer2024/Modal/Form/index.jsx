@@ -5,7 +5,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ReactGA from "react-ga4";
 import Dropdown from "react-dropdown";
-
+import ReactPixel from "react-facebook-pixel";
 import style from "./style.module.scss";
 
 import Agreement from "./Agreement";
@@ -151,11 +151,13 @@ const ConsultationForm = (props) => {
                 .then(modal?.closeModal())
                 .then(
                     ReactGA.event("generate_lead", {
-                        event_category: "button",
-                        event_label: "generate_lead",
+                        category: "form",
+                        action: "submit",
                     })
                 )
-                .then(router.push(props.thank_you_page));
+                .then(ReactPixel.track("Lead"))
+                .then(router.push(props.thank_you_page))
+                .catch(console.log);
         },
     });
 

@@ -2,12 +2,11 @@ import style from "./header.module.scss";
 import Link from "next/link";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import { PopupModal, useCalendlyEventListener } from "react-calendly";
-import { useEffect, useState } from "react";
-import ReactGA from "react-ga4";
+import { PopupModal } from "react-calendly";
+import { useState } from "react";
+
 import { useDispatch } from "react-redux";
-import { addUserData } from "../../store/userSlice";
-import { postData } from "../functions/postData";
+
 import { useRouter } from "next/router";
 import Calendly from "../Calendly";
 

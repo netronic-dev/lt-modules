@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import Dropdown from "react-dropdown";
-
+import ReactPixel from "react-facebook-pixel";
 import {
     InputCall,
     InputEmail,
@@ -63,14 +63,19 @@ const Form = (props) => {
                         BXName: "UF_CRM_1624974650",
                     },
                 ]
-            ).then(
-                ReactGA.event("generate_lead", {
-                    event_category: "button",
-                    event_label: "generate_lead",
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(() => {
+                    document.body.className = "";
+                    router.push(props.thank_you_page_url);
                 })
-            );
-            document.body.className = "";
-            router.push(props.thank_you_page_url);
+                .catch(console.log);
         },
     });
 

@@ -2,7 +2,10 @@ import { useRef } from "react";
 
 import style from "./style.module.scss";
 import { useModals } from "../../../context/ModalsProvider";
-import ConsultationForm from "./Form";
+
+import dynamic from "next/dynamic";
+
+const ConsultationForm = dynamic(() => import("./Form"), { ssr: false });
 
 const Modal = (props) => {
     const ref = useRef(null);

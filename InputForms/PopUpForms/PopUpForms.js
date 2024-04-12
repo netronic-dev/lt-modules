@@ -16,7 +16,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import Dropdown from "react-dropdown";
-
+import ReactPixel from "react-facebook-pixel";
 function turnOnScroll() {
     document.body.className = "";
 }
@@ -115,20 +115,24 @@ export function PopUpNamePhone(props) {
                 props.lang,
                 window.location.href,
                 router.query
-            ).then(
-                ReactGA.event("generate_lead", {
-                    event_category: "button",
-                    event_label: "generate_lead",
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(() => {
+                    modal.NamePhoneModalChangeVisibility();
+                    router.push(props.thank_you_page);
+                    turnOnScroll();
                 })
-            );
-            modal.NamePhoneModalChangeVisibility();
-            router.push(props.thank_you_page);
-            turnOnScroll();
+                .catch(console.log);
         },
     });
 
     useEffect(() => {
-        console.log(modal?.region);
         modal?.region
             ? setRegionCode(modal?.region.toLowerCase())
             : setRegionCode("us");
@@ -384,8 +388,19 @@ export function PopUpEmail(props) {
                 props.lang,
                 window.location.href,
                 router.query
-            );
-            modal.closeModal();
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(() => {
+                    router.push(props.thank_you_page);
+                    turnOnScroll();
+                })
+                .catch(console.log);
         },
     });
 
@@ -557,15 +572,22 @@ export function PopUpEmailPhone(props) {
                         window.location.href,
                         router.query
                     )
+                        .then(
+                            ReactGA.event("generate_lead", {
+                                category: "form",
+                                action: "submit",
+                            })
+                        )
+                        .then(ReactPixel.track("Lead"))
+                        .then(() => {
+                            router.push(props.thank_you_page);
+                            modal.EmailPhoneModalChangeVisibility();
+                            turnOnScroll();
+                        })
+                        .catch(console.log)
                 )
-                .then(router.push(props.thank_you_page))
+                .then()
                 .catch(console.log);
-            ReactGA.event("generate_lead", {
-                category: "form",
-                action: "submit",
-            });
-            modal.EmailPhoneModalChangeVisibility();
-            turnOnScroll();
         },
     });
 
@@ -885,7 +907,6 @@ export function PopUpEvent(props) {
     };
 
     useEffect(() => {
-        console.log(modal?.region);
         modal?.region
             ? setRegionCode(modal?.region.toLowerCase())
             : setRegionCode("us");
@@ -928,16 +949,21 @@ export function PopUpEvent(props) {
                     props.lang,
                     window.location.href,
                     router.query
-                ).then(
-                    ReactGA.event("generate_lead", {
-                        event_category: "button",
-                        event_label: "generate_lead",
-                    })
                 )
+                    .then(
+                        ReactGA.event("generate_lead", {
+                            category: "form",
+                            action: "submit",
+                        })
+                    )
+                    .then(ReactPixel.track("Lead"))
+                    .then(() => {
+                        modal.EventModalChangeVisibility();
+                        router.push(props.thank_you_page);
+                        turnOnScroll();
+                    })
+                    .catch(console.log)
             );
-            modal.EventModalChangeVisibility();
-            router.push(props.thank_you_page);
-            turnOnScroll();
         },
     });
 
@@ -1232,14 +1258,20 @@ export function PopUpNameEmail(props) {
                         window.location.href,
                         router.query
                     )
+                        .then(
+                            ReactGA.event("generate_lead", {
+                                category: "form",
+                                action: "submit",
+                            })
+                        )
+                        .then(ReactPixel.track("Lead"))
+                        .then(() => {
+                            router.push(props.thank_you_page);
+                            turnOnScroll();
+                        })
+                        .catch(console.log)
                 )
-                .then(router.push(props.thank_you_page))
                 .catch(console.log);
-            ReactGA.event("generate_lead", {
-                category: "form",
-                action: "submit",
-            });
-            turnOnScroll();
         },
     });
 

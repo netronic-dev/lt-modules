@@ -14,7 +14,7 @@ import { postData } from "../../../../functions/postData";
 import { setUserData } from "../../../../../store/actions/userData";
 import ReactGA from "react-ga4";
 import { addUserData } from "../../../../../store/userSlice";
-
+import ReactPixel from "react-facebook-pixel";
 const Form = (props) => {
     let validate = validation;
 
@@ -65,14 +65,19 @@ const Form = (props) => {
                         BXName: "UF_CRM_1624974650",
                     },
                 ]
-            ).then(
-                ReactGA.event("generate_lead", {
-                    event_category: "button",
-                    event_label: "generate_lead",
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(() => {
+                    document.body.className = "";
+                    router.push(props.thank_you_page_url);
                 })
-            );
-            document.body.className = "";
-            router.push(props.thank_you_page_url);
+                .catch(console.log);
         },
     });
 

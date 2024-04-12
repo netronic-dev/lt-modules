@@ -2,6 +2,8 @@ import style from "./style.module.scss";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import ReactGA from "react-ga4";
+import ReactPixel from "react-facebook-pixel";
+
 import {
     InputEmail,
     InputCall,
@@ -51,13 +53,16 @@ export function PopUpForm(props) {
                 props.lang,
                 window.location.href,
                 router.query
-            );
-            then(
-                ReactGA.event("generate_lead", {
-                    event_category: "button",
-                    event_label: "generate_lead",
-                })
-            ).then(router.push(props.thank_you_page_url));
+            )
+                .then(
+                    ReactGA.event("generate_lead", {
+                        category: "form",
+                        action: "submit",
+                    })
+                )
+                .then(ReactPixel.track("Lead"))
+                .then(router.push(props.thank_you_page_url))
+                .catch(console.log);
         },
     });
 

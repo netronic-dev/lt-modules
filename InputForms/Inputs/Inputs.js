@@ -144,7 +144,7 @@ export function InputName(props) {
     if (props.error_1) {
         icon.error = icons.error_1;
     }
-    console.log("props.error", props.error);
+
     return (
         <div className={style.input_block_out}>
             <div className={theme[props.theme ? props.theme : "standard"]}>

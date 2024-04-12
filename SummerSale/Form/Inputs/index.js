@@ -1,60 +1,67 @@
-import Link from 'next/link';
-import ReactGA from 'react-ga4';
-import style from './style.module.scss';
-import axios from 'axios';
+import Link from "next/link";
+import ReactGA from "react-ga4";
+import style from "./style.module.scss";
+import axios from "axios";
+import ReactPixel from "react-facebook-pixel";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { useInView } from "react-hook-inview";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../../../store/actions/userData";
+import { postData } from "../../../../lt-modules/functions/postData.ts";
+import { useGAEvents } from "../../../../context/GAEventsProvider";
 
-import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
-import { useInView } from 'react-hook-inview';
-import { useDispatch } from 'react-redux';
-import { setUserData } from '../../../../store/actions/userData';
-import { postData } from '../../../../lt-modules/functions/postData.ts';
-import { useGAEvents } from '../../../../context/GAEventsProvider';
-
-export function InputsWName (props) {
+export function InputsWName(props) {
     const router = useRouter();
     const dispatch = useDispatch();
     const GAEvents = useGAEvents();
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            email: '',
-            phone: '',
+            name: "",
+            email: "",
+            phone: "",
             agreement: true,
         },
         validate,
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
             const options = {
-                method: 'POST',
+                method: "POST",
                 url: `https://api.netronic.net/send-email`,
                 headers: {
-                    'content-type': 'application/json',
+                    "content-type": "application/json",
                 },
-                data: { email: values.email, fromName: props.fromName, letterId: props.letterId },
+                data: {
+                    email: values.email,
+                    fromName: props.fromName,
+                    letterId: props.letterId,
+                },
             };
-            axios.request(options).then(postData(
-                values,
-                props.destinationURL,
-                props.orderName,
-                props.lang,
-                window.location.hostname,
-                router.query
-            )
-                .then(
-                    ReactGA.event('generate_lead', {
-                        event_category: 'button',
-                        event_label: 'generate_lead',
-                    })
+            axios.request(options).then(
+                postData(
+                    values,
+                    props.destinationURL,
+                    props.orderName,
+                    props.lang,
+                    window.location.hostname,
+                    router.query
                 )
-                .then(router.push(props.thankYouPage)))
-                ;
+                    .then(
+                        ReactGA.event("generate_lead", {
+                            category: "form",
+                            action: "submit",
+                        })
+                    )
+                    .then(ReactPixel.track("Lead"))
+                    .then(router.push(props.thankYouPage))
+                    .catch(console.log)
+            );
         },
     });
 
-    function onAgreementChange () {
-        formik.setFieldValue('agreement', !formik.values.agreement);
+    function onAgreementChange() {
+        formik.setFieldValue("agreement", !formik.values.agreement);
     }
 
     const [ref, isVisible] = useInView({
@@ -63,7 +70,7 @@ export function InputsWName (props) {
 
     return (
         <div className={style.input_land_out}>
-            <form onSubmit={formik.handleSubmit} className='form_submit_land'>
+            <form onSubmit={formik.handleSubmit} className="form_submit_land">
                 <div className={style.content}>
                     <div className={style.input_out__outer}>
                         <div className={style.input_out}>
@@ -73,11 +80,11 @@ export function InputsWName (props) {
                                         ? `${style.input} ${style.input_error}`
                                         : style.input
                                 }
-                                name='name'
-                                maxLength='30'
+                                name="name"
+                                maxLength="30"
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
-                                placeholder={props.namePlaceholder || 'Name *'}
+                                placeholder={props.namePlaceholder || "Name *"}
                             />
                         </div>
                         <div className={style.error}>{formik.errors.name}</div>
@@ -92,10 +99,10 @@ export function InputsWName (props) {
                                 }
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
-                                maxLength='40'
-                                name='email'
-                                type='email'
-                                placeholder={props.placeholder || 'Email *'}
+                                maxLength="40"
+                                name="email"
+                                type="email"
+                                placeholder={props.placeholder || "Email *"}
                             />
                         </div>
                         <div className={style.error}>{formik.errors.email}</div>
@@ -108,13 +115,13 @@ export function InputsWName (props) {
                                         ? `${style.input} ${style.input_error}`
                                         : style.input
                                 }
-                                type='tel'
-                                name='phone'
-                                maxLength='30'
+                                type="tel"
+                                name="phone"
+                                maxLength="30"
                                 onChange={formik.handleChange}
                                 value={formik.values.phone}
                                 placeholder={
-                                    props.callPlaceholder || 'Phone number *'
+                                    props.callPlaceholder || "Phone number *"
                                 }
                             />
                         </div>
@@ -130,8 +137,8 @@ export function InputsWName (props) {
                 />
                 <button
                     className={style.button}
-                    id={props.id ? props.id : ''}
-                    type='submit'
+                    id={props.id ? props.id : ""}
+                    type="submit"
                     onClick={props.onClick}
                     disabled={true}
                 >
@@ -142,7 +149,7 @@ export function InputsWName (props) {
     );
 }
 
-function Agreement (props) {
+function Agreement(props) {
     return (
         <div className={style.agreement__outer}>
             <div className={style.agreement}>
@@ -159,12 +166,12 @@ function Agreement (props) {
                 <p className={style.agreement__text}>
                     <span onClick={props.onAgreementChange}>
                         {props.agreementText ||
-                            'Подтверждаю, что ознакомился и согласен с условиями '}
-                    </span>{' '}
-                    <Link href='/privacy-policy'>
+                            "Подтверждаю, что ознакомился и согласен с условиями "}
+                    </span>{" "}
+                    <Link href="/privacy-policy">
                         <a>
                             {props.agreementSpanText ||
-                                'политики конфиденциальности'}
+                                "политики конфиденциальности"}
                         </a>
                     </Link>
                 </p>
@@ -175,9 +182,9 @@ function Agreement (props) {
 }
 
 const dotIcon = (
-    <svg width='20' height='20' viewBox='0 0 20 20' fill='none'>
-        <circle cx='10' cy='10' r='10' fill='#383838' />
-        <circle className={style.dot} cx='10' cy='10' r='8' fill='#F1F4F6' />
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="10" fill="#383838" />
+        <circle className={style.dot} cx="10" cy="10" r="8" fill="#F1F4F6" />
     </svg>
 );
 
@@ -185,36 +192,36 @@ export const validate = (values) => {
     const errors = {};
 
     if (values.name !== undefined) {
-        if (values.name === '') {
-            errors.name = 'Required field';
+        if (values.name === "") {
+            errors.name = "Required field";
         }
     }
 
     if (values.email !== undefined) {
-        if (values.email === '') {
-            errors.email = 'Required field';
+        if (values.email === "") {
+            errors.email = "Required field";
         } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
         ) {
-            errors.email = 'Wrong E-mail';
+            errors.email = "Wrong E-mail";
         }
     }
 
     if (values.phone !== undefined) {
-        if (values.phone === '') {
-            errors.phone = 'Required field';
+        if (values.phone === "") {
+            errors.phone = "Required field";
         } else if (
             !/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(
                 values.phone
             )
         ) {
-            errors.phone = 'Wrong phone number';
+            errors.phone = "Wrong phone number";
         }
     }
 
     if (values.agreement !== undefined) {
         if (values.agreement === false) {
-            errors.agreement = 'Required';
+            errors.agreement = "Required";
         }
     }
 
