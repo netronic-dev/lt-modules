@@ -2,12 +2,12 @@ import "client-only";
 
 import style from "./style.module.scss";
 import { getLocalStorage, setLocalStorage } from "./storageHelper";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 export default function CookieBanner(props) {
     const [cookieConsent, setCookieConsent] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const storedCookieConsent = getLocalStorage("cookie_consent", null);
 
         setCookieConsent(storedCookieConsent);
