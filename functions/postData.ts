@@ -1,6 +1,11 @@
 import axios from "axios";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
 
+export const fbpCookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("_fbp="))
+    ?.split("=")[1];
+
 export async function postData(
     values: any,
     url: string,
@@ -11,8 +16,9 @@ export async function postData(
     fields?: field[] | []
 ) {
     console.log("first");
-    let locationInfo: any = await getLocationData();
+    let locationInfo: locationData = await getLocationData();
     const storedCookieConsent = getLocalStorage("cookie_consent", null);
+
     let data: any = {
         siteName: siteDomain,
         orderName: orderName,
@@ -30,6 +36,15 @@ export async function postData(
                   utm_term: routerQuerry.utm_term || "",
               }
             : { utm_source: "direct" },
+        fbpCookie,
+        userLocationData: {
+            ip: locationInfo.ip,
+            zipcode: locationInfo.zipcode,
+            state: locationInfo.state,
+            country: locationInfo.country,
+            city: locationInfo.city,
+            region: locationInfo.region,
+        },
         fields: [
             {
                 name: "Страна",
@@ -81,49 +96,33 @@ export interface field {
 interface locationData {
     ip: string;
     region: string;
+    city: string;
     country: string;
+    zipcode: string;
+    state: string;
 }
 
-// async function getLocationData() {
-//     let locationData: locationData | {} = {
-//         ip: '',
-//         region: '',
-//         country: '',
-//     };
-//     await axios
-//         .get(
-//             'https://ipgeolocation.abstractapi.com/v1/?api_key=e2d2ea1613cd480b88aadaa79bc71675'
-//         )
-//         .then((response: any) => {
-//             locationData = {
-//                 ip: response.data.ip_address,
-//                 region: response.data.region,
-//                 country: response.data.country,
-//             };
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//         });
-//     return locationData;
-// }
-
-async function getLocationData() {
-    let locationData: locationData | {} = {
+export async function getLocationData() {
+    let locationData = {
         ip: "",
+        city: "",
         region: "",
         country: "",
-        city: "",
+        zipcode: "",
+        state: "",
     };
     await axios
         .get(
             "https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee"
         )
-        .then((response: any) => {
+        .then((response) => {
             locationData = {
                 ip: response.data.ip,
                 city: response.data.city,
-                region: response.data.state_prov,
+                region: response.data.country_code2,
                 country: response.data.country_name,
+                zipcode: response.data.zipcode,
+                state: response.data.state_prov,
             };
         })
         .catch((error) => {
