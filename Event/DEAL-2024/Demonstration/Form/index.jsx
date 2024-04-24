@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-dropdown";
 
 import {
@@ -15,11 +15,13 @@ import { setUserData } from "../../../../../store/actions/userData";
 import ReactGA from "react-ga4";
 import { addUserData } from "../../../../../store/userSlice";
 import ReactPixel from "react-facebook-pixel";
+import { searchParams } from "../../../../../store/searchParamsSlice";
 const Form = (props) => {
     let validate = validation;
 
     const router = useRouter();
     const dispatch = useDispatch();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         formik.setFieldValue(
@@ -52,7 +54,7 @@ const Form = (props) => {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query,
+                queryParams || router.query,
                 [
                     {
                         name: "date",

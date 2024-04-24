@@ -12,6 +12,8 @@ import Input from "./Inputs";
 import { postData } from "../../../functions/postData";
 import { useModals } from "../../../../context/ModalsProvider";
 import { phoneMasks } from "../../../../Data/phoneMasks";
+import { searchParams } from "../../../../store/searchParamsSlice";
+import { useSelector } from "react-redux";
 
 const ConsultationForm = (props) => {
     const [valid, setValid] = useState(null);
@@ -19,6 +21,7 @@ const ConsultationForm = (props) => {
     const [regionCode, setRegionCode] = useState();
     const router = useRouter();
     const modal = useModals();
+    const queryParams = useSelector(searchParams);
 
     const setErrorText = () => {
         const errorMessages = {};
@@ -114,7 +117,7 @@ const ConsultationForm = (props) => {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(modal?.closeModal())
                 .then(

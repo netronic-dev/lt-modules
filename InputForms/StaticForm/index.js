@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
 import { postData } from "../../functions/postData.ts";
 import { useValidation } from "../../../context/ValidationProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../store/actions/userData";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
@@ -15,6 +15,7 @@ import { phoneMasks } from "../../../Data/phoneMasks.js";
 import axios from "axios";
 import Dropdown from "react-dropdown";
 import ReactPixel from "react-facebook-pixel";
+import { searchParams } from "../../../store/searchParamsSlice.js";
 const buttonTheme = {
     general: style.general_button_inactive,
     black: style.button_black_inactive,
@@ -44,6 +45,7 @@ export function ThemeForm(props) {
     const router = useRouter();
     const dispatch = useDispatch();
     const modal = useModals();
+    const queryParams = useSelector(searchParams);
 
     const budgetRangeValues = [
         "$10,000 - $25,000",
@@ -130,7 +132,7 @@ export function ThemeForm(props) {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(
                     ReactGA.event("generate_lead", {
@@ -299,6 +301,7 @@ export function ThemeFormAll(props) {
     // const validate = useValidation();
     const router = useRouter();
     const modal = useModals();
+    const queryParams = useSelector(searchParams);
 
     const validate = (values) => {
         const errors = {};
@@ -357,7 +360,7 @@ export function ThemeFormAll(props) {
                     props.orderName,
                     props.lang,
                     window.location.href,
-                    router.query
+                    queryParams || router.query
                 )
                     .then(
                         ReactGA.event("generate_lead", {

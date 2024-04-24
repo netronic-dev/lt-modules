@@ -7,7 +7,7 @@ import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
 import { useModals } from "../../../context/ModalsProvider";
 import { useValidation } from "../../../context/ValidationProvider";
 import { postData } from "../../functions/postData.ts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../store/actions/userData";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import { phoneMasks } from "../../../Data/phoneMasks";
@@ -17,6 +17,7 @@ import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import Dropdown from "react-dropdown";
 import ReactPixel from "react-facebook-pixel";
+import { searchParams } from "../../../store/searchParamsSlice";
 function turnOnScroll() {
     document.body.className = "";
 }
@@ -35,6 +36,7 @@ export function PopUpNamePhone(props) {
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -114,7 +116,7 @@ export function PopUpNamePhone(props) {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(
                     ReactGA.event("generate_lead", {
@@ -334,6 +336,7 @@ export function PopUpEmail(props) {
     const router = useRouter();
     const modal = useModals();
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -387,7 +390,7 @@ export function PopUpEmail(props) {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(
                     ReactGA.event("generate_lead", {
@@ -498,6 +501,7 @@ export function PopUpEmailPhone(props) {
     const modal = useModals();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -570,7 +574,7 @@ export function PopUpEmailPhone(props) {
                         props.orderName,
                         props.lang,
                         window.location.href,
-                        router.query
+                        queryParams || router.query
                     )
                         .then(
                             ReactGA.event("generate_lead", {
@@ -842,6 +846,7 @@ export function PopUpEvent(props) {
     const dispatch = useDispatch();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -948,7 +953,7 @@ export function PopUpEvent(props) {
                     props.orderName,
                     props.lang,
                     window.location.href,
-                    router.query
+                    queryParams || router.query
                 )
                     .then(
                         ReactGA.event("generate_lead", {
@@ -1156,6 +1161,7 @@ export function PopUpNameEmail(props) {
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -1256,7 +1262,7 @@ export function PopUpNameEmail(props) {
                         props.orderName,
                         props.lang,
                         window.location.href,
-                        router.query
+                        queryParams || router.query
                     )
                         .then(
                             ReactGA.event("generate_lead", {

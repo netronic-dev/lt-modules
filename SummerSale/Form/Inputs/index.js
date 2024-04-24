@@ -6,15 +6,17 @@ import ReactPixel from "react-facebook-pixel";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useInView } from "react-hook-inview";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../../store/actions/userData";
 import { postData } from "../../../../lt-modules/functions/postData.ts";
 import { useGAEvents } from "../../../../context/GAEventsProvider";
+import { searchParams } from "../../../../store/searchParamsSlice.js";
 
 export function InputsWName(props) {
     const router = useRouter();
     const dispatch = useDispatch();
     const GAEvents = useGAEvents();
+    const queryParams = useSelector(searchParams);
 
     const formik = useFormik({
         initialValues: {
@@ -45,7 +47,7 @@ export function InputsWName(props) {
                     props.orderName,
                     props.lang,
                     window.location.hostname,
-                    router.query
+                    queryParams || router.query
                 )
                     .then(
                         ReactGA.event("generate_lead", {

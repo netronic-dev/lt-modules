@@ -11,8 +11,6 @@ const url = `https://graph.facebook.com/v19.0/${pixel_id}/events`;
 export const sendEventToConversionApi = async (siteName) => {
     const userLocationData = await getLocationData();
     const userAgent = navigator.userAgent;
-    console.log("User agent:", userAgent);
-    console.log(userLocationData);
 
     const hashedCity = createHash("sha256")
         .update(userLocationData.city)
@@ -55,9 +53,6 @@ export const sendEventToConversionApi = async (siteName) => {
             params: {
                 access_token: access_token,
             },
-        })
-        .then((response) => {
-            console.log("Response:", response.data);
         })
         .catch((error) => {
             console.error("Error:", error.response.data);

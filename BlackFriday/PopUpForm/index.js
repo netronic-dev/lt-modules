@@ -13,13 +13,15 @@ import Agreement from "../Agreement";
 import { postData } from "../../functions/postData";
 import { validate } from "../../InputForms/validate/validate";
 import { useGAEvents } from "../../../context/GAEventsProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../store/actions/userData";
+import { searchParams } from "../../../store/searchParamsSlice";
 
 export function PopUpForm(props) {
     const router = useRouter();
     const gaEvents = useGAEvents();
     const dispatch = useDispatch();
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         formik.setFieldValue(
@@ -52,7 +54,7 @@ export function PopUpForm(props) {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(
                     ReactGA.event("generate_lead", {

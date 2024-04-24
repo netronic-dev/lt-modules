@@ -24,7 +24,18 @@ export async function postData(
     console.log("first");
     let locationInfo: locationData = await getLocationData();
     const storedCookieConsent = getLocalStorage("cookie_consent", null);
-
+    const queryLength = Object.keys(routerQuerry).length;
+    const query =
+        queryLength > 0
+            ? {
+                  utm_campaign: routerQuerry.utm_campaign || "",
+                  utm_medium: routerQuerry.utm_medium || "",
+                  utm_source: routerQuerry.utm_source || "direct",
+                  utm_term: routerQuerry.utm_term || "",
+              }
+            : {
+                  utm_source: "direct",
+              };
     let data: any = {
         siteName: siteDomain,
         orderName: orderName,
@@ -34,14 +45,7 @@ export async function postData(
         lang: lang,
         cookies: storedCookieConsent,
         comment: values.comment,
-        query: routerQuerry
-            ? {
-                  utm_campaign: routerQuerry.utm_campaign || "",
-                  utm_medium: routerQuerry.utm_medium || "",
-                  utm_source: routerQuerry.utm_source || "direct",
-                  utm_term: routerQuerry.utm_term || "",
-              }
-            : { utm_source: "direct" },
+        query,
         fbpCookie,
         userLocationData: {
             ip: locationInfo.ip,
@@ -108,34 +112,6 @@ interface locationData {
     state: string;
 }
 
-// export async function getLocationData() {
-//     let locationData = {
-//         ip: "",
-//         city: "",
-//         region: "",
-//         country: "",
-//         zipcode: "",
-//         state: "",
-//     };
-//     await axios
-//         .get(
-//             "https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee"
-//         )
-//         .then((response) => {
-//             locationData = {
-//                 ip: response.data.ip,
-//                 city: response.data.city,
-//                 region: response.data.country_code2,
-//                 country: response.data.country_name,
-//                 zipcode: response.data.zipcode,
-//                 state: response.data.state_prov,
-//             };
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//         });
-//     return locationData;
-// }
 export async function getLocationData() {
     let locationData = {
         ip: "",

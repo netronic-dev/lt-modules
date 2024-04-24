@@ -9,36 +9,20 @@ import {
 } from "../../../InputForms/Inputs/Inputs";
 import style from "./style.module.scss";
 import Agreement from "../../Form/Agreement";
-import { postData } from "../../../functions/postData copy";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../../store/actions/userData";
 import ReactGA from "react-ga4";
 import ReactPixel from "react-facebook-pixel";
-// interface FormModalProps {
-// 	thank_you_page_url: string;
-// 	text: string;
-// 	onQuitClick: () => void;
-// 	title: ReactNode;
-// 	agreement__text: ReactNode | string;
-// 	agreement__text_req?: ReactNode | string;
-// 	buttonText: string;
-// 	dateTitle: string;
-// 	datesData: dropdownInputDataCell[];
-// 	equpmentTypeTitle: string;
-// 	equipmentTypeData: dropdownInputDataCell[];
-// 	destinationURL: string;
-// 	orderName: string;
-// 	lang: string;
-// }
-// interface dropdownInputDataCell {
-// 	name: string;
-// }
+import { searchParams } from "../../../../store/searchParamsSlice";
+import { postData } from "../../../functions/postData";
+
 const FormModal = (props) => {
     let validate = validation;
 
     const router = useRouter();
     const dispatch = useDispatch();
-    console.log(dispatch);
+    const queryParams = useSelector(searchParams);
 
     function onAgreementChange() {
         formik.setFieldValue(
@@ -70,7 +54,7 @@ const FormModal = (props) => {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query,
+                queryParams || router.query,
                 [
                     {
                         name: "date",

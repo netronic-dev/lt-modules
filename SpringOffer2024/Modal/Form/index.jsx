@@ -12,6 +12,8 @@ import Agreement from "./Agreement";
 import Input from "./Inputs";
 import { postData } from "../../../functions/postData";
 import { useModals } from "../../../../context/ModalsProvider";
+import { searchParams } from "../../../../store/searchParamsSlice";
+import { useSelector } from "react-redux";
 
 const ConsultationForm = (props) => {
     const [valid, setValid] = useState(null);
@@ -21,6 +23,7 @@ const ConsultationForm = (props) => {
     const [comment, setComment] = useState(null);
     const router = useRouter();
     const modal = useModals();
+    const queryParams = useSelector(searchParams);
 
     const setErrorText = () => {
         const errorMessages = {};
@@ -146,7 +149,7 @@ const ConsultationForm = (props) => {
                 props.orderName,
                 props.lang,
                 window.location.href,
-                router.query
+                queryParams || router.query
             )
                 .then(modal?.closeModal())
                 .then(

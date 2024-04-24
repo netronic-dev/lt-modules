@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactGA from "react-ga4";
 import { postData } from "../functions/postData";
 import { useCalendlyEventListener } from "react-calendly";
 import ReactPixel from "react-facebook-pixel";
 import style from "./style.module.scss";
 import { addUserData } from "../../store/userSlice";
+import { searchParams } from "../../store/searchParamsSlice";
 
 const Calendly = (props) => {
     const [eventData, setEventData] = useState(null);
     const router = useRouter();
     const dispatch = useDispatch();
+    const queryParams = useSelector(searchParams);
 
     useCalendlyEventListener({
         onEventScheduled: (e) => {
@@ -49,7 +51,7 @@ const Calendly = (props) => {
                         `Call  order | LT NET (Call ${data.time})`,
                         props.lang,
                         window.location.href,
-                        router.query
+                        queryParams || router.query
                     )
                         .then(
                             ReactGA.event("generate_lead", {
