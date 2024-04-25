@@ -8,7 +8,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { useRouter } from "next/router";
-import Calendly from "../Calendly";
+import dynamic from "next/dynamic";
+const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
+// import Calendly from "../Calendly";
 
 export default function Header(props) {
     const [isOpen, setState] = useState(false);
