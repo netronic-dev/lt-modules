@@ -134,13 +134,14 @@ export function ThemeForm(props) {
                 window.location.href,
                 queryParams || router.query
             )
-                .then(
+                .then(() => {
+                    formik.resetForm();
                     ReactGA.event("generate_lead", {
                         category: "form",
                         action: "submit",
-                    })
-                )
-                .then(ReactPixel.track("Lead"))
+                    });
+                    ReactPixel.track("Lead");
+                })
                 .then(router.push("/thanks-pres"))
                 .catch(console.log);
         },
@@ -287,8 +288,9 @@ export function ThemeForm(props) {
                 : buttonTheme[props.buttonTheme]
         }
         `}
+                disabled={formik.isSubmitting}
             >
-                {props.buttonText}
+                {formik.isSubmitting ? props.submittingText : props.buttonText}
             </button>
         </form>
     );
@@ -362,13 +364,13 @@ export function ThemeFormAll(props) {
                     window.location.href,
                     queryParams || router.query
                 )
-                    .then(
+                    .then(() => {
                         ReactGA.event("generate_lead", {
                             category: "form",
                             action: "submit",
-                        })
-                    )
-                    .then(ReactPixel.track("Lead"))
+                        });
+                        ReactPixel.track("Lead");
+                    })
                     .then(router.push("/thanks-pres"))
                     .catch(console.log)
             );
@@ -458,8 +460,9 @@ export function ThemeFormAll(props) {
                 : buttonTheme[props.buttonTheme]
         }
         `}
+                disabled={formik.isSubmitting}
             >
-                {props.buttonText}
+                {formik.isSubmitting ? props.submittingText : props.buttonText}
             </button>
         </form>
     );

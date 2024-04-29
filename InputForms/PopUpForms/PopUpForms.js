@@ -1,23 +1,21 @@
+import axios from "axios";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import style from "../forms.module.scss";
 import { useRouter } from "next/router";
-import { icons } from "../icons/icons";
-import { InputName, InputCall, InputEmail } from "../Inputs/Inputs";
-import { useModals } from "../../../context/ModalsProvider";
-import { useValidation } from "../../../context/ValidationProvider";
-import { postData } from "../../functions/postData.ts";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../../../store/actions/userData";
-import { useGAEvents } from "../../../context/GAEventsProvider";
-import { phoneMasks } from "../../../Data/phoneMasks";
+import { useEffect, useState } from "react";
+import Dropdown from "react-dropdown";
+import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import axios from "axios";
-import Dropdown from "react-dropdown";
-import ReactPixel from "react-facebook-pixel";
+import { useDispatch, useSelector } from "react-redux";
+import { useGAEvents } from "../../../context/GAEventsProvider";
+import { useModals } from "../../../context/ModalsProvider";
+import { setUserData } from "../../../store/actions/userData";
 import { searchParams } from "../../../store/searchParamsSlice";
+import { postData } from "../../functions/postData.ts";
+import style from "../forms.module.scss";
+import { icons } from "../icons/icons";
+import { InputEmail, InputName } from "../Inputs/Inputs";
 function turnOnScroll() {
     document.body.className = "";
 }
@@ -118,17 +116,18 @@ export function PopUpNamePhone(props) {
                 window.location.href,
                 queryParams || router.query
             )
-                .then(
+                .then(() => {
+                    formik.resetForm();
                     ReactGA.event("generate_lead", {
                         category: "form",
                         action: "submit",
-                    })
-                )
-                .then(ReactPixel.track("Lead"))
-                .then(() => {
-                    modal.NamePhoneModalChangeVisibility();
-                    router.push(props.thank_you_page);
+                    });
+                    ReactPixel.track("Lead");
+                    modal.closeModal();
                     turnOnScroll();
+                })
+                .then(() => {
+                    router.push(props.thank_you_page);
                 })
                 .catch(console.log);
         },
@@ -319,8 +318,11 @@ export function PopUpNamePhone(props) {
                                         : style.general_button_inactive
                                     : style.general_button_inactive
                             } "button-submit"`}
+                            disabled={formik.isSubmitting}
                         >
-                            {props.buttonText}
+                            {formik.isSubmitting
+                                ? props.submittingText
+                                : props.buttonText}
                         </button>
                     </form>
                 </div>
@@ -392,14 +394,14 @@ export function PopUpEmail(props) {
                 window.location.href,
                 queryParams || router.query
             )
-                .then(
+                .then(() => {
+                    formik.resetForm();
+                    modal.closeModal();
                     ReactGA.event("generate_lead", {
                         category: "form",
                         action: "submit",
-                    })
-                )
-                .then(ReactPixel.track("Lead"))
-                .then(() => {
+                    });
+                    ReactPixel.track("Lead");
                     router.push(props.thank_you_page);
                     turnOnScroll();
                 })
@@ -478,8 +480,11 @@ export function PopUpEmail(props) {
                                         : style.general_button_inactive
                                     : style.general_button_inactive
                             } "button-submit"`}
+                            disabled={formik.isSubmitting}
                         >
-                            {props.buttonText}
+                            {formik.isSubmitting
+                                ? props.submittingText
+                                : props.buttonText}
                         </button>
                     </form>
                 </div>
@@ -576,21 +581,21 @@ export function PopUpEmailPhone(props) {
                         window.location.href,
                         queryParams || router.query
                     )
-                        .then(
+                        .then(() => {
+                            formik.resetForm();
                             ReactGA.event("generate_lead", {
                                 category: "form",
                                 action: "submit",
-                            })
-                        )
-                        .then(ReactPixel.track("Lead"))
-                        .then(() => {
-                            router.push(props.thank_you_page);
-                            modal.EmailPhoneModalChangeVisibility();
+                            });
+                            ReactPixel.track("Lead");
                             turnOnScroll();
                         })
                         .catch(console.log)
                 )
-                .then()
+                .then(() => {
+                    modal.closeModal();
+                    router.push(props.thank_you_page);
+                })
                 .catch(console.log);
         },
     });
@@ -822,8 +827,11 @@ export function PopUpEmailPhone(props) {
                                         : style.general_button_inactive
                                     : style.general_button_inactive
                             } "button-submit"`}
+                            disabled={formik.isSubmitting}
                         >
-                            {props.buttonText || "Get catalog"}
+                            {formik.isSubmitting
+                                ? props.submittingText
+                                : props.buttonText || "Get catalog"}
                         </button>
                     </form>
                 </div>
@@ -946,29 +954,33 @@ export function PopUpEvent(props) {
                     letterId: props.letterId,
                 },
             };
-            axios.request(options).then(
-                postData(
-                    data,
-                    props.destinationURL,
-                    props.orderName,
-                    props.lang,
-                    window.location.href,
-                    queryParams || router.query
-                )
-                    .then(
-                        ReactGA.event("generate_lead", {
-                            category: "form",
-                            action: "submit",
-                        })
+            axios
+                .request(options)
+                .then(
+                    postData(
+                        data,
+                        props.destinationURL,
+                        props.orderName,
+                        props.lang,
+                        window.location.href,
+                        queryParams || router.query
                     )
-                    .then(ReactPixel.track("Lead"))
-                    .then(() => {
-                        modal.EventModalChangeVisibility();
-                        router.push(props.thank_you_page);
-                        turnOnScroll();
-                    })
-                    .catch(console.log)
-            );
+                        .then(() => {
+                            formik.resetForm();
+                            ReactGA.event("generate_lead", {
+                                category: "form",
+                                action: "submit",
+                            });
+                            ReactPixel.track("Lead");
+                            turnOnScroll();
+                        })
+                        .catch(console.log)
+                )
+                .then(() => {
+                    modal.closeModal();
+                    router.push(props.thank_you_page);
+                })
+                .catch(console.log);
         },
     });
 
@@ -1141,8 +1153,11 @@ export function PopUpEvent(props) {
                                         : style.general_button_inactive
                                     : style.general_button_inactive
                             } "button-submit"`}
+                            disabled={formik.isSubmitting}
                         >
-                            {props.buttonText}
+                            {formik.isSubmitting
+                                ? props.submittingText
+                                : props.buttonText}
                         </button>
                     </form>
                 </div>
@@ -1264,19 +1279,21 @@ export function PopUpNameEmail(props) {
                         window.location.href,
                         queryParams || router.query
                     )
-                        .then(
+                        .then(() => {
+                            formik.resetForm();
                             ReactGA.event("generate_lead", {
                                 category: "form",
                                 action: "submit",
-                            })
-                        )
-                        .then(ReactPixel.track("Lead"))
-                        .then(() => {
-                            router.push(props.thank_you_page);
+                            });
+                            ReactPixel.track("Lead");
                             turnOnScroll();
                         })
                         .catch(console.log)
                 )
+                .then(() => {
+                    modal.closeModal();
+                    router.push(props.thank_you_page);
+                })
                 .catch(console.log);
         },
     });
@@ -1405,8 +1422,11 @@ export function PopUpNameEmail(props) {
                                         : style.general_button_inactive
                                     : style.general_button_inactive
                             } "button-submit"`}
+                            disabled={formik.isSubmitting}
                         >
-                            {props.buttonText || "Get"}
+                            {formik.isSubmitting
+                                ? props.submittingText
+                                : props.buttonText || "Get"}
                         </button>
                     </form>
                 </div>

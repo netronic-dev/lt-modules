@@ -68,14 +68,12 @@ const Form = (props) => {
                     },
                 ]
             )
-                .then(
+                .then(() => {
                     ReactGA.event("generate_lead", {
                         category: "form",
                         action: "submit",
-                    })
-                )
-                .then(ReactPixel.track("Lead"))
-                .then(() => {
+                    });
+                    ReactPixel.track("Lead");
                     document.body.className = "";
                     router.push(props.thank_you_page_url);
                 })
@@ -141,8 +139,14 @@ const Form = (props) => {
                 </div>
             </div>
             <div className={style.submit_wrapper}>
-                <button type="submit" className={style.button_submit}>
-                    {props.buttonText}
+                <button
+                    type="submit"
+                    className={style.button_submit}
+                    disabled={formik.isSubmitting}
+                >
+                    {formik.isSubmitting
+                        ? props.submittingText
+                        : props.buttonText}
                 </button>
             </div>
         </form>

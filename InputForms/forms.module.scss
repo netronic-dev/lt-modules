@@ -809,6 +809,11 @@
     line-height: 16px;
     text-align: center;
     color: #ffffff;
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
 }
 
 .general_button_active:hover {

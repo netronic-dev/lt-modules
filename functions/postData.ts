@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
+import { getName } from "country-list";
 
 const getCookieByKey = (key: string) => {
     if (typeof window !== "undefined") {
@@ -24,6 +25,7 @@ export async function postData(
     console.log("first");
     let locationInfo: locationData = await getLocationData();
     const storedCookieConsent = getLocalStorage("cookie_consent", null);
+    const countryName = getName(locationInfo.country);
     const queryLength = Object.keys(routerQuerry).length;
     const query =
         queryLength > 0
@@ -51,14 +53,14 @@ export async function postData(
             ip: locationInfo.ip,
             zipcode: locationInfo.zipcode,
             state: locationInfo.state,
-            country: locationInfo.country,
+            country: countryName,
             city: locationInfo.city,
             region: locationInfo.region,
         },
         fields: [
             {
                 name: "Страна",
-                value: locationInfo.country,
+                value: countryName,
                 BXName: "ADDRESS_COUNTRY",
             },
             {
