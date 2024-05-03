@@ -87,7 +87,7 @@ export function PopUpNamePhone(props) {
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        // if (!values.budget) errors.budget = "Required";
+        if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
@@ -98,7 +98,7 @@ export function PopUpNamePhone(props) {
             phone: false,
             contactMethod: "",
             // planToUse: "",
-            // budget: "",
+            budget: "",
             // comment: "",
         },
         validate,
@@ -222,7 +222,7 @@ export function PopUpNamePhone(props) {
                                         </span>
                                     )}
                                 </div>
-                                {/* <div className={style.input_block_out}>
+                                <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
                                             formik.errors.budget
@@ -239,7 +239,7 @@ export function PopUpNamePhone(props) {
                                             {formik.errors.budget}
                                         </span>
                                     )}
-                                </div> */}
+                                </div>
                             </div>
                             <div>
                                 <div className={style.input_block_out}>
@@ -536,7 +536,7 @@ export function PopUpEmailPhone(props) {
         }
 
         if (!values.contactMethod) errors.contactMethod = "Required";
-        // if (!values.budget) errors.budget = "Required";
+        if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
@@ -548,7 +548,7 @@ export function PopUpEmailPhone(props) {
             phone: false,
             contactMethod: "",
             // planToUse: "",
-            // budget: "",
+            budget: "",
             // comment: "",
         },
         validate,
@@ -724,7 +724,16 @@ export function PopUpEmailPhone(props) {
                                         </span>
                                     )}
                                 </div>
-                                {/* <div className={style.input_block_out}>
+                                <InputEmail
+                                    noIcons
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    error={formik.errors.email}
+                                    placeholder={props.emailPlaceholder}
+                                />
+                            </div>
+                            <div className={style.inputs_block__input_cell}>
+                                <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
                                             formik.errors.budget
@@ -741,16 +750,7 @@ export function PopUpEmailPhone(props) {
                                             {formik.errors.budget}
                                         </span>
                                     )}
-                                </div> */}
-                            </div>
-                            <div className={style.inputs_block__input_cell}>
-                                <InputEmail
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    error={formik.errors.email}
-                                    placeholder={props.emailPlaceholder}
-                                />
+                                </div>
                                 <div className={style.input_block_out}>
                                     <Dropdown
                                         className={`Dropdown-black_form  ${
