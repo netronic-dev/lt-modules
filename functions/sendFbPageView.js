@@ -8,7 +8,7 @@ const access_token =
 const pixel_id = "1815249061859086";
 const url = `https://graph.facebook.com/v19.0/${pixel_id}/events`;
 
-export const sendEventToConversionApi = async (siteName) => {
+export const sendEventToConversionApi = async (siteName, eventName) => {
     const userLocationData = await getLocationData();
     const userAgent = navigator.userAgent;
 
@@ -27,7 +27,7 @@ export const sendEventToConversionApi = async (siteName) => {
 
     const data = [
         {
-            event_name: "PageView",
+            event_name: eventName,
             event_time: Math.floor(Date.now() / 1000),
             user_data: {
                 ct: hashedCity,

@@ -16,6 +16,7 @@ import ReactGA from "react-ga4";
 import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../store/searchParamsSlice";
 import { postData } from "../../../functions/postData";
+import { sendEventToConversionApi } from "../../../functions/sendFbPageView";
 
 const FormModal = (props) => {
     let validate = validation;
@@ -75,6 +76,7 @@ const FormModal = (props) => {
                         action: "submit",
                     });
                     ReactPixel.track("Lead");
+                    sendEventToConversionApi(window.location.href, "Lead");
                     document.body.className = "";
                     router.push(props.thank_you_page_url);
                 })

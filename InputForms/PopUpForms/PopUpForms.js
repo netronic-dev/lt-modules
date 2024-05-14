@@ -16,6 +16,7 @@ import { postData } from "../../functions/postData.ts";
 import style from "../forms.module.scss";
 import { icons } from "../icons/icons";
 import { InputEmail, InputName } from "../Inputs/Inputs";
+import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 function turnOnScroll() {
     document.body.className = "";
 }
@@ -123,6 +124,7 @@ export function PopUpNamePhone(props) {
                         action: "submit",
                     });
                     ReactPixel.track("Lead");
+                    sendEventToConversionApi(window.location.href, "Lead");
                     modal.closeModal();
                     turnOnScroll();
                 })
@@ -402,6 +404,7 @@ export function PopUpEmail(props) {
                         action: "submit",
                     });
                     ReactPixel.track("Lead");
+                    sendEventToConversionApi(window.location.href, "Lead");
                     router.push(props.thank_you_page);
                     turnOnScroll();
                 })
@@ -588,6 +591,10 @@ export function PopUpEmailPhone(props) {
                                 action: "submit",
                             });
                             ReactPixel.track("Lead");
+                            sendEventToConversionApi(
+                                window.location.href,
+                                "Lead"
+                            );
                             turnOnScroll();
                         })
                         .catch(console.log)
@@ -972,6 +979,10 @@ export function PopUpEvent(props) {
                                 action: "submit",
                             });
                             ReactPixel.track("Lead");
+                            sendEventToConversionApi(
+                                window.location.href,
+                                "Lead"
+                            );
                             turnOnScroll();
                         })
                         .catch(console.log)
@@ -1286,6 +1297,10 @@ export function PopUpNameEmail(props) {
                                 action: "submit",
                             });
                             ReactPixel.track("Lead");
+                            sendEventToConversionApi(
+                                window.location.href,
+                                "Lead"
+                            );
                             turnOnScroll();
                         })
                         .catch(console.log)

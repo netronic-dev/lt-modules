@@ -16,6 +16,7 @@ import axios from "axios";
 import Dropdown from "react-dropdown";
 import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../store/searchParamsSlice.js";
+import { sendEventToConversionApi } from "../../functions/sendFbPageView.js";
 const buttonTheme = {
     general: style.general_button_inactive,
     black: style.button_black_inactive,
@@ -141,6 +142,7 @@ export function ThemeForm(props) {
                         action: "submit",
                     });
                     ReactPixel.track("Lead");
+                    sendEventToConversionApi(window.location.href, "Lead");
                 })
                 .then(router.push("/thanks-pres"))
                 .catch(console.log);
@@ -370,6 +372,7 @@ export function ThemeFormAll(props) {
                             action: "submit",
                         });
                         ReactPixel.track("Lead");
+                        sendEventToConversionApi(window.location.href, "Lead");
                     })
                     .then(router.push("/thanks-pres"))
                     .catch(console.log)
