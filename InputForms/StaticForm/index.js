@@ -104,8 +104,8 @@ export function ThemeForm(props) {
             errors.email = "Invalid email address";
         }
 
-        if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.budget) errors.budget = "Required";
+        // if (!values.contactMethod) errors.contactMethod = "Required";
+        // if (!values.budget) errors.budget = "Required";
 
         return errors;
     };
@@ -115,9 +115,9 @@ export function ThemeForm(props) {
             name: "",
             email: "",
             phone: false,
-            contactMethod: "",
+            // contactMethod: "",
             // planToUse: "",
-            budget: "",
+            // budget: "",
             // comment: "",
         },
         validate,
@@ -218,7 +218,7 @@ export function ThemeForm(props) {
                         error={formik.errors.email}
                     />
                 </div>
-                <div className={style.inputs_cell}>
+                {/* <div className={style.inputs_cell}>
                     <div className={style.input_block_out}>
                         <Dropdown
                             className={`Dropdown-blue_form  ${
@@ -254,7 +254,7 @@ export function ThemeForm(props) {
                             </span>
                         )}
                     </div>
-                    {/* <div className={style.input_block_out}>
+                    <div className={style.input_block_out}>
                         <Dropdown
                             className={`Dropdown-blue_form  ${
                                 formik.errors.planToUse ? "Dropdown-error" : ""
@@ -278,8 +278,8 @@ export function ThemeForm(props) {
                             placeholder={props.commentPlaceholder}
                             name="comment"
                         />
-                    </div> */}
-                </div>
+                    </div>
+                </div> */}
             </div>
             <button
                 type="submit"

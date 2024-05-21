@@ -97,9 +97,9 @@ const ConsultationForm = (props) => {
             errors.agreement = errorMessages.required;
         }
 
-        if (!values.contactMethod)
-            errors.contactMethod = errorMessages.required;
-        return errors;
+        // if (!values.contactMethod)
+        //     errors.contactMethod = errorMessages.required;
+        // return errors;
     };
 
     const contactMethodValues =
@@ -133,7 +133,7 @@ const ConsultationForm = (props) => {
             phone: false,
             email: "",
             agreement: true,
-            contactMethod: "",
+            // contactMethod: "",
             // comment: "",
         },
         validate,
@@ -251,8 +251,16 @@ const ConsultationForm = (props) => {
                                 </span>
                             )}
                         </div>
+                        <Input
+                            error={formik.errors.email}
+                            onChange={formik.handleChange}
+                            type={props.textType}
+                            value={formik.values.email}
+                            placeholder={props.emailPlaceholder}
+                            name="email"
+                        />
                     </div>
-                    <div className={style.grid_cell}>
+                    {/* <div className={style.grid_cell}>
                         <Input
                             error={formik.errors.email}
                             onChange={formik.handleChange}
@@ -279,7 +287,7 @@ const ConsultationForm = (props) => {
                                 </span>
                             )}
                         </div>
-                        {/* <div className={style.input_block_out}>
+                        <div className={style.input_block_out}>
                             <Input
                                 onChange={onChangeComment}
                                 type="text"
@@ -287,8 +295,8 @@ const ConsultationForm = (props) => {
                                 placeholder={props.commentPlaceholder}
                                 name="comment"
                             />
-                        </div> */}
-                    </div>
+                        </div>
+                    </div> */}
                 </div>
                 <Agreement
                     isModal={props.isModal}

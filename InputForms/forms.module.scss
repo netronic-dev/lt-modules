@@ -22,7 +22,7 @@
 
 .inputs_block__input {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
 
     @media (max-width: 700px) {
@@ -380,7 +380,7 @@
 
     .inputs {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         width: 100%;
         margin-bottom: 60px;
         gap: 20px;
