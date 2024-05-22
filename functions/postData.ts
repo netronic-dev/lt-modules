@@ -148,8 +148,20 @@ export async function getLocationData() {
                     state: response.data.region,
                 };
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(async (error) => {
+                await axios
+                    .get("https://ipinfo.io/json?token=eba5da567f5208")
+                    .then((response) => {
+                        locationData = {
+                            ip: response.data.ip,
+                            city: response.data.city,
+                            region: response.data.country,
+                            country: response.data.country,
+                            zipcode: response.data.postal,
+                            state: response.data.region,
+                        };
+                    })
+                    .catch(console.log);
             });
 
         let date = new Date(

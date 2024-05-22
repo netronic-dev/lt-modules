@@ -33,19 +33,19 @@ export default function CookieBanner(props) {
                 </div>
                 <div className={style.buttons_block}>
                     <button
-                        className={style.button}
-                        onClick={() => setCookieConsent(false)}
-                    >
-                        {props.decline_btn_text}
-                    </button>
-                    <button
-                        className={style.button}
+                        className={style.allow_button}
                         onClick={() => {
                             setCookieConsent(true);
                             window.location.reload();
                         }}
                     >
                         {props.allow_btn_text}
+                    </button>
+                    <button
+                        className={style.decline_button}
+                        onClick={() => setCookieConsent(false)}
+                    >
+                        {props.decline_btn_text}
                     </button>
                 </div>
             </div>

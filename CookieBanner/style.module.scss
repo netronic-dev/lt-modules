@@ -90,7 +90,37 @@
                 justify-content: center;
             }
 
-            .button {
+            .allow_button {
+                background-color: #0090ff;
+                padding: 9px 28px;
+                border-radius: 40px;
+                border: 2px solid #0090ff;
+                color: #fff;
+                font-family: Manrope;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                transition: all 0.4s ease;
+
+                @media (hover: hover) {
+                    &:hover {
+                        cursor: pointer;
+                        transition: all 0.4s ease;
+                        background-color: transparent;
+                    }
+                }
+
+                @media (hover: none) {
+                    &:active {
+                        cursor: pointer;
+                        transition: all 0.4s ease;
+                        background-color: transparent;
+                    }
+                }
+            }
+
+            .decline_button {
                 background-color: transparent;
                 padding: 9px 28px;
                 border-radius: 40px;
@@ -103,10 +133,20 @@
                 line-height: normal;
                 transition: all 0.4s ease;
 
-                &:hover {
-                    cursor: pointer;
-                    transition: all 0.4s ease;
-                    background-color: #0090ff;
+                @media (hover: hover) {
+                    &:hover {
+                        cursor: pointer;
+                        transition: all 0.4s ease;
+                        background-color: #0090ff;
+                    }
+                }
+
+                @media (hover: none) {
+                    &:active {
+                        cursor: pointer;
+                        transition: all 0.4s ease;
+                        background-color: #0090ff;
+                    }
                 }
             }
         }
