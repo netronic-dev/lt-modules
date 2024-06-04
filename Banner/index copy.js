@@ -1,54 +1,49 @@
 import Image from "next/image";
-import style from "./style.module.scss";
-import bannerLogo from "../../public/spring-offer-2024/banner_dev.png";
-import bannerLogoLap from "../../public/spring-offer-2024/banner_dev_lap.png";
-import bannerBg from "../../public/spring-offer-2024/banner_bg.jpg";
-import bannerFlowers from "../../public/spring-offer-2024/banner_flowers.png";
-import bannerLeftFlowers from "../../public/spring-offer-2024/banner_left_flowers.png";
-import bannerRightFlowers from "../../public/spring-offer-2024/banner_right_flowers.png";
 import { useRouter } from "next/router";
 
+import style from "./style_copy.module.scss";
+import bgVerticalLine from "../../public/new LTO/left vertical line.png";
+import bgHeroes from "../../public/new LTO/bg heroes.png";
+import bgFigure from "../../public/new LTO/bg figure.png";
+import bgPolygon from "../../public/new LTO/bg polygon.png";
+
 const Banner = (props) => {
-    const router = useRouter();
     return (
         <div className={`${style.banner} fade-down-animation`}>
-            <div className={style.bannerBg}>
-                <Image
-                    src={bannerBg}
-                    layout="fill"
-                    alt="bannerBg"
-                    objectPosition="50% 0"
-                />
-            </div>
-            <div className={style.banner_logo}>
-                <Image src={bannerLogo} layout="fill" alt="logo" />
-            </div>
-            <div className={style.banner_logo_lap}>
-                <Image src={bannerLogoLap} layout="fill" alt="logo" />
-            </div>
-            <div className={style.banner_flowers}>
-                <Image src={bannerFlowers} layout="fill" alt="logo" />
-            </div>
-            <div className={style.banner_left_flowers}>
-                <Image src={bannerLeftFlowers} layout="fill" alt="logo" />
-            </div>
-            <div className={style.banner_right_flowers}>
-                <Image src={bannerRightFlowers} layout="fill" alt="logo" />
-            </div>
-            <p className={style.text_bold}>{props.text_bold}</p>
-            {/* <div className={style.banner_info}>
-                <EventInfo
-                    dateName={props.dateName}
-                    date={props.date}
-                    placeName={props.placeName}
-                    place={props.place}
-                />
-            </div> */}
-            <div className={style.block_text}>
-                <p className={style.text}>{props.text}</p>
-                <p className={style.endDate}>{props.endDate}</p>
-            </div>
-            <button
+            <div className={style.container}>
+                <div className={style.left_line}>
+                    <Image src={bgVerticalLine} alt="" layout="fill" />
+                </div>
+                <div className={style.bg_polygon}>
+                    <Image
+                        src={bgPolygon}
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+                <div className={style.bg_figure}>
+                    <Image
+                        src={bgFigure}
+                        alt=""
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </div>
+                <div className={style.bg_heroes}>
+                    <Image
+                        src={bgHeroes}
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+                <p className={style.title}>{props.title}</p>
+                <div className={style.block_text}>
+                    <p className={style.sub_title}>{props.sub_title}</p>
+                    <p className={style.text}>{props.text}</p>
+                </div>
+                {/* <button
                 type="submit"
                 className={style.button_submit}
                 onClick={() => {
@@ -57,14 +52,14 @@ const Banner = (props) => {
                 }}
             >
                 {props.buttonText}
-            </button>
-
-            <button
-                className={style.button_close}
-                onClick={() => props.toggleActivity()}
-            >
-                {closeBtn}
-            </button>
+            </button> */}
+                <button
+                    className={style.button_close}
+                    onClick={() => props.toggleActivity()}
+                >
+                    {closeBtn}
+                </button>
+            </div>
         </div>
     );
 };
