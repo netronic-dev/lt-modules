@@ -6,104 +6,96 @@ function FooterSocial(props) {
     const GAEvents = useGAEvents();
 
     return (
-        <div className={style.footer_social}>
-            <div className={style.logos_row}>
-                {lasertagLogo}
-                {partOf}
-                <a
-                    className={style.netronic_logo_bg}
-                    href="https://netronic.net"
-                    target="_blank"
-                >
-                    {netronic}
-                </a>
-            </div>
-            <span className={style.social_text}>{props.text}</span>
-            <ul className={style.social_links}>
-                {/* <li onClick={() => props.onEmailIconCLick()}>{emailIcon}</li> */}
-                {/* facebook */}
-                <li>
-                    <a
-                        href={props.facebook}
-                        target="_blank"
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                "Footer",
-                                "Link click",
-                                props.facebook
-                            )
-                        }
-                    >
-                        {facebookIcon}
-                    </a>
-                </li>
-                {/* instagram */}
-                <li>
-                    <a
-                        href={props.instagram}
-                        target="_blank"
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                "Footer",
-                                "Link click",
-                                props.instagram
-                            )
-                        }
-                    >
-                        {instagramIcon}
-                    </a>
-                </li>
-                {/* youtube */}
-                <li>
-                    <a
-                        href={props.youtube}
-                        target="_blank"
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                "Footer",
-                                "Link click",
-                                props.youtube
-                            )
-                        }
-                    >
-                        {youtubeIcon}
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href={props.linkedin}
-                        target="_blank"
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                "Footer",
-                                "Link click",
-                                props.linkedin
-                            )
-                        }
-                    >
-                        {linkedInIcon}
-                    </a>
-                </li>
-            </ul>
-            <div className={style.footer_text}>
-                <Link href="/privacy-policy">
-                    <a
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                "Footer",
-                                "Link click",
-                                "/privacy-policy"
-                            )
-                        }
-                    >
-                        <div>Privacy Policy</div>
-                    </a>
-                </Link>
-            </div>
-            <div className={style.copyright}>
-                Copyright © {new Date().getFullYear()} All Rights Reserved.
-            </div>
+      <div className={style.footer_social}>
+        <div className={style.logos_row}>
+          {lasertagLogo}
+          {partOf}
+          <a
+            className={style.netronic_logo_bg}
+            href="https://netronic.net"
+            target="_blank"
+          >
+            {netronic}
+          </a>
         </div>
+        <span className={style.social_text}>{props.text}</span>
+        <ul className={style.social_links}>
+          {/* <li onClick={() => props.onEmailIconCLick()}>{emailIcon}</li> */}
+          {/* facebook */}
+          <li>
+            <a
+              href={props.facebook}
+              target="_blank"
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", props.facebook)
+              }
+            >
+              {facebookIcon}
+            </a>
+          </li>
+          {/* instagram */}
+          <li>
+            <a
+              href={props.instagram}
+              target="_blank"
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", props.instagram)
+              }
+            >
+              {instagramIcon}
+            </a>
+          </li>
+          {/* youtube */}
+          <li>
+            <a
+              href={props.youtube}
+              target="_blank"
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", props.youtube)
+              }
+            >
+              {youtubeIcon}
+            </a>
+          </li>
+          <li>
+            <a
+              href={props.linkedin}
+              target="_blank"
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", props.linkedin)
+              }
+            >
+              {linkedInIcon}
+            </a>
+          </li>
+          {/* tikTok */}
+          <li>
+            <a
+              href={props.tikTok}
+              target="_blank"
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", props.tikTok)
+              }
+            >
+              {tikTokIcon}
+            </a>
+          </li>
+        </ul>
+        <div className={style.footer_text}>
+          <Link href="/privacy-policy">
+            <a
+              onClick={() =>
+                GAEvents.buttonClick("Footer", "Link click", "/privacy-policy")
+              }
+            >
+              <div>Privacy Policy</div>
+            </a>
+          </Link>
+        </div>
+        <div className={style.copyright}>
+          Copyright © {new Date().getFullYear()} All Rights Reserved.
+        </div>
+      </div>
     );
 }
 
@@ -407,3 +399,18 @@ const linkedInIcon = (
         />
     </svg>
 );
+const tikTokIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="45"
+    height="45"
+    viewBox="0 0 45 45"
+    fill="none"
+  >
+    <path
+      d="M36.2276 10.4291C35.9429 10.2819 35.6657 10.1206 35.3971 9.9457C34.616 9.42931 33.8998 8.82084 33.264 8.1334C31.6732 6.31318 31.079 4.4666 30.8602 3.17373H30.869C30.6861 2.10059 30.7617 1.40625 30.7732 1.40625H23.5275V29.424C23.5275 29.8002 23.5275 30.172 23.5116 30.5394C23.5116 30.5851 23.5072 30.6272 23.5046 30.6765C23.5046 30.6967 23.5046 30.7178 23.5002 30.7389C23.5002 30.7441 23.5002 30.7494 23.5002 30.7547C23.4238 31.76 23.1016 32.7311 22.5618 33.5826C22.022 34.4341 21.2813 35.1399 20.4047 35.6379C19.4911 36.1576 18.4578 36.4303 17.4068 36.4289C14.0309 36.4289 11.2948 33.6762 11.2948 30.2766C11.2948 26.877 14.0309 24.1242 17.4068 24.1242C18.0458 24.1236 18.6809 24.2242 19.2885 24.4222L19.2973 17.0446C17.4528 16.8064 15.5789 16.953 13.7939 17.4752C12.0089 17.9973 10.3515 18.8838 8.92618 20.0786C7.67732 21.1637 6.62739 22.4584 5.82365 23.9045C5.51779 24.4318 4.36378 26.5509 4.22404 29.99C4.13615 31.9421 4.72238 33.9645 5.00187 34.8003V34.8179C5.17765 35.3101 5.8588 36.9896 6.96886 38.4056C7.86397 39.5413 8.92151 40.5391 10.1074 41.3666V41.349L10.125 41.3666C13.6327 43.7502 17.5219 43.5938 17.5219 43.5938C18.1951 43.5665 20.4504 43.5938 23.0115 42.38C25.8522 41.0344 27.4693 39.0296 27.4693 39.0296C28.5025 37.8317 29.324 36.4666 29.8986 34.9928C30.5543 33.2692 30.7732 31.202 30.7732 30.3759V15.5118C30.861 15.5646 32.0318 16.3389 32.0318 16.3389C32.0318 16.3389 33.7184 17.4199 36.3498 18.1239C38.2377 18.6249 40.7813 18.7304 40.7813 18.7304V11.5374C39.8901 11.6341 38.0804 11.3528 36.2276 10.4291Z"
+      fill="white"
+    />
+  </svg>
+);
+
