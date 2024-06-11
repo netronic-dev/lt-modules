@@ -1,0 +1,238 @@
+.joinOur {
+  padding: 44px 0 29px;
+  background: #040a17;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.joinOur__box {
+  max-width: 1235px;
+  padding: 45px 24px 47px;
+  border-radius: 20px;
+  border: 2px solid #0090ff;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px #0090ff;
+}
+
+.joinOur__title {
+  color: #ffffff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  margin-bottom: 16px;
+
+  @media (min-width: 744px) {
+    font-size: 36px;
+    letter-spacing: 0.72px;
+    margin-bottom: 24px;
+  }
+}
+
+.joinOur__title__span {
+  color: #0090ff;
+}
+
+.joinOur__textInfo {
+  max-width: 762px;
+  color: #ffffff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  margin-bottom: 33px;
+
+  @media (min-width: 744px) {
+    margin-bottom: 16px;
+  }
+}
+
+.joinOur__text {
+  max-width: 762px;
+  color: #ffffff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 2.4px;
+  margin-bottom: 41px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 51px;
+  }
+
+  @media (min-width: 1512px) {
+    margin-bottom: 44px;
+  }
+}
+
+.joinOur__textVerification {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-family: Manrope;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.24px;
+}
+
+.joinOur__stepsBox {
+  margin-bottom: 14px;
+  @media (min-width: 744px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 1512px) {
+    gap: 10px;
+  }
+}
+
+.joinOur__stepOneBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 290px;
+  height: 281px;
+
+  .joinOur__stepsBox__number {
+    font-size: 64px;
+  }
+}
+
+.joinOur__joinImgOne {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.joinOur__stepOneOverlay {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.joinOur__stepOneLink {
+  max-width: 91px;
+  color: #ffffff;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.googlePlayBtn {
+  width: 169px;
+  height: 50px;
+  display: block;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  margin-top: 60px;
+}
+
+.joinOur__stepTwoBox {
+  position: relative;
+  width: 290px;
+  height: 281px;
+  display: flex;
+  align-items: end;
+
+  .joinOur__stepsBox__number {
+    font-size: 74px;
+  }
+}
+
+.joinOur__joinImgTwo {
+  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.joinOur__stepTwo__textOverlay {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  width: 61px;
+  height: 18px;
+  border-radius: 2px;
+  border: 1px solid #0090ff;
+  box-shadow: 0px 0px 4px 0px #0090ff;
+}
+
+.joinOur__stepTwo__scrollText {
+  max-width: 107px;
+  color: #ffffff;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.joinOur__stepTwo__scrollTextSpan {
+  font-weight: 800;
+}
+
+.joinOur__stepThreeBox {
+  position: relative;
+  width: 230px;
+  height: 281px;
+
+  .joinOur__stepsBox__number {
+    font-size: 64px;
+  }
+}
+
+.joinOur__joinImgThree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.joinAlertImg {
+  z-index: 2;
+}
+
+.joinOur__stepFourBox {
+  position: relative;
+  width: 260px;
+  height: 281px;
+  display: flex;
+  align-items: end;
+
+  .joinOur__stepsBox__number {
+    font-size: 74px;
+  }
+}
+
+.joinOur__joinImgFour {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.joinOur__stepsBox__number {
+  font-family: Manrope;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 6.4px;
+  color: #040a17;
+  text-shadow: -2px -2px 0 #0090ff, 2px -2px 0 #0090ff, -2px 2px 0 #0090ff,
+    2px 2px 0 #0090ff, 0 -2px 0 #0090ff, 2px 0 0 #0090ff, 0 2px 0 #0090ff,
+    -2px 0 0 #0090ff;
+  z-index: 2;
+}
