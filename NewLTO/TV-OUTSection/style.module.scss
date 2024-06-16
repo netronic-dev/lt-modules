@@ -1,0 +1,352 @@
+$blue: #0090ff;
+$white: #ffffff;
+
+.TV_OUTContainer__list__item {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.TV_OUTContainer__list__item.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.TV_OUTContainer__topBox {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.TV_OUTContainer__topBox.appear {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.TV_OUTContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #050a1b;
+  padding-top: 37px;
+  background-image: url("/images/newLTO/tv-outBgMobile.webp");
+  background-repeat: no-repeat;
+  background-position: right top 15%;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  @media (max-width: 743px) {
+    align-items: center;
+  }
+
+  @media (min-width: 744px) {
+    padding-top: 90px;
+    background-image: url("/images/newLTO/tv-outBgTablet.webp");
+    background-position: right top 63%;
+  }
+
+  @media (min-width: 1024px) {
+    background-image: url("/images/newLTO/tv-outBgDesktop.webp");
+    background-position: right -3% top 56%;
+    background-size: 60%;
+  }
+
+  @media (min-width: 1512px) {
+    background-image: url("/images/newLTO/tv-outBg.webp");
+    background-position: right 0% top 27%;
+  }
+}
+
+.TV_OUTContainer__ellBg {
+  position: absolute;
+  top: 5%;
+  left: -163%;
+  width: 232%;
+  height: 43%;
+
+  @media (min-width: 744px) {
+    top: 12%;
+    left: -92%;
+    width: 129%;
+    height: 71%;
+  }
+
+  @media (min-width: 1024px) {
+    top: 20%;
+    left: -98%;
+  }
+
+  @media (min-width: 1512px) {
+    top: 0;
+    left: -66%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.TV_OUTContainer__insideBox {
+  position: relative;
+  @media (min-width: 1512px) {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+}
+
+.TV_OUTContainer__topBox {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  margin-bottom: 35px;
+
+  @media (min-width: 744px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 70px;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 42px;
+  }
+}
+
+.hero__image {
+  border-radius: 7px;
+  box-shadow: 0px 0px 20px 0px $blue;
+
+  @media (max-width: 743px) {
+    margin: 0 auto;
+  }
+}
+
+.TV_OUTContainer__topBox__insideBox {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  @media (min-width: 744px) {
+    gap: 23px;
+  }
+}
+
+.TV_OUTContainer__topBox__insideBox__title {
+  max-width: 215px;
+  color: $white;
+  font-family: Manrope;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.52px;
+}
+
+.TV_OUTContainer__topBox__insideBox__text {
+  color: $white;
+  font-family: Manrope;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.4px;
+
+  @media (min-width: 744px) {
+    max-width: 365px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 314px;
+  }
+
+  @media (min-width: 1512px) {
+    max-width: 499px;
+  }
+}
+
+.TV_OUTContainer__googlePlayBtnBox {
+  display: none;
+  flex-direction: column;
+  gap: 23px;
+
+  @media (max-width: 743px) {
+    align-items: center;
+    margin-top: 90px;
+  }
+
+  @media (min-width: 1024px) {
+    display: flex;
+    margin-left: auto;
+  }
+}
+
+.TV_OUTContainer__googlePlayBtnBoxSecond {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  margin-top: 40px;
+  margin-bottom: 49px;
+
+  @media (min-width: 380px) and (max-width: 743px) {
+    align-items: center;
+    margin-top: 90px;
+    margin-bottom: 110px;
+  }
+
+  @media (max-width: 743px) {
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.TV_OUTContainer__googlePlayBtnBox__text {
+  max-width: 250px;
+  color: #fff;
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.36px;
+
+  @media (max-width: 743px) {
+    text-align: center;
+  }
+}
+
+.googlePlayBtn {
+  width: 228px;
+  height: 67px;
+  display: block;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.TV_OUTContainer__topBox__image {
+  position: relative;
+  margin: 0 auto;
+  width: 316px;
+  height: 206px;
+  margin-bottom: 39px;
+
+  @media (min-width: 744px) {
+    display: none;
+  }
+}
+
+.TV_OUTContainer__topBox__imageDesktop {
+  display: none;
+  position: absolute;
+
+  @media (min-width: 744px) {
+    bottom: 19px;
+    right: -76px;
+    display: block;
+    width: 478px;
+    height: 310px;
+  }
+
+  @media (min-width: 1024px) {
+    bottom: 37px;
+    right: -190px;
+    display: block;
+    width: 562px;
+    height: 364px;
+  }
+
+  @media (min-width: 1512px) {
+    bottom: 86px;
+    right: -363px;
+    display: block;
+    width: 667px;
+    height: 432px;
+  }
+}
+
+.TV_OUTContainer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 0;
+
+  @media (min-width: 744px) {
+    height: 512px;
+    row-gap: 18px;
+    column-gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 1024px) {
+    width: fit-content;
+    column-gap: 24px;
+    margin-bottom: 87px;
+  }
+
+  @media (min-width: 1512px) {
+    row-gap: 40px;
+    column-gap: 58px;
+    height: 517px;
+  }
+}
+
+.TV_OUTContainer__list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.TV_OUTContainer__list__iconBox {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $white;
+}
+
+.TV_OUTContainer__list__textBox {
+  // max-width: 251px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  // @media (min-width: 744px) {
+  //   max-width: 215px;
+  // }
+
+  // @media (min-width: 1512px) {
+  //   max-width: 250px;
+  // }
+}
+
+.TV_OUTContainer__list__title {
+  max-width: 217px;
+  color: $white;
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.36px;
+}
+
+.TV_OUTContainer__list__text {
+  max-width: 251px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.32px;
+
+  @media (min-width: 744px) {
+    max-width: 215px;
+  }
+
+  @media (min-width: 1512px) {
+    max-width: 250px;
+  }
+}

@@ -1,0 +1,134 @@
+$blue: #0090ff;
+$white: #ffffff;
+
+.feedbackContainer__leftBox__title,
+.feedbackContainer__imageBox {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.feedbackContainer__leftBox__title.appear,
+.feedbackContainer__imageBox.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feedbackContainer__textBox {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.feedbackContainer__textBox.appear {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.feedbackContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #040a17;
+  padding: 0 16px 10px;
+
+  @media (min-width: 744px) {
+    padding: 0 20px 101px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-bottom: 113px;
+  }
+
+  @media (min-width: 1512px) {
+    padding-bottom: 91px;
+  }
+}
+
+.feedbackContainer__insideBox {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  @media (min-width: 744px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 20px;
+    max-width: 922px;
+  }
+
+  @media (min-width: 1512px) {
+    gap: 60px;
+    max-width: 977px;
+    justify-content: center;
+  }
+}
+
+.feedbackContainer__leftBox__title {
+  color: $white;
+  font-family: Manrope;
+  font-size: 30px;
+  letter-spacing: 0.6px;
+  font-weight: 800;
+  line-height: normal;
+  margin-bottom: 36px;
+
+  @media (min-width: 744px) {
+    font-size: 36px;
+    letter-spacing: 0.72px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 44px;
+  }
+}
+
+.feedbackContainer__leftBox__titleSpan {
+  color: $blue;
+}
+
+.feedbackContainer__textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feedbackContainer__text {
+  max-width: 470px;
+  color: $white;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.32px;
+}
+
+.feedbackContainer__consultationLink {
+  width: 273px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  margin-top: 30px;
+  border-radius: 7px;
+  background-color: $blue;
+  color: $white;
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.36px;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+  &:hover {
+    background-color: $white;
+    color: #000000;
+  }
+}
