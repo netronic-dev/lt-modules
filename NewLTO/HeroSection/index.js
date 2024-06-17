@@ -3,7 +3,6 @@ import Image from "next/image";
 import style from "./style.module.scss";
 import heroLogo from "/public/images/newLTO/lto-logo.webp";
 import heroBgImage from "/public/images/newLTO/heroImg.webp";
-import heroNightBg from "../../../public/images/newLTO/galaxy-night.webp";
 import ChangeLanguage from "../ChangeLanguage/index";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 
@@ -19,7 +18,9 @@ const HeroSection = ({ title, titleSpan, subtitle, text, textSpan }) => {
   );
 
   return (
-    <section className={style.hero} style={{ backgroundImage: `url(${heroNightBg.src})` }}>
+    <section
+      className={style.hero}
+    >
       <div className={style.hero__insideBox}>
         <div className={style.hero__changeLanguageBox}>
           <ChangeLanguage />
