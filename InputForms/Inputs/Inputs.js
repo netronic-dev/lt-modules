@@ -44,6 +44,7 @@ export function InputEmail(props) {
                         color: props.color,
                     }}
                     placeholder={props.placeholder || "Email *"}
+                    disabled={props.loggedViaSocials}
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
@@ -164,6 +165,7 @@ export function InputName(props) {
                     placeholder={props.placeholder || "Name *"}
                     onChange={props.onChange}
                     value={props.value}
+                    disabled={props.loggedViaSocials}
                 />
                 {props.anotherPlace ? (
                     <AddingPlaceholder
