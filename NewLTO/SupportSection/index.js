@@ -22,6 +22,8 @@ const SupportSection = ({ title, subtitle, linkText, text }) => {
           {subtitle}{" "}
           <a
             className={style.supportContainer__link}
+            target="_blank"
+            rel="noreferrer"
             href="https://lasertag.net/download/How%20to%20join%20open%20beta%20test%20of%20new%20LTO_ENG.pdf"
           >
             {linkText}
