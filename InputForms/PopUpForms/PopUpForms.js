@@ -7,6 +7,16 @@ import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { authentication } from "../../../firebase-config";
+import {
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    updateCurrentUser,
+} from "firebase/auth";
+import Image from "next/image";
+import googleLogo from "../../../public/icons/google__logo.png";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import { useModals } from "../../../context/ModalsProvider";
@@ -29,6 +39,7 @@ export function PopUpNamePhone(props) {
     const [contactMethod, setContactMethod] = useState(null);
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
+    const [loggedViaSocials, setLoggedSocials] = useState("");
 
     const router = useRouter();
     const modal = useModals();
@@ -40,6 +51,25 @@ export function PopUpNamePhone(props) {
     function onAgreementChange() {
         changeAgreement(!agreement);
     }
+
+    const googleAuth = async () => {
+        await signOut(authentication);
+
+        const provider = new GoogleAuthProvider();
+        const { user } = await signInWithPopup(authentication, provider);
+        setLoggedSocials("Google");
+        await formik.setFieldValue("email", user.email);
+        await formik.setFieldValue("name", user.displayName);
+    };
+
+    const clearAuth = async () => {
+        await signOut(authentication);
+        setLoggedSocials("");
+        await formik.setFieldValue("email", "");
+        await formik.setFieldValue("name", "");
+        await formik.setFieldValue("contactMethod", "");
+        setContactMethod(null);
+    };
 
     const budgetRangeValues = [
         "$10,000 - $25,000",
@@ -103,6 +133,10 @@ export function PopUpNamePhone(props) {
         return errors;
     };
 
+    const orderName = loggedViaSocials
+        ? `(${loggedViaSocials}) ${props.orderName}`
+        : `(Noauthorization) ${props.orderName}`;
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -123,7 +157,7 @@ export function PopUpNamePhone(props) {
             postData(
                 data,
                 props.destinationURL,
-                props.orderName,
+                orderName,
                 props.lang,
                 window.location.href,
                 queryParams || router.query
@@ -147,6 +181,11 @@ export function PopUpNamePhone(props) {
     });
 
     useEffect(() => {
+        if (formik.values.name || formik.values.email || formik.values.phone)
+            formik.validateForm();
+    }, [loggedViaSocials, formik.values]);
+
+    useEffect(() => {
         modal?.region
             ? setRegionCode(modal?.region.toLowerCase())
             : setRegionCode("us");
@@ -158,6 +197,64 @@ export function PopUpNamePhone(props) {
             <div className={`${style.inputs_block} fade-up-animation`}>
                 <div className={style.close}>
                     <button onClick={props.closeClick}>{icons.cross}</button>
+                </div>
+                <div className={style.auth_block}>
+                    <div className={style.buttons_row}>
+                        {loggedViaSocials ? (
+                            <>
+                                <button
+                                    className={style.clear_button}
+                                    onClick={clearAuth}
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    className={style.change_button}
+                                    onClick={
+                                        loggedViaSocials === "Google"
+                                            ? googleAuth
+                                            : facebookAuth
+                                    }
+                                >
+                                    Change account
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    className={style.google_button}
+                                    onClick={googleAuth}
+                                >
+                                    <Image
+                                        src={googleLogo}
+                                        alt="google logo"
+                                        height={15}
+                                        width={15}
+                                    />{" "}
+                                    Authorization via Google
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    <div className={style.divider_block}>
+                        <span
+                            className={`${style.divider} ${
+                                props.isModal ? "" : style.divider_white
+                            }`}
+                        ></span>
+                        <span
+                            className={`${style.divider_text} ${
+                                props.isModal ? "" : style.divider_text_white
+                            }`}
+                        >
+                            or
+                        </span>
+                        <span
+                            className={`${style.divider} ${
+                                props.isModal ? "" : style.divider_white
+                            }`}
+                        ></span>
+                    </div>
                 </div>
                 <div className={style.text_block}>
                     <p className={style.title}>
@@ -177,6 +274,7 @@ export function PopUpNamePhone(props) {
                                     value={formik.values.name}
                                     error={formik.errors.name}
                                     placeholder={props.namePlaceholder}
+                                    loggedViaSocials={loggedViaSocials}
                                 />
                                 <div
                                     className={`${style.phone__input_block} ${
@@ -241,6 +339,7 @@ export function PopUpNamePhone(props) {
                                     value={formik.values.email}
                                     error={formik.errors.email}
                                     placeholder={props.emailPlaceholder}
+                                    loggedViaSocials={loggedViaSocials}
                                 />
                                 {/* <div className={style.input_block_out}>
                                     <Dropdown
@@ -522,12 +621,32 @@ export function PopUpEmailPhone(props) {
     const [contactMethod, setContactMethod] = useState(null);
     const [planToUse, setPlanToUse] = useState(null);
     const [comment, setComment] = useState(null);
+    const [loggedViaSocials, setLoggedSocials] = useState("");
 
     const router = useRouter();
     const modal = useModals();
     const [agreement, changeAgreement] = useState(false);
     const GAEvents = useGAEvents();
     const queryParams = useSelector(searchParams);
+
+    const googleAuth = async () => {
+        await signOut(authentication);
+
+        const provider = new GoogleAuthProvider();
+        const { user } = await signInWithPopup(authentication, provider);
+        setLoggedSocials("Google");
+        await formik.setFieldValue("email", user.email);
+        await formik.setFieldValue("name", user.displayName);
+    };
+
+    const clearAuth = async () => {
+        await signOut(authentication);
+        setLoggedSocials("");
+        await formik.setFieldValue("email", "");
+        await formik.setFieldValue("name", "");
+        await formik.setFieldValue("contactMethod", "");
+        setContactMethod(null);
+    };
 
     function onAgreementChange() {
         changeAgreement(!agreement);
@@ -561,6 +680,10 @@ export function PopUpEmailPhone(props) {
 
         return errors;
     };
+
+    const orderName = loggedViaSocials
+        ? `(${loggedViaSocials}) ${props.orderName}`
+        : `(Noauthorization) ${props.orderName}`;
 
     const formik = useFormik({
         initialValues: {
@@ -597,7 +720,7 @@ export function PopUpEmailPhone(props) {
                     postData(
                         data,
                         props.destinationURL,
-                        props.orderName,
+                        orderName,
                         props.lang,
                         window.location.href,
                         queryParams || router.query
@@ -624,6 +747,11 @@ export function PopUpEmailPhone(props) {
                 .catch(console.log);
         },
     });
+
+    useEffect(() => {
+        if (formik.values.name || formik.values.email || formik.values.phone)
+            formik.validateForm();
+    }, [loggedViaSocials, formik.values]);
 
     useEffect(() => {
         modal?.region
@@ -671,6 +799,64 @@ export function PopUpEmailPhone(props) {
                 <div className={style.close}>
                     <button onClick={props.closeClick}>{icons.cross}</button>
                 </div>
+                <div className={style.auth_block}>
+                    <div className={style.buttons_row}>
+                        {loggedViaSocials ? (
+                            <>
+                                <button
+                                    className={style.clear_button}
+                                    onClick={clearAuth}
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    className={style.change_button}
+                                    onClick={
+                                        loggedViaSocials === "Google"
+                                            ? googleAuth
+                                            : facebookAuth
+                                    }
+                                >
+                                    Change account
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    className={style.google_button}
+                                    onClick={googleAuth}
+                                >
+                                    <Image
+                                        src={googleLogo}
+                                        alt="google logo"
+                                        height={15}
+                                        width={15}
+                                    />{" "}
+                                    Authorization via Google
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    <div className={style.divider_block}>
+                        <span
+                            className={`${style.divider} ${
+                                props.isModal ? "" : style.divider_white
+                            }`}
+                        ></span>
+                        <span
+                            className={`${style.divider_text} ${
+                                props.isModal ? "" : style.divider_text_white
+                            }`}
+                        >
+                            or
+                        </span>
+                        <span
+                            className={`${style.divider} ${
+                                props.isModal ? "" : style.divider_white
+                            }`}
+                        ></span>
+                    </div>
+                </div>
                 <div className={style.text_block}>
                     <p className={style.title}>
                         {props.title || "Fill in the form below"}
@@ -690,6 +876,7 @@ export function PopUpEmailPhone(props) {
                                     value={formik.values.name}
                                     error={formik.errors.name}
                                     placeholder={props.namePlaceholder}
+                                    loggedViaSocials={loggedViaSocials}
                                 />
 
                                 <div
@@ -755,6 +942,7 @@ export function PopUpEmailPhone(props) {
                                     value={formik.values.email}
                                     error={formik.errors.email}
                                     placeholder={props.emailPlaceholder}
+                                    loggedViaSocials={loggedViaSocials}
                                 />
                             </div>
                             {/* <div className={style.inputs_block__input_cell}>
