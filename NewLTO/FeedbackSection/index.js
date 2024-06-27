@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import style from "./style.module.scss";
-import feedbackImg from "/public/images/newLTO/feedbackImg.webp";
+import feedbackImg from "/public/images/newLTO/feedbackImg.png";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 
 const FeedbackSection = ({

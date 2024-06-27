@@ -3,7 +3,7 @@ import { useRef } from "react";
 import style from "./style.module.scss";
 import heroLogo from "/public/images/newLTO/lto-logo.webp";
 import tvOutLogo from "/public/images/newLTO/tv-out-logo.webp";
-import mobileImg from "/public/images/newLTO/tv-out-mobileImg.webp";
+import mobileImg from "/public/images/newLTO/tv-out-mobileImg.png";
 import tvOutImg from "/public/images/newLTO/tv-outImg.webp";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 import tvOutEll from "/public/images/newLTO/tv-outEllipse.webp";

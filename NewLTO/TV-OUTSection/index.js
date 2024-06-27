@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import style from "./style.module.scss";
 import tvOutLogo from "/public/images/newLTO/tv-out-logo.webp";
-import googlePlayBtn from "/public/images/newLTO/googlePlayBtn.webp";
+import googlePlayBtn from "/public/images/newLTO/googlePlayBtn.png";
 import Icon from "../../../components/Icon/Icon";
 import tvOutImg from "/public/images/newLTO/tv-outImg.webp";
 import tvOutEll from "/public/images/newLTO/tv-outEllipse.webp";

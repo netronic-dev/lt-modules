@@ -29,7 +29,7 @@ $white: #ffffff;
   flex-direction: column;
   background-color: #050a1b;
   padding-top: 37px;
-  background-image: url("../../../public/images/newLTO/tv-outBgMobile.webp");
+  background-image: url("../../../public/images/newLTO/tv-outBgMobile.png");
   background-repeat: no-repeat;
   background-position: right top 15%;
   padding-left: 18px;
@@ -41,18 +41,18 @@ $white: #ffffff;
 
   @media (min-width: 744px) {
     padding-top: 90px;
-    background-image: url("../../../public/images/newLTO/tv-outBgTablet.webp");
+    background-image: url("../../../public/images/newLTO/tv-outBgTablet.png");
     background-position: right top 63%;
   }
 
   @media (min-width: 1024px) {
-    background-image: url("../../../public/images/newLTO/tv-outBgDesktop.webp");
+    background-image: url("../../../public/images/newLTO/tv-outBgDesktop.png");
     background-position: right -3% top 56%;
     background-size: 60%;
   }
 
   @media (min-width: 1512px) {
-    background-image: url("../../../public/images/newLTO/tv-outBg.webp");
+    background-image: url("../../../public/images/newLTO/tv-outBg.png");
     background-position: right 0% top 27%;
   }
 }

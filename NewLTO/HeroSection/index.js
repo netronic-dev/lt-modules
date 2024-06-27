@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import style from "./style.module.scss";
 import heroLogo from "/public/images/newLTO/lto-logo.webp";
-import heroBgImage from "/public/images/newLTO/heroImg.webp";
+import heroBgImage from "/public/images/newLTO/heroImg.png";
 import ChangeLanguage from "../ChangeLanguage/index";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 

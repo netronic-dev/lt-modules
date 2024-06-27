@@ -6,8 +6,8 @@ import joinImgTwo from "/public/images/newLTO/join-img-two.webp";
 import joinImgThree from "/public/images/newLTO/join-img-three.webp";
 import joinImgFour from "/public/images/newLTO/join-img-four.webp";
 import stepOneScreen from "/public/images/newLTO/stepOneScreen.webp";
-import googlePlayBtn from "/public/images/newLTO/googlePlayBtn.webp";
-import joinAlertImg from "/public/images/newLTO/joinAlertImg.webp";
+import googlePlayBtn from "/public/images/newLTO/googlePlayBtn.png";
+import joinAlertImg from "/public/images/newLTO/joinAlertImg.png";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 import ellipseRightBg from "/public/images/newLTO/join-ellipseRight.webp";
 import ellipseLeftBg from "/public/images/newLTO/join-ellipseLeft.webp";
@@ -120,7 +120,7 @@ const JoinOurSection = ({
           <div ref={stepTwoBoxRef} className={style.joinOur__stepTwoBox}>
             <div className={style.joinOur__joinImgTwo}>
               <Image
-                width={201}
+                width={160}
                 height={261}
                 src={joinImgTwo}
                 alt="Join-img-two"
