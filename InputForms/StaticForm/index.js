@@ -24,7 +24,6 @@ import { selectOptions } from "../../../constants/globalConstants";
 import googleLogo from "../../../public/icons/google__logo.png";
 import { icons } from "../icons/icons";
 import { setUserData } from "../../../store/actions/userData.js";
-import { dispatch } from "d3";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
@@ -566,6 +565,7 @@ export function ThemeFormAll(props) {
   const queryParams = useSelector(searchParams);
   const [loggedViaSocials, setLoggedSocials] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -895,8 +895,8 @@ export function ThemeFormAll(props) {
           className={`
             ${
               !isValid || isSubmitting
-                ? buttonActiveTheme[props.buttonActiveTheme]
-                : buttonTheme[props.buttonTheme]
+                ? buttonTheme[props.buttonTheme]
+                : buttonActiveTheme[props.buttonActiveTheme]
             }
             `}
           disabled={!isValid || isSubmitting}
