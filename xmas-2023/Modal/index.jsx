@@ -35,6 +35,7 @@ const Modal = (props) => {
                     namePlaceholder={props.namePlaceholder}
                     phonePlaceholder={props.phonePlaceholder}
                     emailPlaceholder={props.emailPlaceholder}
+                    budgetPlaceholder={props.budgetPlaceholder}
                     btnText={props.btnText}
                     question__text={props.question__text}
                     agreementText={props.agreementText}

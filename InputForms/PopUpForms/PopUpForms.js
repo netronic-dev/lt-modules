@@ -1,1677 +1,1821 @@
 import axios from "axios";
-import { useFormik } from "formik";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Select, { components } from "react-select";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { debounce } from "lodash";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import Image from "next/image";
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Dropdown from "react-dropdown";
 import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
+import { useDispatch, useSelector } from "react-redux";
 import "react-phone-input-2/lib/style.css";
 import { authentication } from "../../../firebase-config";
-import {
-    signInWithPopup,
-    GoogleAuthProvider,
-    signOut,
-    updateCurrentUser,
-} from "firebase/auth";
-import Image from "next/image";
+import { schema } from "../../../Layouts/validate";
 import googleLogo from "../../../public/icons/google__logo.png";
 
-import { useDispatch, useSelector } from "react-redux";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import { useModals } from "../../../context/ModalsProvider";
 import { setUserData } from "../../../store/actions/userData";
 import { searchParams } from "../../../store/searchParamsSlice";
-import { postData } from "../../functions/postData.ts";
+import { postData } from "../../functions/postData";
 import style from "../forms.module.scss";
 import { icons } from "../icons/icons";
 import { InputEmail, InputName } from "../Inputs/Inputs";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView";
+import { selectOptions } from "../../../constants/globalConstants";
+
 function turnOnScroll() {
-    document.body.className = "";
+  document.body.className = "";
 }
 
-export function PopUpNamePhone(props) {
-    const [valid, setValid] = useState(null);
-    const [phone, setPhone] = useState(null);
-    const [regionCode, setRegionCode] = useState();
-    const [budgetRange, setBudgetRange] = useState(null);
-    const [contactMethod, setContactMethod] = useState(null);
-    const [planToUse, setPlanToUse] = useState(null);
-    const [comment, setComment] = useState(null);
-    const [loggedViaSocials, setLoggedSocials] = useState("");
-
-    const router = useRouter();
-    const modal = useModals();
-    const dispatch = useDispatch();
-    const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents();
-    const queryParams = useSelector(searchParams);
-
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-    }
-
-    const googleAuth = async () => {
-        await signOut(authentication);
-
-        const provider = new GoogleAuthProvider();
-        const { user } = await signInWithPopup(authentication, provider);
-        setLoggedSocials("Google");
-        await formik.setFieldValue("email", user.email);
-        await formik.setFieldValue("name", user.displayName);
-    };
-
-    const clearAuth = async () => {
-        await signOut(authentication);
-        setLoggedSocials("");
-        await formik.setFieldValue("email", "");
-        await formik.setFieldValue("name", "");
-        await formik.setFieldValue("contactMethod", "");
-        setContactMethod(null);
-    };
-
-    const budgetRangeValues = [
-        "$10,000 - $25,000",
-        "$25,000 - $50,000",
-        "more than $50,000",
-    ];
-    const defaultBudgetRangeOption = budgetRange;
-
-    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
-    const defaultContactMethodOption = contactMethod;
-
-    const planToUseValues = [
-        "for an existing business",
-        "to start a new business",
-    ];
-    const defaultPlanToUseOption = planToUse;
-
-    const onSelectBudgetRange = (option) => {
-        setBudgetRange(option.value);
-        formik.setFieldValue("budget", option.value);
-    };
-    const onSelectContactMethod = (option) => {
-        setContactMethod(option.value);
-        formik.setFieldValue("contactMethod", option.value);
-    };
-    const onSelectPlanToUse = (option) => {
-        setPlanToUse(option.value);
-        formik.setFieldValue("planToUse", option.value);
-    };
-    const onChangeComment = (e) => {
-        setComment(e.target.value);
-        formik.setFieldValue("comment", e.target.value);
-    };
-
-    const validate = (values) => {
-        const errors = {};
-
-        if (!values.name) {
-            errors.name = "Required";
-        } else if (values.name.length < 2) {
-            errors.name = "The name must have at least 2 characters";
-        }
-
-        if (!values.phone) {
-            errors.phone = "Required";
-        }
-
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
-                values.email
-            )
-        ) {
-            errors.email = "Invalid email address";
-        }
-
-        // if (!values.contactMethod) errors.contactMethod = "Required";
-        // if (!values.budget) errors.budget = "Required";
-
-        return errors;
-    };
-
-    const orderName = loggedViaSocials
-        ? `(${loggedViaSocials}) ${props.orderName}`
-        : `(Noauthorization) ${props.orderName}`;
-
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            email: "",
-            phone: false,
-            // contactMethod: "",
-            // planToUse: "",
-            // budget: "",
-            // comment: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            dispatch(setUserData(values.name));
-            const data = {
-                ...values,
-                phone: `+${phone}`,
-            };
-            postData(
-                data,
-                props.destinationURL,
-                orderName,
-                props.lang,
-                window.location.href,
-                queryParams || router.query
-            )
-                .then(() => {
-                    formik.resetForm();
-                    ReactGA.event("generate_lead", {
-                        category: "form",
-                        action: "submit",
-                    });
-                    ReactPixel.track("Lead");
-                    sendEventToConversionApi(window.location.href, "Lead");
-                    modal.closeModal();
-                    turnOnScroll();
-                })
-                .then(() => {
-                    router.push(props.thank_you_page);
-                })
-                .catch(console.log);
-        },
+const debouncedSubmit = debounce(async (type, siteName) => {
+  try {
+    await axios.post("https://back.netronic.net/forms/trackSubmit", {
+      type: type,
+      siteName: siteName,
     });
+  } catch (error) {
+    console.error("Error tracking submit:", error);
+  }
+}, 300);
 
-    useEffect(() => {
-        if (formik.values.name || formik.values.email || formik.values.phone)
-            formik.validateForm();
-    }, [loggedViaSocials, formik.values]);
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    boxSizing: "border-box",
+    width: "100%",
+    height: "55px",
+    padding: "18px 16px",
+    borderRadius: "5px",
+    border: "1px solid transparent",
+    backgroundColor: "#212121",
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#fff",
+    fontSize: "14px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "14px",
+    outline: 0,
+    padding: 0,
 
-    useEffect(() => {
-        modal?.region
-            ? setRegionCode(modal?.region.toLowerCase())
-            : setRegionCode("us");
-    }, [modal.region]);
+    "&:hover": {
+      border: "1px solid transparent",
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#fff",
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+  }),
+  menu: (provided) => ({
+    ...provided,
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#000",
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    padding: "0",
+  }),
+  option: (provided) => ({
+    ...provided,
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "#8f96a3",
+    fontSize: "14px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "140%",
+    fontFamily: "Arial, Helvetica, sans-serif",
+  }),
+};
 
-    return (
-        <div className={style.inputs_block_out}>
-            <div className={style.close_block} onClick={props.closeClick}></div>
-            <div className={`${style.inputs_block} fade-up-animation`}>
-                <div className={style.close}>
-                    <button onClick={props.closeClick}>{icons.cross}</button>
-                </div>
-                <div className={style.auth_block}>
-                    <div className={style.buttons_row}>
-                        {loggedViaSocials ? (
-                            <>
-                                <button
-                                    className={style.clear_button}
-                                    onClick={clearAuth}
-                                >
-                                    Clear
-                                </button>
-                                <button
-                                    className={style.change_button}
-                                    onClick={
-                                        loggedViaSocials === "Google"
-                                            ? googleAuth
-                                            : facebookAuth
-                                    }
-                                >
-                                    Change account
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <button
-                                    className={style.google_button}
-                                    onClick={googleAuth}
-                                >
-                                    <Image
-                                        src={googleLogo}
-                                        alt="google logo"
-                                        height={15}
-                                        width={15}
-                                    />{" "}
-                                    Authorization via Google
-                                </button>
-                            </>
-                        )}
-                    </div>
-                    <div className={style.divider_block}>
-                        <span
-                            className={`${style.divider} ${
-                                props.isModal ? "" : style.divider_white
-                            }`}
-                        ></span>
-                        <span
-                            className={`${style.divider_text} ${
-                                props.isModal ? "" : style.divider_text_white
-                            }`}
-                        >
-                            or
-                        </span>
-                        <span
-                            className={`${style.divider} ${
-                                props.isModal ? "" : style.divider_white
-                            }`}
-                        ></span>
-                    </div>
-                </div>
-                <div className={style.text_block}>
-                    <p className={style.title}>
-                        {props.title || "Fill in the form below"}
-                    </p>
-                    <p className={style.paragraph}>
-                        {props.subtitle || "Our manager will contact you"}
-                    </p>
-                </div>
-                <div className={style.inputs_block__inputs}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className={style.inputs_block__input}>
-                            <div>
-                                <InputName
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.name}
-                                    error={formik.errors.name}
-                                    placeholder={props.namePlaceholder}
-                                    loggedViaSocials={loggedViaSocials}
-                                />
-                                <div
-                                    className={`${style.phone__input_block} ${
-                                        formik.errors.phone
-                                            ? "phone__input__error"
-                                            : ""
-                                    }`}
-                                >
-                                    <PhoneInput
-                                        containerClass="catalog_input__phone_container"
-                                        inputClass={
-                                            valid
-                                                ? "input__phone"
-                                                : "input__phone_error"
-                                        }
-                                        buttonClass={
-                                            valid
-                                                ? "drop_down"
-                                                : "drop_down_error"
-                                        }
-                                        country={regionCode}
-                                        enableSearch
-                                        excludeCountries={["ru"]}
-                                        autoFormat={false}
-                                        placeholder={props.phonePlaceholder}
-                                        onChange={(
-                                            value,
-                                            country,
-                                            e,
-                                            formattedValue
-                                        ) => {
-                                            const { format, dialCode } =
-                                                country;
-                                            setPhone(value);
-                                            if (
-                                                value.length > 5 &&
-                                                value.length < 20
-                                            ) {
-                                                formik.setFieldValue(
-                                                    "phone",
-                                                    true
-                                                );
-                                                setValid(true);
-                                            } else {
-                                                formik.setFieldValue(
-                                                    "phone",
-                                                    false
-                                                );
-                                                setValid(false);
-                                            }
-                                        }}
-                                    />
-                                    {!valid && (
-                                        <span className={style.error__message}>
-                                            Invalid mobile number
-                                        </span>
-                                    )}
-                                </div>
-                                <InputEmail
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    error={formik.errors.email}
-                                    placeholder={props.emailPlaceholder}
-                                    loggedViaSocials={loggedViaSocials}
-                                />
-                                {/* <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.budget
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={budgetRangeValues}
-                                        onChange={onSelectBudgetRange}
-                                        value={defaultBudgetRangeOption}
-                                        placeholder={props.budgetPlaceholder}
-                                    />
-                                    {formik.errors.budget && (
-                                        <span className={style.error}>
-                                            {formik.errors.budget}
-                                        </span>
-                                    )}
-                                </div> */}
-                            </div>
-                            {/* <div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.contactMethod
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={contactMethodValues}
-                                        onChange={onSelectContactMethod}
-                                        value={defaultContactMethodOption}
-                                        placeholder={
-                                            props.contactMethodPlaceholder
-                                        }
-                                    />
-                                    {formik.errors.contactMethod && (
-                                        <span className={style.error__message}>
-                                            {formik.errors.contactMethod}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.planToUse
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={planToUseValues}
-                                        onChange={onSelectPlanToUse}
-                                        value={defaultPlanToUseOption}
-                                        placeholder={props.planToUsePlaceholder}
-                                    />
-                                    {formik.errors.planToUse && (
-                                        <span className={style.error__message}>
-                                            {formik.errors.planToUse}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Input
-                                        onChange={onChangeComment}
-                                        type="text"
-                                        value={formik.values.comment}
-                                        placeholder={props.commentPlaceholder}
-                                        name="comment"
-                                    />
-                                </div>
-                            </div> */}
-                        </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{" "}
-                                {props.agreement_link}
-                            </p>
-                        </div>
-                        <button
-                            type={agreement ? "submit" : "button"}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
-                                    : style.general_button_inactive
-                            } "button-submit"`}
-                            disabled={formik.isSubmitting}
-                        >
-                            {formik.isSubmitting
-                                ? props.submittingText
-                                : props.buttonText}
-                        </button>
-                    </form>
-                </div>
-            </div>
+const DropdownIndicator = (props) => {
+  const { selectProps } = props;
+  const isMenuOpen = selectProps.menuIsOpen;
+  return (
+    <components.DropdownIndicator {...props}>
+      {isMenuOpen ? (
+        <svg id="icon-arrow-down" viewBox="0 0 37 32" width={12} height={12}>
+          <path fill="#fff" d="M18.667 32l-16.166-28h32.332l-16.166 28z"></path>
+        </svg>
+      ) : (
+        <svg id="icon-arrow-up" viewBox="0 0 37 32" width={12} height={12}>
+          <path fill="#fff" d="M18.667 0l16.166 28h-32.332l16.166-28z"></path>
+        </svg>
+      )}
+    </components.DropdownIndicator>
+  );
+};
+
+export function PopUpNamePhone(props) {
+  const [regionCode, setRegionCode] = useState();
+  const [loggedViaSocials, setLoggedSocials] = useState("");
+
+  const router = useRouter();
+  const modal = useModals();
+  const dispatch = useDispatch();
+  const [agreement, changeAgreement] = useState(false);
+  const GAEvents = useGAEvents();
+  const queryParams = useSelector(searchParams);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  const handleServerErrors = (error) => {
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phoneNumber"].includes(key)) {
+        setError(key, {
+          type: "server",
+          message,
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1200);
+  }, [window.innerWidth]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    control,
+    reset,
+    setError,
+    getValues,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      agreement: true,
+    },
+  });
+
+  const handleAgreementChange = (e) => {
+    setValue("agreement", !getValues("agreement"));
+    trigger("agreement");
+  };
+
+  const googleAuth = async () => {
+    await signOut(authentication);
+
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(authentication, provider);
+    setLoggedSocials("Google");
+    reset({
+      email: user.email,
+      name: user.displayName,
+    });
+  };
+
+  const clearAuth = async () => {
+    await signOut(authentication);
+    setLoggedSocials("");
+    reset({
+      email: "",
+      name: "",
+    });
+  };
+
+  const orderName = loggedViaSocials
+    ? `(${loggedViaSocials}) ${props.orderName}`
+    : `(Noauthorization) ${props.orderName}`;
+
+  const onSubmit = async (values) => {
+    dispatch(setUserData(values.name));
+    const data = {
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      budget: values.budget.value,
+    };
+
+    try {
+      debouncedSubmit("attempt", window.location.hostname);
+
+      const postToCRMResponse = await postData(
+        data,
+        props.destinationURL,
+        orderName,
+        window.location.href,
+        window.location.hostname,
+        queryParams || router.query
+      );
+
+      Promise.all([postToCRMResponse]).then(() => {
+        reset();
+        ReactGA.event("generate_lead", {
+          category: "form",
+          action: "submit",
+        });
+        ReactPixel.track("Lead");
+        sendEventToConversionApi(window.location.href, "Lead");
+        modal.closeModal();
+        router.push(props.thank_you_page);
+      });
+    } catch (error) {
+      handleServerErrors(error.response.data);
+    }
+  };
+
+  const handleMenuOpen = () => setMenuIsOpen(true);
+  const handleMenuClose = () => setMenuIsOpen(false);
+
+  useEffect(() => {
+    modal?.region
+      ? setRegionCode(modal?.region.toLowerCase())
+      : setRegionCode("us");
+  }, [modal.region]);
+
+  return (
+    <div className={style.inputs_block_out}>
+      <div className={style.close_block} onClick={props.closeClick}></div>
+      <div className={`${style.inputs_block} fade-up-animation`}>
+        <div className={style.close}>
+          <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-    );
+        {isDesktop ? (
+          <div className={style.auth_block}>
+            <div className={style.buttons_row}>
+              {loggedViaSocials ? (
+                <>
+                  <button className={style.clear_button} onClick={clearAuth}>
+                    Clear
+                  </button>
+                  <button
+                    className={style.change_button}
+                    onClick={
+                      loggedViaSocials === "Google" ? googleAuth : facebookAuth
+                    }
+                  >
+                    Change account
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className={style.google_button} onClick={googleAuth}>
+                    <Image
+                      src={googleLogo}
+                      alt="google logo"
+                      height={15}
+                      width={15}
+                    />{" "}
+                    Authorization via Google
+                  </button>
+                </>
+              )}
+            </div>
+            <div className={style.divider_block}>
+              <span
+                className={`${style.divider} ${
+                  props.isModal ? "" : style.divider_white
+                }`}
+              ></span>
+              <span
+                className={`${style.divider_text} ${
+                  props.isModal ? "" : style.divider_text_white
+                }`}
+              >
+                or
+              </span>
+              <span
+                className={`${style.divider} ${
+                  props.isModal ? "" : style.divider_white
+                }`}
+              ></span>
+            </div>
+          </div>
+        ) : null}
+        <div className={style.text_block}>
+          <p className={style.title}>
+            {props.title || "Fill in the form below"}
+          </p>
+          <p className={style.paragraph}>
+            {props.subtitle || "Our manager will contact you"}
+          </p>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.inputs_block__input}>
+            <div className={style.input__label}>
+              <input
+                className={style.input}
+                style={{
+                  borderColor: errors.name ? "#d22e2e" : "#000",
+                }}
+                $error={errors.name ? "true" : "false"}
+                {...register("name", {
+                  required: "Name is required",
+                })}
+                placeholder={
+                  props.namePlaceholder ? props.namePlaceholder : "Name*"
+                }
+              />
+              <p className={style.error__message}>{errors.name?.message}</p>
+            </div>
+            <div className={style.input__label}>
+              <Controller
+                name="phoneNumber"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <PhoneInput
+                    international
+                    inputStyle={{
+                      height: "55px",
+                      width: "100%",
+                      boxSizing: "border-box",
+                      borderRadius: "8px",
+                      borderWidth: "1px",
+                      borderStyle: "solid",
+                      borderColor: errors.phoneNumber
+                        ? "#d22e2e"
+                        : "transparent",
+                      color: "#fff",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "140px",
+                      outline: "0",
+                      backgroundColor: "#212121",
+                    }}
+                    buttonStyle={{
+                      borderColor: errors.phoneNumber ? "#d22e2e" : "#000",
+                      borderWidth: "1px",
+                      borderStyle: "solid",
+                      height: "55px",
+                    }}
+                    country="ua"
+                    enableSearch
+                    excludeCountries={["ru"]}
+                    value={value}
+                    onChange={onChange}
+                    error={
+                      value
+                        ? isValidPhoneNumber(`+${value}`)
+                          ? undefined
+                          : "Invalid phone number"
+                        : "Phone number is required"
+                    }
+                  />
+                )}
+              />
+              {errors.phoneNumber && (
+                <p className={style.error__message}>
+                  {errors.phoneNumber?.message}
+                </p>
+              )}
+            </div>
+            <div className={style.input__label}>
+              <input
+                className={style.input}
+                style={{
+                  borderColor: errors.email ? "#d22e2e" : "#000",
+                }}
+                $error={errors.email ? "true" : "false"}
+                {...register("email")}
+                placeholder={
+                  props.emailPlaceholder ? props.emailPlaceholder : "Email*"
+                }
+              />
+              <p className={style.error__message}>{errors.email?.message}</p>
+            </div>
+            <Controller
+              control={control}
+              name="budget"
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  placeholder={props.budgetPlaceholder}
+                  options={selectOptions}
+                  isSearchable={false}
+                  components={{ DropdownIndicator }}
+                  onMenuOpen={handleMenuOpen}
+                  onMenuClose={handleMenuClose}
+                  menuIsOpen={menuIsOpen}
+                  styles={customStyles}
+                />
+              )}
+            />
+            {errors.budget && (
+              <p className={style.error__message}>
+                {errors.budget.value.message}
+              </p>
+            )}
+          </div>
+
+          <div className={style.agreement}>
+            <div className={style.input__label}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  className={
+                    getValues("agreement") === true
+                      ? style.agreement_dot_button_active
+                      : style.agreement_dot_button
+                  }
+                  onClick={handleAgreementChange}
+                  {...register("agreement")}
+                >
+                  {icons.dot}
+                </div>
+                <p
+                  className={style.agreement__text}
+                  onClick={() => modal.closeModal()}
+                >
+                  <span onClick={handleAgreementChange}>
+                    {props.agreement_text}
+                  </span>{" "}
+                  {props.agreement_link}
+                </p>
+              </div>
+              {errors.agreement && (
+                <p className={style.error__message}>
+                  {errors.agreement.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <button
+            type="submit"
+            className={`${
+              !isValid || isSubmitting
+                ? style.general_button_inactive
+                : style.general_button_active
+            } button-submit`}
+            disabled={!isValid || isSubmitting}
+          >
+            {isSubmitting ? props.submittingText : props.buttonText}
+          </button>
+        </form>
+        {/* </div> */}
+      </div>
+    </div>
+  );
 }
 
 export function PopUpEmail(props) {
-    const [selectedLanguage, setSelectedLanguage] = useState(null);
-    const [agreement, changeAgreement] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [loggedViaSocials, setLoggedSocials] = useState("");
 
-    const router = useRouter();
-    const modal = useModals();
-    const GAEvents = useGAEvents();
-    const queryParams = useSelector(searchParams);
+  const router = useRouter();
+  const modal = useModals();
+  const GAEvents = useGAEvents();
+  const queryParams = useSelector(searchParams);
 
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-        formik.setFieldValue("agreement", !agreement);
-    }
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1200);
+  }, [window.innerWidth]);
 
-    const languageValues = [
-        "Español",
-        "Deutsch",
-        "Italiano",
-        "Français",
-        "Українська",
-        "English",
-    ];
+  const orderName = loggedViaSocials
+    ? `(${loggedViaSocials}) ${props.orderName}`
+    : `(Noauthorization) ${props.orderName}`;
 
-    const onSelectLanguage = (option) => {
-        setSelectedLanguage(option.value);
-        formik.setFieldValue("language", option.value);
-    };
+  const googleAuth = async () => {
+    await signOut(authentication);
 
-    const validate = (values) => {
-        const errors = {};
-
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
-                values.email
-            )
-        ) {
-            errors.email = "Invalid email address";
-        }
-
-        if (!values.language) errors.language = "Required";
-        if (!values.agreement) errors.agreement = "Required";
-
-        return errors;
-    };
-
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            agreement: true,
-            language: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            postData(
-                data,
-                props.destinationURL,
-                props.orderName,
-                props.lang,
-                window.location.href,
-                queryParams || router.query
-            )
-                .then(() => {
-                    formik.resetForm();
-                    modal.closeModal();
-                    ReactGA.event("generate_lead", {
-                        category: "form",
-                        action: "submit",
-                    });
-                    ReactPixel.track("Lead");
-                    sendEventToConversionApi(window.location.href, "Lead");
-                    router.push(props.thank_you_page);
-                    turnOnScroll();
-                })
-                .catch(console.log);
-        },
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(authentication, provider);
+    setLoggedSocials("Google");
+    reset({
+      email: user.email,
+      name: user.displayName,
     });
+  };
 
-    return (
-        <div className={style.inputs_block_out}>
-            <div className={style.close_block} onClick={props.closeClick}></div>
-            <div className={`${style.inputs_block} fade-up-animation`}>
-                <div className={style.close}>
-                    <button onClick={props.closeClick}>{icons.cross}</button>
-                </div>
-                <div className={style.text_block}>
-                    <p className={style.title}>
-                        {props.title || "Fill in the form below"}
-                    </p>
-                </div>
-                <div className={style.inputs_block__inputs}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <InputEmail
-                            noIcons
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                            error={formik.errors.email}
-                            placeholder={props.emailPlaceholder}
-                        />
-                        <div className={style.input_block_out}>
-                            <Dropdown
-                                className={`Dropdown-black_form  ${
-                                    formik.errors.language
-                                        ? "Dropdown-error"
-                                        : ""
-                                }`}
-                                options={languageValues}
-                                onChange={onSelectLanguage}
-                                value={selectedLanguage}
-                                placeholder={props.selectLanguagePlaceholder}
-                            />
-                            {formik.errors.language && (
-                                <span className={style.error}>
-                                    {formik.errors.language}
-                                </span>
-                            )}
-                        </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{" "}
-                                {props.agreement_link}
-                            </p>
-                            {formik.errors.agreement && (
-                                <span className={style.error}>
-                                    {formik.errors.agreement}
-                                </span>
-                            )}
-                        </div>
-                        <button
-                            type={agreement ? "submit" : "button"}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
-                                    : style.general_button_inactive
-                            } "button-submit"`}
-                            disabled={formik.isSubmitting}
-                        >
-                            {formik.isSubmitting
-                                ? props.submittingText
-                                : props.buttonText}
-                        </button>
-                    </form>
-                </div>
-            </div>
+  const clearAuth = async () => {
+    await signOut(authentication);
+    setLoggedSocials("");
+    reset({
+      email: "",
+      name: "",
+      contactMethod: "",
+    });
+  };
+
+  const handleServerErrors = (error) => {
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phoneNumber"].includes(key)) {
+        setError(key, {
+          type: "server",
+          message,
+        });
+      }
+    });
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    control,
+    reset,
+    setError,
+    getValues,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      agreement: true,
+    },
+  });
+
+  const handleAgreementChange = (e) => {
+    setValue("agreement", !getValues("agreement"));
+    trigger("agreement");
+  };
+
+  const languageValues = [
+    "Español",
+    "Deutsch",
+    "Italiano",
+    "Français",
+    "Українська",
+    "English",
+  ];
+
+  const onSelectLanguage = (option) => {
+    setSelectedLanguage(option.value);
+    // formik.setFieldValue("language", option.value);
+  };
+
+  const onSubmit = async (values) => {
+    const data = {
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      budget: values.budget.value,
+    };
+
+    try {
+      debouncedSubmit("attempt", window.location.hostname);
+
+      const postToCRMResponse = await postData(
+        data,
+        props.destinationURL,
+        orderName,
+        window.location.href,
+        window.location.hostname,
+        queryParams || router.query
+      );
+
+      Promise.all([postToCRMResponse]).then(() => {
+        reset();
+        ReactGA.event("generate_lead", {
+          category: "form",
+          action: "submit",
+        });
+        ReactPixel.track("Lead");
+        sendEventToConversionApi(window.location.href, "Lead");
+        modal.closeModal();
+        router.push(props.thank_you_page);
+      });
+    } catch (error) {
+      handleServerErrors(error.response.data);
+    }
+  };
+
+  return (
+    <div className={style.inputs_block_out}>
+      <div className={style.close_block} onClick={props.closeClick}></div>
+      <div className={`${style.inputs_block} fade-up-animation`}>
+        <div className={style.close}>
+          <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-    );
+        <div className={style.text_block}>
+          <p className={style.title}>
+            {props.title || "Fill in the form below"}
+          </p>
+        </div>
+        <div className={style.inputs_block__inputs}>
+          {isDesktop ? (
+            <div className={style.auth_block}>
+              <div className={style.buttons_row}>
+                {loggedViaSocials ? (
+                  <>
+                    <button className={style.clear_button} onClick={clearAuth}>
+                      Clear
+                    </button>
+                    <button
+                      className={style.change_button}
+                      onClick={
+                        loggedViaSocials === "Google"
+                          ? googleAuth
+                          : facebookAuth
+                      }
+                    >
+                      Change account
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={style.google_button}
+                      onClick={googleAuth}
+                    >
+                      <Image
+                        src={googleLogo}
+                        alt="google logo"
+                        height={15}
+                        width={15}
+                      />{" "}
+                      Authorization via Google
+                    </button>
+                  </>
+                )}
+              </div>
+              <div className={style.divider_block}>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+                <span
+                  className={`${style.divider_text} ${
+                    props.isModal ? "" : style.divider_text_white
+                  }`}
+                >
+                  or
+                </span>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+              </div>
+            </div>
+          ) : null}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.input__label}>
+              <input
+                className={style.input}
+                style={{
+                  borderColor: errors.email ? "#d22e2e" : "#000",
+                }}
+                $error={errors.email ? "true" : "false"}
+                {...register("email")}
+                placeholder={
+                  props.emailPlaceholder ? props.emailPlaceholder : "Email*"
+                }
+              />
+              <p className={style.error__message}>{errors.email?.message}</p>
+            </div>
+            <div className={style.input_block_out}>
+              <Dropdown
+                className={`Dropdown-black_form  ${
+                  formik.errors.language ? "Dropdown-error" : ""
+                }`}
+                options={languageValues}
+                onChange={onSelectLanguage}
+                value={selectedLanguage}
+                placeholder={props.selectLanguagePlaceholder}
+              />
+              {formik.errors.language && (
+                <span className={style.error}>{formik.errors.language}</span>
+              )}
+            </div>
+            <div className={style.agreement}>
+              <div className={style.input__label}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    className={
+                      getValues("agreement") === true
+                        ? style.agreement_dot_button_active
+                        : style.agreement_dot_button
+                    }
+                    onClick={handleAgreementChange}
+                    {...register("agreement")}
+                  >
+                    {icons.dot}
+                  </div>
+                  <p className={style.agreement__text}>
+                    <span onClick={handleAgreementChange}>
+                      {props.agreement_text}
+                    </span>{" "}
+                    {props.agreement_link}
+                  </p>
+                </div>
+                {errors.agreement && (
+                  <p className={style.error__message}>
+                    {errors.agreement.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <button
+              type={agreement ? "submit" : "button"}
+              className={`
+                    ${style.general_button_inactive}
+                "button-submit"`}
+              disabled={formik.isSubmitting}
+            >
+              {formik.isSubmitting ? props.submittingText : props.buttonText}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function PopUpEmailPhone(props) {
-    const [valid, setValid] = useState(null);
-    const [phone, setPhone] = useState(null);
-    const [regionCode, setRegionCode] = useState();
-    const [budgetRange, setBudgetRange] = useState(null);
-    const [contactMethod, setContactMethod] = useState(null);
-    const [planToUse, setPlanToUse] = useState(null);
-    const [comment, setComment] = useState(null);
-    const [loggedViaSocials, setLoggedSocials] = useState("");
+  const [regionCode, setRegionCode] = useState();
+  const [loggedViaSocials, setLoggedSocials] = useState("");
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-    const router = useRouter();
-    const modal = useModals();
-    const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents();
-    const queryParams = useSelector(searchParams);
+  const router = useRouter();
+  const modal = useModals();
+  const GAEvents = useGAEvents();
+  const queryParams = useSelector(searchParams);
+  const [isDesktop, setIsDesktop] = useState(true);
 
-    const googleAuth = async () => {
-        await signOut(authentication);
+  const orderName = loggedViaSocials
+    ? `(${loggedViaSocials}) ${props.orderName}`
+    : `(Noauthorization) ${props.orderName}`;
 
-        const provider = new GoogleAuthProvider();
-        const { user } = await signInWithPopup(authentication, provider);
-        setLoggedSocials("Google");
-        await formik.setFieldValue("email", user.email);
-        await formik.setFieldValue("name", user.displayName);
-    };
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1200);
+  }, [window.innerWidth]);
 
-    const clearAuth = async () => {
-        await signOut(authentication);
-        setLoggedSocials("");
-        await formik.setFieldValue("email", "");
-        await formik.setFieldValue("name", "");
-        await formik.setFieldValue("contactMethod", "");
-        setContactMethod(null);
-    };
+  const handleMenuOpen = () => setMenuIsOpen(true);
+  const handleMenuClose = () => setMenuIsOpen(false);
 
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-    }
-
-    const validate = (values) => {
-        const errors = {};
-
-        if (!values.name) {
-            errors.name = "Required";
-        } else if (values.name.length < 2) {
-            errors.name = "The name must have at least 2 characters";
-        }
-
-        if (!values.phone) {
-            errors.phone = "Required";
-        }
-
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
-                values.email
-            )
-        ) {
-            errors.email = "Invalid email address";
-        }
-
-        // if (!values.contactMethod) errors.contactMethod = "Required";
-        // if (!values.budget) errors.budget = "Required";
-
-        return errors;
-    };
-
-    const orderName = loggedViaSocials
-        ? `(${loggedViaSocials}) ${props.orderName}`
-        : `(Noauthorization) ${props.orderName}`;
-
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            email: "",
-            phone: false,
-            // contactMethod: "",
-            // planToUse: "",
-            // budget: "",
-            // comment: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            const data = {
-                ...values,
-                phone: `+${phone}`,
-            };
-            const options = {
-                method: "POST",
-                url: `https://api.netronic.net/send-email`,
-                headers: {
-                    "content-type": "application/json",
-                },
-                data: {
-                    email: values.email,
-                    fromName: props.fromName,
-                    letterId: props.letterId,
-                },
-            };
-            axios
-                .request(options)
-                .then(console.log)
-                .then(
-                    postData(
-                        data,
-                        props.destinationURL,
-                        orderName,
-                        props.lang,
-                        window.location.href,
-                        queryParams || router.query
-                    )
-                        .then(() => {
-                            formik.resetForm();
-                            ReactGA.event("generate_lead", {
-                                category: "form",
-                                action: "submit",
-                            });
-                            ReactPixel.track("Lead");
-                            sendEventToConversionApi(
-                                window.location.href,
-                                "Lead"
-                            );
-                            turnOnScroll();
-                        })
-                        .catch(console.log)
-                )
-                .then(() => {
-                    modal.closeModal();
-                    router.push(props.thank_you_page);
-                })
-                .catch(console.log);
-        },
+  const handleServerErrors = (error) => {
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phoneNumber"].includes(key)) {
+        setError(key, {
+          type: "server",
+          message,
+        });
+      }
     });
+  };
 
-    useEffect(() => {
-        if (formik.values.name || formik.values.email || formik.values.phone)
-            formik.validateForm();
-    }, [loggedViaSocials, formik.values]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    control,
+    reset,
+    setError,
+    getValues,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      agreement: true,
+    },
+  });
 
-    useEffect(() => {
-        modal?.region
-            ? setRegionCode(modal?.region.toLowerCase())
-            : setRegionCode("us");
-    }, [modal.region]);
+  const handleAgreementChange = (e) => {
+    setValue("agreement", !getValues("agreement"));
+    trigger("agreement");
+  };
 
-    const budgetRangeValues = [
-        "$10,000 - $25,000",
-        "$25,000 - $50,000",
-        "more than $50,000",
-    ];
-    const defaultBudgetRangeOption = budgetRange;
+  const googleAuth = async () => {
+    await signOut(authentication);
 
-    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
-    const defaultContactMethodOption = contactMethod;
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(authentication, provider);
+    setLoggedSocials("Google");
+    reset({
+      email: user.email,
+      name: user.displayName,
+    });
+  };
 
-    const planToUseValues = [
-        "for an existing business",
-        "to start a new business",
-    ];
-    const defaultPlanToUseOption = planToUse;
+  const clearAuth = async () => {
+    await signOut(authentication);
+    setLoggedSocials("");
+    reset({
+      email: "",
+      name: "",
+    });
+  };
 
-    const onSelectBudgetRange = (option) => {
-        setBudgetRange(option.value);
-        formik.setFieldValue("budget", option.value);
+  useEffect(() => {
+    modal?.region
+      ? setRegionCode(modal?.region.toLowerCase())
+      : setRegionCode("us");
+  }, [modal.region]);
+
+  const onSubmit = async (values) => {
+    const data = {
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      budget: values.budget.value,
     };
-    const onSelectContactMethod = (option) => {
-        setContactMethod(option.value);
-        formik.setFieldValue("contactMethod", option.value);
-    };
-    const onSelectPlanToUse = (option) => {
-        setPlanToUse(option.value);
-        formik.setFieldValue("planToUse", option.value);
-    };
-    const onChangeComment = (e) => {
-        setComment(e.target.value);
-        formik.setFieldValue("comment", e.target.value);
-    };
 
-    return (
-        <div className={style.inputs_block_out}>
-            <div className={style.close_block} onClick={props.closeClick}></div>
-            <div className={style.inputs_block}>
-                <div className={style.close}>
-                    <button onClick={props.closeClick}>{icons.cross}</button>
-                </div>
-                <div className={style.auth_block}>
-                    <div className={style.buttons_row}>
-                        {loggedViaSocials ? (
-                            <>
-                                <button
-                                    className={style.clear_button}
-                                    onClick={clearAuth}
-                                >
-                                    Clear
-                                </button>
-                                <button
-                                    className={style.change_button}
-                                    onClick={
-                                        loggedViaSocials === "Google"
-                                            ? googleAuth
-                                            : facebookAuth
-                                    }
-                                >
-                                    Change account
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <button
-                                    className={style.google_button}
-                                    onClick={googleAuth}
-                                >
-                                    <Image
-                                        src={googleLogo}
-                                        alt="google logo"
-                                        height={15}
-                                        width={15}
-                                    />{" "}
-                                    Authorization via Google
-                                </button>
-                            </>
-                        )}
-                    </div>
-                    <div className={style.divider_block}>
-                        <span
-                            className={`${style.divider} ${
-                                props.isModal ? "" : style.divider_white
-                            }`}
-                        ></span>
-                        <span
-                            className={`${style.divider_text} ${
-                                props.isModal ? "" : style.divider_text_white
-                            }`}
-                        >
-                            or
-                        </span>
-                        <span
-                            className={`${style.divider} ${
-                                props.isModal ? "" : style.divider_white
-                            }`}
-                        ></span>
-                    </div>
-                </div>
-                <div className={style.text_block}>
-                    <p className={style.title}>
-                        {props.title || "Fill in the form below"}
-                    </p>
-                    <p className={style.paragraph}>
-                        {props.subTitle ||
-                            "Get an equipment catalog with prices"}
-                    </p>
-                </div>
-                <div className={style.inputs_block__inputs}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className={style.inputs_block__input}>
-                            <div className={style.inputs_block__input_cell}>
-                                <InputName
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.name}
-                                    error={formik.errors.name}
-                                    placeholder={props.namePlaceholder}
-                                    loggedViaSocials={loggedViaSocials}
-                                />
+    const options = {
+      method: "POST",
+      url: `https://api.netronic.net/send-email`,
+      headers: {
+        "content-type": "application/json",
+      },
+      data: {
+        email: values.email,
+        fromName: props.fromName,
+        letterId: props.letterId,
+      },
+    };
+    try {
+      debouncedSubmit("attempt", window.location.hostname);
 
-                                <div
-                                    className={`${style.phone__input_block} ${
-                                        formik.errors.phone
-                                            ? "phone__input__error"
-                                            : ""
-                                    }`}
-                                >
-                                    <PhoneInput
-                                        containerClass="catalog_input__phone_container"
-                                        inputClass={
-                                            valid
-                                                ? "input__phone"
-                                                : "input__phone_error"
-                                        }
-                                        buttonClass={
-                                            valid
-                                                ? "drop_down"
-                                                : "drop_down_error"
-                                        }
-                                        country={regionCode}
-                                        enableSearch
-                                        excludeCountries={["ru"]}
-                                        autoFormat={false}
-                                        placeholder={props.phonePlaceholder}
-                                        onChange={(
-                                            value,
-                                            country,
-                                            e,
-                                            formattedValue
-                                        ) => {
-                                            const { format, dialCode } =
-                                                country;
-                                            setPhone(value);
-                                            if (
-                                                value.length > 5 &&
-                                                value.length < 20
-                                            ) {
-                                                formik.setFieldValue(
-                                                    "phone",
-                                                    true
-                                                );
-                                                setValid(true);
-                                            } else {
-                                                formik.setFieldValue(
-                                                    "phone",
-                                                    false
-                                                );
-                                                setValid(false);
-                                            }
-                                        }}
-                                    />
-                                    {!valid && (
-                                        <span className={style.error_Phone}>
-                                            Invalid mobile number
-                                        </span>
-                                    )}
-                                </div>
-                                <InputEmail
-                                    noIcons
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    error={formik.errors.email}
-                                    placeholder={props.emailPlaceholder}
-                                    loggedViaSocials={loggedViaSocials}
-                                />
-                            </div>
-                            {/* <div className={style.inputs_block__input_cell}>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.budget
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={budgetRangeValues}
-                                        onChange={onSelectBudgetRange}
-                                        value={defaultBudgetRangeOption}
-                                        placeholder={props.budgetPlaceholder}
-                                    />
-                                    {formik.errors.budget && (
-                                        <span className={style.error}>
-                                            {formik.errors.budget}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.contactMethod
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={contactMethodValues}
-                                        onChange={onSelectContactMethod}
-                                        value={defaultContactMethodOption}
-                                        placeholder={
-                                            props.contactMethodPlaceholder
-                                        }
-                                    />
-                                    {formik.errors.contactMethod && (
-                                        <span className={style.error}>
-                                            {formik.errors.contactMethod}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.planToUse
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={planToUseValues}
-                                        onChange={onSelectPlanToUse}
-                                        value={defaultPlanToUseOption}
-                                        placeholder={props.planToUsePlaceholder}
-                                    />
-                                    {formik.errors.planToUse && (
-                                        <span className={style.error}>
-                                            {formik.errors.planToUse}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Input
-                                        onChange={onChangeComment}
-                                        type="text"
-                                        value={formik.values.comment}
-                                        placeholder={props.commentPlaceholder}
-                                        name="comment"
-                                    />
-                                </div>
-                            </div> */}
-                        </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{" "}
-                                {props.agreement_link}
-                            </p>
-                        </div>
-                        <button
-                            type={agreement ? "submit" : "button"}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
-                                    : style.general_button_inactive
-                            } "button-submit"`}
-                            disabled={formik.isSubmitting}
-                        >
-                            {formik.isSubmitting
-                                ? props.submittingText
-                                : props.buttonText || "Get catalog"}
-                        </button>
-                    </form>
-                </div>
-            </div>
+      const sendEmailResponse = await axios.request(options);
+      const postToCRMResponse = await postData(
+        data,
+        props.destinationURL,
+        orderName,
+        window.location.href,
+        window.location.hostname,
+        queryParams || router.query
+      );
+
+      Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        reset();
+        ReactGA.event("generate_lead", {
+          category: "form",
+          action: "submit",
+        });
+        ReactPixel.track("Lead");
+        sendEventToConversionApi(window.location.href, "Lead");
+        modal.closeModal();
+        router.push(props.thank_you_page);
+      });
+    } catch (error) {
+      handleServerErrors(error.response.data);
+    }
+  };
+
+  return (
+    <div className={style.inputs_block_out}>
+      <div className={style.close_block} onClick={props.closeClick}></div>
+      <div className={style.inputs_block}>
+        <div className={style.close}>
+          <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-    );
+        {isDesktop ? (
+          <div className={style.auth_block}>
+            <div className={style.buttons_row}>
+              {loggedViaSocials ? (
+                <>
+                  <button className={style.clear_button} onClick={clearAuth}>
+                    Clear
+                  </button>
+                  <button
+                    className={style.change_button}
+                    onClick={
+                      loggedViaSocials === "Google" ? googleAuth : facebookAuth
+                    }
+                  >
+                    Change account
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className={style.google_button} onClick={googleAuth}>
+                    <Image
+                      src={googleLogo}
+                      alt="google logo"
+                      height={15}
+                      width={15}
+                    />{" "}
+                    Authorization via Google
+                  </button>
+                </>
+              )}
+            </div>
+            <div className={style.divider_block}>
+              <span
+                className={`${style.divider} ${
+                  props.isModal ? "" : style.divider_white
+                }`}
+              ></span>
+              <span
+                className={`${style.divider_text} ${
+                  props.isModal ? "" : style.divider_text_white
+                }`}
+              >
+                or
+              </span>
+              <span
+                className={`${style.divider} ${
+                  props.isModal ? "" : style.divider_white
+                }`}
+              ></span>
+            </div>
+          </div>
+        ) : null}
+        <div className={style.text_block}>
+          <p className={style.title}>
+            {props.title || "Fill in the form below"}
+          </p>
+          <p className={style.paragraph}>
+            {props.subTitle || "Get an equipment catalog with prices"}
+          </p>
+        </div>
+        <div className={style.inputs_block__inputs}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.inputs_block__input}>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.name ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.name ? "true" : "false"}
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
+                  placeholder={
+                    props.namePlaceholder ? props.namePlaceholder : "Name*"
+                  }
+                />
+                <p className={style.error__message}>{errors.name?.message}</p>
+              </div>
+
+              <div className={style.input__label}>
+                <Controller
+                  name="phoneNumber"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <PhoneInput
+                      international
+                      inputStyle={{
+                        height: "55px",
+                        width: "100%",
+                        boxSizing: "border-box",
+                        borderRadius: "8px",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        borderColor: errors.phoneNumber
+                          ? "#d22e2e"
+                          : "transparent",
+                        color: "#fff",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                        lineHeight: "140px",
+                        outline: "0",
+                        backgroundColor: "#212121",
+                      }}
+                      buttonStyle={{
+                        borderColor: errors.phoneNumber ? "#d22e2e" : "#000",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        height: "55px",
+                      }}
+                      country="ua"
+                      enableSearch
+                      excludeCountries={["ru"]}
+                      value={value}
+                      onChange={onChange}
+                      error={
+                        value
+                          ? isValidPhoneNumber(`+${value}`)
+                            ? undefined
+                            : "Invalid phone number"
+                          : "Phone number is required"
+                      }
+                    />
+                  )}
+                />
+                {errors.phoneNumber && (
+                  <p className={style.error__message}>
+                    {errors.phoneNumber?.message}
+                  </p>
+                )}
+              </div>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.email ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.email ? "true" : "false"}
+                  {...register("email")}
+                  placeholder={
+                    props.emailPlaceholder ? props.emailPlaceholder : "Email*"
+                  }
+                />
+                <p className={style.error__message}>{errors.email?.message}</p>
+              </div>
+              <Controller
+                control={control}
+                name="budget"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    placeholder={props.budgetPlaceholder}
+                    options={selectOptions}
+                    isSearchable={false}
+                    components={{ DropdownIndicator }}
+                    onMenuOpen={handleMenuOpen}
+                    onMenuClose={handleMenuClose}
+                    menuIsOpen={menuIsOpen}
+                    styles={customStyles}
+                  />
+                )}
+              />
+              {errors.budget && (
+                <p className={style.error__message}>
+                  {errors.budget.value.message}
+                </p>
+              )}
+            </div>
+            <div className={style.agreement}>
+              <div className={style.input__label}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    className={
+                      getValues("agreement") === true
+                        ? style.agreement_dot_button_active
+                        : style.agreement_dot_button
+                    }
+                    onClick={handleAgreementChange}
+                    {...register("agreement")}
+                  >
+                    {icons.dot}
+                  </div>
+                  <p
+                    className={style.agreement__text}
+                    onClick={() => modal.closeModal()}
+                  >
+                    <span onClick={handleAgreementChange}>
+                      {props.agreement_text}
+                    </span>{" "}
+                    {props.agreement_link}
+                  </p>
+                </div>
+                {errors.agreement && (
+                  <p className={style.error__message}>
+                    {errors.agreement.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <button
+              type="submit"
+              className={`${
+                !isValid || isSubmitting
+                  ? style.general_button_inactive
+                  : style.general_button_active
+              } button-submit`}
+              disabled={!isValid || isSubmitting}
+            >
+              {isSubmitting
+                ? props.submittingText
+                : props.buttonText || "Get catalog"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function PopUpEvent(props) {
-    const [valid, setValid] = useState(null);
-    const [phone, setPhone] = useState(null);
-    const [regionCode, setRegionCode] = useState();
-    const [budgetRange, setBudgetRange] = useState(null);
-    const [contactMethod, setContactMethod] = useState(null);
-    const [planToUse, setPlanToUse] = useState(null);
-    const [comment, setComment] = useState(null);
+  const [regionCode, setRegionCode] = useState();
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [loggedViaSocials, setLoggedSocials] = useState("");
 
-    const router = useRouter();
-    const modal = useModals();
-    const dispatch = useDispatch();
-    const [agreement, changeAgreement] = useState(false);
-    const GAEvents = useGAEvents();
-    const queryParams = useSelector(searchParams);
+  const router = useRouter();
+  const modal = useModals();
+  const dispatch = useDispatch();
+  const GAEvents = useGAEvents();
+  const queryParams = useSelector(searchParams);
 
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-    }
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1200);
+  }, [window.innerWidth]);
 
-    const validate = (values) => {
-        const errors = {};
+  const orderName = loggedViaSocials
+    ? `(${loggedViaSocials}) ${props.orderName}`
+    : `(Noauthorization) ${props.orderName}`;
 
-        if (!values.name) {
-            errors.name = "Required";
-        } else if (values.name.length < 2) {
-            errors.name = "The name must have at least 2 characters";
-        }
+  const googleAuth = async () => {
+    await signOut(authentication);
 
-        if (!values.phone) {
-            errors.phone = "Required";
-        }
-
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
-                values.email
-            )
-        ) {
-            errors.email = "Invalid email address";
-        }
-
-        return errors;
-    };
-
-    const budgetRangeValues = [
-        "$10,000 - $25,000",
-        "$25,000 - $50,000",
-        "more than $50,000",
-    ];
-    const defaultBudgetRangeOption = budgetRange;
-
-    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
-    const defaultContactMethodOption = contactMethod;
-
-    const planToUseValues = [
-        "for an existing business",
-        "to start a new business",
-    ];
-    const defaultPlanToUseOption = planToUse;
-
-    const onSelectBudgetRange = (option) => {
-        setBudgetRange(option.value);
-        formik.setFieldValue("budget", option.value);
-    };
-    const onSelectContactMethod = (option) => {
-        setContactMethod(option.value);
-        formik.setFieldValue("contactMethod", option.value);
-    };
-    const onSelectPlanToUse = (option) => {
-        setPlanToUse(option.value);
-        formik.setFieldValue("planToUse", option.value);
-    };
-    const onChangeComment = (e) => {
-        setComment(e.target.value);
-        formik.setFieldValue("comment", e.target.value);
-    };
-
-    useEffect(() => {
-        modal?.region
-            ? setRegionCode(modal?.region.toLowerCase())
-            : setRegionCode("us");
-    }, [modal.region]);
-
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            phone: false,
-            name: "",
-            // contactMethod: "",
-            // planToUse: "",
-            // budget: "",
-            // comment: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            dispatch(setUserData(values.name));
-            const data = {
-                ...values,
-                phone: `+${phone}`,
-            };
-            const options = {
-                method: "POST",
-                url: `https://api.netronic.net/send-email`,
-                headers: {
-                    "content-type": "application/json",
-                },
-                data: {
-                    email: values.email,
-                    fromName: props.fromName,
-                    letterId: props.letterId,
-                },
-            };
-            axios
-                .request(options)
-                .then(
-                    postData(
-                        data,
-                        props.destinationURL,
-                        props.orderName,
-                        props.lang,
-                        window.location.href,
-                        queryParams || router.query
-                    )
-                        .then(() => {
-                            formik.resetForm();
-                            ReactGA.event("generate_lead", {
-                                category: "form",
-                                action: "submit",
-                            });
-                            ReactPixel.track("Lead");
-                            sendEventToConversionApi(
-                                window.location.href,
-                                "Lead"
-                            );
-                            turnOnScroll();
-                        })
-                        .catch(console.log)
-                )
-                .then(() => {
-                    modal.closeModal();
-                    router.push(props.thank_you_page);
-                })
-                .catch(console.log);
-        },
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(authentication, provider);
+    setLoggedSocials("Google");
+    reset({
+      email: user.email,
+      name: user.displayName,
     });
+  };
 
-    return (
-        <div className={style.inputs_block_out}>
-            <div className={style.close_block} onClick={props.closeClick}></div>
-            <div className={style.inputs_block}>
-                <div className={style.close}>
-                    <button onClick={props.closeClick}>{icons.cross}</button>
-                </div>
-                <div className={style.text_block}>
-                    <p className={style.title}>
-                        {props.title || "Fill in the form below"}
-                    </p>
-                    <p className={style.paragraph}>{props.subTitle}</p>
-                </div>
-                <div className={style.inputs_block__inputs}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className={style.inputs_block__input}>
-                            <InputName
-                                onChange={formik.handleChange}
-                                value={formik.values.name}
-                                error={formik.errors.name}
-                            />
+  const clearAuth = async () => {
+    await signOut(authentication);
+    setLoggedSocials("");
+    reset({
+      email: "",
+      name: "",
+      contactMethod: "",
+    });
+  };
 
-                            <div
-                                className={`${style.phone__input_block} ${
-                                    formik.errors.phone
-                                        ? "phone__input__error"
-                                        : ""
-                                }`}
-                            >
-                                <PhoneInput
-                                    containerClass="input__phone_container"
-                                    inputClass={
-                                        valid
-                                            ? "input__phone"
-                                            : "input__phone_error"
-                                    }
-                                    buttonClass={
-                                        valid ? "drop_down" : "drop_down_error"
-                                    }
-                                    country={regionCode}
-                                    enableSearch
-                                    excludeCountries={["ru"]}
-                                    autoFormat={false}
-                                    placeholder={props.phonePlaceholder}
-                                    onChange={(
-                                        value,
-                                        country,
-                                        e,
-                                        formattedValue
-                                    ) => {
-                                        const { format, dialCode } = country;
-                                        setPhone(value);
-                                        if (
-                                            value.length > 5 &&
-                                            value.length < 20
-                                        ) {
-                                            formik.setFieldValue("phone", true);
-                                            setValid(true);
-                                        } else {
-                                            formik.setFieldValue(
-                                                "phone",
-                                                false
-                                            );
-                                            setValid(false);
-                                        }
-                                    }}
-                                />
-                                {!valid && (
-                                    <span className={style.error__message}>
-                                        Invalid mobile number
-                                    </span>
-                                )}
-                            </div>
-                            <InputEmail
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                                error={formik.errors.email}
-                            />
-                            {/* <div className={style.input_block_out}>
-                                <Dropdown
-                                    className={`Dropdown-black_form  ${
-                                        formik.errors.budget
-                                            ? "Dropdown-error"
-                                            : ""
-                                    }`}
-                                    options={budgetRangeValues}
-                                    onChange={onSelectBudgetRange}
-                                    value={defaultBudgetRangeOption}
-                                    placeholder={props.budgetPlaceholder}
-                                />
-                                {formik.errors.budget && (
-                                    <span className={style.error}>
-                                        {formik.errors.budget}
-                                    </span>
-                                )}
-                            </div> */}
-                            {/* <div className={style.input_block_out}>
-                                <Dropdown
-                                    className={`Dropdown-black_form  ${
-                                        formik.errors.contactMethod
-                                            ? "Dropdown-error"
-                                            : ""
-                                    }`}
-                                    options={contactMethodValues}
-                                    onChange={onSelectContactMethod}
-                                    value={defaultContactMethodOption}
-                                    placeholder={props.contactMethodPlaceholder}
-                                />
-                                {formik.errors.contactMethod && (
-                                    <span className={style.error__message}>
-                                        {formik.errors.contactMethod}
-                                    </span>
-                                )}
-                            </div> */}
-                            {/* <div className={style.input_block_out}>
-                                <Dropdown
-                                    className={`Dropdown-black_form  ${
-                                        formik.errors.planToUse
-                                            ? "Dropdown-error"
-                                            : ""
-                                    }`}
-                                    options={planToUseValues}
-                                    onChange={onSelectPlanToUse}
-                                    value={defaultPlanToUseOption}
-                                    placeholder={props.planToUsePlaceholder}
-                                />
-                                {formik.errors.planToUse && (
-                                    <span className={style.error__message}>
-                                        {formik.errors.planToUse}
-                                    </span>
-                                )}
-                            </div>
-                            <div className={style.input_block_out}>
-                                <Input
-                                    onChange={onChangeComment}
-                                    type="text"
-                                    value={formik.values.comment}
-                                    placeholder={props.commentPlaceholder}
-                                    name="comment"
-                                />
-                            </div> */}
-                        </div>
-                        <div className={style.agreement}>
-                            <div
-                                className={
-                                    agreement === true
-                                        ? style.agreement_dot_button_active
-                                        : style.agreement_dot_button
-                                }
-                                onClick={onAgreementChange}
-                            >
-                                {icons.dot}
-                            </div>
-                            <p className={style.agreement__text}>
-                                <span onClick={onAgreementChange}>
-                                    {props.agreement_text}
-                                </span>{" "}
-                                {props.agreement_link}
-                            </p>
-                        </div>
-                        <button
-                            type={agreement ? "submit" : "button"}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
-                                    : style.general_button_inactive
-                            } "button-submit"`}
-                            disabled={formik.isSubmitting}
-                        >
-                            {formik.isSubmitting
-                                ? props.submittingText
-                                : props.buttonText}
-                        </button>
-                    </form>
-                </div>
-            </div>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    control,
+    reset,
+    setError,
+    getValues,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      agreement: true,
+    },
+  });
+
+  const handleServerErrors = (error) => {
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phoneNumber"].includes(key)) {
+        setError(key, {
+          type: "server",
+          message,
+        });
+      }
+    });
+  };
+
+  const handleAgreementChange = (e) => {
+    setValue("agreement", !getValues("agreement"));
+    trigger("agreement");
+  };
+
+  useEffect(() => {
+    modal?.region
+      ? setRegionCode(modal?.region.toLowerCase())
+      : setRegionCode("us");
+  }, [modal.region]);
+
+  const onSubmit = async (values) => {
+    dispatch(setUserData(values.name));
+    const data = {
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      budget: values.budget.value,
+    };
+
+    const options = {
+      method: "POST",
+      url: `https://api.netronic.net/send-email`,
+      headers: {
+        "content-type": "application/json",
+      },
+      data: {
+        email: values.email,
+        fromName: props.fromName,
+        letterId: props.letterId,
+      },
+    };
+    try {
+      debouncedSubmit("attempt", window.location.hostname);
+
+      const sendEmailResponse = await axios.request(options);
+      const postToCRMResponse = await postData(
+        data,
+        props.destinationURL,
+        orderName,
+        window.location.href,
+        window.location.hostname,
+        queryParams || router.query
+      );
+
+      Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        reset();
+        ReactGA.event("generate_lead", {
+          category: "form",
+          action: "submit",
+        });
+        ReactPixel.track("Lead");
+        sendEventToConversionApi(window.location.href, "Lead");
+        modal.closeModal();
+        router.push(props.thank_you_page);
+      });
+    } catch (error) {
+      handleServerErrors(error.response.data);
+    }
+  };
+
+  return (
+    <div className={style.inputs_block_out}>
+      <div className={style.close_block} onClick={props.closeClick}></div>
+      <div className={style.inputs_block}>
+        <div className={style.close}>
+          <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-    );
+        <div className={style.text_block}>
+          <p className={style.title}>
+            {props.title || "Fill in the form below"}
+          </p>
+          <p className={style.paragraph}>{props.subTitle}</p>
+        </div>
+        <div className={style.inputs_block__inputs}>
+          {isDesktop ? (
+            <div className={style.auth_block}>
+              <div className={style.buttons_row}>
+                {loggedViaSocials ? (
+                  <>
+                    <button className={style.clear_button} onClick={clearAuth}>
+                      Clear
+                    </button>
+                    <button
+                      className={style.change_button}
+                      onClick={
+                        loggedViaSocials === "Google"
+                          ? googleAuth
+                          : facebookAuth
+                      }
+                    >
+                      Change account
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={style.google_button}
+                      onClick={googleAuth}
+                    >
+                      <Image
+                        src={googleLogo}
+                        alt="google logo"
+                        height={15}
+                        width={15}
+                      />{" "}
+                      Authorization via Google
+                    </button>
+                  </>
+                )}
+              </div>
+              <div className={style.divider_block}>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+                <span
+                  className={`${style.divider_text} ${
+                    props.isModal ? "" : style.divider_text_white
+                  }`}
+                >
+                  or
+                </span>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+              </div>
+            </div>
+          ) : null}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.inputs_block__input}>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.name ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.name ? "true" : "false"}
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
+                  placeholder={
+                    props.namePlaceholder ? props.namePlaceholder : "Name*"
+                  }
+                />
+                <p className={style.error__message}>{errors.name?.message}</p>
+              </div>
+
+              <div className={style.input__label}>
+                <Controller
+                  name="phoneNumber"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <PhoneInput
+                      international
+                      inputStyle={{
+                        height: "55px",
+                        width: "100%",
+                        boxSizing: "border-box",
+                        borderRadius: "8px",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        borderColor: errors.phoneNumber
+                          ? "#d22e2e"
+                          : "transparent",
+                        color: "#fff",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                        lineHeight: "140px",
+                        outline: "0",
+                        backgroundColor: "#212121",
+                      }}
+                      buttonStyle={{
+                        borderColor: errors.phoneNumber ? "#d22e2e" : "#000",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        height: "55px",
+                      }}
+                      country="ua"
+                      enableSearch
+                      excludeCountries={["ru"]}
+                      value={value}
+                      onChange={onChange}
+                      error={
+                        value
+                          ? isValidPhoneNumber(`+${value}`)
+                            ? undefined
+                            : "Invalid phone number"
+                          : "Phone number is required"
+                      }
+                    />
+                  )}
+                />
+                {errors.phoneNumber && (
+                  <p className={style.error__message}>
+                    {errors.phoneNumber?.message}
+                  </p>
+                )}
+              </div>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.email ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.email ? "true" : "false"}
+                  {...register("email")}
+                  placeholder={
+                    props.emailPlaceholder ? props.emailPlaceholder : "Email*"
+                  }
+                />
+                <p className={style.error__message}>{errors.email?.message}</p>
+              </div>
+              <Controller
+                control={control}
+                name="budget"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    placeholder={props.budgetPlaceholder}
+                    options={selectOptions}
+                    isSearchable={false}
+                    components={{ DropdownIndicator }}
+                    onMenuOpen={handleMenuOpen}
+                    onMenuClose={handleMenuClose}
+                    menuIsOpen={menuIsOpen}
+                    styles={customStyles}
+                  />
+                )}
+              />
+              {errors.budget && (
+                <p className={style.error__message}>
+                  {errors.budget.value.message}
+                </p>
+              )}
+            </div>
+            <div className={style.agreement}>
+              <div className={style.input__label}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    className={
+                      getValues("agreement") === true
+                        ? style.agreement_dot_button_active
+                        : style.agreement_dot_button
+                    }
+                    onClick={handleAgreementChange}
+                    {...register("agreement")}
+                  >
+                    {icons.dot}
+                  </div>
+                  <p className={style.agreement__text}>
+                    <span onClick={handleAgreementChange}>
+                      {props.agreement_text}
+                    </span>{" "}
+                    {props.agreement_link}
+                  </p>
+                </div>
+                {errors.agreement && (
+                  <p className={style.error__message}>
+                    {errors.agreement.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <button
+              type="submit"
+              className={`${
+                !isValid || isSubmitting
+                  ? style.general_button_inactive
+                  : style.general_button_active
+              } button-submit`}
+              disabled={!isValid || isSubmitting}
+            >
+              {isSubmitting ? props.submittingText : props.buttonText}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function PopUpNameEmail(props) {
-    const router = useRouter();
-    const modal = useModals();
-    const dispatch = useDispatch();
-    const [agreement, changeAgreement] = useState(false);
-    const [budgetRange, setBudgetRange] = useState(null);
-    const [contactMethod, setContactMethod] = useState(null);
-    const [planToUse, setPlanToUse] = useState(null);
-    const [comment, setComment] = useState(null);
-    const GAEvents = useGAEvents();
-    const queryParams = useSelector(searchParams);
+  const router = useRouter();
+  const modal = useModals();
+  const dispatch = useDispatch();
+  const GAEvents = useGAEvents();
+  const queryParams = useSelector(searchParams);
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [loggedViaSocials, setLoggedSocials] = useState("");
 
-    function onAgreementChange() {
-        changeAgreement(!agreement);
-    }
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1200);
+  }, [window.innerWidth]);
 
-    const budgetRangeValues = [
-        "$10,000 - $25,000",
-        "$25,000 - $50,000",
-        "more than $50,000",
-    ];
-    const defaultBudgetRangeOption = budgetRange;
+  const orderName = loggedViaSocials
+    ? `(${loggedViaSocials}) ${props.orderName}`
+    : `(Noauthorization) ${props.orderName}`;
 
-    const contactMethodValues = ["phone / e-mail", "whatsapp / e-mail"];
-    const defaultContactMethodOption = contactMethod;
+  const googleAuth = async () => {
+    await signOut(authentication);
 
-    const planToUseValues = [
-        "for an existing business",
-        "to start a new business",
-    ];
-    const defaultPlanToUseOption = planToUse;
-
-    const onSelectBudgetRange = (option) => {
-        setBudgetRange(option.value);
-        formik.setFieldValue("budget", option.value);
-    };
-    const onSelectContactMethod = (option) => {
-        setContactMethod(option.value);
-        formik.setFieldValue("contactMethod", option.value);
-    };
-    const onSelectPlanToUse = (option) => {
-        setPlanToUse(option.value);
-        formik.setFieldValue("planToUse", option.value);
-    };
-    const onChangeComment = (e) => {
-        setComment(e.target.value);
-        formik.setFieldValue("comment", e.target.value);
-    };
-
-    const validate = (values) => {
-        const errors = {};
-
-        if (!values.name) {
-            errors.name = "Required";
-        } else if (values.name.length < 2) {
-            errors.name = "The name must have at least 2 characters";
-        }
-
-        if (!values.phone) {
-            errors.phone = "Required";
-        }
-
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (
-            !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(
-                values.email
-            )
-        ) {
-            errors.email = "Invalid email address";
-        }
-
-        if (!values.contactMethod) errors.contactMethod = "Required";
-        if (!values.budget) errors.budget = "Required";
-
-        return errors;
-    };
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            email: "",
-            contactMethod: "",
-            planToUse: "",
-            budget: "",
-            comment: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            dispatch(setUserData(values.name));
-            const options = {
-                method: "POST",
-                url: `https://api.netronic.net/send-email`,
-                headers: {
-                    "content-type": "application/json",
-                },
-                data: {
-                    email: values.email,
-                    fromName: props.fromName,
-                    letterId: props.letterId,
-                },
-            };
-            axios
-                .request(options)
-                .then(console.log)
-                .then(
-                    postData(
-                        data,
-                        props.destinationURL,
-                        props.orderName,
-                        props.lang,
-                        window.location.href,
-                        queryParams || router.query
-                    )
-                        .then(() => {
-                            formik.resetForm();
-                            ReactGA.event("generate_lead", {
-                                category: "form",
-                                action: "submit",
-                            });
-                            ReactPixel.track("Lead");
-                            sendEventToConversionApi(
-                                window.location.href,
-                                "Lead"
-                            );
-                            turnOnScroll();
-                        })
-                        .catch(console.log)
-                )
-                .then(() => {
-                    modal.closeModal();
-                    router.push(props.thank_you_page);
-                })
-                .catch(console.log);
-        },
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(authentication, provider);
+    setLoggedSocials("Google");
+    reset({
+      email: user.email,
+      name: user.displayName,
     });
+  };
 
-    return (
-        <div className={style.inputs_block_out}>
-            <div className={style.close_block} onClick={props.closeClick}></div>
-            <div className={style.inputs_block}>
-                <div className={style.close}>
-                    <button onClick={props.closeClick}>{icons.cross}</button>
-                </div>
-                <div className={style.text_block}>
-                    <p className={style.title}>{props.title}</p>
-                    <p className={style.paragraph}>{props.subtitle}</p>
-                </div>
-                <div className={style.inputs_block__inputs}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className={style.inputs_block__input}>
-                            <div>
-                                <InputName
-                                    onChange={formik.handleChange}
-                                    value={formik.values.name}
-                                    error={formik.errors.name}
-                                    placeholder={props.namePlaceholder}
-                                />
-                                <InputEmail
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    error={formik.errors.email}
-                                    placeholder={props.emailPlaceholder}
-                                />
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.budget
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={budgetRangeValues}
-                                        onChange={onSelectBudgetRange}
-                                        value={defaultBudgetRangeOption}
-                                        placeholder={props.budgetPlaceholder}
-                                    />
-                                    {formik.errors.budget && (
-                                        <span className={style.error}>
-                                            {formik.errors.budget}
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                            <div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.contactMethod
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={contactMethodValues}
-                                        onChange={onSelectContactMethod}
-                                        value={defaultContactMethodOption}
-                                        placeholder={
-                                            props.contactMethodPlaceholder
-                                        }
-                                    />
-                                    {formik.errors.contactMethod && (
-                                        <span className={style.error}>
-                                            {formik.errors.contactMethod}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Dropdown
-                                        className={`Dropdown-black_form  ${
-                                            formik.errors.planToUse
-                                                ? "Dropdown-error"
-                                                : ""
-                                        }`}
-                                        options={planToUseValues}
-                                        onChange={onSelectPlanToUse}
-                                        value={defaultPlanToUseOption}
-                                        placeholder={props.planToUsePlaceholder}
-                                    />
-                                    {formik.errors.planToUse && (
-                                        <span className={style.error}>
-                                            {formik.errors.planToUse}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.input_block_out}>
-                                    <Input
-                                        onChange={onChangeComment}
-                                        type="text"
-                                        value={formik.values.comment}
-                                        placeholder={props.commentPlaceholder}
-                                        name="comment"
-                                    />
-                                </div>
-                                <div className={style.agreement}>
-                                    <div
-                                        className={
-                                            agreement === true
-                                                ? style.agreement_dot_button_active
-                                                : style.agreement_dot_button
-                                        }
-                                        onClick={onAgreementChange}
-                                    >
-                                        {icons.dot}
-                                    </div>
-                                    <p className={style.agreement__text}>
-                                        <span onClick={onAgreementChange}>
-                                            {props.agreement_text}
-                                        </span>{" "}
-                                        {props.agreement_link}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+  const clearAuth = async () => {
+    await signOut(authentication);
+    setLoggedSocials("");
+    reset({
+      email: "",
+      name: "",
+      contactMethod: "",
+    });
+  };
 
-                        <button
-                            type={agreement ? "submit" : "button"}
-                            className={`${
-                                agreement
-                                    ? Object.keys(formik.errors).length == 0
-                                        ? style.general_button_active
-                                        : style.general_button_inactive
-                                    : style.general_button_inactive
-                            } "button-submit"`}
-                            disabled={formik.isSubmitting}
-                        >
-                            {formik.isSubmitting
-                                ? props.submittingText
-                                : props.buttonText || "Get"}
-                        </button>
-                    </form>
-                </div>
-            </div>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    control,
+    reset,
+    setError,
+    getValues,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      agreement: true,
+    },
+  });
+
+  const handleServerErrors = (error) => {
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phoneNumber"].includes(key)) {
+        setError(key, {
+          type: "server",
+          message,
+        });
+      }
+    });
+  };
+
+  const onSubmit = async (values) => {
+    dispatch(setUserData(values.name));
+    const data = {
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      budget: values.budget.value,
+    };
+
+    const options = {
+      method: "POST",
+      url: `https://api.netronic.net/send-email`,
+      headers: {
+        "content-type": "application/json",
+      },
+      data: {
+        email: values.email,
+        fromName: props.fromName,
+        letterId: props.letterId,
+      },
+    };
+    try {
+      debouncedSubmit("attempt", window.location.hostname);
+
+      const sendEmailResponse = await axios.request(options);
+      const postToCRMResponse = await postData(
+        data,
+        props.destinationURL,
+        orderName,
+        window.location.href,
+        window.location.hostname,
+        queryParams || router.query
+      );
+
+      Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        reset();
+        ReactGA.event("generate_lead", {
+          category: "form",
+          action: "submit",
+        });
+        ReactPixel.track("Lead");
+        sendEventToConversionApi(window.location.href, "Lead");
+        modal.closeModal();
+        router.push(props.thank_you_page);
+      });
+    } catch (error) {
+      handleServerErrors(error.response.data);
+    }
+  };
+
+  const handleAgreementChange = (e) => {
+    setValue("agreement", !getValues("agreement"));
+    trigger("agreement");
+  };
+
+  const handleMenuOpen = () => setMenuIsOpen(true);
+  const handleMenuClose = () => setMenuIsOpen(false);
+
+  return (
+    <div className={style.inputs_block_out}>
+      <div className={style.close_block} onClick={props.closeClick}></div>
+      <div className={style.inputs_block}>
+        <div className={style.close}>
+          <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-    );
+        <div className={style.text_block}>
+          <p className={style.title}>{props.title}</p>
+          <p className={style.paragraph}>{props.subtitle}</p>
+        </div>
+        <div className={style.inputs_block__inputs}>
+          {isDesktop ? (
+            <div className={style.auth_block}>
+              <div className={style.buttons_row}>
+                {loggedViaSocials ? (
+                  <>
+                    <button className={style.clear_button} onClick={clearAuth}>
+                      Clear
+                    </button>
+                    <button
+                      className={style.change_button}
+                      onClick={
+                        loggedViaSocials === "Google"
+                          ? googleAuth
+                          : facebookAuth
+                      }
+                    >
+                      Change account
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={style.google_button}
+                      onClick={googleAuth}
+                    >
+                      <Image
+                        src={googleLogo}
+                        alt="google logo"
+                        height={15}
+                        width={15}
+                      />{" "}
+                      Authorization via Google
+                    </button>
+                  </>
+                )}
+              </div>
+              <div className={style.divider_block}>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+                <span
+                  className={`${style.divider_text} ${
+                    props.isModal ? "" : style.divider_text_white
+                  }`}
+                >
+                  or
+                </span>
+                <span
+                  className={`${style.divider} ${
+                    props.isModal ? "" : style.divider_white
+                  }`}
+                ></span>
+              </div>
+            </div>
+          ) : null}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.inputs_block__input}>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.name ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.name ? "true" : "false"}
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
+                  placeholder={
+                    props.namePlaceholder ? props.namePlaceholder : "Name*"
+                  }
+                />
+                <p className={style.error__message}>{errors.name?.message}</p>
+              </div>
+              <div className={style.input__label}>
+                <Controller
+                  name="phoneNumber"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <PhoneInput
+                      international
+                      inputStyle={{
+                        height: "55px",
+                        width: "100%",
+                        boxSizing: "border-box",
+                        borderRadius: "8px",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        borderColor: errors.phoneNumber
+                          ? "#d22e2e"
+                          : "transparent",
+                        color: "#fff",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                        lineHeight: "140px",
+                        outline: "0",
+                        backgroundColor: "#212121",
+                      }}
+                      buttonStyle={{
+                        borderColor: errors.phoneNumber ? "#d22e2e" : "#000",
+                        borderWidth: "1px",
+                        borderStyle: "solid",
+                        height: "55px",
+                      }}
+                      country="ua"
+                      enableSearch
+                      excludeCountries={["ru"]}
+                      value={value}
+                      onChange={onChange}
+                      error={
+                        value
+                          ? isValidPhoneNumber(`+${value}`)
+                            ? undefined
+                            : "Invalid phone number"
+                          : "Phone number is required"
+                      }
+                    />
+                  )}
+                />
+                {errors.phoneNumber && (
+                  <p className={style.error__message}>
+                    {errors.phoneNumber?.message}
+                  </p>
+                )}
+              </div>
+              <div className={style.input__label}>
+                <input
+                  className={style.input}
+                  style={{
+                    borderColor: errors.email ? "#d22e2e" : "#000",
+                  }}
+                  $error={errors.email ? "true" : "false"}
+                  {...register("email")}
+                  placeholder={
+                    props.emailPlaceholder ? props.emailPlaceholder : "Email*"
+                  }
+                />
+                <p className={style.error__message}>{errors.email?.message}</p>
+              </div>
+              <Controller
+                control={control}
+                name="budget"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    placeholder={props.budgetPlaceholder}
+                    options={selectOptions}
+                    isSearchable={false}
+                    components={{ DropdownIndicator }}
+                    onMenuOpen={handleMenuOpen}
+                    onMenuClose={handleMenuClose}
+                    menuIsOpen={menuIsOpen}
+                    styles={customStyles}
+                  />
+                )}
+              />
+              {errors.budget && (
+                <p className={style.error__message}>
+                  {errors.budget.value.message}
+                </p>
+              )}
+              <div>
+                <div className={style.agreement}>
+                  <div className={style.input__label}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        className={
+                          getValues("agreement") === true
+                            ? style.agreement_dot_button_active
+                            : style.agreement_dot_button
+                        }
+                        onClick={handleAgreementChange}
+                        {...register("agreement")}
+                      >
+                        {icons.dot}
+                      </div>
+                      <p
+                        className={style.agreement__text}
+                        onClick={() => modal.closeModal()}
+                      >
+                        <span onClick={handleAgreementChange}>
+                          {props.agreement_text}
+                        </span>{" "}
+                        {props.agreement_link}
+                      </p>
+                    </div>
+                    {errors.agreement && (
+                      <p className={style.error__message}>
+                        {errors.agreement.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className={`${
+                !isValid || isSubmitting
+                  ? style.general_button_inactive
+                  : style.general_button_active
+              } button-submit`}
+              disabled={!isValid || isSubmitting}
+            >
+              {isSubmitting
+                ? props.submittingText
+                : props.buttonText || "Get catalog"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const Input = (props) => {
-    return (
-        <label className={style.input__label}>
-            <input
-                name={props.name}
-                className={`${style.input} ${
-                    props.error ? style.input__error : ""
-                }`}
-                type={props.type}
-                onChange={props.onChange}
-                value={props.value}
-                placeholder={props.placeholder}
-            />
-            {props.error ? (
-                <span className={style.error__message}>{props.error}</span>
-            ) : null}
-        </label>
-    );
+  return (
+    <label className={style.input__label}>
+      <input
+        name={props.name}
+        className={`${style.input} ${props.error ? style.input__error : ""}`}
+        type={props.type}
+        onChange={props.onChange}
+        value={props.value}
+        placeholder={props.placeholder}
+      />
+      {props.error ? (
+        <span className={style.error__message}>{props.error}</span>
+      ) : null}
+    </label>
+  );
 };

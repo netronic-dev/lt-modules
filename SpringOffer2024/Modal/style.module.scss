@@ -1,97 +1,99 @@
 .background_blur {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.3);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+
+  .modal {
+    padding: 72px 108px 73px 108px;
+    transform: scale(0);
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px 0px #0090ff;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    @media (min-width: 800px) and (max-height: 670px) {
+      height: 100%;
+      overflow-y: scroll;
+    }
+
+    @media (max-width: 800px) {
+      height: 100%;
+      overflow-y: scroll;
+    }
+
+    @media screen and (max-width: 650px) {
+      padding: 40px 20px 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+    }
+  }
+
+  .button_block {
+    position: absolute;
+    top: 33px;
+    right: 33px;
+    width: 27px;
+    height: 27px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 101;
+    overflow: hidden;
+    border-radius: 100px;
 
-    .modal {
-        padding: 72px 108px 73px 108px;
-        transform: scale(0);
-        background-color: #fff;
-        border-radius: 25px;
-        box-shadow: 0px 0px 20px 0px #0090ff;
+    .close__button {
+      position: relative;
+      cursor: pointer;
+      background-color: #000;
+      border: none;
+      outline: 0;
+      width: 27px;
+      height: 27px;
+      max-width: 27px;
+      border-radius: 200px;
+      color: #fff;
+      font-size: 24px;
+      transition: color 0.4s ease;
+      text-align: center;
 
-        @media (min-width: 800px) and (max-height: 670px) {
-            height: 100%;
-            overflow-y: scroll;
-        }
-
-        @media (max-width: 800px) {
-            height: 100%;
-            overflow-y: scroll;
-        }
-
-        @media screen and (max-width: 650px) {
-            padding: 40px 20px 0 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-        }
-    }
-
-    .button_block {
+      &:hover {
+        transition: color 0.4s ease;
+        color: #b7b7b7;
+      }
+      svg {
         position: absolute;
-        top: 33px;
-        right: 33px;
-        width: 27px;
-        height: 27px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 100px;
-
-        .close__button {
-            position: relative;
-            cursor: pointer;
-            background-color: #000;
-            border: none;
-            outline: 0;
-            width: 27px;
-            height: 27px;
-            max-width: 27px;
-            border-radius: 200px;
-            color: #fff;
-            font-size: 24px;
-            transition: color 0.4s ease;
-            text-align: center;
-
-            &:hover {
-                transition: color 0.4s ease;
-                color: #b7b7b7;
-            }
-            svg {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
+  }
 }
 
 .animation_scale {
-    animation: animation_scale 1s ease 0.1s forwards;
+  animation: animation_scale 1s ease 0.1s forwards;
 }
 
 @keyframes animation_scale {
-    from {
-        transform: scale(0);
-    }
+  from {
+    transform: scale(0);
+  }
 
-    to {
-        transform: scale(1);
-    }
+  to {
+    transform: scale(1);
+  }
 }
 
 .closed__modal {
-    display: none;
+  display: none;
 }
