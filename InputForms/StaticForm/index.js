@@ -302,7 +302,9 @@ export function ThemeForm(props) {
         ReactPixel.track("Lead");
         sendEventToConversionApi(window.location.href, "Lead");
         modal.closeModal();
-        router.push(props.thank_you_page);
+        router.push(
+          props.thank_you_page ? props.thank_you_page : "/thanks-call"
+        );
       });
     } catch (error) {
       handleServerErrors(error.response.data);
