@@ -32,7 +32,7 @@ const ChangeLanguage = () => {
   const changeLanguage = (selectedOption) => {
     setSelectedLanguage(selectedOption);
     router.push(
-      `/New_LASERTAG_OPERATOR_App-&_TV-OUT_${
+      `/Realese_New_LASERTAG_OPERATOR_App-&_TV-OUT_${
         selectedOption.label === "FR"
           ? "FR"
           : selectedOption.label === "ES"

@@ -31,7 +31,7 @@ const Banner = (props) => {
           <p className={style.text}>{props.text}</p>
           <button
             onClick={() => {
-              router.push("/New_LASERTAG_OPERATOR_App-&_TV-OUT_EN");
+              router.push("/Realese_New_LASERTAG_OPERATOR_App-&_TV-OUT_EN");
             }}
             className={style.buttonLTOText}
           >

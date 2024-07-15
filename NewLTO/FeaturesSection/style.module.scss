@@ -3,7 +3,9 @@ $white: #ffffff;
 
 .featuresContainer__title,
 .featuresContainer__list__item,
-.featuresContainer__activeList__item {
+.featuresContainer__activeList__item,
+.featuresContainer__googlePlayBtnBox,
+.featuresContainer__googlePlayBtnBoxSecond {
   opacity: 0;
   transform: translateY(100px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -11,7 +13,9 @@ $white: #ffffff;
 
 .featuresContainer__title.appear,
 .featuresContainer__list__item.appear,
-.featuresContainer__activeList__item.appear {
+.featuresContainer__activeList__item.appear,
+.featuresContainer__googlePlayBtnBox.appear,
+.featuresContainer__googlePlayBtnBoxSecond.appear {
   opacity: 1;
   transform: translateY(0);
 }
@@ -61,13 +65,13 @@ $white: #ffffff;
   position: absolute;
   top: 23%;
   right: -175%;
-  width: 232%;
+  width: 245%;
   height: 43%;
 
   @media (min-width: 744px) {
     top: 12%;
     right: -106%;
-    width: 145%;
+    width: 169%;
     height: 71%;
   }
 
@@ -292,4 +296,68 @@ $white: #ffffff;
     rgba(0, 144, 255, 0) 101.23%
   );
   box-shadow: 0px 0px 20px 0px rgba(0, 144, 255, 0.5);
+}
+
+.featuresContainer__googlePlayBtnBox {
+  display: none;
+  flex-direction: column;
+  gap: 23px;
+
+  @media (max-width: 743px) {
+    align-items: center;
+    margin-top: 90px;
+  }
+
+  @media (min-width: 1024px) {
+    display: flex;
+    margin-left: auto;
+    margin-bottom: 31px;
+  }
+}
+
+.featuresContainer__googlePlayBtnBoxSecond {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  margin-top: 40px;
+  margin-bottom: 49px;
+  align-items: center;
+
+  @media (min-width: 380px) and (max-width: 743px) {
+    align-items: center;
+    margin-top: 90px;
+    margin-bottom: 110px;
+  }
+
+  @media (max-width: 743px) {
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.featuresContainer__googlePlayBtnBox__text {
+  max-width: 250px;
+  color: #fff;
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.36px;
+
+  @media (max-width: 743px) {
+    text-align: center;
+  }
+}
+
+.googlePlayBtn {
+  width: 228px;
+  height: 67px;
+  display: block;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
