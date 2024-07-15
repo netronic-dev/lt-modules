@@ -112,7 +112,7 @@ const FeaturesSection = ({
             </p>
 
             <a
-              href="https://play.google.com/apps/testing/com.lasertag.tvout"
+              href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
               target="_blank"
               rel="noopener noreferrer"
               className={style.googlePlayBtn}
@@ -155,7 +155,7 @@ const FeaturesSection = ({
               {googlePlayBtnText}
             </p>
             <a
-              href="https://play.google.com/apps/testing/com.lasertag.tvout"
+              href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
               target="_blank"
               rel="noopener noreferrer"
               className={style.googlePlayBtn}
