@@ -31,7 +31,6 @@ const HeroSection = ({ title, titleSpan, subtitle, text, textSpan }) => {
             alt="Hero-bg"
           />
         </div>
-
         <a
           className={style.hero__imageBox}
           href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
