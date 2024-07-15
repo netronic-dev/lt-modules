@@ -18,9 +18,7 @@ const HeroSection = ({ title, titleSpan, subtitle, text, textSpan }) => {
   );
 
   return (
-    <section
-      className={style.hero}
-    >
+    <section className={style.hero}>
       <div className={style.hero__insideBox}>
         <div className={style.hero__changeLanguageBox}>
           <ChangeLanguage />
@@ -34,9 +32,14 @@ const HeroSection = ({ title, titleSpan, subtitle, text, textSpan }) => {
           />
         </div>
 
-        <div className={style.hero__imageBox}>
+        <a
+          className={style.hero__imageBox}
+          href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src={heroLogo} alt="Hero-logo" width={113} height={113} />
-        </div>
+        </a>
         <h1 ref={titleRef} className={style.hero__title}>
           {title} <br />{" "}
           <span className={style.hero__title__span}>{titleSpan}</span>

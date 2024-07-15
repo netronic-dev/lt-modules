@@ -122,9 +122,14 @@ $white: #ffffff;
 
 .hero__image {
   filter: drop-shadow(0px 0px 20px #0090ff);
+  transition: transform 0.3s ease;
 
   @media (max-width: 743px) {
     margin-right: 45px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

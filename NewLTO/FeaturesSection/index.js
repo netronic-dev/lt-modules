@@ -67,9 +67,14 @@ const FeaturesSection = ({
       <div className={style.featuresContainer__listsBox}>
         <div>
           <div ref={textBoxRef} className={style.featuresContainer__topBox}>
-            <div className={style.hero__image}>
+            <a
+              className={style.hero__image}
+              href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image src={heroLogo} alt="Hero-logo" width={113} height={113} />
-            </div>
+            </a>
             <div className={style.featuresContainer__topBox__insideBox}>
               <h3 className={style.featuresContainer__topBox__insideBox__title}>
                 {subtitle}

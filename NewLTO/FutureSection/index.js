@@ -30,22 +30,32 @@ const FutureSection = ({ title, titleSpan, text }) => {
         {text}
       </p>
       <div ref={boxLogos} className={style.futureContainer__iconsBox}>
-        <div className={style.futureContainer__iconsBox__iconRight}>
+        <a
+          className={style.futureContainer__iconsBox__iconRight}
+          href="https://play.google.com/store/apps/details?id=net.lasertag.operator"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src={heroLogo}
             alt="hero-logo-icon"
             layout="fill"
             objectFit="contain"
           />
-        </div>
-        <div className={style.futureContainer__iconsBox__iconLeft}>
+        </a>
+        <a
+          className={style.futureContainer__iconsBox__iconLeft}
+          href="https://play.google.com/apps/testing/com.lasertag.tvout"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src={tvOutLogo}
             alt="Tv-out-icon"
             layout="fill"
             objectFit="contain"
           />
-        </div>
+        </a>
       </div>
       <div ref={boxImages} className={style.futureContainer__imagesBox}>
         <div className={style.futureContainer__imagesBox__imageRight}>

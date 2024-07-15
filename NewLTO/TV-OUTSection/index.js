@@ -50,9 +50,14 @@ const TV_OUTSection = ({ subtitle, subtext, googlePlayBtnText, longList }) => {
       </div>
       <div className={style.TV_OUTContainer__insideBox}>
         <div ref={logoBoxRef} className={style.TV_OUTContainer__topBox}>
-          <div className={style.hero__image}>
+          <a
+            className={style.hero__image}
+            href="https://play.google.com/apps/testing/com.lasertag.tvout"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={tvOutLogo} alt="Tv-out-logo" width={201} height={113} />
-          </div>
+          </a>
           <div className={style.TV_OUTContainer__topBox__insideBox}>
             <h3 className={style.TV_OUTContainer__topBox__insideBox__title}>
               {subtitle}

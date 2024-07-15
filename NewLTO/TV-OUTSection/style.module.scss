@@ -113,9 +113,14 @@ $white: #ffffff;
 .hero__image {
   border-radius: 7px;
   box-shadow: 0px 0px 20px 0px $blue;
+  transition: transform 0.3s ease;
 
   @media (max-width: 743px) {
     margin: 0 auto;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
