@@ -357,7 +357,7 @@ export function PopUpNamePhone(props) {
                       borderStyle: "solid",
                       height: "55px",
                     }}
-                    country="ua"
+                    country={regionCode}
                     enableSearch
                     excludeCountries={["ru"]}
                     value={value}
@@ -981,7 +981,7 @@ export function PopUpEmailPhone(props) {
                         borderStyle: "solid",
                         height: "55px",
                       }}
-                      country="ua"
+                      country={regionCode}
                       enableSearch
                       excludeCountries={["ru"]}
                       value={value}
@@ -1342,7 +1342,7 @@ export function PopUpEvent(props) {
                         borderStyle: "solid",
                         height: "55px",
                       }}
-                      country="ua"
+                      country={regionCode}
                       enableSearch
                       excludeCountries={["ru"]}
                       value={value}
@@ -1455,6 +1455,7 @@ export function PopUpNameEmail(props) {
   const [isDesktop, setIsDesktop] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [loggedViaSocials, setLoggedSocials] = useState("");
+  const [regionCode, setRegionCode] = useState();
 
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 1200);
@@ -1514,6 +1515,12 @@ export function PopUpNameEmail(props) {
       }
     });
   };
+
+  useEffect(() => {
+    modal?.region
+      ? setRegionCode(modal?.region.toLowerCase())
+      : setRegionCode("us");
+  }, [modal.region]);
 
   const onSubmit = async (values) => {
     dispatch(setUserData(values.name));
@@ -1690,7 +1697,7 @@ export function PopUpNameEmail(props) {
                         borderStyle: "solid",
                         height: "55px",
                       }}
-                      country="ua"
+                      country={regionCode}
                       enableSearch
                       excludeCountries={["ru"]}
                       value={value}

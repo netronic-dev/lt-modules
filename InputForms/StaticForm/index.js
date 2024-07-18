@@ -447,7 +447,7 @@ export function ThemeForm(props) {
                     borderStyle: "solid",
                     height: "55px",
                   }}
-                  country="ua"
+                  country={regionCode}
                   enableSearch
                   excludeCountries={["ru"]}
                   value={value}
@@ -800,7 +800,7 @@ export function ThemeFormAll(props) {
                     borderStyle: "solid",
                     height: "52px",
                   }}
-                  country="ua"
+                  country={regionCode}
                   enableSearch
                   excludeCountries={["ru"]}
                   value={value}
