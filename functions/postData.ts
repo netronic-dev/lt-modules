@@ -12,6 +12,8 @@ const getCookieByKey = (key: string) => {
   }
 };
 
+export const fbpCookie = getCookieByKey("_fbp");
+
 export async function postData(
   values: any,
   url: string,
