@@ -4,7 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Select, { components } from "react-select";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { debounce } from "lodash";
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signOut,
+  linkWithCredential,
+} from "firebase/auth";
 import Image from "next/image";
 
 import { useRouter } from "next/router";
@@ -26,9 +32,9 @@ import { searchParams } from "../../../store/searchParamsSlice";
 import { postData } from "../../functions/postData";
 import style from "../forms.module.scss";
 import { icons } from "../icons/icons";
-import { InputEmail, InputName } from "../Inputs/Inputs";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 import { selectOptions } from "../../../constants/globalConstants";
+import { Icon } from "../../../components/Icon";
 
 function turnOnScroll() {
   document.body.className = "";
@@ -183,6 +189,42 @@ export function PopUpNamePhone(props) {
     });
   };
 
+  const facebookAuth = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const { user } = await signInWithPopup(authentication, provider);
+
+      setLoggedSocials("Facebook");
+      reset({
+        email: user.email
+          ? user.email
+          : user.reloadUserInfo.providerUserInfo[0].email,
+        name: user.displayName,
+      });
+    } catch (error) {
+      if (error.code === "auth/popup-blocked") {
+        alert("Please allow pop-ups for this site.");
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        const pendingCred = FacebookAuthProvider.credentialFromError(error);
+        const googleProvider = new GoogleAuthProvider();
+        const googleUser = await signInWithPopup(
+          authentication,
+          googleProvider
+        );
+        const user = await linkWithCredential(googleUser.user, pendingCred);
+        reset({
+          email: user._tokenResponse.email,
+          name: user._tokenResponse.displayName,
+        });
+        setLoggedSocials("Facebook");
+      } else {
+        alert("Try again, please!");
+      }
+    }
+  };
+
   const clearAuth = async () => {
     await signOut(authentication);
     setLoggedSocials("");
@@ -275,6 +317,18 @@ export function PopUpNamePhone(props) {
                       width={15}
                     />{" "}
                     Authorization via Google
+                  </button>
+                  <button
+                    className={style.facebook_button}
+                    onClick={facebookAuth}
+                  >
+                    <Icon
+                      name="icon-facebook_logo"
+                      className={style.facebook_icon}
+                      width={15}
+                      height={15}
+                    />{" "}
+                    Authorization via Meta (Facebook)
                   </button>
                 </>
               )}
@@ -496,6 +550,42 @@ export function PopUpEmail(props) {
     });
   };
 
+  const facebookAuth = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const { user } = await signInWithPopup(authentication, provider);
+
+      setLoggedSocials("Facebook");
+      reset({
+        email: user.email
+          ? user.email
+          : user.reloadUserInfo.providerUserInfo[0].email,
+        name: user.displayName,
+      });
+    } catch (error) {
+      if (error.code === "auth/popup-blocked") {
+        alert("Please allow pop-ups for this site.");
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        const pendingCred = FacebookAuthProvider.credentialFromError(error);
+        const googleProvider = new GoogleAuthProvider();
+        const googleUser = await signInWithPopup(
+          authentication,
+          googleProvider
+        );
+        const user = await linkWithCredential(googleUser.user, pendingCred);
+        reset({
+          email: user._tokenResponse.email,
+          name: user._tokenResponse.displayName,
+        });
+        setLoggedSocials("Facebook");
+      } else {
+        alert("Try again, please!");
+      }
+    }
+  };
+
   const clearAuth = async () => {
     await signOut(authentication);
     setLoggedSocials("");
@@ -634,6 +724,18 @@ export function PopUpEmail(props) {
                         width={15}
                       />{" "}
                       Authorization via Google
+                    </button>
+                    <button
+                      className={style.facebook_button}
+                      onClick={facebookAuth}
+                    >
+                      <Icon
+                        name="icon-facebook_logo"
+                        className={style.facebook_icon}
+                        width={15}
+                        height={15}
+                      />{" "}
+                      Authorization via Meta (Facebook)
                     </button>
                   </>
                 )}
@@ -800,6 +902,42 @@ export function PopUpEmailPhone(props) {
     });
   };
 
+  const facebookAuth = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const { user } = await signInWithPopup(authentication, provider);
+
+      setLoggedSocials("Facebook");
+      reset({
+        email: user.email
+          ? user.email
+          : user.reloadUserInfo.providerUserInfo[0].email,
+        name: user.displayName,
+      });
+    } catch (error) {
+      if (error.code === "auth/popup-blocked") {
+        alert("Please allow pop-ups for this site.");
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        const pendingCred = FacebookAuthProvider.credentialFromError(error);
+        const googleProvider = new GoogleAuthProvider();
+        const googleUser = await signInWithPopup(
+          authentication,
+          googleProvider
+        );
+        const user = await linkWithCredential(googleUser.user, pendingCred);
+        reset({
+          email: user._tokenResponse.email,
+          name: user._tokenResponse.displayName,
+        });
+        setLoggedSocials("Facebook");
+      } else {
+        alert("Try again, please!");
+      }
+    }
+  };
+
   const clearAuth = async () => {
     await signOut(authentication);
     setLoggedSocials("");
@@ -897,6 +1035,18 @@ export function PopUpEmailPhone(props) {
                       width={15}
                     />{" "}
                     Authorization via Google
+                  </button>
+                  <button
+                    className={style.facebook_button}
+                    onClick={facebookAuth}
+                  >
+                    <Icon
+                      name="icon-facebook_logo"
+                      className={style.facebook_icon}
+                      width={15}
+                      height={15}
+                    />{" "}
+                    Authorization via Meta (Facebook)
                   </button>
                 </>
               )}
@@ -1122,6 +1272,42 @@ export function PopUpEvent(props) {
     });
   };
 
+  const facebookAuth = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const { user } = await signInWithPopup(authentication, provider);
+
+      setLoggedSocials("Facebook");
+      reset({
+        email: user.email
+          ? user.email
+          : user.reloadUserInfo.providerUserInfo[0].email,
+        name: user.displayName,
+      });
+    } catch (error) {
+      if (error.code === "auth/popup-blocked") {
+        alert("Please allow pop-ups for this site.");
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        const pendingCred = FacebookAuthProvider.credentialFromError(error);
+        const googleProvider = new GoogleAuthProvider();
+        const googleUser = await signInWithPopup(
+          authentication,
+          googleProvider
+        );
+        const user = await linkWithCredential(googleUser.user, pendingCred);
+        reset({
+          email: user._tokenResponse.email,
+          name: user._tokenResponse.displayName,
+        });
+        setLoggedSocials("Facebook");
+      } else {
+        alert("Try again, please!");
+      }
+    }
+  };
+
   const clearAuth = async () => {
     await signOut(authentication);
     setLoggedSocials("");
@@ -1267,6 +1453,18 @@ export function PopUpEvent(props) {
                         width={15}
                       />{" "}
                       Authorization via Google
+                    </button>
+                    <button
+                      className={style.facebook_button}
+                      onClick={facebookAuth}
+                    >
+                      <Icon
+                        name="icon-facebook_logo"
+                        className={style.facebook_icon}
+                        width={15}
+                        height={15}
+                      />{" "}
+                      Authorization via Meta (Facebook)
                     </button>
                   </>
                 )}
@@ -1477,6 +1675,42 @@ export function PopUpNameEmail(props) {
     });
   };
 
+  const facebookAuth = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const { user } = await signInWithPopup(authentication, provider);
+
+      setLoggedSocials("Facebook");
+      reset({
+        email: user.email
+          ? user.email
+          : user.reloadUserInfo.providerUserInfo[0].email,
+        name: user.displayName,
+      });
+    } catch (error) {
+      if (error.code === "auth/popup-blocked") {
+        alert("Please allow pop-ups for this site.");
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        const pendingCred = FacebookAuthProvider.credentialFromError(error);
+        const googleProvider = new GoogleAuthProvider();
+        const googleUser = await signInWithPopup(
+          authentication,
+          googleProvider
+        );
+        const user = await linkWithCredential(googleUser.user, pendingCred);
+        reset({
+          email: user._tokenResponse.email,
+          name: user._tokenResponse.displayName,
+        });
+        setLoggedSocials("Facebook");
+      } else {
+        alert("Try again, please!");
+      }
+    }
+  };
+
   const clearAuth = async () => {
     await signOut(authentication);
     setLoggedSocials("");
@@ -1623,6 +1857,18 @@ export function PopUpNameEmail(props) {
                         width={15}
                       />{" "}
                       Authorization via Google
+                    </button>
+                    <button
+                      className={style.facebook_button}
+                      onClick={facebookAuth}
+                    >
+                      <Icon
+                        name="icon-facebook_logo"
+                        className={style.facebook_icon}
+                        width={15}
+                        height={15}
+                      />{" "}
+                      Authorization via Meta (Facebook)
                     </button>
                   </>
                 )}

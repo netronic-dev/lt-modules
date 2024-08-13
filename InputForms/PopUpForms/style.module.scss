@@ -1,0 +1,52 @@
+     .facebook_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 8px;
+        background: #395498;
+        border: 1px solid #395498;
+        cursor: pointer;
+        width: 418px;
+        padding: 16.5px 0;
+        border-radius: 8px;
+        color: #fff;
+        font-family: Manrope;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 23px;
+        transition: all 0.4s ease;
+
+        @media (max-width: 500px) {
+          width: 100%;
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            transition: all 0.4s ease;
+            background: #fff;
+            color: #395498;
+
+            .facebook_icon {
+              color: #395498;
+            }
+          }
+        }
+
+        @media (hover: none) {
+          &:active {
+            transition: all 0.4s ease;
+            background: #fff;
+            color: #395498;
+
+            .facebook_icon {
+              color: #395498;
+            }
+          }
+        }
+      }
+
+      .facebook_icon {
+        color: #fff;
+      }

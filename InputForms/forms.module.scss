@@ -407,7 +407,7 @@
   align-items: flex-start;
 
   .inputs {
-    width: 285px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1230,16 +1230,20 @@
       background: #395498;
       border: 1px solid #395498;
       cursor: pointer;
-      width: 418px;
+      width: 300px;
       padding: 16.5px 0;
       border-radius: 8px;
       color: #fff;
       font-family: Manrope;
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 800;
       line-height: 23px;
       transition: all 0.4s ease;
+
+      .facebook_icon {
+        color: #fff;
+      }
 
       @media (max-width: 500px) {
         width: 100%;
@@ -1250,6 +1254,10 @@
           transition: all 0.4s ease;
           background: #fff;
           color: #395498;
+
+          .facebook_icon {
+            color: #395498;
+          }
         }
       }
 
@@ -1258,6 +1266,10 @@
           transition: all 0.4s ease;
           background: #fff;
           color: #395498;
+
+          .facebook_icon {
+            color: #395498;
+          }
         }
       }
     }
@@ -1270,13 +1282,13 @@
       cursor: pointer;
       border-radius: 8px;
       background: #e0e0e0;
-      width: 418px;
+      width: 300px;
       padding: 16.5px 0;
       border: 1px solid #fff;
 
       color: #000;
       font-family: Manrope;
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 800;
       line-height: 23px;
