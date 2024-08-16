@@ -1,4 +1,5 @@
 import Image from "next/image";
+import classNames from "classnames";
 import style from "./style.module.scss";
 import Link from "next/link";
 import mainImgOne from "../../../../public/blog/iaapa-expo-europe-2024/mainImgOne.webp";
@@ -70,6 +71,7 @@ export default function IAAPAMain(props) {
           place={props.place}
           standName={props.standName}
           stand={props.stand}
+          event_info_img={props.event_info_img}
         />
 
         {props.text ? <div className={style.text}>{props.text}</div> : null}
@@ -146,7 +148,9 @@ function EventInfo(props) {
           </p>
         </div>
       ) : null}
-      <div className={style.event_info_cell}>
+      <div
+        className={classNames(style.event_info_cell, style.event_info_cell_two)}
+      >
         <div className={style.event_info__top}>
           <div className={style.event_info__place_icon_outer}>
             {props.iconsBlue ? placeIconBlue : placeIcon}
@@ -171,6 +175,46 @@ function EventInfo(props) {
           {props.place}
         </p>
       </div>
+      <div
+        className={classNames(
+          style.event_info_cell,
+          style.event_info_cell_three
+        )}
+      >
+        <div className={style.event_info__top}>
+          <div className={style.event_info__place_icon_outer}>
+            {props.iconsBlue ? standIconBlue : standIcon}
+          </div>
+          <h3
+            className={
+              props.iconsBlue
+                ? style.event_info__title_blue
+                : style.event_info__title
+            }
+          >
+            {props.standName}
+          </h3>
+        </div>
+        <p
+          className={
+            props.textWhite
+              ? style.event_info__text_white
+              : style.event_info__text_bold
+          }
+        >
+          {props.stand}
+        </p>
+      </div>
+      {props.event_info_img && (
+        <div className={style.event_info_img}>
+          <Image
+            src={props.event_info_img}
+            layout="fill"
+            objectFit="cover"
+            alt="event_info_img"
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -216,6 +260,36 @@ const placeIconBlue = (
         />
       </clipPath>
     </defs>
+  </svg>
+);
+
+const standIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d="M9.5 14H11V11H15.5L14 9L15.5 7H9.5V14ZM5 21V5C5 4.45 5.19583 3.97917 5.5875 3.5875C5.97917 3.19583 6.45 3 7 3H17C17.55 3 18.0208 3.19583 18.4125 3.5875C18.8042 3.97917 19 4.45 19 5V21L12 18L5 21ZM7 17.95L12 15.8L17 17.95V5H7V17.95Z"
+      fill="#8E8E8E"
+    />
+  </svg>
+);
+
+const standIconBlue = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d="M9.5 14H11V11H15.5L14 9L15.5 7H9.5V14ZM5 21V5C5 4.45 5.19583 3.97917 5.5875 3.5875C5.97917 3.19583 6.45 3 7 3H17C17.55 3 18.0208 3.19583 18.4125 3.5875C18.8042 3.97917 19 4.45 19 5V21L12 18L5 21ZM7 17.95L12 15.8L17 17.95V5H7V17.95Z"
+      fill="#0090FF"
+    />
   </svg>
 );
 

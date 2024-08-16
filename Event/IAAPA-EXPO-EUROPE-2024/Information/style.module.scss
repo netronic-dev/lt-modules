@@ -1,0 +1,264 @@
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 60px;
+  width: 1170px;
+  margin: 0 auto;
+
+  .title {
+    color: #000;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+
+    @media (min-width: 744px) {
+      margin-bottom: 45px;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 45px;
+      margin-bottom: 47px;
+    }
+  }
+
+  .titleSpan {
+    color: #0090ff;
+  }
+
+  .infoDecorationLineTablet {
+    position: absolute;
+    width: 718px;
+    height: 613px;
+    top: 181px;
+    left: 5px;
+    z-index: 1;
+  }
+
+  .infoDecorationLineDesktop {
+    position: absolute;
+    width: 969px;
+    height: 200px;
+    top: 217px;
+    left: 11px;
+    z-index: 1;
+  }
+
+  .light_blue_figure_left {
+    position: absolute;
+    width: 642px;
+    height: 718px;
+    top: -79px;
+    left: -720px;
+  }
+
+  .light_blue_figure_right {
+    position: absolute;
+    width: 642px;
+    height: 718px;
+    top: -79px;
+    right: -567px;
+  }
+
+  .event_info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2;
+
+    @media (min-width: 744px) {
+      gap: 18px;
+      padding-left: 45px;
+      padding-right: 30px;
+      margin-bottom: 50px;
+    }
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .info_row {
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+      gap: 4px;
+      padding: 26px 42px 38px 31px;
+
+      @media (min-width: 744px) {
+        padding: 26px 23px 45px 31px;
+
+        &:nth-child(odd) {
+          @media (max-width: 1023px) {
+            margin-right: auto;
+          }
+        }
+
+        &:nth-child(even) {
+          @media (max-width: 1023px) {
+            margin-left: auto;
+          }
+        }
+
+        &:nth-child(1) {
+          width: 396px;
+        }
+
+        &:nth-child(2) {
+          width: 473px;
+        }
+
+        &:nth-child(3) {
+          width: 474px;
+        }
+
+        &:nth-child(4) {
+          width: 445px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        &:nth-child(3) {
+          margin-left: 15px;
+        }
+      }
+
+      @media (min-width: 1927px) {
+        &:nth-child(4) {
+          width: 474px;
+        }
+
+        &:nth-child(1) {
+          margin-left: -71px;
+        }
+
+        &:nth-child(3) {
+          margin-left: 95px;
+        }
+      }
+
+      .icon_cell {
+        display: flex;
+        gap: 7px;
+
+        .icon_text {
+          color: #8e8e8e;
+          text-align: center;
+          font-family: Manrope;
+          font-size: 16.593px;
+          font-weight: 700;
+          line-height: normal;
+          text-transform: uppercase;
+        }
+      }
+
+      .icon_block {
+        position: relative;
+        width: 24px;
+        height: 24px;
+      }
+
+      .cell_title {
+        color: #000;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 33.185px;
+
+        @media (min-width: 744px) {
+          font-size: 24px;
+        }
+      }
+
+      .cell_text {
+        color: #0090ff;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      .cell_text_large {
+        color: #0090ff;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 33.185px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .main {
+    padding: 0 20px 10px 20px;
+    width: 100%;
+
+    .even_block {
+      gap: 70px 154px;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .main {
+    .even_block {
+      gap: 70px;
+    }
+  }
+}
+
+@media (max-width: 735px) {
+  .main {
+    padding: 50px 15px 50px 15px;
+
+    .title {
+      font-size: 35px;
+    }
+
+    .even_block {
+      gap: 30px;
+      margin-top: 30px;
+      grid-template-columns: 1fr;
+
+      .image_block {
+        position: relative;
+        height: 90px;
+      }
+
+      .event_info {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .info_row {
+          flex: 1 1 30%;
+          max-width: 400px;
+
+          .icon_cell {
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          }
+
+          .empty_icon_cell {
+            display: none;
+          }
+
+          .cell_text {
+            font-size: 12px;
+            margin-left: 0;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

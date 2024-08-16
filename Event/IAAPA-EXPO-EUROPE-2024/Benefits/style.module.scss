@@ -1,0 +1,224 @@
+.benefits {
+  padding: 120px 0 40px 0;
+  background: linear-gradient(180deg, #f0f0f0 0%, #fff 100%);
+
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+
+    .subtitle {
+      width: calc(100% - 30px);
+      color: #000;
+      text-align: center;
+      font-family: Manrope;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+      margin: 0 auto;
+
+      @media (min-width: 744px) {
+        max-width: 702px;
+        font-size: 40px;
+      }
+
+      @media (min-width: 1024px) {
+        max-width: 877px;
+        font-size: 45px;
+      }
+
+      span {
+        font-weight: 800;
+      }
+    }
+
+    .text {
+      color: #000;
+      font-family: Manrope;
+      font-size: 16px;
+      text-align: center;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: -16px;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      @media (min-width: 744px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      @media (min-width: 1927px) {
+        font-size: 19px;
+      }
+    }
+
+    .benefits_list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (max-width: 743px) {
+        margin-bottom: 40px;
+      }
+
+      @media (min-width: 744px) {
+        flex-direction: row;
+      }
+    }
+
+    .benefits_item {
+      position: relative;
+      width: 377px;
+      height: 315px;
+      display: flex;
+      justify-content: center;
+
+      @media (min-width: 1024px) {
+        width: 505px;
+        height: 423px;
+      }
+
+      @media (min-width: 1927px) {
+        width: 624px;
+        height: 522px;
+      }
+    }
+
+    .benefits_title {
+      color: #000;
+      text-align: center;
+      font-family: Manrope;
+      font-size: 23px;
+      font-weight: 700;
+      line-height: normal;
+      z-index: 2;
+      margin: 0 auto;
+      margin-top: 196px;
+
+      @media (min-width: 1024px) {
+        font-size: 28px;
+        margin-top: 263px;
+      }
+
+      @media (min-width: 1927px) {
+        font-size: 35px;
+        margin-top: 321px;
+      }
+    }
+
+    .benefits_grid {
+      display: flex;
+      flex-direction: column;
+      gap: 74px;
+
+      .grid_cell {
+        margin: 0 auto;
+        max-width: 305px;
+
+        @media (min-width: 744px) {
+          max-width: 200px;
+        }
+
+        @media (min-width: 1024px) {
+          max-width: 299px;
+        }
+
+        @media (min-width: 1927px) {
+          max-width: 336px;
+        }
+      }
+
+      .upper_row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        gap: 28px;
+
+        @media (min-width: 744px) {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: baseline;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        @media (min-width: 1927px) {
+          gap: 61px;
+        }
+
+        @media (max-width: 1024px) {
+          gap: 43px;
+        }
+
+        @media (max-width: 550px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .bottom_row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+
+        @media (max-width: 550px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .icon_image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+      }
+
+      .sizeImage_1 {
+        width: 150px;
+        height: 100px;
+      }
+
+      .sizeImage_2 {
+        width: 82px;
+        height: 106px;
+      }
+
+      .sizeImage_3 {
+        width: 129px;
+        height: 82px;
+      }
+
+      .sizeImage_4 {
+        width: 145px;
+        height: 83px;
+      }
+
+      .sizeImage_5 {
+        width: 90px;
+        height: 86px;
+      }
+
+      .divider {
+        margin: 24px 20px 38px;
+        height: 1px;
+        width: 80%;
+        background: #d9d9d9;
+
+        @media (max-width: 1200px) {
+          margin: 15px auto 24px auto;
+        }
+
+        @media (max-width: 550px) {
+          margin: 29px auto 23px auto;
+        }
+      }
+    }
+  }
+}

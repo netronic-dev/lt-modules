@@ -1,67 +1,90 @@
-import Image from 'next/image';
-import style from './style.module.scss';
-import Link from 'next/link';
+import Image from "next/image";
+import classNames from "classnames";
+import style from "./style.module.scss";
+import Link from "next/link";
+import gatewayImgOne from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgOne.webp";
+import gatewayImgTwo from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgTwo.webp";
+import gatewayImgThree from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgThree.webp";
 
-const Page = props => {
-	return (
-		<section className={style.main}>
-			<h2 className={style.title}>{props.title}</h2>
-			<p className={style.text}>{props.upperText}</p>
-			<div className={style.devider}></div>
-			<p className={style.text}>{props.underDeviderText}</p>
-			<div className={style.cells_wrapper}>
-				{/* <div className={style.cards_cell}>
-					{props.data.map((item, index) => (
-						<div
-							className={style.cell}
-							key={index}>
-							<div className={style.image_wrap}>
-								<Image
-									src={item.image}
-									alt='icon'
-								/>
-							</div>
+const Page = (props) => {
+  return (
+    <section className={style.main}>
+      <h2 className={style.title}>
+        {props.title} <span className={style.titleSpan}>{props.titleSpan}</span>
+      </h2>
+      <p className={style.text}>
+        {props.upperText} <br />{" "}
+        <span className={style.upperTextSpan}>{props.upperTextSpan}</span>
+      </p>
+      <div className={style.event_logo}>
+        <Image
+          src={props.eventLogo}
+          layout="fill"
+          objectFit="contain"
+          alt="laser tag convetion"
+        />
+      </div>
+      <div className={style.gatewayImgOne}>
+        <Image
+          src={gatewayImgOne}
+          layout="fill"
+          objectFit="contain"
+          alt="gatewayImgOne"
+        />
+      </div>
+      <p className={classNames(style.second_text, style.second_text_center)}>
+        <span className={style.second_text_span}>{props.second_text_span}</span>{" "}
+        {props.second_text}
+      </p>
+      <div className={style.gatewayImgTwo}>
+        <Image
+          src={gatewayImgTwo}
+          layout="fill"
+          objectFit="contain"
+          alt="gatewayImgTwo"
+        />
+      </div>
+      <div className={style.third_text_box}>
+        <p className={style.second_text}>
+          <span className={style.second_text_span}>
+            {props.third_text_span}
+          </span>
+          {props.third_text}
+        </p>
+      </div>
+      <div className={style.gatewayImgThree}>
+        <Image
+          src={gatewayImgThree}
+          layout="fill"
+          objectFit="contain"
+          alt="gatewayImgThree"
+        />
+      </div>
 
-							<p className={style.cell_text}>{item.text}</p>
-						</div>
-					))}
-				</div> */}
-				<div className={style.image_cell}>
-					<Image
-						src={props.heroImage}
-						alt='heroImage'
-						layout='fill'
-						objectFit='cover'
-						objectPosition='100% 0'
-					/>
-				</div>
-				<div className={style.image_cell_lap}>
-					<Image
-						src={props.heroImage_lap}
-						alt='heroImage'
-						layout='fill'
-						objectFit='cover'
-						objectPosition='50% 0'
-					/>
-				</div>
-			</div>
-			<div className={style.under_cells_text}>
-				<p className={style.text}>{props.underCellsText}</p>
-			</div>
-			{props.buttonText && props.register_text ? (
-				<div className={style.register_block}>
-					<p className={style.register_text}>{props.register_text}</p>
-					<Link
-						href={props.link || '/iaapa-vienna-2023/#register'}
-						scroll={false}>
-						<a className={style.register_button}>
-							{props.buttonText}
-						</a>
-					</Link>
-				</div>
-			) : null}
-		</section>
-	);
+      <div className={style.register_block}>
+        <div className={style.offer_box}>
+          <h3 className={style.offer_title}>{props.offer_title}</h3>
+          <p className={style.offer_text}>{props.offer_text}</p>
+        </div>
+        <Link
+          href={props.link || "/iaapa-expo-europe-2024/#register"}
+          scroll={false}
+        >
+          <a className={style.register_button}>{props.btn_text}</a>
+        </Link>
+        {props.event_info_img && (
+          <div className={style.event_info_img}>
+            <Image
+              src={props.event_info_img}
+              layout="fill"
+              objectFit="cover"
+              alt="event_info_img"
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
 };
 
 export default Page;

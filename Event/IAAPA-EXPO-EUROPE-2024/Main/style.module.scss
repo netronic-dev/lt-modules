@@ -42,6 +42,7 @@
 
       @media (min-width: 744px) {
         padding-top: 40px;
+        text-align: start;
       }
 
       @media (min-width: 1024px) {
@@ -69,6 +70,25 @@
       top: 248px;
       right: 22%;
       z-index: -1;
+
+      @media (min-width: 744px) {
+        width: 1131px;
+        height: 1264px;
+        transform: rotate(31deg);
+        top: -541px;
+        right: -764px;
+      }
+
+      @media (min-width: 1024px) {
+        transform: rotate(60deg);
+        top: -562px;
+        right: -571px;
+      }
+
+      @media (min-width: 1927px) {
+        transform: rotate(59deg);
+        right: -404px;
+      }
     }
   }
 
@@ -92,7 +112,7 @@
     }
 
     @media (min-width: 1024px) {
-      width: 364px;
+      max-width: 364px;
       font-size: 24px;
       line-height: 36px;
       margin-top: 11px;
@@ -101,6 +121,10 @@
 
   .event_info {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 26px;
     max-width: 349px;
     border-radius: 20px;
     background: #fff;
@@ -113,14 +137,25 @@
 
     @media (min-width: 744px) {
       max-width: 729px;
+      flex-wrap: nowrap;
+      margin-top: 135px;
+      gap: 45px;
     }
 
     @media (min-width: 1024px) {
       max-width: 956px;
+      margin-top: 55px;
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+
+    @media (max-width: 1926px) {
+      justify-content: space-between;
     }
 
     @media (min-width: 1927px) {
       max-width: 1170px;
+      gap: 110px;
     }
 
     .event_info_cell {
@@ -147,42 +182,15 @@
           display: flex;
           justify-content: center;
           align-items: center;
-
-          @media (max-width: 500px) {
-            width: 13px;
-            height: 13px;
-
-            svg {
-              width: 13px;
-              height: 13px;
-            }
-          }
         }
 
         .event_info__title {
-          font-family: "Manrope";
-          font-weight: 500;
+          font-weight: 700;
           font-size: 16.593px;
-          line-height: 19px;
+          line-height: normal;
           text-align: center;
           text-transform: uppercase;
           color: #8e8e8e;
-
-          @media (max-width: 1200px) {
-            font-size: 14.3px;
-          }
-
-          @media (max-width: 900px) {
-            font-size: 12px;
-          }
-
-          @media (max-width: 750px) {
-            font-size: 10.507px;
-          }
-
-          @media (max-width: 500px) {
-            font-size: 7.413px;
-          }
         }
 
         .event_info__title_blue {
@@ -198,44 +206,33 @@
 
       .event_info__text {
         color: #000;
-        font-family: Manrope;
-        font-size: 26.963px;
-        font-style: normal;
+        font-size: 20px;
         font-weight: 500;
-        line-height: 123.077%;
-        margin-left: 71px;
+        line-height: normal;
+
+        @media (min-width: 1024px) {
+          font-size: 24px;
+          line-height: 33.185px;
+        }
 
         span {
           color: #0090ff;
         }
+      }
 
-        @media (max-width: 1200px) {
-          font-size: 23.4px;
-          margin-left: 50px;
-        }
+      .event_info__text_bold {
+        color: #000;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: normal;
 
-        @media (max-width: 900px) {
-          font-size: 20px;
-        }
-
-        @media (max-width: 750px) {
-          font-size: 17.074px;
-        }
-
-        @media (max-width: 500px) {
-          font-size: 12.046px;
-          margin-left: 30px;
+        @media (min-width: 1024px) {
+          font-size: 24px;
+          line-height: 33.185px;
         }
       }
 
       .event_info__text_br {
-        @media (max-width: 900px) {
-          max-width: 100px;
-        }
-
-        @media (max-width: 500px) {
-          max-width: 60px;
-        }
       }
 
       .event_info__text_white {
@@ -250,6 +247,36 @@
           color: #0090ff;
         }
       }
+    }
+  }
+
+  .event_info_cell_two {
+    order: 3;
+
+    @media (min-width: 744px) {
+      order: 2;
+    }
+  }
+
+  .event_info_cell_three {
+    order: 2;
+
+    @media (min-width: 744px) {
+      order: 3;
+    }
+  }
+
+  .event_info_img {
+    display: none;
+
+    @media (min-width: 1927px) {
+      position: absolute;
+      display: block;
+      width: 214px;
+      height: 95%;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
@@ -307,11 +334,18 @@
   @media (min-width: 744px) {
     width: 540px;
     height: 400px;
+    bottom: -119px;
+    left: 74%;
   }
 
   @media (min-width: 1024px) {
     width: 663px;
     height: 491px;
+    left: 68%;
+  }
+
+  @media (min-width: 1927px) {
+    left: 59%;
   }
 }
 
@@ -345,6 +379,26 @@
   top: -21px;
   left: 112px;
   z-index: 0;
+
+  @media (min-width: 744px) {
+    width: 247px;
+    height: 247px;
+    top: -456px;
+    left: 227px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 221px;
+    top: -507px;
+    left: 308px;
+  }
+
+  @media (min-width: 1927px) {
+    width: 337px;
+    height: 289px;
+    top: -563px;
+    left: 263px;
+  }
 }
 
 .imageItemTwo {
@@ -354,6 +408,27 @@
   width: 132px;
   height: 128px;
   z-index: 0;
+
+  @media (min-width: 744px) {
+    left: 466px;
+    top: -426px;
+    width: 332px;
+    height: 328px;
+  }
+
+  @media (min-width: 1024px) {
+    left: 569px;
+    top: -529px;
+    width: 298px;
+    height: 302px;
+  }
+
+  @media (min-width: 1927px) {
+    width: 369px;
+    height: 352px;
+    left: 584px;
+    top: -568px;
+  }
 }
 
 .imageItemThree {
@@ -363,6 +438,24 @@
   width: 208px;
   height: 207px;
   z-index: 0;
+
+  @media (min-width: 744px) {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    display: block;
+    top: -331px;
+    right: -225px;
+    width: 405px;
+    height: 373px;
+  }
+
+  @media (min-width: 1927px) {
+    width: 473px;
+    height: 417px;
+    right: -106px;
+  }
 }
 
 .imageItemFour {
@@ -371,6 +464,17 @@
   @media (min-width: 1024px) {
     display: block;
     position: absolute;
+    width: 273px;
+    height: 252px;
+    top: -574px;
+    right: -140px;
     z-index: 0;
+  }
+
+  @media (min-width: 1927px) {
+    width: 364px;
+    height: 336px;
+    top: -665px;
+    right: -91px;
   }
 }
