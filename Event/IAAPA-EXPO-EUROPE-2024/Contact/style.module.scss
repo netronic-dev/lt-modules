@@ -33,12 +33,20 @@
       line-height: normal;
       max-width: 972px;
       margin-top: 15px;
+
+      @media (min-width: 744px) {
+        font-size: 24px;
+      }
     }
 
     .cell_wrapper {
       display: flex;
       margin-top: 70px;
       gap: 70px;
+
+      @media (min-width: 1024px) {
+        margin-top: 30px;
+      }
 
       .cell {
         display: flex;
@@ -76,19 +84,9 @@
           height: 131px;
           border-radius: 50px;
           background: #d9d9d9;
-        }
 
-        .devider_three {
-          display: none;
           @media (min-width: 744px) {
-            display: block;
-            position: absolute;
-            top: 289px;
-            left: 60%;
-            width: 1px;
-            height: 131px;
-            border-radius: 50px;
-            background: #d9d9d9;
+            display: none;
           }
         }
 
@@ -150,17 +148,17 @@
 
         @media (min-width: 744px) {
           flex-wrap: nowrap;
+          align-items: baseline;
         }
 
         .cell {
           @media (max-width: 743px) {
             width: 250px;
-          }
-
-          &:nth-child(2) {
-            padding: 0;
-            border-left: none;
-            border-right: none;
+            &:nth-child(2) {
+              padding: 0;
+              border-left: none;
+              border-right: none;
+            }
           }
         }
       }

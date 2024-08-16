@@ -1,6 +1,10 @@
 import Image from "next/image";
 import style from "./style.module.scss";
 import Link from "next/link";
+import {
+  formatPhoneNumberEurope,
+  formatPhoneNumberUsa,
+} from "../../../functions/formatPhoneNumber";
 
 const Page = (props) => {
   return (
@@ -14,13 +18,12 @@ const Page = (props) => {
               <span className={style.cell_title}>{item.title}</span>
               <div className={style.devider}></div>
               <div className={style.devider_two}></div>
-              <div className={style.devider_three}></div>
               {item.phone1 ? (
                 <Link
                   href={
                     item.link1
                       ? `https://wa.me/${item.phone1}`
-                      : `tel:${item.phone1}`
+                      : `tel:+${item.phone1}`
                   }
                 >
                   <a className={style.link} target="_blank">
@@ -38,7 +41,7 @@ const Page = (props) => {
                   href={
                     item.link2
                       ? `https://wa.me/${item.phone2}`
-                      : `tel:${item.phone2}`
+                      : `tel:+14${item.phone2}`
                   }
                 >
                   <a className={style.link} target="_blank">

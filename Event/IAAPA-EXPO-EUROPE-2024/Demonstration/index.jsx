@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 const Form = dynamic(() => import("./Form"), { ssr: false });
 
 const Page = (props) => {
+  console.log(props.thank_you_page_url, "thank_you_page_url");
   console.log(props.destinationURL, "props.destinationURL");
   return (
     <section className={style.main} id="register">
