@@ -102,17 +102,17 @@ const Form = (props) => {
     },
   });
 
-    const handleServerErrors = (error) => {
-      console.log(error, "error");
-      Object.entries(error).forEach(([key, message]) => {
-        if (["name", "email", "phone"].includes(key)) {
-          formik.setFieldError(key, message);
-        }
-      });
-      };
+  const handleServerErrors = (error) => {
+    console.log(error, "error");
+    Object.entries(error).forEach(([key, message]) => {
+      if (["name", "email", "phone"].includes(key)) {
+        formik.setFieldError(key, message);
+      }
+    });
+  };
 
   return (
-    <form className={style.form} onSubmit={formik.handleSubmit}>
+    <form className={style.form} onSubmit={formik.handleSubmit} id={props.id}>
       <div className={style.inputs_wrapper}>
         <div className={style.cell}>
           <InputName
