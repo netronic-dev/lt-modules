@@ -8,7 +8,7 @@ const Page = (props) => {
   console.log(props.thank_you_page_url, "thank_you_page_url");
   console.log(props.destinationURL, "props.destinationURL");
   return (
-    <section className={style.main} id="register">
+    <section className={style.main} id={props.id}>
       <h2 className={style.title}>{props.title}</h2>
       <p className={style.text}>{props.text}</p>
       <Form
