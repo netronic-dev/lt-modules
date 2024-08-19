@@ -25,7 +25,7 @@ export async function postData(
   let locationInfo: any = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
-  const countryCode = getCountryCode(values.phoneNumber);
+  const countryCode = getCountryCode(`+${values.phone}`);
   const queryLength = Object.keys(routerQuery).length;
   const query =
     queryLength > 0
@@ -38,7 +38,7 @@ export async function postData(
       : {
           utm_source: "google",
           utm_medium: "referral",
-        };
+      };
 
   let data: any = {
     fromPage: siteDomain,
@@ -47,22 +47,27 @@ export async function postData(
     name: values.name || "",
     email: values.email || "",
     budget: values.budget || "",
-    phoneNumber: values.phoneNumber || "",
-    countryCode,
+    equipmentType: values.equipmentType || "",
+    method: values.method || "",
+    typeOfBusiness: values.typeOfBusiness || "",
+    website: values.website || "",
+    comment: values.comment || "",
+    phoneNumber: `+${values.phone}` || "",
+    countryCode: countryCode,
     query,
     cookies: storedCookieConsent,
     geoInfo: {
-      country: countryName,
+      country: values.country ? values.country : countryName,
       city: locationInfo.city,
     },
   };
+  console.log(data, 'data');
   return await axios.post(url, data);
 }
 
 export interface field {
   name: string;
   value: string;
-  BXName?: string;
 }
 
 export async function getLocationData() {

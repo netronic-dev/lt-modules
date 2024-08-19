@@ -12,8 +12,10 @@ const Page = (props) => {
       <h2 className={style.title}>{props.title}</h2>
       <p className={style.text}>{props.text}</p>
       <Form
-        dateData={props.dateData}
+        methodsData={props.methodsData}
         equipData={props.equipData}
+        budgetData={props.budgetData}
+        typeOfBusinessData={props.typeOfBusinessData}
         buttonText={props.buttonText}
         agreement__text={props.agreementText}
         agreement__text_req={props.agreement__text_req}
