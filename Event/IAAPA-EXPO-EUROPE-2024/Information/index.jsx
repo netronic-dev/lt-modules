@@ -1,6 +1,5 @@
 import Image from "next/image";
 import style from "./style.module.scss";
-import EventSlider from "../Slider";
 import infoDecorationLineTablet from "../../../../public/blog/iaapa-expo-europe-2024/infoDecorationLineTablet.webp";
 import infoDecorationLineDesktop from "../../../../public/blog/iaapa-expo-europe-2024/infoDecorationLineDesktop.webp";
 import useIsTablet from "../../../../hooks/useIsTablet";
@@ -10,7 +9,6 @@ import light_blue_figure from "../../../../public/blog/iaapa-expo-europe-2024/li
 const Page = (props) => {
   const isTablet = useIsTablet({ width: 744 });
   const isDesktop = useIsDesktop({ width: 1024 });
-  const isMaxDesktop = useIsDesktop({ width: 1927 });
 
   return (
     <section className={style.main}>
@@ -91,7 +89,6 @@ const Page = (props) => {
           </li>
         ))}
       </ul>
-      <EventSlider imagesData={props.imagesData} />
     </section>
   );
 };
