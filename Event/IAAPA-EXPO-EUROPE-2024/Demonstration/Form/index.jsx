@@ -14,7 +14,6 @@ import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../../store/searchParamsSlice";
 import { sendEventToConversionApi } from "../../../../functions/sendFbPageView";
 import {
-  InputCall,
   InputComment,
   InputCountry,
   InputEmail,
@@ -23,7 +22,6 @@ import {
 } from "./Inputs/Inputs";
 import { useEffect, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
-import { isValidPhoneNumber } from "libphonenumber-js";
 const Form = (props) => {
   let validate = validation;
   const [regionCode, setRegionCode] = useState();
@@ -111,6 +109,8 @@ const Form = (props) => {
     });
   };
 
+  console.log(formik.errors, "formik.errors");
+
   return (
     <form className={style.form} onSubmit={formik.handleSubmit} id={props.id}>
       <div className={style.inputs_wrapper}>
@@ -169,7 +169,7 @@ const Form = (props) => {
               padding: "16px 14px",
               paddingLeft: "48px",
               borderRadius: "8px",
-              border: "1px solid #000",
+              border: `1px solid ${formik.errors.phone ? "#d22e2e" : "#000"}`,
               background: "#fff",
               color: "#000",
               fontFamily: "Manrope",
@@ -186,6 +186,7 @@ const Form = (props) => {
             }}
             containerClass="responsive-input-container"
           />
+          <>{formik.errors.phone}</>
           <Dropdown
             className="dropdown"
             options={props.budgetData}
@@ -252,6 +253,13 @@ export const validation = (values) => {
       errors.name = "Required";
     }
   }
+
+  if (values.phone !== undefined) {
+    if (values.phone === "") {
+      errors.phone = "Required";
+    }
+  }
+
   if (values.email !== undefined) {
     if (values.email === "") {
       errors.email = "Required";

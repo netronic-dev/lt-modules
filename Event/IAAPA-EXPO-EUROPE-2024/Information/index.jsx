@@ -14,7 +14,7 @@ const Page = (props) => {
 
   return (
     <section className={style.main}>
-      {isMaxDesktop && (
+      {isDesktop && (
         <div className={style.light_blue_figure_left}>
           <Image
             src={light_blue_figure}
@@ -24,7 +24,7 @@ const Page = (props) => {
           />
         </div>
       )}
-      {isMaxDesktop && (
+      {isDesktop && (
         <div className={style.light_blue_figure_right}>
           <Image
             src={light_blue_figure}
@@ -67,7 +67,7 @@ const Page = (props) => {
               <h2 className={style.icon_text}>{item.iconText}</h2>
             </div>
             <h3 className={style.cell_title}>
-              {item.subtitle} {!isTablet && <br />}
+              {item.subtitle} {!isTablet && !isDesktop && <br />}
               <span
                 className={`${
                   index !== 1 ? style.cell_text : style.cell_text_large
@@ -78,7 +78,7 @@ const Page = (props) => {
             </h3>
             {item.subtitleBottom && (
               <h3 className={style.cell_title}>
-                {item.subtitleBottom} {!isTablet && <br />}
+                {item.subtitleBottom} {!isTablet && !isDesktop && <br />}
                 <span
                   className={`${
                     index !== 1 ? style.cell_text : style.cell_text_large

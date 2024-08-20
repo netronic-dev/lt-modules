@@ -60,19 +60,21 @@ export default function IAAPAMain(props) {
           </div>
         </ul>
 
-        <EventInfo
-          iconsBlue={props.iconsBlue}
-          textWhite={props.textWhite}
-          timeName={props.timeName}
-          time={props.time}
-          dateName={props.dateName}
-          date={props.date}
-          placeName={props.placeName}
-          place={props.place}
-          standName={props.standName}
-          stand={props.stand}
-          event_info_img={props.event_info_img}
-        />
+        <div className={style.event_info_overlay}>
+          <EventInfo
+            iconsBlue={props.iconsBlue}
+            textWhite={props.textWhite}
+            timeName={props.timeName}
+            time={props.time}
+            dateName={props.dateName}
+            date={props.date}
+            placeName={props.placeName}
+            place={props.place}
+            standName={props.standName}
+            stand={props.stand}
+            event_info_img={props.event_info_img}
+          />
+        </div>
 
         {props.text ? <div className={style.text}>{props.text}</div> : null}
         <div
@@ -166,11 +168,12 @@ function EventInfo(props) {
           </h3>
         </div>
         <p
-          className={
+          className={classNames(
             props.textWhite
               ? style.event_info__text_white
-              : style.event_info__text
-          }
+              : style.event_info__text,
+            style.event_info__text_br
+          )}
         >
           {props.place}
         </p>

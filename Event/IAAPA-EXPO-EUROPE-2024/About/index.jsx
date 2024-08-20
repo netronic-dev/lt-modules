@@ -6,7 +6,7 @@ const Page = (props) => {
         <section className={style.main}>
             <h2 className={style.title}>{props.title}</h2>
             <p className={style.text}>{props.text}</p>
-            {props.bg_logo ? (
+            {props.bg_logo && (
                 <div className={style.bg_logo}>
                     <Image
                         src={props.bg_logo}
@@ -15,7 +15,7 @@ const Page = (props) => {
                         objectFit="cover"
                     />
                 </div>
-            ) : null}
+            )}
             <div className={style.images_block}>
                 <Image
                     src={props.image}

@@ -20,10 +20,16 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 1200px) {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 10px;
+  }
+
+  @media (max-width: 743px) {
+    align-items: center;
   }
 
   .block_title {
@@ -68,7 +74,7 @@
       width: 510px;
       height: 570px;
       top: 248px;
-      right: 22%;
+      right: 15%;
       z-index: -1;
 
       @media (min-width: 744px) {
@@ -119,13 +125,23 @@
     }
   }
 
+  .event_info_overlay {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+
+    @media (min-width: 1927px) {
+      max-width: 1170px;
+    }
+  }
+
   .event_info {
+    width: 100%;
     position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 26px;
-    max-width: 349px;
     border-radius: 20px;
     background: #fff;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
@@ -133,12 +149,12 @@
     display: flex;
     z-index: 2;
     border-top: 6px solid #0090ff;
-    margin-top: 322px;
+    margin-top: 282px;
 
     @media (min-width: 744px) {
       max-width: 729px;
       flex-wrap: nowrap;
-      margin-top: 135px;
+      margin-top: 91px;
       gap: 45px;
     }
 
@@ -201,6 +217,12 @@
           text-align: center;
           text-transform: uppercase;
           color: #0090ff;
+        }
+      }
+
+      .event_info__text_br {
+        @media (min-width: 744px) and (max-width: 1023px) {
+          max-width: 300px;
         }
       }
 
@@ -272,7 +294,7 @@
     @media (min-width: 1927px) {
       position: absolute;
       display: block;
-      width: 214px;
+      width: 183px;
       height: 95%;
       right: 28px;
       top: 50%;
@@ -335,7 +357,7 @@
     width: 540px;
     height: 400px;
     bottom: -119px;
-    left: 74%;
+    left: 72%;
   }
 
   @media (min-width: 1024px) {
@@ -377,7 +399,7 @@
   width: 216px;
   height: 194px;
   top: -21px;
-  left: 112px;
+  left: -94px;
   z-index: 0;
 
   @media (min-width: 744px) {
@@ -403,7 +425,7 @@
 
 .imageItemTwo {
   position: absolute;
-  left: -11px;
+  left: -208px;
   top: -11px;
   width: 132px;
   height: 128px;
@@ -434,7 +456,7 @@
 .imageItemThree {
   position: absolute;
   top: 71px;
-  right: -148px;
+  right: -267px;
   width: 208px;
   height: 207px;
   z-index: 0;

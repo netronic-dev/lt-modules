@@ -1,12 +1,21 @@
 import Image from "next/image";
 import classNames from "classnames";
 import style from "./style.module.scss";
+import useIsTablet from "../../../../hooks/useIsTablet";
 
 const Benefits = (props) => {
-  const sizeImages = {};
+  const isTablet = useIsTablet({ width: 744 });
   return (
     <section className={style.benefits}>
       <div className={style.container}>
+          <div className={style.bg_logo}>
+            <Image
+              src={props.bg_logo}
+              alt="background logo"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
         <p className={style.subtitle}>{props.subtitle}</p>
         <ul className={style.benefits_list}>
           {props.dataTwo.map((item, index) => (

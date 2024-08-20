@@ -44,7 +44,7 @@
     width: 969px;
     height: 200px;
     top: 217px;
-    left: 11px;
+    left: 41px;
     z-index: 1;
   }
 
@@ -53,7 +53,11 @@
     width: 642px;
     height: 718px;
     top: -79px;
-    left: -720px;
+    left: -628px;
+
+    @media (min-width: 1927px) {
+      left: -700px;
+    }
   }
 
   .light_blue_figure_right {
@@ -61,7 +65,7 @@
     width: 642px;
     height: 718px;
     top: -79px;
-    right: -567px;
+    right: -601px;
   }
 
   .event_info {
@@ -80,6 +84,7 @@
     @media (min-width: 1024px) {
       flex-direction: row;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 30px;
       padding-left: 10px;
       padding-right: 10px;
@@ -128,13 +133,13 @@
 
       @media (min-width: 1024px) {
         &:nth-child(3) {
-          margin-left: 15px;
+          margin-left: 47px;
         }
       }
 
       @media (min-width: 1927px) {
         &:nth-child(4) {
-          width: 474px;
+          width: 448px;
         }
 
         &:nth-child(1) {
@@ -143,6 +148,10 @@
 
         &:nth-child(3) {
           margin-left: 95px;
+        }
+
+        &:nth-child(2) {
+          margin-right: 254px;
         }
       }
 
@@ -183,6 +192,10 @@
         font-size: 16px;
         font-weight: 500;
         line-height: normal;
+
+        @media (min-width: 1024px) {
+          font-size: 20px;
+        }
       }
 
       .cell_text_large {
@@ -190,6 +203,10 @@
         font-size: 20px;
         font-weight: 500;
         line-height: 33.185px;
+
+        @media (min-width: 1024px) {
+          font-size: 24px;
+        }
       }
     }
   }

@@ -12,6 +12,7 @@
   }
 
   .title {
+    max-width: 345px;
     color: #000;
     font-family: Manrope;
     font-size: 35px;
@@ -46,7 +47,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    max-width: 310px;
+    padding: 0 20px;
 
     @media (min-width: 744px) {
       font-size: 20px;
@@ -122,6 +123,18 @@
     left: -31px;
     top: 864px;
 
+    @media (min-width: 410px) {
+      top: 806px;
+    }
+
+    @media (min-width: 480px) {
+      top: 729px;
+    }
+
+    @media (min-width: 600px) {
+      top: 679px;
+    }
+
     @media (min-width: 744px) {
       left: -1px;
       top: 886px;
@@ -130,6 +143,22 @@
     @media (min-width: 1024px) {
       left: 754px;
       top: 507px;
+    }
+
+    @media (min-width: 1050px) {
+      left: 790px;
+    }
+
+    @media (min-width: 1080px) {
+      left: 826px;
+    }
+
+    @media (min-width: 1130px) {
+      left: 892px;
+    }
+
+    @media (min-width: 1195px) {
+      left: 956px;
     }
 
     @media (min-width: 1927px) {
