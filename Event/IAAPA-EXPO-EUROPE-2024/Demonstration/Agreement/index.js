@@ -1,8 +1,6 @@
 import style from "./style.module.scss";
 
 export default function Agreement(props) {
-  console.log(props.text, "text");
-  console.log(props.text_req, "text_req");
   return (
     <div className={style.agreement_cont}>
       {props.text_req ? (
@@ -31,19 +29,10 @@ export default function Agreement(props) {
         >
           {props.text}
         </p>
+        {props.error && (
+          <p className={style.error_rounded_flat}>{props.error}</p>
+        )}
       </div>
     </div>
   );
 }
-
-// const agreementDot = (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     width="11"
-//     height="11"
-//     viewBox="0 0 12 11"
-//     fill="none"
-//   >
-//     <circle cx="6.35986" cy="5.5" r="5.5" fill="#0090FF" />
-//   </svg>
-// );

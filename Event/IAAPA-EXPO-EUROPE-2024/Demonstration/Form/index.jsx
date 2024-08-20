@@ -94,8 +94,6 @@ const Form = (props) => {
         document.body.className = "";
         router.push(props.thank_you_page_url);
       } catch (error) {
-        console.log(error, "error");
-        console.log(error.response, "error.response");
         handleServerErrors(error.response.data);
       }
     },
@@ -109,8 +107,6 @@ const Form = (props) => {
       }
     });
   };
-
-  console.log(formik.errors, "formik.errors");
 
   return (
     <form className={style.form} onSubmit={formik.handleSubmit} id={props.id}>
@@ -265,9 +261,18 @@ const Form = (props) => {
         <button
           type="submit"
           className={style.button_submit}
-          disabled={formik.isSubmitting}
+          disabled={
+            formik.isSubmitting ||
+            Object.keys(formik.errors).length > 0 ||
+            formik.values.name === "" ||
+            formik.values.phone === "" ||
+            formik.values.email === "" ||
+            formik.values.isAgreePrivacyPolicy === false
+          }
         >
-          {formik.isSubmitting ? props.submittingText : props.buttonText}
+          {formik.isSubmitting
+            ? props.submittingText || "Submitting..."
+            : props.buttonText}
         </button>
       </div>
     </form>

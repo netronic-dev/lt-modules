@@ -61,7 +61,6 @@ export async function postData(
       city: locationInfo.city,
     },
   };
-  console.log(data, 'data');
   return await axios.post(url, data);
 }
 

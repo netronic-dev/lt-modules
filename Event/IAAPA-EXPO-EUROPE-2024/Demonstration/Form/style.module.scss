@@ -51,13 +51,17 @@
       padding-top: 17px;
       padding-bottom: 17px;
       outline: 0;
-      border: none;
       transition: color 0.4s ease, background 0.4s ease, border 0.4s ease;
 
-      &:hover {
+      &:hover:enabled {
         background: #fff;
         color: #000;
-        border: 1px solid #000;
+        border-color: #000;
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
       }
     }
   }
