@@ -71,88 +71,144 @@
         grid-template-columns: 1fr;
         margin-top: 41px;
       }
+    }
+  }
+}
 
-      .cell {
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .cell_image {
+    position: relative;
+    width: 100%;
+    height: 174px;
+
+    @media (min-width: 1927px) {
+      height: 212px;
+    }
+
+    .bg_hover {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .bg_hover {
+        border-radius: 11px;
+        position: relative;
+        height: 100%;
+        display: block;
         display: flex;
-        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+    }
+  }
 
-        .cell_image {
-          position: relative;
-          width: 100%;
-          height: 214px;
+  .divider {
+    margin: 28px 0 16px 0;
+    width: 80%;
+    height: 1px;
+    background: #d9d9d9;
+  }
 
-          @media (max-width: 1200px) {
-            height: 173px;
-          }
+  .cell_text {
+    max-width: 300px;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
 
-          @media (max-width: 880px) {
-            height: 126px;
-          }
+.slide {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 30px;
+}
 
-          .bg_hover {
-            display: none;
-          }
+.prev_arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 41%;
+  left: 15%;
+  z-index: 3;
+  transform: translateY(-50%);
 
-          &:hover {
-            cursor: pointer;
+  @media (min-width: 700px) {
+    left: -8px;
+  }
 
-            .bg_hover {
-              border-radius: 11px;
-              position: relative;
-              height: 100%;
-              display: block;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background: rgba(0, 0, 0, 0.2);
-              z-index: 10;
-            }
-          }
-        }
+  @media (min-width: 744px) {
+    top: 29%;
+    left: 15px;
+  }
 
-        .divider {
-          margin: 28px 0 16px 0;
-          width: 80%;
-          height: 1px;
-          background: #d9d9d9;
+  @media (max-width: 768px) {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
 
-          @media (max-width: 1200px) {
-            margin: 23px 0 13px 0;
-          }
+  &:hover {
+    svg {
+      circle {
+        fill: #fff;
+        stroke: #0090ff;
+      }
 
-          @media (max-width: 880px) {
-            margin: 16px 0 10px 0;
-          }
+      path {
+        fill: #0090ff;
+      }
+    }
+  }
+}
 
-          @media (max-width: 500px) {
-            margin: 23px 0;
-          }
-        }
+.next_arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 41%;
+  right: 15%;
+  z-index: 3;
+  transform: translateY(-50%);
 
-        .cell_text {
-          cursor: pointer;
-          color: #000;
-          text-align: center;
-          font-family: Manrope;
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: normal;
-          text-decoration-line: underline;
+  @media (min-width: 700px) {
+    right: -8px;
+  }
 
-          @media (max-width: 1200px) {
-            font-size: 14.749px;
-          }
+  @media (min-width: 744px) {
+    top: 29%;
+    right: 15px;
+  }
 
-          @media (max-width: 880px) {
-            font-size: 10.715px;
-          }
+  @media (max-width: 768px) {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
 
-          @media (max-width: 500px) {
-            font-size: 15.924px;
-          }
-        }
+  &:hover {
+    svg {
+      circle {
+        fill: #fff;
+        stroke: #0090ff;
+      }
+
+      path {
+        fill: #0090ff;
       }
     }
   }

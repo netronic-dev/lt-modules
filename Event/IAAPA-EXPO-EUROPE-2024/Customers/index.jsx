@@ -3,14 +3,15 @@ import Slider from "react-slick";
 import style from "./style.module.scss";
 import { useModals } from "../../../../context/ModalsProvider";
 import useIsTablet from "../../../../hooks/useIsTablet";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import useIsDesktop from "../../../../hooks/useIsDesktop";
 
 const PrevArrow = ({ onClick }) => {
   return (
     <div className={style.prev_arrow} onClick={onClick}>
       <svg
-        width="50"
-        height="50"
+        width="30"
+        height="30"
         viewBox="0 0 50 50"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +42,8 @@ const NextArrow = ({ onClick }) => {
   return (
     <div className={style.next_arrow} onClick={onClick}>
       <svg
-        width="50"
-        height="50"
+        width="30"
+        height="30"
         viewBox="0 0 50 50"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -69,36 +70,10 @@ const NextArrow = ({ onClick }) => {
   );
 };
 
-const settings = {
-  centerMode: false,
-  infinite: true,
-  centerPadding: "0",
-  slidesToShow: 1,
-  speed: 500,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-  beforeChange: (prev, next) => {
-    setActiveSlide(next + 1);
-  },
-  responsive: [
-    {
-      breakpoint: 1023,
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 649,
-      settings: {
-        slidesToShow: 1,
-      },
-    },
-  ],
-};
-
 const Customers = (props) => {
   const modals = useModals();
-  const isTablet = useIsTablet({ width: 744 });
+  const isDesktop = useIsDesktop({ width: 1024 });
+  const [activeSlide, setActiveSlide] = useState(1);
 
   const getLInk = (index) => {
     switch (index) {
@@ -112,15 +87,42 @@ const Customers = (props) => {
         break;
     }
   };
-  const sliderRef = useRef(null);
+
+  const settings = {
+    centerMode: false,
+    infinite: true,
+    centerPadding: "0",
+    slidesToShow: 1,
+    speed: 500,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    beforeChange: (prev, next) => {
+      setActiveSlide(next + 1);
+    },
+    responsive: [
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <section className={style.customers}>
       <div className={style.container}>
         <h2 className={style.title}>{props.title}</h2>
         <p className={style.text}>{props.text}</p>
-        <div className={style.grid}>
-          {props.data.map((item, index) => (
+        {isDesktop ? (
+          <div className={style.grid}>
+            {props.data.map((item, index) => (
               <div className={style.cell} key={index}>
                 <a
                   className={style.cell_image}
@@ -152,8 +154,42 @@ const Customers = (props) => {
                   {item.text}
                 </a>
               </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="event__slider_iaapa_2024">
+            <Slider {...settings}>
+              {props.data.map((item, index) => (
+                <div className={style.slide} key={index}>
+                  <div className={style.cell}>
+                    <a
+                      className={style.cell_image}
+                      onClick={() => modals.VideoModalOpen(getLInk(index))}
+                      target="_blank"
+                    >
+                      <Image
+                        src={item.src}
+                        alt={`slide${index + 1}`}
+                        layout="fill"
+                        objectFit="contain"
+                        objectPosition="50% 50%"
+                        quality={100}
+                      />
+                    </a>
+                    <div className={style.divider}></div>
+                    <a
+                      onClick={() => modals.VideoModalOpen(getLInk(index))}
+                      target="_blank"
+                      className={style.cell_text}
+                    >
+                      {item.text}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        )}
       </div>
     </section>
   );
