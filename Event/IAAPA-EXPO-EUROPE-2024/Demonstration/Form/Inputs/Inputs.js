@@ -26,18 +26,20 @@ export function InputEmail(props) {
   if (props.error_1) {
     icon.error = icons.error_1;
   }
+
   return (
     <div className={style.input_block_out}>
       <div className={theme[props.theme ? props.theme : "standard"]}>
         <input
           className={`
                         ${styleInput.input}
-                        ${props.error ? style.input_error : ""}
+                        ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
           type="email"
           onChange={props.onChange}
+          onBlur={props.onBlur}
           value={props.value}
           name="email"
           style={{
@@ -63,11 +65,15 @@ export function InputEmail(props) {
           </div>
         )}
       </div>
-      <div
-        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
-      >
-        {props.error}
-      </div>
+      {props.touched && props.error && (
+        <div
+          className={
+            errorTheme[props.errorTheme ? props.errorTheme : "standard"]
+          }
+        >
+          {props.error}
+        </div>
+      )}
     </div>
   );
 }
@@ -86,12 +92,13 @@ export function InputWebsite(props) {
         <input
           className={`
                         ${styleInput.input}
-                        ${props.error ? style.input_error : ""}
+                        ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
           type="text"
           onChange={props.onChange}
+          onBlur={props.onBlur}
           value={props.value}
           name="website"
           style={{
@@ -117,11 +124,15 @@ export function InputWebsite(props) {
           </div>
         )}
       </div>
-      <div
-        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
-      >
-        {props.error}
-      </div>
+      {props.touched && props.error && (
+        <div
+          className={
+            errorTheme[props.errorTheme ? props.errorTheme : "standard"]
+          }
+        >
+          {props.error}
+        </div>
+      )}
     </div>
   );
 }
@@ -140,12 +151,13 @@ export function InputCountry(props) {
         <input
           className={`
                         ${styleInput.input}
-                        ${props.error ? style.input_error : ""}
+                        ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
           type="text"
           onChange={props.onChange}
+          onBlur={props.onBlur}
           value={props.value}
           name="country"
           style={{
@@ -171,11 +183,15 @@ export function InputCountry(props) {
           </div>
         )}
       </div>
-      <div
-        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
-      >
-        {props.error}
-      </div>
+      {props.touched && props.error && (
+        <div
+          className={
+            errorTheme[props.errorTheme ? props.errorTheme : "standard"]
+          }
+        >
+          {props.error}
+        </div>
+      )}
     </div>
   );
 }
@@ -194,12 +210,13 @@ export function InputComment(props) {
         <input
           className={`
                         ${styleInput.input}
-                        ${props.error ? style.input_error : ""}
+                        ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
           type="text"
           onChange={props.onChange}
+          onBlur={props.onBlur}
           value={props.value}
           name="comment"
           style={{
@@ -225,11 +242,15 @@ export function InputComment(props) {
           </div>
         )}
       </div>
-      <div
-        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
-      >
-        {props.error}
-      </div>
+      {props.touched && props.error && (
+        <div
+          className={
+            errorTheme[props.errorTheme ? props.errorTheme : "standard"]
+          }
+        >
+          {props.error}
+        </div>
+      )}
     </div>
   );
 }
@@ -301,7 +322,7 @@ export function InputName(props) {
         <input
           maxLength="30"
           className={`${styleInput.input} ${
-            props.error ? style.input_error : ""
+            props.error && props.touched ? style.input_error : ""
           } ${props.correct ? style.input_correct : ""} ${props.className}`}
           style={{
             backgroundColor: props.bg_color,
@@ -311,6 +332,7 @@ export function InputName(props) {
           type="text"
           placeholder={props.placeholder || "Name*"}
           onChange={props.onChange}
+          onBlur={props.onBlur}
           value={props.value}
           disabled={props.loggedViaSocials}
         />
@@ -330,11 +352,15 @@ export function InputName(props) {
           </div>
         )}
       </div>
-      <div
-        className={errorTheme[props.errorTheme ? props.errorTheme : "standard"]}
-      >
-        {props.error}
-      </div>
+      {props.touched && props.error && (
+        <div
+          className={
+            errorTheme[props.errorTheme ? props.errorTheme : "standard"]
+          }
+        >
+          {props.error}
+        </div>
+      )}
     </div>
   );
 }

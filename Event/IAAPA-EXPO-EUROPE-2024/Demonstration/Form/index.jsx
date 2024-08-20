@@ -22,6 +22,7 @@ import {
 } from "./Inputs/Inputs";
 import { useEffect, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
+import { isValidPhoneNumber } from "libphonenumber-js";
 const Form = (props) => {
   let validate = validation;
   const [regionCode, setRegionCode] = useState();
@@ -117,24 +118,30 @@ const Form = (props) => {
         <div className={style.cell}>
           <InputName
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name}
             error={formik.errors.name}
+            touched={formik.touched.name}
             theme="rounded"
             noIcons
             errorTheme="rounded_flat"
           />
           <InputEmail
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
             error={formik.errors.email}
+            touched={formik.touched.email}
             theme="rounded"
             noIcons
             errorTheme="rounded_flat"
           />
           <InputWebsite
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.website}
             error={formik.errors.website}
+            touched={formik.touched.website}
             theme="rounded"
             noIcons
           />
@@ -163,13 +170,21 @@ const Form = (props) => {
             excludeCountries={"ru"}
             value={formik.values.phone}
             onChange={(value) => formik.setFieldValue("phone", value)}
+            onBlur={() => formik.setFieldTouched("phone")}
             inputStyle={{
               width: "100%",
               height: "55px",
               padding: "16px 14px",
               paddingLeft: "48px",
               borderRadius: "8px",
-              border: `1px solid ${formik.errors.phone ? "#d22e2e" : "#000"}`,
+              border: `1px solid ${
+                (formik.errors.phone && formik.touched.phone) ||
+                (!formik.errors.phone &&
+                  formik.values.phone &&
+                  !isValidPhoneNumber(`+${formik.values.phone}`))
+                  ? "#d22e2e"
+                  : "#000"
+              }`,
               background: "#fff",
               color: "#000",
               fontFamily: "Manrope",
@@ -180,13 +195,26 @@ const Form = (props) => {
             }}
             inputClass="responsive-input"
             buttonStyle={{
-              borderColor: formik.errors.phone ? "#d22e2e" : "#000",
+              borderColor:
+                (formik.errors.phone && formik.touched.phone) ||
+                (!formik.errors.phone &&
+                  formik.values.phone &&
+                  !isValidPhoneNumber(`+${formik.values.phone}`))
+                  ? "#d22e2e"
+                  : "#000",
               borderWidth: "1px",
               borderStyle: "solid",
             }}
             containerClass="responsive-input-container"
           />
-          <>{formik.errors.phone}</>
+          {formik.errors.phone && formik.touched.phone && (
+            <p className={style.error_rounded_flat}>{formik.errors.phone}</p>
+          )}
+          {!formik.errors.phone &&
+            formik.values.phone &&
+            !isValidPhoneNumber(`+${formik.values.phone}`) && (
+              <p className={style.error_rounded_flat}>Invalid phone number</p>
+            )}
           <Dropdown
             className="dropdown"
             options={props.budgetData}
@@ -200,6 +228,7 @@ const Form = (props) => {
             onChange={formik.handleChange}
             value={formik.values.country}
             error={formik.errors.country}
+            touched={formik.touched.country}
             theme="rounded"
             noIcons
             errorTheme="rounded_flat"
@@ -215,8 +244,10 @@ const Form = (props) => {
           />
           <InputComment
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.comment}
             error={formik.errors.comment}
+            touched={formik.touched.comment}
             theme="rounded"
             noIcons
             errorTheme="rounded_flat"
