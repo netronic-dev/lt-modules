@@ -142,16 +142,11 @@
   cursor: pointer;
   position: absolute;
   top: 41%;
-  left: 15%;
+  left: 0;
   z-index: 3;
   transform: translateY(-50%);
 
-  @media (min-width: 700px) {
-    left: -8px;
-  }
-
   @media (min-width: 744px) {
-    top: 29%;
     left: 15px;
   }
 
@@ -180,16 +175,11 @@
   cursor: pointer;
   position: absolute;
   top: 41%;
-  right: 15%;
+  right: 0;
   z-index: 3;
   transform: translateY(-50%);
 
-  @media (min-width: 700px) {
-    right: -8px;
-  }
-
   @media (min-width: 744px) {
-    top: 29%;
     right: 15px;
   }
 
