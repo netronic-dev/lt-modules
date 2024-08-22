@@ -25,7 +25,7 @@ export async function postData(
   let locationInfo: any = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
-  const countryCode = getCountryCode(`+${values.phone}`);
+  const countryCode = getCountryCode(values.phoneNumber);
   const queryLength = Object.keys(routerQuery).length;
   const query =
     queryLength > 0
@@ -38,7 +38,7 @@ export async function postData(
       : {
           utm_source: "google",
           utm_medium: "referral",
-      };
+        };
 
   let data: any = {
     fromPage: siteDomain,
@@ -52,7 +52,7 @@ export async function postData(
     typeOfBusiness: values.typeOfBusiness || "",
     website: values.website || "",
     comment: values.comment || "",
-    phoneNumber: `+${values.phone}` || "",
+    phoneNumber: values.phone ? `+${values.phone}` : values.phoneNumber || "",
     countryCode: countryCode,
     query,
     cookies: storedCookieConsent,

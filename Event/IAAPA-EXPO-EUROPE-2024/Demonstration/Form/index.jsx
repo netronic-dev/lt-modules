@@ -7,7 +7,6 @@ import Dropdown from "react-dropdown";
 import style from "./style.module.scss";
 import Agreement from "../Agreement";
 import { postData } from "../../../../functions/postData";
-import { setUserData } from "../../../../../store/actions/userData";
 import ReactGA from "react-ga4";
 import { addUserData } from "../../../../../store/userSlice";
 import ReactPixel from "react-facebook-pixel";
@@ -76,8 +75,13 @@ const Form = (props) => {
       try {
         dispatch(addUserData(values.name));
 
+        const data = {
+          ...values,
+          phoneNumber: `+${values.phone}`,
+        };
+
         await postData(
-          values,
+          data,
           props.destinationURL,
           props.orderName,
           window.location.href,
