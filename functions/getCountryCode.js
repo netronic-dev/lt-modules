@@ -1,6 +1,7 @@
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 export const getCountryCode = (phoneNumber) => {
+  console.log(phoneNumber, 'phoneNumber');
   if (!phoneNumber) return null;
 
   const parsedNumber = parsePhoneNumberFromString(phoneNumber);

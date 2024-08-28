@@ -20,12 +20,20 @@ export async function postData(
   orderName: string,
   siteDomain: string,
   fromSite: string,
-  routerQuery?: any
+  routerQuery?: any,
 ) {
+  console.log(values, "values");
+  console.log(url, "url");
+  console.log(orderName, "orderName");
+  console.log(siteDomain, "siteDomain");
+  console.log(fromSite, "fromSite");
+  console.log(routerQuery, "routerQuery");
+
   let locationInfo: any = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
+  console.log(countryCode, "countryCode");
   const queryLength = Object.keys(routerQuery).length;
   const query =
     queryLength > 0
