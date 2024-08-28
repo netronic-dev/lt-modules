@@ -22,13 +22,6 @@ export async function postData(
   fromSite: string,
   routerQuery?: any
 ) {
-  console.log(values, "values");
-  console.log(url, "url");
-  console.log(orderName, "orderName");
-  console.log(siteDomain, "siteDomain");
-  console.log(fromSite, "fromSite");
-  console.log(routerQuery, "routerQuery");
-
   let locationInfo: any = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
@@ -69,7 +62,6 @@ export async function postData(
       city: locationInfo.city,
     },
   };
-  console.log(data, "data");
   return await axios.post(url, data);
 }
 
