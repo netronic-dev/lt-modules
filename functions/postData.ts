@@ -20,7 +20,7 @@ export async function postData(
   orderName: string,
   siteDomain: string,
   fromSite: string,
-  routerQuery?: any,
+  routerQuery?: any
 ) {
   console.log(values, "values");
   console.log(url, "url");
@@ -33,7 +33,6 @@ export async function postData(
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
-  console.log(countryCode, "countryCode");
   const queryLength = Object.keys(routerQuery).length;
   const query =
     queryLength > 0
@@ -61,7 +60,8 @@ export async function postData(
     website: values.website || "",
     comment: values.comment || "",
     phoneNumber: values.phone ? `+${values.phone}` : values.phoneNumber || "",
-    countryCode: countryCode,
+    chatPhone: values.chatPhone || "",
+    countryCode: countryCode || "",
     query,
     cookies: storedCookieConsent,
     geoInfo: {
@@ -69,6 +69,7 @@ export async function postData(
       city: locationInfo.city,
     },
   };
+  console.log(data, "data");
   return await axios.post(url, data);
 }
 
