@@ -54,7 +54,13 @@ export const sendEventToConversionApi = async (siteName, eventName) => {
         access_token: access_token,
       },
     })
-    .catch((error) => {
+    .catch(async (error) => {
       console.error("Error:", error.response.data);
+      await axios.post(
+        "https://back.netronic.net/telegram/send-error-message",
+        {
+          message: `frontend error: ❌ ${window.location.hostname}: ${error.response.data}`,
+        }
+      );
     });
 };

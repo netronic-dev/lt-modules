@@ -107,6 +107,12 @@ export async function getLocationData() {
         };
       })
       .catch(async (error) => {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
         await axios
           .get("https://ipinfo.io/json?token=eba5da567f5208")
           .then((response) => {
