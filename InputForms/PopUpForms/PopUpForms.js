@@ -205,7 +205,7 @@ export function PopUpNamePhone(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: ❌ ${window.location.hostname}: ${
+          message: `frontend error: facebookAuth ❌ ${window.location.hostname}: ${
             error.code ? error.code : error
           }`,
         }
@@ -232,7 +232,7 @@ export function PopUpNamePhone(props) {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: Try again, please!`,
+            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
           }
         );
       }
@@ -580,9 +580,9 @@ export function PopUpEmail(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: ❌ ${window.location.hostname}: ${
-            error.code ? error.code : error
-          }`,
+          message: `frontend error: facebookAuth ❌ ${
+            window.location.hostname
+          }: ${error.code ? error.code : error}`,
         }
       );
       if (error.code === "auth/popup-blocked") {
@@ -607,7 +607,7 @@ export function PopUpEmail(props) {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: Try again, please!`,
+            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
           }
         );
       }
@@ -946,9 +946,9 @@ export function PopUpEmailPhone(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: ❌ ${window.location.hostname}: ${
-            error.code ? error.code : error
-          }`,
+          message: `frontend error: facebookAuth ❌ ${
+            window.location.hostname
+          }: ${error.code ? error.code : error}`,
         }
       );
       if (error.code === "auth/popup-blocked") {
@@ -973,7 +973,7 @@ export function PopUpEmailPhone(props) {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: Try again, please!`,
+            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
           }
         );
       }
@@ -1330,9 +1330,9 @@ export function PopUpEvent(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: ❌ ${window.location.hostname}: ${
-            error.code ? error.code : error
-          }`,
+          message: `frontend error: facebookAuth ❌ ${
+            window.location.hostname
+          }: ${error.code ? error.code : error}`,
         }
       );
       if (error.code === "auth/popup-blocked") {
@@ -1357,7 +1357,7 @@ export function PopUpEvent(props) {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: Try again, please!`,
+            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
           }
         );
       }
@@ -1747,9 +1747,9 @@ export function PopUpNameEmail(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: ❌ ${window.location.hostname}: ${
-            error.code ? error.code : error
-          }`,
+          message: `frontend error: facebookAuth ❌ ${
+            window.location.hostname
+          }: ${error.code ? error.code : error}`,
         }
       );
       if (error.code === "auth/popup-blocked") {
@@ -1774,7 +1774,7 @@ export function PopUpNameEmail(props) {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: Try again, please!`,
+            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
           }
         );
       }

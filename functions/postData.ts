@@ -110,7 +110,7 @@ export async function getLocationData() {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
           {
-            message: `frontend error: ❌ ${window.location.hostname}: ${error}`,
+            message: `frontend error: postData ❌ ${window.location.hostname}: ${error}`,
           }
         );
         await axios

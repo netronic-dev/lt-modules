@@ -65,7 +65,7 @@ const Calendly = (props) => {
               await axios.post(
                 "https://back.netronic.net/telegram/send-error-message",
                 {
-                  message: `frontend error: ❌ ${window.location.hostname}: ${error}`,
+                  message: `frontend error: calendly ❌ ${window.location.hostname}: ${error}`,
                 }
               );
             });
@@ -74,7 +74,7 @@ const Calendly = (props) => {
           await axios.post(
             "https://back.netronic.net/telegram/send-error-message",
             {
-              message: `frontend error: ❌ ${window.location.hostname}: ${error}`,
+              message: `frontend error: calendly ❌ ${window.location.hostname}: ${error}`,
             }
           );
         });
