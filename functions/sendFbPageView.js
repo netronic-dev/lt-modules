@@ -61,7 +61,7 @@ export const sendEventToConversionApi = async (siteName, eventName) => {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: sendFbPageView ❌ ${window.location.hostname}: ${error.response.data}`,
+          message: `frontend error: sendFbPageView ❌ ${window.location.hostname}: ${error}`,
         }
       );
     });
