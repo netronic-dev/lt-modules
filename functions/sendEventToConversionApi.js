@@ -10,6 +10,7 @@ const url = `https://graph.facebook.com/v19.0/${pixel_id}/events`;
 
 export const sendEventToConversionApi = async (siteName, eventName) => {
   const userLocationData = await getLocationData();
+  console.log(userLocationData, 'userLocationData');
   const userAgent = navigator.userAgent;
 
   const hashedCity = createHash("sha256")

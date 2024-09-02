@@ -85,6 +85,7 @@ export async function getLocationData() {
 
   const clientIP = await axios.get("https://api.ipify.org/?format=json");
   if (clientIP.data.ip === cookieIp) {
+    console.log('1');
     locationData = {
       ip: getCookieByKey("ip") || "",
       city: getCookieByKey("city") || "",
@@ -97,6 +98,7 @@ export async function getLocationData() {
     await axios
       .get("https://ipinfo.io/json?token=ee40c07fb51963")
       .then((response) => {
+        console.log('2');
         locationData = {
           ip: response.data.ip,
           city: response.data.city,
@@ -110,6 +112,7 @@ export async function getLocationData() {
         await axios
           .get("https://ipinfo.io/json?token=eba5da567f5208")
           .then((response) => {
+            console.log('3');
             locationData = {
               ip: response.data.ip,
               city: response.data.city,
@@ -120,12 +123,6 @@ export async function getLocationData() {
             };
           })
           .catch(console.log);
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: postData ❌ ${window.location.hostname}: ${error}`,
-          }
-        );
       });
 
     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();

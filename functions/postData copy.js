@@ -16,6 +16,7 @@ export async function postData(
   fields
 ) {
   let locationInfo = await getLocationData();
+  console.log(locationInfo, 'locationInfo');
   const storedCookieConsent = getLocalStorage("cookie_consent", null);
 
   let data = {
