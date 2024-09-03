@@ -36,7 +36,8 @@ const Calendly = (props) => {
       ...eventData,
     };
     eventData &&
-      fetch("https://api.netronic.net/calendly", {
+      // fetch("https://api.netronic.net/calendly", {
+      fetch("http://localhost:5002/calendly", {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {

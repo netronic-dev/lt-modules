@@ -24,7 +24,6 @@ export async function postData(
   source?: string
 ) {
   let locationInfo: any = await getLocationData();
-  console.log(locationInfo, 'locationInfo');
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);

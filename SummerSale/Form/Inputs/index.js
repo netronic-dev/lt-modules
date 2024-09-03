@@ -29,16 +29,16 @@ export function InputsWName(props) {
         onSubmit: (values) => {
             dispatch(setUserData(values.name));
             const options = {
-                method: "POST",
-                url: `https://api.netronic.net/send-email`,
-                headers: {
-                    "content-type": "application/json",
-                },
-                data: {
-                    email: values.email,
-                    fromName: props.fromName,
-                    letterId: props.letterId,
-                },
+              method: "POST",
+              url: `https://back.netronic.net/send-email`,
+              headers: {
+                "content-type": "application/json",
+              },
+              data: {
+                email: values.email,
+                fromName: props.fromName,
+                letterId: props.letterId,
+              },
             };
             axios.request(options).then(
                 postData(

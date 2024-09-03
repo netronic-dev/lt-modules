@@ -1004,7 +1004,7 @@ export function PopUpEmailPhone(props) {
 
     const options = {
       method: "POST",
-      url: `https://api.netronic.net/send-email`,
+      url: `https://back.netronic.net/send-email`,
       headers: {
         "content-type": "application/json",
       },
@@ -1424,7 +1424,7 @@ export function PopUpEvent(props) {
 
     const options = {
       method: "POST",
-      url: `https://api.netronic.net/send-email`,
+      url: `https://back.netronic.net/send-email`,
       headers: {
         "content-type": "application/json",
       },
@@ -1836,7 +1836,7 @@ export function PopUpNameEmail(props) {
 
     const options = {
       method: "POST",
-      url: `https://api.netronic.net/send-email`,
+      url: `https://back.netronic.net/send-email`,
       headers: {
         "content-type": "application/json",
       },
