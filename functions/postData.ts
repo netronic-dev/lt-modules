@@ -24,6 +24,7 @@ export async function postData(
   source?: string
 ) {
   let locationInfo: any = await getLocationData();
+  console.log(locationInfo, 'locationInfo');
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
@@ -81,54 +82,77 @@ export async function getLocationData() {
     zipcode: "",
     state: "",
   };
+
   let cookieIp = getCookieByKey("ip");
 
-  const clientIP = await axios.get("https://api.ipify.org/?format=json");
-  if (clientIP.data.ip === cookieIp) {
-    console.log('1');
-    locationData = {
-      ip: getCookieByKey("ip") || "",
-      city: getCookieByKey("city") || "",
-      region: getCookieByKey("region") || "",
-      country: getCookieByKey("country") || "",
-      zipcode: getCookieByKey("zipcode") || "",
-      state: getCookieByKey("state") || "",
-    };
-  } else {
-    await axios
-      .get("https://ipinfo.io/json?token=ee40c07fb51963")
-      .then((response) => {
-        console.log('2');
+  try {
+    const clientIP = await axios.get("https://api.ipify.org/?format=json");
+
+    if (clientIP.data.ip === cookieIp) {
+      locationData = {
+        ip: getCookieByKey("ip") || "",
+        city: getCookieByKey("city") || "",
+        region: getCookieByKey("region") || "",
+        country: getCookieByKey("country") || "",
+        zipcode: getCookieByKey("zipcode") || "",
+        state: getCookieByKey("state") || "",
+      };
+    } else {
+      try {
+        const response = await axios.get(
+          "https://ipinfo.io/json?token=ee40c07fb51963"
+        );
         locationData = {
           ip: response.data.ip,
           city: response.data.city,
-          region: response.data.country,
+          region: response.data.region,
           country: response.data.country,
           zipcode: response.data.postal,
           state: response.data.region,
         };
-      })
-      .catch(async (error) => {
-        await axios
-          .get("https://ipinfo.io/json?token=eba5da567f5208")
-          .then((response) => {
-            console.log('3');
-            locationData = {
-              ip: response.data.ip,
-              city: response.data.city,
-              region: response.data.country,
-              country: response.data.country,
-              zipcode: response.data.postal,
-              state: response.data.region,
-            };
-          })
-          .catch(console.log);
-      });
+      } catch (error) {
+        console.log("First ipinfo.io request failed, trying fallback token");
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: postData ❌ ${window.location.hostname}: First ipinfo.io request failed, trying fallback token,
+            ${error}`,
+          }
+        );
+        try {
+          const fallbackResponse = await axios.get(
+            "https://ipinfo.io/json?token=eba5da567f5208"
+          );
+          locationData = {
+            ip: fallbackResponse.data.ip,
+            city: fallbackResponse.data.city,
+            region: fallbackResponse.data.region,
+            country: fallbackResponse.data.country,
+            zipcode: fallbackResponse.data.postal,
+            state: fallbackResponse.data.region,
+          };
+        } catch (fallbackError) {
+          console.error(
+            "Error fetching location data from fallback ipinfo.io",
+            fallbackError
+          );
+          await axios.post(
+            "https://back.netronic.net/telegram/send-error-message",
+            {
+              message: `frontend error: postData ❌ ${window.location.hostname}: Error fetching location data from fallback ipinfo.io,
+            ${fallbackError}`,
+            }
+          );
+        }
+      }
 
-    let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
-    for (const [key, value] of Object.entries(locationData)) {
-      document.cookie = `${key}=${value}; expires="${date}"`;
+      let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+      for (const [key, value] of Object.entries(locationData)) {
+        document.cookie = `${key}=${value}; expires="${date}"`;
+      }
     }
+  } catch (initialError) {
+    console.error("Error fetching IP address from ipify", initialError);
   }
 
   return locationData;
