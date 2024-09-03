@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import ReactGA from "react-ga4";
+import axios from "axios";
 import { postData } from "../functions/postData";
 import { useCalendlyEventListener } from "react-calendly";
 import ReactPixel from "react-facebook-pixel";
