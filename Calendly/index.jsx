@@ -36,7 +36,7 @@ const Calendly = (props) => {
       ...eventData,
     };
     eventData &&
-      fetch("https://api.netronic.net/calendly", {
+      fetch("https://back.netronic.net/calendly", {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {
@@ -48,10 +48,10 @@ const Calendly = (props) => {
           dispatch(addUserData(data.name));
           postData(
             data,
-            "https://dev.lasertag.net/forms",
-            `Call  order | LT NET (Call ${data.time})`,
-            props.lang,
+            "https://back.netronic.net/forms",
+            `Call  order (Calendly) | LT NET (Call ${data.time})`,
             window.location.href,
+            window.location.hostname,
             queryParams || router.query
           )
             .then(
