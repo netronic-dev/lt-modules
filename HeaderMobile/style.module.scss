@@ -8,7 +8,7 @@
 .navigation_mobile {
 	position: fixed;
 	z-index: 50;
-	display: none;
+	// display: none;
 	background-color: #000;
 	width: 100%;
 }
@@ -144,8 +144,8 @@
 		color: #ff6157;
 	}
 }
-@media (max-width: 1200px) {
-	.navigation_mobile {
-		display: block;
-	}
-}
+// @media (max-width: 1200px) {
+// 	.navigation_mobile {
+// 		display: block;
+// 	}
+// }

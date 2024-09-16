@@ -52,7 +52,7 @@ const Calendly = (props) => {
             `Call  order (Calendly) | LT NET (Call ${data.time})`,
             window.location.href,
             window.location.hostname,
-            queryParams || router.query,
+            queryParams || router.query
           )
             .then(
               ReactGA.event("generate_lead", {
