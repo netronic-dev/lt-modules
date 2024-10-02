@@ -1,127 +1,127 @@
-import style from "./style.module.scss"
-import { useState } from "react"
-import { useModals } from "../../context/ModalsProvider"
+import style from "./style.module.scss";
+import { useState } from "react";
+import { useModals } from "../../context/ModalsProvider";
 
 export function Calculator(props) {
-  let sortedNumbersData
-  const modals = useModals()
+  let sortedNumbersData;
+  const modals = useModals();
   if (props.lt) {
     if (props.en) {
-      sortedNumbersData = numbersData.ltWorld
+      sortedNumbersData = numbersData.ltWorld;
     } else {
-      sortedNumbersData = numbersData.ltRu
+      sortedNumbersData = numbersData.ltRu;
     }
   } else {
     if (props.en) {
-      sortedNumbersData = numbersData.marsWorld
+      sortedNumbersData = numbersData.marsWorld;
     } else {
-      sortedNumbersData = numbersData.marsRu
+      sortedNumbersData = numbersData.marsRu;
     }
   }
 
-  const [activeCell, changeActiveCell] = useState(1)
+  const [activeCell, changeActiveCell] = useState(1);
   // Количество рабочих дней арены в месяце
-  const [input1, changeInput1] = useState(sortedNumbersData.workingDays)
+  const [input1, changeInput1] = useState(sortedNumbersData.workingDays);
   // Количество рабочих часов арены в день
-  const [input2, changeInput2] = useState(sortedNumbersData.workingHours)
-  // Количество игр в час 
-  const [input3, changeInput3] = useState(sortedNumbersData.gamesPerHour)
+  const [input2, changeInput2] = useState(sortedNumbersData.workingHours);
+  // Количество игр в час
+  const [input3, changeInput3] = useState(sortedNumbersData.gamesPerHour);
   // Стоимость игры для одного игрока
-  const [input4, changeInput4] = useState(sortedNumbersData.costPerPlayer)
+  const [input4, changeInput4] = useState(sortedNumbersData.costPerPlayer);
   // Количество комплектов лазертаг оборудования
-  const [input5, changeInput5] = useState(sortedNumbersData.numberOfSets)
+  const [input5, changeInput5] = useState(sortedNumbersData.numberOfSets);
   // Общая стоимость лазертаг оборудования
-  const [input6, changeInput6] = useState(sortedNumbersData.costOfEquipment)
+  const [input6, changeInput6] = useState(sortedNumbersData.costOfEquipment);
   // Cумма инвестиций на открытие арены
-  const [input7, changeInput7] = useState(sortedNumbersData.investPrice)
+  const [input7, changeInput7] = useState(sortedNumbersData.investPrice);
   // Операционные ежемесячные расходы
-  const [input8, changeInput8] = useState(sortedNumbersData.monthlyExpenses)
+  const [input8, changeInput8] = useState(sortedNumbersData.monthlyExpenses);
   // Процент загрузка арены
-  const [input9, changeInput9] = useState(sortedNumbersData.clubLoad)
+  const [input9, changeInput9] = useState(sortedNumbersData.clubLoad);
 
-  let range = input9 / 100
+  let range = input9 / 100;
   // Количество рабочих дней в месяце
   function onInput1Change(e) {
-    changeInput1(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput1(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Количество рабочих часов в день
   function onInput2Change(e) {
-    changeInput2(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput2(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Количество игр в час
   function onInput3Change(e) {
-    changeInput3(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput3(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Стоимость игры для одного игрока
   function onInput4Change(e) {
-    changeInput4(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput4(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Количество комплектов лазертаг оборудования
   function onInput5Change(e) {
-    changeInput5(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput5(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Общая стоимость лазертаг оборудования
   function onInput6Change(e) {
-    changeInput6(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput6(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Сумма инвестиций на открытие арены
   function onInput7Change(e) {
-    changeInput7(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput7(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Операционные ежемесячные расходы
   function onInput8Change(e) {
-    changeInput8(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput8(Number(e.target.value.replace(/\W/gi, "")));
   }
   // Процент загрузка арены
   function onInput9Change(e) {
-    changeInput9(Number(e.target.value.replace(/\W/gi, '')))
+    changeInput9(Number(e.target.value.replace(/\W/gi, "")));
   }
   // количество игр в день
-  let num1 = ((input2) * (input3)) * range
+  let num1 = input2 * input3 * range;
   // количество игр в месяц
-  let num2 = (num1) * (input1)
+  let num2 = num1 * input1;
   // количество игроков в день,  чел.
-  let num3 = (num1) * (input5)
+  let num3 = num1 * input5;
   // количество игроков в месяц,  чел.
-  let num4 = (num3) * (input1)
+  let num4 = num3 * input1;
   // Сумма выручки в день
-  let num5 = (input4) * (num3)
+  let num5 = input4 * num3;
   // Выручка в месяц (валовый доход)
-  let num6 = (num5) * (input1)
+  let num6 = num5 * input1;
   // Размер инвестиций на открытие арены (оборудовани + постройка)
-  let num7 = (input6) + (input7)
+  let num7 = input6 + input7;
   // Операционные расходы в месяц
-  let num8 = (input8)
+  let num8 = input8;
   // EBIT (операционная прибыль в месяц)
-  let num9 = (num6) - (num8)
+  let num9 = num6 - num8;
   // Срок окупаемости (месяцев)
-  let num10 = (num7) / (num9)
+  let num10 = num7 / num9;
   // Рентабельность бизнеса
-  let num11 = (num9 * 100) / (num6)
+  let num11 = (num9 * 100) / num6;
   // ROI ПРОЕКТА, %
-  let num12 = (num9) / (num7) * 100
+  let num12 = (num9 / num7) * 100;
 
   function onPrevClick() {
     if (activeCell > 1) {
-      changeActiveCell(activeCell - 1)
+      changeActiveCell(activeCell - 1);
     }
   }
   function onNextClick() {
     if (activeCell < 3) {
-      changeActiveCell(activeCell + 1)
+      changeActiveCell(activeCell + 1);
     }
   }
   function onFirstPageChange() {
-    changeActiveCell(1)
+    changeActiveCell(1);
   }
   function onSecondPageChange() {
-    changeActiveCell(2)
+    changeActiveCell(2);
   }
   function onThirdPageChange() {
-    changeActiveCell(3)
+    changeActiveCell(3);
   }
   function onInputFormOpen() {
-    modals.NamePhoneModalChangeVisibility
+    modals.NamePhoneModalChangeVisibility;
   }
 
   return (
@@ -135,9 +135,17 @@ export function Calculator(props) {
         />
       </div>
       <div className={style.calculator}>
-        <div className={`${style.inputs_cell} ${activeCell === 3 ? style.paddings : null}`}>
+        <div
+          className={`${style.inputs_cell} ${
+            activeCell === 3 ? style.paddings : null
+          }`}
+        >
           <div className={style.triangle_out}>
-            <img className={style.triangle} src="/calculator/triangle.svg" />
+            <img
+              className={style.triangle}
+              src="/calculator/triangle.svg"
+              alt="triangle"
+            />
           </div>
           <div className={style.responsive}>
             <PageButtons
@@ -147,24 +155,36 @@ export function Calculator(props) {
               onThirdPageChange={onThirdPageChange}
             />
           </div>
-          {activeCell === 1 ?
-            (<div>
+          {activeCell === 1 ? (
+            <div>
               <InputItem
-                title={props.en ? "Number of working days in a month" : "Количество рабочих дней в месяце"}
+                title={
+                  props.en
+                    ? "Number of working days in a month"
+                    : "Количество рабочих дней в месяце"
+                }
                 min={sortedNumbersData.workingDaysFrom}
                 max={sortedNumbersData.workingDaysTo}
                 onChange={onInput1Change}
                 value={input1}
               />
               <InputItem
-                title={props.en ? "Number of working hours per day" : "Количество рабочих часов в день"}
+                title={
+                  props.en
+                    ? "Number of working hours per day"
+                    : "Количество рабочих часов в день"
+                }
                 min={sortedNumbersData.workingHoursFrom}
                 max={sortedNumbersData.workingHoursTo}
                 onChange={onInput2Change}
                 value={input2}
               />
               <InputItem
-                title={props.en ? "Number of games per hour" : "Максимальное количество игр в час"}
+                title={
+                  props.en
+                    ? "Number of games per hour"
+                    : "Максимальное количество игр в час"
+                }
                 min={sortedNumbersData.gamesPerHourFrom}
                 max={sortedNumbersData.gamesPerHourTo}
                 onChange={onInput3Change}
@@ -172,7 +192,11 @@ export function Calculator(props) {
               />
               <div className={style.responsive}>
                 <InputItem
-                  title={props.en ? "Cost of the game for one player $" : "Стоимость игры для одного игрока ₽"}
+                  title={
+                    props.en
+                      ? "Cost of the game for one player $"
+                      : "Стоимость игры для одного игрока ₽"
+                  }
                   min={sortedNumbersData.costPerPlayerFrom}
                   step={10}
                   max={sortedNumbersData.costPerPlayerTo}
@@ -180,20 +204,28 @@ export function Calculator(props) {
                   value={input4}
                 />
                 <InputItem
-                  title={props.en ? "Number of sets" : "Количество комплектов оборудования"}
+                  title={
+                    props.en
+                      ? "Number of sets"
+                      : "Количество комплектов оборудования"
+                  }
                   min={sortedNumbersData.numberOfSetsFrom}
                   max={sortedNumbersData.numberOfSetsTo}
                   onChange={onInput5Change}
                   value={input5}
                 />
               </div>
-            </div>) : null
-          }
-          {activeCell === 2 ?
+            </div>
+          ) : null}
+          {activeCell === 2 ? (
             <div>
               <div className={style.desktop}>
                 <InputItem
-                  title={props.en ? "Cost of the game for one player $" : "Стоимость игры для одного игрока ₽"}
+                  title={
+                    props.en
+                      ? "Cost of the game for one player $"
+                      : "Стоимость игры для одного игрока ₽"
+                  }
                   min={sortedNumbersData.costPerPlayerFrom}
                   step={10}
                   max={sortedNumbersData.costPerPlayerTo}
@@ -201,7 +233,11 @@ export function Calculator(props) {
                   value={input4}
                 />
                 <InputItem
-                  title={props.en ? "Number of sets" : "Количество комплектов оборудования"}
+                  title={
+                    props.en
+                      ? "Number of sets"
+                      : "Количество комплектов оборудования"
+                  }
                   min={sortedNumbersData.numberOfSetsFrom}
                   max={sortedNumbersData.numberOfSetsTo}
                   onChange={onInput5Change}
@@ -209,7 +245,11 @@ export function Calculator(props) {
                 />
               </div>
               <InputItem
-                title={props.en ? "Total cost of equipment $" : "Общая стоимость оборудования ₽"}
+                title={
+                  props.en
+                    ? "Total cost of equipment $"
+                    : "Общая стоимость оборудования ₽"
+                }
                 min={sortedNumbersData.costOfEquipmentFrom}
                 max={sortedNumbersData.costOfEquipmentTo}
                 step={10000}
@@ -218,17 +258,29 @@ export function Calculator(props) {
               />
               <div className={style.responsive}>
                 <InputItem
-                  title={props.en ? "Total investment for the arena opening $" : "Cумма инвестиций на открытие арены ₽"}
+                  title={
+                    props.en
+                      ? "Total investment for the arena opening $"
+                      : "Cумма инвестиций на открытие арены ₽"
+                  }
                   onChange={onInput7Change}
                   value={input7}
                 />
                 <InputItem
-                  title={props.en ? "Operating expenses per month $" : "Операционные ежемесячные расходы ₽"}
+                  title={
+                    props.en
+                      ? "Operating expenses per month $"
+                      : "Операционные ежемесячные расходы ₽"
+                  }
                   onChange={onInput8Change}
                   value={input8}
                 />
                 <InputItem
-                  title={props.en ? "Arena load (percentage)" : "Процент загрузки клуба %"}
+                  title={
+                    props.en
+                      ? "Arena load (percentage)"
+                      : "Процент загрузки клуба %"
+                  }
                   min={sortedNumbersData.clubLoadFrom}
                   step={5}
                   max={sortedNumbersData.clubLoadTo}
@@ -237,22 +289,34 @@ export function Calculator(props) {
                 />
               </div>
             </div>
-            : null}
-          {activeCell === 3 ?
-            (<>
+          ) : null}
+          {activeCell === 3 ? (
+            <>
               <div className={style.desktop}>
                 <InputItem
-                  title={props.en ? "Total investment for the arena opening $" : "Cумма инвестиций на открытие клуба ₽"}
+                  title={
+                    props.en
+                      ? "Total investment for the arena opening $"
+                      : "Cумма инвестиций на открытие клуба ₽"
+                  }
                   onChange={onInput7Change}
                   value={input7}
                 />
                 <InputItem
-                  title={props.en ? "Operating expenses per month $" : "Операционные ежемесячные расходы ₽"}
+                  title={
+                    props.en
+                      ? "Operating expenses per month $"
+                      : "Операционные ежемесячные расходы ₽"
+                  }
                   onChange={onInput8Change}
                   value={input8}
                 />
                 <InputItem
-                  title={props.en ? "Arena load (percentage)" : "Процент загрузки клуба %"}
+                  title={
+                    props.en
+                      ? "Arena load (percentage)"
+                      : "Процент загрузки клуба %"
+                  }
                   min={sortedNumbersData.clubLoadFrom}
                   step={5}
                   max={sortedNumbersData.clubLoadTo}
@@ -268,11 +332,15 @@ export function Calculator(props) {
                   num3={num10}
                 />
               </div>
-            </>)
-            : null}
+            </>
+          ) : null}
           <div className={style.buttons}>
             <button
-              className={`${activeCell === 1 ? style.button_border_inactive : style.button_border}`}
+              className={`${
+                activeCell === 1
+                  ? style.button_border_inactive
+                  : style.button_border
+              }`}
               onClick={activeCell === 1 ? null : onPrevClick}
             >
               {props.en ? "Back" : "Назад"}
@@ -281,7 +349,13 @@ export function Calculator(props) {
               className={style.button_fill}
               onClick={activeCell === 3 ? onInputFormOpen : onNextClick}
             >
-              {activeCell === 3 ? props.en ? "Contact us" : "Связаться" : props.en ? "Next" : "Далее"}
+              {activeCell === 3
+                ? props.en
+                  ? "Contact us"
+                  : "Связаться"
+                : props.en
+                ? "Next"
+                : "Далее"}
             </button>
           </div>
         </div>
@@ -293,14 +367,14 @@ export function Calculator(props) {
             num3={num10}
           />
         </div>
-      </div >
+      </div>
     </>
-  )
+  );
 }
 function OutCome(props) {
-  const num1 = Number(props.num1).toFixed(0)
-  const num2 = Number(props.num2).toFixed(0)
-  const num3 = Number(props.num3).toFixed(1)
+  const num1 = Number(props.num1).toFixed(0);
+  const num2 = Number(props.num2).toFixed(0);
+  const num3 = Number(props.num3).toFixed(1);
   return (
     <div className={style.outcome}>
       <h2 className={style.outcome__title}>
@@ -308,7 +382,11 @@ function OutCome(props) {
       </h2>
       <div className={style.outcome__cell}>
         <div className={style.outcome_type}>
-          <img className={style.outcome_type__icon} src="/calculator/pepe.svg" />
+          <img
+            className={style.outcome_type__icon}
+            src="/calculator/pepe.svg"
+            alt="pepe"
+          />
           <h3 className={style.outcome_type__text}>
             {props.en ? "Revenue per day" : "Сумма выручки в день"}
           </h3>
@@ -319,9 +397,15 @@ function OutCome(props) {
       </div>
       <div className={style.outcome__cell}>
         <div className={style.outcome_type}>
-          <img className={style.outcome_type__icon} src="/calculator/calendar.svg" />
+          <img
+            className={style.outcome_type__icon}
+            src="/calculator/calendar.svg"
+            alt="calendar"
+          />
           <h3 className={style.outcome_type__text}>
-            {props.en ? "Operating profit per month" : "Операционная прибыль в месяц"}
+            {props.en
+              ? "Operating profit per month"
+              : "Операционная прибыль в месяц"}
           </h3>
         </div>
         <p className={style.outcome__value}>
@@ -330,25 +414,24 @@ function OutCome(props) {
       </div>
       <div className={style.outcome__cell}>
         <div className={style.outcome_type}>
-          <img className={style.outcome_type__icon} src="/calculator/time.svg" />
+          <img
+            className={style.outcome_type__icon}
+            src="/calculator/time.svg"
+            alt="time"
+          />
           <h3 className={style.outcome_type__text}>
             {props.en ? "Payback time (months)" : "Срок окупаемости (месяцев)"}
           </h3>
         </div>
-        <p className={style.outcome__value}>
-          {num3}
-        </p>
+        <p className={style.outcome__value}>{num3}</p>
       </div>
     </div>
-  )
+  );
 }
 function InputItem(props) {
-
   return (
     <div className={style.input_item}>
-      <h3 className={style.input_item__title}>
-        {props.title}
-      </h3>
+      <h3 className={style.input_item__title}>{props.title}</h3>
       <input
         className={style.input_item__number_input}
         type="text"
@@ -358,7 +441,7 @@ function InputItem(props) {
         max={props.max}
       />
       <div className={style.input_item__range_input_out}>
-        {props.max ?
+        {props.max ? (
           <input
             className={style.input_item__range_input}
             type="range"
@@ -368,7 +451,8 @@ function InputItem(props) {
             step={props.step ? props.step : 1}
             onChange={props.onChange}
             value={props.value}
-          /> : null}
+          />
+        ) : null}
         <div className={style.from_to}>
           <p className={style.text}>
             {props.min ? numberWithSpace(props.min) : null}
@@ -379,7 +463,7 @@ function InputItem(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 function PageButtons(props) {
   return (
@@ -388,24 +472,27 @@ function PageButtons(props) {
         <button
           onClick={props.onFirstPageChange}
           className={`${style.top_buttons__button} 
-            ${props.activeCell === 1 ? style.active : null}`}>
+            ${props.activeCell === 1 ? style.active : null}`}
+        >
           1
         </button>
         <button
           onClick={props.onSecondPageChange}
           className={`${style.top_buttons__button} 
-            ${props.activeCell === 2 ? style.active : null}`}>
+            ${props.activeCell === 2 ? style.active : null}`}
+        >
           2
         </button>
         <button
           onClick={props.onThirdPageChange}
           className={`${style.top_buttons__button} 
-            ${props.activeCell === 3 ? style.active : null}`}>
+            ${props.activeCell === 3 ? style.active : null}`}
+        >
           3
         </button>
       </div>
     </div>
-  )
+  );
 }
 function numberWithSpace(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -434,7 +521,7 @@ const numbersData = {
     monthlyExpenses: 60000,
     clubLoad: 20,
     clubLoadFrom: 10,
-    clubLoadTo: 100
+    clubLoadTo: 100,
   },
   marsWorld: {
     workingDays: 28,
@@ -459,7 +546,7 @@ const numbersData = {
     monthlyExpenses: 5000,
     clubLoad: 20,
     clubLoadFrom: 10,
-    clubLoadTo: 100
+    clubLoadTo: 100,
   },
   ltRu: {
     workingDays: 28,
@@ -484,7 +571,7 @@ const numbersData = {
     monthlyExpenses: 60000,
     clubLoad: 15,
     clubLoadFrom: 10,
-    clubLoadTo: 100
+    clubLoadTo: 100,
   },
   ltWorld: {
     workingDays: 28,
@@ -509,6 +596,6 @@ const numbersData = {
     monthlyExpenses: 5000,
     clubLoad: 15,
     clubLoadFrom: 10,
-    clubLoadTo: 100
-  }
-}
+    clubLoadTo: 100,
+  },
+};

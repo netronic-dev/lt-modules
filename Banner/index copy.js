@@ -14,16 +14,31 @@ const Banner = (props) => {
     <div className={`${style.banner} fade-down-animation`}>
       <div className={style.container}>
         <div className={style.left_line}>
-          <Image src={bgVerticalLine} alt="" layout="fill" />
+          <Image src={bgVerticalLine} alt="bgVerticalLine" layout="fill" />
         </div>
         <div className={style.bg_polygon}>
-          <Image src={bgPolygon} alt="" layout="fill" objectFit="contain" />
+          <Image
+            src={bgPolygon}
+            alt="bgPolygon"
+            layout="fill"
+            objectFit="contain"
+          />
         </div>
         <div className={style.bg_figure}>
-          <Image src={bgFigure} alt="" layout="fill" objectFit="cover" />
+          <Image
+            src={bgFigure}
+            alt="bgFigure"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
         <div className={style.bg_heroes}>
-          <Image src={bgHeroes} alt="" layout="fill" objectFit="contain" />
+          <Image
+            src={bgHeroes}
+            alt="bgHeroes"
+            layout="fill"
+            objectFit="contain"
+          />
         </div>
         <p className={style.title}>{props.title}</p>
         <div className={style.block_text}>
@@ -51,6 +66,7 @@ const Banner = (props) => {
         <button
           className={style.button_close}
           onClick={() => props.toggleActivity()}
+          aria-label="Close button"
         >
           {closeBtn}
         </button>

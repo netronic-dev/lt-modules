@@ -56,6 +56,7 @@ export default function IAAPAMain(props) {
               objectFit="cover"
               objectPosition={props.objectPosition}
               priority
+              alt="laser tag convetion"
             />
           </div>
         </ul>

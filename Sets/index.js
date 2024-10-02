@@ -27,8 +27,9 @@ export function SetsButtons(props) {
 function SetButton(props) {
   return (
     <div
-      className={`${style.button} ${props.active === true ? style.active : null
-        }`}
+      className={`${style.button} ${
+        props.active === true ? style.active : null
+      }`}
       onClick={props.onClick}
     >
       <p className={style.title}>{props.title}</p>
@@ -45,10 +46,7 @@ export function SetsHeader(props) {
         <p className={style.text}>{props.text}</p>
       </div>
       <div className={style.sets_header_button}>
-        <Button
-          style="blueBlack"
-          text={props.buttonText}
-        />
+        <Button style="blueBlack" text={props.buttonText} />
       </div>
     </div>
   );
@@ -57,14 +55,15 @@ export function SetsHeader(props) {
 export function SetsGrid(props) {
   return (
     <div
-      className={`${style.sets_grid} ${props.columns === "2"
-        ? style.two_columns
-        : props.columns === "3"
+      className={`${style.sets_grid} ${
+        props.columns === "2"
+          ? style.two_columns
+          : props.columns === "3"
           ? style.three_columns
           : props.columns === "4"
-            ? style.four_columns
-            : null
-        }`}
+          ? style.four_columns
+          : null
+      }`}
     >
       {props.in}
     </div>
@@ -77,7 +76,12 @@ export function SetsProductCard(props) {
       <>
         <div className={style.sets_pc}>
           <div className={style.sets_pc_image}>
-            <Image src={props.src} layout="fill" objectFit="contain" />
+            <Image
+              src={props.src}
+              layout="fill"
+              objectFit="contain"
+              alt="image"
+            />
           </div>
           <div className={style.sets_pc_content}>
             <p className={style.text}>{props.name}</p>
@@ -121,17 +125,13 @@ export function SetsTable(props) {
             </p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
+            <p className={style.text}>{props.en ? "+" : "Есть"}</p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Defeat sensor" : "Датчик поражения"}
             </p>
           </div>
           <div className={style.grid}>
-            <p className={style.text}>
-              {props.en ? "+" : "Есть"}
-            </p>
+            <p className={style.text}>{props.en ? "+" : "Есть"}</p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Second hand sensor" : "Датчик второй руки"}
             </p>
@@ -144,7 +144,9 @@ export function SetsTable(props) {
           </div>
           <div className={style.grid}>
             <p className={style.text}>
-              {props.en ? "Recoil imitation module in the butt" : "Модуль вибрации в прикладе"}
+              {props.en
+                ? "Recoil imitation module in the butt"
+                : "Модуль вибрации в прикладе"}
             </p>
             <p className={`${style.text} ${style.standart}`}>
               {props.en ? "Recoil imitation" : "Имитация отдачи"}
@@ -160,11 +162,7 @@ export function SetsTable(props) {
           </div>
         </div>
         <div className={style.button_form}>
-          <Button
-            type="catalog"
-            style="blueBlack"
-            text={props.buttonText}
-          />
+          <Button type="catalog" style="blueBlack" text={props.buttonText} />
         </div>
       </div>
     );
@@ -174,18 +172,18 @@ export function SetsTable(props) {
         <div className={style.table_outdoor}>
           <div className={style.table_outdoor_header}>
             <h2 className={style.table_header_title}>
-              {props.en ? "Falcon Modifications F1 | F2" : "Модификации Falcon F1 | F2"}
+              {props.en
+                ? "Falcon Modifications F1 | F2"
+                : "Модификации Falcon F1 | F2"}
             </h2>
           </div>
-          {props.en ?
-            (<FalconTableEn sets={true} />) :
-            (<FalconTable sets={true} />)}
+          {props.en ? (
+            <FalconTableEn sets={true} />
+          ) : (
+            <FalconTable sets={true} />
+          )}
           <div className={style.button_form}>
-            <Button
-              text={props.buttonText}
-              type="catalog"
-              style="blueBlack"
-            />
+            <Button text={props.buttonText} type="catalog" style="blueBlack" />
           </div>
         </div>
       </div>

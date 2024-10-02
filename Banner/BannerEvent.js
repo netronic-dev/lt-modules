@@ -44,6 +44,7 @@ const Banner = (props) => {
         <button
           className={style.button_close}
           onClick={() => props.toggleActivity()}
+          aria-label="close button"
         >
           {closeBtn}
         </button>

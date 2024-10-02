@@ -2,9 +2,9 @@ import { Component } from "react";
 import style from "./style.module.scss";
 
 const theme = {
-  "short": style.video_short,
-  "full": style.video_full
-}
+  short: style.video_short,
+  full: style.video_full,
+};
 export default class VideoBlock extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +20,17 @@ export default class VideoBlock extends Component {
   }
   render() {
     return (
-      <div className={theme[this.props.theme ? this.props.theme : "short"]} onClick={this.onFrameChange}>
+      <div
+        className={theme[this.props.theme ? this.props.theme : "short"]}
+        onClick={this.onFrameChange}
+      >
         {this.state.isFrameOpen === false ? (
           <>
-            <a className={style.video__link}>
+            <a
+              href="#"
+              className={style.video__link}
+              aria-label="Maxresdefault"
+            >
               <picture>
                 <source
                   srcSet={
@@ -40,6 +47,7 @@ export default class VideoBlock extends Component {
                     this.props.videoLink +
                     "/maxresdefault.jpg"
                   }
+                  alt="maxresdefault"
                 />
               </picture>
             </a>
@@ -47,12 +55,7 @@ export default class VideoBlock extends Component {
               className={style.video__button}
               aria-label="Запустить видео"
             >
-              <svg
-                width="50"
-                height="50"
-                viewBox="0 0 50 50"
-                fill="none"
-              >
+              <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
                 <circle
                   className={style.video__button_shape}
                   cx="25"

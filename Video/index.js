@@ -9,11 +9,13 @@ export function VideoPopUp(props) {
       ${theme[props.theme ? props.theme : "default"].style}
       `}
     >
-      <div className={style.close_block} onClick={props.onClick}>
-      </div>
+      <div className={style.close_block} onClick={props.onClick}></div>
       <div className={style.video_popup}>
         <div className={style.button_out} onClick={props.onClick}>
-          <button className={style.video_button_close}>
+          <button
+            className={style.video_button_close}
+            aria-label="Close button"
+          >
             {theme[props.theme ? props.theme : "default"].icon}
           </button>
         </div>
@@ -28,7 +30,7 @@ export function VideoPopUp(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const cross = (

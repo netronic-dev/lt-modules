@@ -205,9 +205,9 @@ export function PopUpNamePhone(props) {
       await axios.post(
         "https://back.netronic.net/telegram/send-error-message",
         {
-          message: `frontend error: facebookAuth ❌ ${window.location.hostname}: ${
-            error.code ? error.code : error
-          }`,
+          message: `frontend error: facebookAuth ❌ ${
+            window.location.hostname
+          }: ${error.code ? error.code : error}`,
         }
       );
       if (error.code === "auth/popup-blocked") {
@@ -384,7 +384,7 @@ export function PopUpNamePhone(props) {
                 style={{
                   borderColor: errors.name ? "#d22e2e" : "#000",
                 }}
-                $error={errors.name ? "true" : "false"}
+                error={errors.name ? "true" : "false"}
                 {...register("name", {
                   required: "Name is required",
                 })}
@@ -452,7 +452,7 @@ export function PopUpNamePhone(props) {
                 style={{
                   borderColor: errors.email ? "#d22e2e" : "#000",
                 }}
-                $error={errors.email ? "true" : "false"}
+                error={errors.email ? "true" : "false"}
                 {...register("email")}
                 placeholder={
                   props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -796,7 +796,7 @@ export function PopUpEmail(props) {
                 style={{
                   borderColor: errors.email ? "#d22e2e" : "#000",
                 }}
-                $error={errors.email ? "true" : "false"}
+                error={errors.email ? "true" : "false"}
                 {...register("email")}
                 placeholder={
                   props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -1131,7 +1131,7 @@ export function PopUpEmailPhone(props) {
                   style={{
                     borderColor: errors.name ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.name ? "true" : "false"}
+                  error={errors.name ? "true" : "false"}
                   {...register("name", {
                     required: "Name is required",
                   })}
@@ -1200,7 +1200,7 @@ export function PopUpEmailPhone(props) {
                   style={{
                     borderColor: errors.email ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.email ? "true" : "false"}
+                  error={errors.email ? "true" : "false"}
                   {...register("email")}
                   placeholder={
                     props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -1554,7 +1554,7 @@ export function PopUpEvent(props) {
                   style={{
                     borderColor: errors.name ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.name ? "true" : "false"}
+                  error={errors.name ? "true" : "false"}
                   {...register("name", {
                     required: "Name is required",
                   })}
@@ -1623,7 +1623,7 @@ export function PopUpEvent(props) {
                   style={{
                     borderColor: errors.email ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.email ? "true" : "false"}
+                  error={errors.email ? "true" : "false"}
                   {...register("email")}
                   placeholder={
                     props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -1972,7 +1972,7 @@ export function PopUpNameEmail(props) {
                   style={{
                     borderColor: errors.name ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.name ? "true" : "false"}
+                  error={errors.name ? "true" : "false"}
                   {...register("name", {
                     required: "Name is required",
                   })}
@@ -2040,7 +2040,7 @@ export function PopUpNameEmail(props) {
                   style={{
                     borderColor: errors.email ? "#d22e2e" : "#000",
                   }}
-                  $error={errors.email ? "true" : "false"}
+                  error={errors.email ? "true" : "false"}
                   {...register("email")}
                   placeholder={
                     props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -2053,6 +2053,7 @@ export function PopUpNameEmail(props) {
                 name="budget"
                 render={({ field }) => (
                   <Select
+                    aria-label="Change budget"
                     {...field}
                     placeholder={props.budgetPlaceholder}
                     options={selectOptions}

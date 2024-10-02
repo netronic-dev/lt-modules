@@ -11,7 +11,7 @@ const Page = (props) => {
                     <div className={style.image_block}>
                         <Image
                             src={props.image}
-                            alt=""
+                            alt="Image"
                             layout="fill"
                             objectFit="contain"
                         />

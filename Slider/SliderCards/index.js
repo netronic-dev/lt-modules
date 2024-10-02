@@ -1,14 +1,12 @@
 import Slider from "react-slick";
 import style from "./style.module.scss";
-import Image from "next/image"
+import Image from "next/image";
 import { useInView } from "react-hook-inview";
 
 export default function SimpleSlider(props) {
-  const [ref, isVisible] = useInView(
-    {
-      unobserveOnEnter: true
-    }
-  )
+  const [ref, isVisible] = useInView({
+    unobserveOnEnter: true,
+  });
   const settings = {
     dots: false,
     infinite: true,
@@ -19,15 +17,15 @@ export default function SimpleSlider(props) {
     speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
-    prevArrow: (
-      prevArrow
-    ),
-    nextArrow: (
-      nextArrow
-    ),
+    prevArrow: prevArrow,
+    nextArrow: nextArrow,
   };
   return (
-    <div className="sliderCards" ref={ref} key={isVisible ? "slider-inview" : "slider"}>
+    <div
+      className="sliderCards"
+      ref={ref}
+      key={isVisible ? "slider-inview" : "slider"}
+    >
       <Slider {...settings}>
         {props.sliderData.map((data, index) => (
           <ImageAdder
@@ -43,7 +41,6 @@ export default function SimpleSlider(props) {
 }
 
 function ImageAdder(props) {
-
   return (
     <div className={style.grid_item}>
       <div className={style.grid_firstColumn}>
@@ -54,6 +51,7 @@ function ImageAdder(props) {
           height={655}
           priority={true}
           className="zoom-animation animated-second"
+          alt="slider"
         />
       </div>
       <div className={style.grid_secondColumn}>
@@ -64,6 +62,7 @@ function ImageAdder(props) {
           height={315}
           priority={true}
           className="zoom-animation animated-third"
+          alt="slider"
         />
         <Image
           src={props.imageThree}
@@ -72,6 +71,7 @@ function ImageAdder(props) {
           height={315}
           priority={true}
           className="zoom-animation animated-fourth"
+          alt="Slider card image"
         />
       </div>
     </div>
@@ -94,7 +94,7 @@ const prevArrow = (
       fill="white"
     />
   </svg>
-)
+);
 const nextArrow = (
   <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
     <circle
@@ -111,4 +111,4 @@ const nextArrow = (
       fill="white"
     />
   </svg>
-)
+);

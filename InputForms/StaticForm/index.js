@@ -477,7 +477,7 @@ export function ThemeForm(props) {
               style={{
                 borderColor: errors.name ? "#d22e2e" : "#000",
               }}
-              $error={errors.name ? "true" : "false"}
+              error={errors.name ? "true" : "false"}
               {...register("name", {
                 required: "Name is required",
               })}
@@ -543,7 +543,7 @@ export function ThemeForm(props) {
               style={{
                 borderColor: errors.email ? "#d22e2e" : "#000",
               }}
-              $error={errors.email ? "true" : "false"}
+              error={errors.email ? "true" : "false"}
               {...register("email")}
               placeholder={
                 props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -892,7 +892,7 @@ export function ThemeFormAll(props) {
               style={{
                 borderColor: errors.name ? "#d22e2e" : "transparent",
               }}
-              $error={errors.name ? "true" : "false"}
+              error={errors.name ? "true" : "false"}
               {...register("name", {
                 required: "Name is required",
               })}
@@ -958,7 +958,7 @@ export function ThemeFormAll(props) {
               style={{
                 borderColor: errors.email ? "#d22e2e" : "transparent",
               }}
-              $error={errors.email ? "true" : "false"}
+              error={errors.email ? "true" : "false"}
               {...register("email")}
               placeholder={
                 props.emailPlaceholder ? props.emailPlaceholder : "Email*"
@@ -971,6 +971,7 @@ export function ThemeFormAll(props) {
             name="budget"
             render={({ field }) => (
               <Select
+                aria-label="Change budget"
                 {...field}
                 placeholder={
                   props.budgetPlaceholder ? props.budgetPlaceholder : "Budget*"

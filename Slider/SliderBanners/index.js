@@ -1,47 +1,61 @@
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
-import { useSwipeable } from "react-swipeable"
-import { FillButton } from "../../../lt-modules/Buttons"
-import style from "./style.module.scss"
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useSwipeable } from "react-swipeable";
+import { FillButton } from "../../../lt-modules/Buttons";
+import style from "./style.module.scss";
 
 export default function SliderBanners(props) {
-  const [ArrayNumber, changeArrayNumber] = useState(0)
-  const [firstPicNumber, changeFirstPicNumber] = useState(0)
-  const [secondPicNumber, changeSecondPicNumber] = useState(1)
-  const [thirdPicNumber, changeThirdPicNumber] = useState(2)
+  const [ArrayNumber, changeArrayNumber] = useState(0);
+  const [firstPicNumber, changeFirstPicNumber] = useState(0);
+  const [secondPicNumber, changeSecondPicNumber] = useState(1);
+  const [thirdPicNumber, changeThirdPicNumber] = useState(2);
 
   function prev() {
-    changeFirstPicNumber(firstPicNumber == 0 ? data.length - 1 : firstPicNumber - 1)
-    changeSecondPicNumber(secondPicNumber == 0 ? data.length - 1 : secondPicNumber - 1)
-    changeThirdPicNumber(thirdPicNumber == 0 ? data.length - 1 : thirdPicNumber - 1)
+    changeFirstPicNumber(
+      firstPicNumber == 0 ? data.length - 1 : firstPicNumber - 1
+    );
+    changeSecondPicNumber(
+      secondPicNumber == 0 ? data.length - 1 : secondPicNumber - 1
+    );
+    changeThirdPicNumber(
+      thirdPicNumber == 0 ? data.length - 1 : thirdPicNumber - 1
+    );
   }
   function next() {
-    changeFirstPicNumber(firstPicNumber == data.length - 1 ? 0 : firstPicNumber + 1)
-    changeSecondPicNumber(secondPicNumber == data.length - 1 ? 0 : secondPicNumber + 1)
-    changeThirdPicNumber(thirdPicNumber == data.length - 1 ? 0 : thirdPicNumber + 1)
+    changeFirstPicNumber(
+      firstPicNumber == data.length - 1 ? 0 : firstPicNumber + 1
+    );
+    changeSecondPicNumber(
+      secondPicNumber == data.length - 1 ? 0 : secondPicNumber + 1
+    );
+    changeThirdPicNumber(
+      thirdPicNumber == data.length - 1 ? 0 : thirdPicNumber + 1
+    );
   }
   function changeSliderData(index) {
-    changeArrayNumber(index)
-    changeFirstPicNumber(0)
-    changeSecondPicNumber(1)
-    changeThirdPicNumber(2)
+    changeArrayNumber(index);
+    changeFirstPicNumber(0);
+    changeSecondPicNumber(1);
+    changeThirdPicNumber(2);
   }
 
-  const data = props.data[ArrayNumber].data
+  const data = props.data[ArrayNumber].data;
 
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => prev(),
     onSwipedLeft: () => next(),
-    trackMouse: true
+    trackMouse: true,
   });
   return (
     <>
-      <div className={style.slider_changer_out} >
+      <div className={style.slider_changer_out}>
         <div className={`${style.slider_changer} fade-up-animation`}>
           {props.data.map((item, index) => (
             <p
-              onClick={() => { changeSliderData(index) }}
+              onClick={() => {
+                changeSliderData(index);
+              }}
               className={`${style.slider_changer_text} 
                 ${index == ArrayNumber ? style.active : null}`}
               key={index}
@@ -60,13 +74,9 @@ export default function SliderBanners(props) {
             objectPosition="100% 100%"
           />
         </div>
-        <div
-          className={`${style.image_cell} ${style.center}`}
-        >
+        <div className={`${style.image_cell} ${style.center}`}>
           <div className={style.button_prev}>
-            <PrevArrow
-              onClick={prev}
-            />
+            <PrevArrow onClick={prev} />
           </div>
           <CellAdder
             key={secondPicNumber}
@@ -76,9 +86,7 @@ export default function SliderBanners(props) {
             visible
           />
           <div className={style.button_next}>
-            <NextArrow
-              onClick={next}
-            />
+            <NextArrow onClick={next} />
           </div>
         </div>
         <div className={`${style.image_cell} ${style.pointer}`} onClick={next}>
@@ -92,42 +100,43 @@ export default function SliderBanners(props) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 function CellAdder(props) {
-  return (
-    props.visible ?
-      <Link href={props.link}>
-        <a className={`fade-up-animation`}>
-          <Image
-            src={props.image}
-            layout="responsive"
-            width={972}
-            height={530}
-            quality={92}
-            priority={true}
-          />
-          <div
-            className={`
-              ${style.cell_button} fade-up-animation animated-second
-            `}
-          >
-            <FillButton text={props.text} />
-          </div>
-        </a>
-      </Link >
-      :
-      <div className="fade-up-animation animated-second">
+  return props.visible ? (
+    <Link href={props.link} aria-label="Slider">
+      <a className={`fade-up-animation`} aria-label="Slider">
         <Image
           src={props.image}
-          layout="fill"
-          objectFit="cover"
-          objectPosition={props.objectPosition}
+          layout="responsive"
+          width={972}
+          height={530}
+          quality={92}
           priority={true}
+          alt="slider"
         />
-      </div>
-  )
+        <div
+          className={`
+              ${style.cell_button} fade-up-animation animated-second
+            `}
+        >
+          <FillButton text={props.text} />
+        </div>
+      </a>
+    </Link>
+  ) : (
+    <div className="fade-up-animation animated-second">
+      <Image
+        src={props.image}
+        layout="fill"
+        objectFit="cover"
+        objectPosition={props.objectPosition}
+        priority={true}
+        alt="slider"
+      />
+    </div>
+  );
 }
 
 function PrevArrow(props) {
@@ -155,7 +164,7 @@ function PrevArrow(props) {
         fill="white"
       />
     </svg>
-  )
+  );
 }
 function NextArrow(props) {
   return (
@@ -180,6 +189,6 @@ function NextArrow(props) {
         d="M22.9998 19L21.5898 20.41L26.1698 25L21.5898 29.59L22.9998 31L28.9998 25L22.9998 19Z"
         fill="white"
       />
-    </svg >
-  )
+    </svg>
+  );
 }
