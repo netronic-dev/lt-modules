@@ -2,10 +2,10 @@ import Image from "next/image";
 import classNames from "classnames";
 import style from "./style.module.scss";
 import Link from "next/link";
-import mainImgOne from "../../../../public/blog/iaapa-expo-europe-2024/mainImgOne.webp";
-import mainImgTwo from "../../../../public/blog/iaapa-expo-europe-2024/mainImgTwo.webp";
+import mainImgOne from "../../../../public/blog/iaapa-2024-orlando/mainImgOne.png";
+import mainImgTwo from "../../../../public/blog/iaapa-2024-orlando/mainImgTwo.png";
 import mainImgThree from "../../../../public/blog/iaapa-expo-europe-2024/mainImgThree.webp";
-import mainImgFour from "../../../../public/blog/iaapa-expo-europe-2024/mainImgFour.webp";
+import mainImgFour from "../../../../public/blog/iaapa-2024-orlando/mainImgFour.png";
 
 export default function IAAPAMain(props) {
   return (

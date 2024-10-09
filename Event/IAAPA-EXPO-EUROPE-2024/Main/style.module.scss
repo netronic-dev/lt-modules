@@ -353,21 +353,24 @@
   transform: translate(-50%, 0);
   z-index: 1;
 
-  @media (min-width: 744px) {
+  @media (min-width: 729px) {
     width: 540px;
     height: 400px;
     bottom: -119px;
     left: 72%;
   }
 
-  @media (min-width: 1024px) {
-    width: 663px;
-    height: 491px;
-    left: 68%;
+  @media (min-width: 956px) {
+    width: 480px;
+    height: 442px;
+    left: 54%;
   }
 
-  @media (min-width: 1927px) {
-    left: 59%;
+  @media (min-width: 1170px) {
+    width: 622px;
+    height: 574px;
+    left: 52%;
+    top: -398px;
   }
 }
 
