@@ -150,7 +150,7 @@ const Form = (props) => {
               onBudgetChange(item);
             }}
             value={formik.values.budget}
-            placeholder=""
+            placeholder="Budget range*"
           />
           {/* <div className={style.dropdown_wrapper}>
             <label
