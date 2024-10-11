@@ -34,15 +34,6 @@ const Form = (props) => {
       : setRegionCode("us");
   }, [modal.region]);
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = (e) => {
-    if (!props.budgetData.some((item) => item.value === props.value)) {
-      setIsFocused(false);
-    }
-  };
-
   const router = useRouter();
   const dispatch = useDispatch();
   const queryParams = useSelector(searchParams);
@@ -119,6 +110,15 @@ const Form = (props) => {
     });
   };
 
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleBudgetFocus = () => setIsFocused(true);
+  const handleBudgetBlur = () => {
+    if (!formik.values.budget) {
+      setIsFocused(false);
+    }
+  };
+
   return (
     <form className={style.form} onSubmit={formik.handleSubmit} id={props.id}>
       <div className={style.inputs_wrapper}>
@@ -150,7 +150,7 @@ const Form = (props) => {
               onBudgetChange(item);
             }}
             value={formik.values.budget}
-            placeholder=""
+            placeholder="Budget range*"
           />
           {/* <div className={style.dropdown_wrapper}>
             <label
