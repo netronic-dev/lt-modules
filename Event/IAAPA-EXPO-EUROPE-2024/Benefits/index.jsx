@@ -16,7 +16,7 @@ const Benefits = (props) => {
         <div className={style.titleBlock}>
           <h2 className={style.title}>{props.title}</h2>
         </div>
-        {/* <div className={style.videosBlock}>
+        <div className={style.videosBlock}>
           <h3 className={style.videosBlockTitle}>{props.videosBlockTitle}</h3>
           <ul className={style.videosList}>
             <li
@@ -94,7 +94,7 @@ const Benefits = (props) => {
               </div>
             </li>
           </ul>
-        </div> */}
+        </div>
         <div className={style.benefits_grid}>
           <h3 className={style.benefits_subtitle}>{props.subtitleTwo}</h3>
           <ul className={style.upper_row}>
