@@ -276,28 +276,31 @@
     background-size: cover;
     margin-top: 35px;
     padding-bottom: 35px;
+    margin-bottom: 15px;
 
     @media (min-width: 744px) {
+      align-items: end;
       justify-content: end;
-      align-items: center;
-      padding-right: 28px;
+      padding-right: 45px;
       padding-top: 113px;
       padding-bottom: 114px;
-      background-image: url("../../../../public/blog/iaapa-2024-orlando/participantTitleBgDesktop.webp");
+      background-image: url("../../../../public/blog/iaapa-2024-orlando/participantTitleBgTablet.webp");
     }
 
     @media (min-width: 956px) {
       margin-top: 55px;
+      align-items: center;
+      background-image: url("../../../../public/blog/iaapa-2024-orlando/participantTitleBgMiniDesktop.webp");
     }
 
     @media (min-width: 1170px) {
       max-width: 1171px;
       margin-top: 60px;
+      background-image: url("../../../../public/blog/iaapa-2024-orlando/participantTitleBgDesktop.webp");
     }
   }
 
   .title {
-    max-width: 284px;
     color: #fff;
     font-family: Manrope;
     font-size: 28px;
@@ -307,8 +310,195 @@
     text-transform: uppercase;
 
     @media (min-width: 744px) {
-      max-width: 356px;
       font-size: 35px;
+      margin-bottom: -85px;
     }
+
+    @media (min-width: 956px) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.videosBlock {
+  padding-top: 32px;
+  padding-bottom: 36px;
+  background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBg.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 60px;
+  overflow: hidden;
+
+  @media (min-width: 744px) {
+    background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgTablet.webp");
+    margin-bottom: 75px;
+  }
+
+  @media (min-width: 956px) {
+    display: flex;
+    align-items: center;
+    background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgMiniDesktop.webp");
+    margin-bottom: 60px;
+  }
+
+  @media (min-width: 1170px) {
+    background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgDesktop.webp");
+    margin-bottom: 100px;
+    gap: 34px;
+    padding-bottom: 16px;
+  }
+}
+
+.videosBlockTitle {
+  color: #000;
+  font-family: Manrope;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-left: 43px;
+  margin-bottom: 30px;
+
+  span {
+    color: #d22e2e;
+  }
+
+  @media (min-width: 956px) {
+    font-size: 30px;
+  }
+
+  @media (min-width: 1170px) {
+    font-size: 35px;
+    margin-left: 25px;
+  }
+}
+
+.videosList {
+  display: flex;
+  flex-direction: column;
+  gap: 83px;
+  border-radius: 10px;
+
+  @media (min-width: 744px) {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.videosItem {
+  position: relative;
+  width: 311px;
+  height: 203px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-left: 51px;
+
+  @media (min-width: 744px) {
+    margin-left: 68px;
+  }
+
+  @media (min-width: 956px) {
+    margin-left: 31px;
+  }
+
+  @media (min-width: 1170px) {
+    width: 381px;
+    height: 248px;
+  }
+}
+
+.videosItem:nth-child(1) {
+  @media (min-width: 1170px) {
+    margin-left: 0;
+  }
+}
+
+.videosItem:nth-child(2) {
+  @media (min-width: 744px) {
+    margin-left: 0;
+  }
+}
+
+.videosItemTitleBox {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.videosItemTitleBox__one {
+  margin-top: -2px;
+  margin-left: -39px;
+
+  @media (min-width: 1170px) {
+    margin-top: -2px;
+    margin-left: -39px;
+  }
+}
+
+.videosItemTitleBox__two {
+  margin: 0 auto;
+  margin-top: 180px;
+  z-index: 2;
+  position: relative;
+
+  @media (min-width: 1170px) {
+    margin-top: 209px;
+    margin-left: 22px;
+  }
+}
+
+.videosItemTitle {
+  color: #000;
+  font-family: Manrope;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.benefitsHeroOne {
+  position: relative;
+  width: 160px;
+  height: 201px;
+  margin-left: -29px;
+
+  @media (min-width: 1170px) {
+    width: 195px;
+    height: 247px;
+    margin-top: 19px;
+  }
+}
+
+.benefitsHeroTwo {
+  position: relative;
+  width: 106px;
+  height: 205px;
+  margin-top: -185px;
+  margin-left: 194px;
+  z-index: 1;
+
+  @media (min-width: 1170px) {
+    margin-top: -176px;
+    margin-left: 238px;
+  }
+}
+
+.playIcon {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+
+  &:hover {
+    color: #d22e2e;
   }
 }

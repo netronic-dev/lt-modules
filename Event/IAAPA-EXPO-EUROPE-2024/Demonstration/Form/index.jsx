@@ -13,7 +13,6 @@ import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../../store/searchParamsSlice";
 import { sendEventToConversionApi } from "../../../../functions/sendFbPageView";
 import {
-  InputComment,
   InputCompanyName,
   InputCountry,
   InputEmail,
@@ -23,6 +22,7 @@ import {
 import { useEffect, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { Icon } from "../../../../../components/Icon";
 const Form = (props) => {
   let validate = validation;
   const [regionCode, setRegionCode] = useState();
@@ -33,6 +33,15 @@ const Form = (props) => {
       ? setRegionCode(modal?.region.toLowerCase())
       : setRegionCode("us");
   }, [modal.region]);
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (e) => {
+    if (!props.budgetData.some((item) => item.value === props.value)) {
+      setIsFocused(false);
+    }
+  };
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -143,6 +152,28 @@ const Form = (props) => {
             value={formik.values.budget}
             placeholder="Budget range*"
           />
+          {/* <div className={style.dropdown_wrapper}>
+            <label
+              className={`${style.dropdown_label} ${
+                isFocused || props.value ? "label-active" : ""
+              }`}
+            >
+              {props.label || "Budget range"}
+              <Icon name="icon-label-star" width={7} height={7} />
+
+              <Dropdown
+                className={`dropdown`}
+                options={props.budgetData}
+                onChange={(item) => {
+                  onBudgetChange(item);
+                }}
+                value={formik.values.budget}
+                // placeholder="Budget range*"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            </label>
+          </div> */}
           <InputCountry
             onChange={formik.handleChange}
             value={formik.values.country}

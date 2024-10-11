@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "../../../../../../lt-modules/InputForms/forms.module.scss";
 import styleInput from "./styleInput.module.scss";
 import { icons } from "../../../../../InputForms/icons/icons";
+import { Icon } from "../../../../../../components/Icon";
 
 const theme = {
   standard: style.input_block,
@@ -27,28 +28,49 @@ export function InputEmail(props) {
     icon.error = icons.error_1;
   }
 
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (e) => {
+    if (!e.target.value) {
+      setIsFocused(false);
+    }
+    props.onBlur && props.onBlur(e);
+  };
+
   return (
     <div className={style.input_block_out}>
       <div className={theme[props.theme ? props.theme : "standard"]}>
-        <input
-          className={`
+        <label className={`${styleInput.labelWrapper}`}>
+          <span
+            className={`${styleInput.label} ${
+              isFocused || props.value ? styleInput.labelActive : ""
+            }`}
+          >
+            {props.label || "Email"}
+            <Icon name="icon-label-star" width={7} height={7} />
+          </span>
+          <input
+            className={`
                         ${styleInput.input}
                         ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
-          type="email"
-          onChange={props.onChange}
-          onBlur={props.onBlur}
-          value={props.value}
-          name="email"
-          style={{
-            backgroundColor: props.bg_color,
-            color: props.color,
-          }}
-          placeholder={props.placeholder || "Email*"}
-          disabled={props.loggedViaSocials}
-        />
+            type="email"
+            onChange={props.onChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            value={props.value}
+            name="email"
+            style={{
+              backgroundColor: props.bg_color,
+              color: props.color,
+            }}
+            // placeholder={props.placeholder || "Email*"}
+            disabled={props.loggedViaSocials}
+          />
+        </label>
         {props.anotherPlace ? (
           <AddingPlaceholder
             text={props.anotherPlace || "Email*"}
@@ -86,28 +108,50 @@ export function InputCompanyName(props) {
   if (props.error_1) {
     icon.error = icons.error_1;
   }
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (e) => {
+    if (!e.target.value) {
+      setIsFocused(false);
+    }
+    props.onBlur && props.onBlur(e);
+  };
+
   return (
     <div className={style.input_block_out}>
       <div className={theme[props.theme ? props.theme : "standard"]}>
-        <input
-          className={`
+        <label className={`${styleInput.labelWrapper}`}>
+          <span
+            className={`${styleInput.label} ${
+              isFocused || props.value ? styleInput.labelActive : ""
+            }`}
+          >
+            {props.label || "Company Name"}
+            <Icon name="icon-label-star" width={7} height={7} />
+          </span>
+          <input
+            className={`
                         ${styleInput.input}
                         ${props.error && props.touched ? style.input_error : ""}
                         ${props.correct ? style.input_correct : ""}
                         ${props.className}
                         `}
-          type="text"
-          onChange={props.onChange}
-          onBlur={props.onBlur}
-          value={props.value}
-          name="companyName"
-          style={{
-            backgroundColor: props.bg_color,
-            color: props.color,
-          }}
-          placeholder={props.placeholder || "Company Name*"}
-          disabled={props.loggedViaSocials}
-        />
+            type="text"
+            onChange={props.onChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            value={props.value}
+            name="companyName"
+            style={{
+              backgroundColor: props.bg_color,
+              color: props.color,
+            }}
+            // placeholder={props.placeholder || "Company Name*"}
+            disabled={props.loggedViaSocials}
+          />
+        </label>
         {props.anotherPlace ? (
           <AddingPlaceholder
             text={props.anotherPlace || "Company Name*"}
@@ -316,26 +360,48 @@ export function InputName(props) {
     icon.error = icons.error_1;
   }
 
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (e) => {
+    if (!e.target.value) {
+      setIsFocused(false);
+    }
+    props.onBlur && props.onBlur(e);
+  };
+
   return (
     <div className={style.input_block_out}>
       <div className={theme[props.theme ? props.theme : "standard"]}>
-        <input
-          maxLength="30"
-          className={`${styleInput.input} ${
-            props.error && props.touched ? style.input_error : ""
-          } ${props.correct ? style.input_correct : ""} ${props.className}`}
-          style={{
-            backgroundColor: props.bg_color,
-            color: props.color,
-          }}
-          name="name"
-          type="text"
-          placeholder={props.placeholder || "Name*"}
-          onChange={props.onChange}
-          onBlur={props.onBlur}
-          value={props.value}
-          disabled={props.loggedViaSocials}
-        />
+        <label className={`${styleInput.labelWrapper}`}>
+          <span
+            className={`${styleInput.label} ${
+              isFocused || props.value ? styleInput.labelActive : ""
+            }`}
+          >
+            {props.label || "Name"}
+            <Icon name="icon-label-star" width={7} height={7} />
+          </span>
+          <input
+            maxLength="30"
+            className={`${styleInput.input} ${
+              props.error && props.touched ? styleInput.inputError : ""
+            } ${props.correct ? styleInput.inputCorrect : ""} ${
+              props.className
+            }`}
+            style={{
+              backgroundColor: props.bg_color,
+              color: props.color,
+            }}
+            name="name"
+            type="text"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={props.onChange}
+            value={props.value}
+            disabled={props.loggedViaSocials}
+          />
+        </label>
         {props.anotherPlace ? (
           <AddingPlaceholder
             text={props.anotherPlace || "Name*"}
