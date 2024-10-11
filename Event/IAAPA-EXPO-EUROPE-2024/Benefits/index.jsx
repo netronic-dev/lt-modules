@@ -51,7 +51,7 @@ const Benefits = (props) => {
                 <Image
                   src="/blog/iaapa-2024-orlando/benefitsHeroOne.webp"
                   alt="benefitsHeroOne"
-                  fill
+                  layout="fill"
                   sizes="100%"
                 />
               </div>
@@ -88,7 +88,7 @@ const Benefits = (props) => {
                 <Image
                   src="/blog/iaapa-2024-orlando/benefitsHeroTwo.webp"
                   alt="benefitsHeroTwo"
-                  fill
+                  layout="fill"
                   sizes="100%"
                 />
               </div>
@@ -103,7 +103,12 @@ const Benefits = (props) => {
               return (
                 <li className={style.grid_cell} key={index}>
                   <div className={classNames(sizeClassName, style.icon_image)}>
-                    <Image src={item.src} alt={item.alt} fill sizes="100%" />
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      layout="fill"
+                      objectFit="cover"
+                    />
                   </div>
 
                   <div className={style.divider}></div>
