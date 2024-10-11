@@ -2,9 +2,9 @@ import Image from "next/image";
 import classNames from "classnames";
 import style from "./style.module.scss";
 import Link from "next/link";
-import gatewayImgOne from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgOne.webp";
-import gatewayImgTwo from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgTwo.webp";
-import gatewayImgThree from "../../../../public/blog/iaapa-expo-europe-2024/GatewayImgThree.webp";
+import gatewayImgOne from "../../../../public/blog/iaapa-2024-orlando/GatewayImgOne.webp";
+import gatewayImgTwo from "../../../../public/blog/iaapa-2024-orlando/GatewayImgTwo.webp";
+import gatewayImgThree from "../../../../public/blog/iaapa-2024-orlando/GatewayImgThree.webp";
 
 const Page = (props) => {
   return (
@@ -13,7 +13,7 @@ const Page = (props) => {
         {props.title} <span className={style.titleSpan}>{props.titleSpan}</span>
       </h2>
       <p className={style.text}>
-        {props.upperText} <br />{" "}
+        {props.upperText}{" "}
         <span className={style.upperTextSpan}>{props.upperTextSpan}</span>
       </p>
       <div className={style.event_logo}>

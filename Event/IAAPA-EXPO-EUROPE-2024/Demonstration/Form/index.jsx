@@ -14,6 +14,7 @@ import { searchParams } from "../../../../../store/searchParamsSlice";
 import { sendEventToConversionApi } from "../../../../functions/sendFbPageView";
 import {
   InputComment,
+  InputCompanyName,
   InputCountry,
   InputEmail,
   InputName,
@@ -49,9 +50,7 @@ const Form = (props) => {
   function onEquipmentTypeChange(item) {
     formik.setFieldValue("equipmentType", item.value);
   }
-  function onEquipmentTypeOfBusinessChange(item) {
-    formik.setFieldValue("typeOfBusiness", item.value);
-  }
+
   function onBudgetChange(item) {
     formik.setFieldValue("budget", item.value);
   }
@@ -61,11 +60,10 @@ const Form = (props) => {
       name: "",
       email: "",
       phone: "",
+      companyName: "",
       website: "",
-      comment: "",
       country: "",
       method: "",
-      typeOfBusiness: "",
       budget: "",
       equipmentType: "",
       isAgreePrivacyPolicy: true,
@@ -136,35 +134,44 @@ const Form = (props) => {
             noIcons
             errorTheme="rounded_flat"
           />
-          <InputWebsite
+          <Dropdown
+            className="dropdown"
+            options={props.budgetData}
+            onChange={(item) => {
+              onBudgetChange(item);
+            }}
+            value={formik.values.budget}
+            placeholder="Budget range*"
+          />
+          <InputCountry
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.website}
-            error={formik.errors.website}
-            touched={formik.touched.website}
+            value={formik.values.country}
+            error={formik.errors.country}
+            touched={formik.touched.country}
             theme="rounded"
             noIcons
+            errorTheme="rounded_flat"
           />
           <Dropdown
             className="dropdown"
-            options={props.methodsData}
             onChange={(item) => {
-              onMethodChange(item);
+              onEquipmentTypeChange(item);
             }}
-            value={formik.values.method}
-            placeholder="Preferred contact method"
-          />
-          <Dropdown
-            className="dropdown"
-            options={props.typeOfBusinessData}
-            onChange={(item) => {
-              onEquipmentTypeOfBusinessChange(item);
-            }}
-            value={formik.values.typeOfBusiness}
-            placeholder="Type of business"
+            options={props.equipData}
+            value={formik.values.equipmentType}
+            placeholder="How do you plan to use the equipment?"
           />
         </div>
         <div className={style.cell}>
+          <InputCompanyName
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.companyName}
+            error={formik.errors.companyName}
+            touched={formik.touched.companyName}
+            theme="rounded"
+            noIcons
+          />
           <PhoneInput
             country={regionCode}
             excludeCountries={"ru"}
@@ -215,42 +222,23 @@ const Form = (props) => {
             !isValidPhoneNumber(`+${formik.values.phone}`) && (
               <p className={style.error_rounded_flat}>Invalid phone number</p>
             )}
-          <Dropdown
-            className="dropdown"
-            options={props.budgetData}
-            onChange={(item) => {
-              onBudgetChange(item);
-            }}
-            value={formik.values.budget}
-            placeholder="Budget range*"
-          />
-          <InputCountry
-            onChange={formik.handleChange}
-            value={formik.values.country}
-            error={formik.errors.country}
-            touched={formik.touched.country}
-            theme="rounded"
-            noIcons
-            errorTheme="rounded_flat"
-          />
-          <Dropdown
-            className="dropdown"
-            onChange={(item) => {
-              onEquipmentTypeChange(item);
-            }}
-            options={props.equipData}
-            value={formik.values.equipmentType}
-            placeholder="How do you plan to use the equipment?"
-          />
-          <InputComment
+          <InputWebsite
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.comment}
-            error={formik.errors.comment}
-            touched={formik.touched.comment}
+            value={formik.values.website}
+            error={formik.errors.website}
+            touched={formik.touched.website}
             theme="rounded"
             noIcons
-            errorTheme="rounded_flat"
+          />
+          <Dropdown
+            className="dropdown"
+            options={props.methodsData}
+            onChange={(item) => {
+              onMethodChange(item);
+            }}
+            value={formik.values.method}
+            placeholder="Preferred contact method"
           />
         </div>
       </div>
@@ -314,6 +302,13 @@ export const validation = (values) => {
       errors.isAgreePrivacyPolicy = "Required";
     }
   }
+
+  if (values.companyName !== undefined) {
+    if (values.companyName === "") {
+      errors.companyName = "Required";
+    }
+  }
+
   if (values.budget !== undefined) {
     if (values.budget === "") {
       errors.budget = "Required";

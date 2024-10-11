@@ -8,11 +8,12 @@ import light_blue_figure from "../../../../public/blog/iaapa-expo-europe-2024/li
 
 const Page = (props) => {
   const isTablet = useIsTablet({ width: 744 });
-  const isDesktop = useIsDesktop({ width: 1024 });
+  const isDesktop = useIsDesktop({ width: 956 });
+  const isMoreDesktop = useIsDesktop({ width: 1170 });
 
   return (
     <section className={style.main}>
-      {isDesktop && (
+      {isMoreDesktop && (
         <div className={style.light_blue_figure_left}>
           <Image
             src={light_blue_figure}
@@ -22,7 +23,7 @@ const Page = (props) => {
           />
         </div>
       )}
-      {isDesktop && (
+      {isMoreDesktop && (
         <div className={style.light_blue_figure_right}>
           <Image
             src={light_blue_figure}
@@ -65,10 +66,13 @@ const Page = (props) => {
               <h2 className={style.icon_text}>{item.iconText}</h2>
             </div>
             <h3 className={style.cell_title}>
-              {item.subtitle} {!isTablet && !isDesktop && <br />}
+              {item.subtitle} {!isTablet && !isDesktop && index !== 3 && <br />}
+              {(isTablet || isDesktop) && index !== 1 && <br />}
               <span
                 className={`${
-                  index !== 1 ? style.cell_text : style.cell_text_large
+                  index !== 1 && index !== 3
+                    ? style.cell_text
+                    : style.cell_text_large
                 }`}
               >
                 {item.text}

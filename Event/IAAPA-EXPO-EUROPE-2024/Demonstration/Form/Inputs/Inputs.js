@@ -78,7 +78,7 @@ export function InputEmail(props) {
   );
 }
 
-export function InputWebsite(props) {
+export function InputCompanyName(props) {
   const icon = {
     error: icons.error,
     agree: icons.agree,
@@ -100,17 +100,17 @@ export function InputWebsite(props) {
           onChange={props.onChange}
           onBlur={props.onBlur}
           value={props.value}
-          name="website"
+          name="companyName"
           style={{
             backgroundColor: props.bg_color,
             color: props.color,
           }}
-          placeholder={props.placeholder || "Website"}
+          placeholder={props.placeholder || "Company Name*"}
           disabled={props.loggedViaSocials}
         />
         {props.anotherPlace ? (
           <AddingPlaceholder
-            text={props.anotherPlace || "Website"}
+            text={props.anotherPlace || "Company Name*"}
             value={props.value}
           />
         ) : (
@@ -196,7 +196,7 @@ export function InputCountry(props) {
   );
 }
 
-export function InputComment(props) {
+export function InputWebsite(props) {
   const icon = {
     error: icons.error,
     agree: icons.agree,
@@ -218,17 +218,17 @@ export function InputComment(props) {
           onChange={props.onChange}
           onBlur={props.onBlur}
           value={props.value}
-          name="comment"
+          name="website"
           style={{
             backgroundColor: props.bg_color,
             color: props.color,
           }}
-          placeholder={props.placeholder || "Comments"}
+          placeholder={props.placeholder || "Website"}
           disabled={props.loggedViaSocials}
         />
         {props.anotherPlace ? (
           <AddingPlaceholder
-            text={props.anotherPlace || "Comments"}
+            text={props.anotherPlace || "Website"}
             value={props.value}
           />
         ) : (

@@ -40,6 +40,10 @@
         font-weight: 700;
         line-height: normal;
         text-transform: uppercase;
+
+        @media (min-width: 744px) {
+          text-align: start;
+        }
       }
 
       .join_us__text_span {

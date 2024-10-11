@@ -56,6 +56,7 @@ export async function postData(
     phoneNumber: values.phone ? `+${values.phone}` : values.phoneNumber || "",
     chatPhone: values.chatPhone || "",
     countryCode: countryCode || "",
+    companyName: values.companyName || "",
     query,
     cookies: storedCookieConsent,
     geoInfo: {
