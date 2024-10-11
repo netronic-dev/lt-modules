@@ -10,12 +10,7 @@ const Benefits = (props) => {
     <section className={style.benefits}>
       <div className={style.container}>
         <div className={style.bg_logo}>
-          <Image
-            src={props.bg_logo}
-            alt="background logo"
-            layout="fill"
-            objectFit="cover"
-          />
+          <Image src={props.bg_logo} alt="background logo" fill sizes="100%" />
         </div>
         <p className={style.subtitle}>{props.subtitle}</p>
         <div className={style.titleBlock}>
@@ -35,13 +30,9 @@ const Benefits = (props) => {
                 onClick={() => modals.VideoModalOpen("21gkLvALdHs")}
                 target="_blank"
                 aria-label="Play benefits video"
+                className={style.playIcon}
               >
-                <Icon
-                  name="icon-benefits-play"
-                  className={style.playIcon}
-                  width={63}
-                  height={63}
-                />
+                <Icon name="icon-benefits-play" width={63} height={63} />
               </a>
               <div
                 className={classNames(
@@ -62,8 +53,6 @@ const Benefits = (props) => {
                   alt="benefitsHeroOne"
                   fill
                   sizes="100%"
-                  width={160}
-                  height={201}
                 />
               </div>
             </li>
@@ -101,8 +90,6 @@ const Benefits = (props) => {
                   alt="benefitsHeroTwo"
                   fill
                   sizes="100%"
-                  width={106}
-                  height={205}
                 />
               </div>
             </li>
@@ -116,12 +103,7 @@ const Benefits = (props) => {
               return (
                 <li className={style.grid_cell} key={index}>
                   <div className={classNames(sizeClassName, style.icon_image)}>
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      layout="fill"
-                      objectFit="contain"
-                    />
+                    <Image src={item.src} alt={item.alt} fill sizes="100%" />
                   </div>
 
                   <div className={style.divider}></div>
