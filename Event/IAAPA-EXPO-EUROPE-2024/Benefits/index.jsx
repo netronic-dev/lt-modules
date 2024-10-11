@@ -44,7 +44,10 @@ const Benefits = (props) => {
                 />
               </a>
               <div
-                className={`${style.videosItemTitleBox} ${style.videosItemTitleBox__one}`}
+                className={classNames(
+                  style.videosItemTitleBox,
+                  style.videosItemTitleBox__one
+                )}
                 style={{
                   backgroundImage:
                     'url("/blog/iaapa-2024-orlando/benefitsVideoBgImgOne.webp")',
@@ -80,7 +83,10 @@ const Benefits = (props) => {
                 <Icon name="icon-benefits-play" width={63} height={63} />
               </a>
               <div
-                className={`${style.videosItemTitleBox} ${style.videosItemTitleBox__two}`}
+                className={classNames(
+                  style.videosItemTitleBox,
+                  style.videosItemTitleBox__two
+                )}
                 style={{
                   backgroundImage:
                     'url("/blog/iaapa-2024-orlando/benefitsVideoBgImgTwo.webp")',
