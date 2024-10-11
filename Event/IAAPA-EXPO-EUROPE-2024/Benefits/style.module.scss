@@ -268,7 +268,7 @@
   .titleBlock {
     height: 328px;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
     background-image: url("../../../../public/blog/iaapa-2024-orlando/participantTitleBg.webp");
     background-repeat: no-repeat;
@@ -279,8 +279,8 @@
     margin-bottom: 15px;
 
     @media (min-width: 744px) {
-      align-items: end;
-      justify-content: end;
+      align-items: flex-end;
+      justify-content: flex-end;
       padding-right: 45px;
       padding-top: 113px;
       padding-bottom: 114px;
