@@ -325,7 +325,7 @@
   .videosBlock {
     padding-top: 32px;
     padding-bottom: 36px;
-    background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBg.webp");
+    background-image: url("/blog/iaapa-2024-orlando/benefitsVideosBg.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -333,19 +333,19 @@
     overflow: hidden;
 
     @media (min-width: 744px) {
-      background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgTablet.webp");
+      background-image: url("/blog/iaapa-2024-orlando/benefitsVideosBgTablet.webp");
       margin-bottom: 75px;
     }
 
     @media (min-width: 956px) {
       display: flex;
       align-items: center;
-      background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgMiniDesktop.webp");
+      background-image: url("/blog/iaapa-2024-orlando/benefitsVideosBgMiniDesktop.webp");
       margin-bottom: 60px;
     }
 
     @media (min-width: 1170px) {
-      background-image: url("../../../../public/blog/iaapa-2024-orlando/benefitsVideosBgDesktop.webp");
+      background-image: url("/blog/iaapa-2024-orlando/benefitsVideosBgDesktop.webp");
       margin-bottom: 100px;
       gap: 34px;
       padding-bottom: 16px;
