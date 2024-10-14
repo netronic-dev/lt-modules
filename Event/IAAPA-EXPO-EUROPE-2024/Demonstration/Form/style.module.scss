@@ -103,18 +103,17 @@
   user-select: none;
 }
 
-.dropdown_wrapper {
+.label_wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   width: 100%;
 
   .dropdown_label {
     position: absolute;
     left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 37%;
+    transform: translateY(-37%);
     display: flex;
     align-items: flex-start;
     pointer-events: none;
@@ -125,9 +124,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 23px;
+    z-index: 2;
   }
 
-  .label-active {
+  .label_active {
     display: none;
   }
 }
