@@ -19,11 +19,11 @@ import {
   InputName,
   InputWebsite,
 } from "./Inputs/Inputs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { Icon } from "../../../../../components/Icon";
-import classNames from "classnames";
+
 const Form = (props) => {
   let validate = validation;
   const [regionCode, setRegionCode] = useState();
@@ -111,16 +111,30 @@ const Form = (props) => {
     });
   };
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        handleBudgetBlur();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   const [isFocused, setIsFocused] = useState(false);
 
   const handleBudgetFocus = () => setIsFocused(true);
+
   const handleBudgetBlur = () => {
     if (!formik.values.budget) {
       setIsFocused(false);
     }
   };
-
-  console.log(isFocused, "isFocused");
 
   return (
     <form className={style.form} onSubmit={formik.handleSubmit} id={props.id}>
@@ -146,36 +160,25 @@ const Form = (props) => {
             noIcons
             errorTheme="rounded_flat"
           />
-          {/* <Dropdown
-            className="dropdown"
-            options={props.budgetData}
-            onChange={(item) => {
-              onBudgetChange(item);
-            }}
-            value={formik.values.budget}
-            placeholder="Budget range*"
-          /> */}
-          {/* <div className={classNames("dropdown", style.dropdown_wrapper)}> */}
           <label className={style.label_wrapper}>
             <span
               className={`${style.dropdown_label} ${
-                isFocused || props.value ? style.label_active : ""
+                isFocused || formik.values.budget ? style.label_active : ""
               }`}
             >
               {props.label || "Budget range"}
               <Icon name="icon-label-star" width={7} height={7} />
             </span>
-            <Dropdown
-              className="dropdown"
-              options={props.budgetData}
-              onChange={(item) => {
-                onBudgetChange(item);
-              }}
-              value={formik.values.budget}
-              placeholder=""
-              onFocus={handleBudgetFocus}
-              onBlur={handleBudgetBlur}
-            />
+            <div ref={dropdownRef}>
+              <Dropdown
+                className="dropdown"
+                options={props.budgetData}
+                onChange={(item) => onBudgetChange(item)}
+                value={formik.values.budget}
+                placeholder=""
+                onFocus={handleBudgetFocus}
+              />
+            </div>
           </label>
           <InputCountry
             onChange={formik.handleChange}
