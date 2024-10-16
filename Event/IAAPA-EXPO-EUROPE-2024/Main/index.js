@@ -223,7 +223,7 @@ function EventInfo(props) {
   );
 }
 
-const placeIcon = (
+export const placeIcon = (
   <svg width="25" height="25" viewBox="0 0 25 25" fill="none">
     <path
       d="M12.2383 2.5C8.36828 2.5 5.23828 5.63 5.23828 9.5C5.23828 14.75 12.2383 22.5 12.2383 22.5C12.2383 22.5 19.2383 14.75 19.2383 9.5C19.2383 5.63 16.1083 2.5 12.2383 2.5ZM7.23828 9.5C7.23828 6.74 9.47828 4.5 12.2383 4.5C14.9983 4.5 17.2383 6.74 17.2383 9.5C17.2383 12.38 14.3583 16.69 12.2383 19.38C10.1583 16.71 7.23828 12.35 7.23828 9.5Z"
@@ -267,7 +267,7 @@ const placeIconBlue = (
   </svg>
 );
 
-const standIcon = (
+ const standIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -297,7 +297,7 @@ const standIconBlue = (
   </svg>
 );
 
-const dateIcon = (
+ const dateIcon = (
   <svg
     width="25"
     height="20"

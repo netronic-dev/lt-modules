@@ -93,7 +93,7 @@ const EventSlider = (props) => {
     <div className="event__slider_deal">
       <Slider {...settings}>
         {props.imagesData.map((item, index) => (
-          <div className={style.slide}>
+          <div className={style.slide} key={index}>
             <Image
               src={item}
               alt={`slide${index + 1}`}
