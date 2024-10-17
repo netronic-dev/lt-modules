@@ -13,11 +13,11 @@ import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../../store/searchParamsSlice";
 import { sendEventToConversionApi } from "../../../../functions/sendFbPageView";
 import {
-  InputCompanyName,
-  InputCountry,
+  // InputCompanyName,
+  // InputCountry,
   InputEmail,
   InputName,
-  InputWebsite,
+  // InputWebsite,
 } from "./Inputs/Inputs";
 import { useEffect, useRef, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
@@ -45,12 +45,12 @@ const Form = (props) => {
       !formik.values.isAgreePrivacyPolicy
     );
   }
-  function onMethodChange(item) {
-    formik.setFieldValue("method", item.value);
-  }
-  function onEquipmentTypeChange(item) {
-    formik.setFieldValue("equipmentType", item.value);
-  }
+  // function onMethodChange(item) {
+  //   formik.setFieldValue("method", item.value);
+  // }
+  // function onEquipmentTypeChange(item) {
+  //   formik.setFieldValue("equipmentType", item.value);
+  // }
 
   function onBudgetChange(item) {
     formik.setFieldValue("budget", item.value);
@@ -61,12 +61,12 @@ const Form = (props) => {
       name: "",
       email: "",
       phone: "",
-      companyName: "",
-      website: "",
-      country: "",
-      method: "",
+      // companyName: "",
+      // website: "",
+      // country: "",
+      // method: "",
       budget: "",
-      equipmentType: "",
+      // equipmentType: "",
       isAgreePrivacyPolicy: true,
     },
     validate,
@@ -160,7 +160,7 @@ const Form = (props) => {
             noIcons
             errorTheme="rounded_flat"
           />
-          <label className={style.label_wrapper}>
+          {/* <label className={style.label_wrapper}>
             <span
               className={`${style.dropdown_label} ${
                 isFocused || formik.values.budget ? style.label_active : ""
@@ -179,8 +179,8 @@ const Form = (props) => {
                 onFocus={handleBudgetFocus}
               />
             </div>
-          </label>
-          <InputCountry
+          </label> */}
+          {/* <InputCountry
             onChange={formik.handleChange}
             value={formik.values.country}
             error={formik.errors.country}
@@ -197,10 +197,10 @@ const Form = (props) => {
             options={props.equipData}
             value={formik.values.equipmentType}
             placeholder="How do you plan to use the equipment?"
-          />
+          /> */}
         </div>
         <div className={style.cell}>
-          <InputCompanyName
+          {/* <InputCompanyName
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.companyName}
@@ -208,7 +208,7 @@ const Form = (props) => {
             touched={formik.touched.companyName}
             theme="rounded"
             noIcons
-          />
+          /> */}
           <PhoneInput
             country={regionCode}
             excludeCountries={"ru"}
@@ -259,7 +259,27 @@ const Form = (props) => {
             !isValidPhoneNumber(`+${formik.values.phone}`) && (
               <p className={style.error_rounded_flat}>Invalid phone number</p>
             )}
-          <InputWebsite
+          <label className={style.label_wrapper}>
+            <span
+              className={`${style.dropdown_label} ${
+                isFocused || formik.values.budget ? style.label_active : ""
+              }`}
+            >
+              {props.label || "Budget range"}
+              <Icon name="icon-label-star" width={7} height={7} />
+            </span>
+            <div ref={dropdownRef}>
+              <Dropdown
+                className="dropdown"
+                options={props.budgetData}
+                onChange={(item) => onBudgetChange(item)}
+                value={formik.values.budget}
+                placeholder=""
+                onFocus={handleBudgetFocus}
+              />
+            </div>
+          </label>
+          {/* <InputWebsite
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.website}
@@ -276,7 +296,7 @@ const Form = (props) => {
             }}
             value={formik.values.method}
             placeholder="Preferred contact method"
-          />
+          /> */}
         </div>
       </div>
       <Agreement
