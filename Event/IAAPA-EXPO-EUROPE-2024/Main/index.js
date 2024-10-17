@@ -49,18 +49,17 @@ export default function IAAPAMain(props) {
           <li className={style.imageItemFour}>
             <Image src={mainImgFour} layout="fill" alt="Image-four" />
           </li>
-          <div className={style.background}>
-            <Image
-              src={props.image}
-              layout="fill"
-              objectFit="cover"
-              objectPosition={props.objectPosition}
-              priority
-              alt="laser tag convetion"
-            />
-          </div>
         </ul>
-
+        <div className={style.background}>
+          <Image
+            src={props.image}
+            layout="fill"
+            objectFit="cover"
+            objectPosition={props.objectPosition}
+            priority
+            alt="laser tag convetion"
+          />
+        </div>
         <div className={style.event_info_overlay}>
           <EventInfo
             iconsBlue={props.iconsBlue}
@@ -267,7 +266,7 @@ const placeIconBlue = (
   </svg>
 );
 
- const standIcon = (
+const standIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -297,7 +296,7 @@ const standIconBlue = (
   </svg>
 );
 
- const dateIcon = (
+const dateIcon = (
   <svg
     width="25"
     height="20"

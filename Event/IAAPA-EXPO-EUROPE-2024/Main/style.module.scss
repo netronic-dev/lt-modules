@@ -347,29 +347,30 @@
   position: absolute;
   width: 428px;
   height: 394px;
-  bottom: -523px;
-  left: -238px;
+  bottom: 129px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
 
   @media (min-width: 729px) {
     width: 480px;
     height: 442px;
-    bottom: -177px;
-    left: 35%;
+    bottom: 103px;
+    left: 68%;
   }
 
   @media (min-width: 956px) {
     width: 480px;
     height: 442px;
-    left: 33%;
-    bottom: -128px;
+    left: 58%;
+    bottom: 155px;
   }
 
   @media (min-width: 1170px) {
     width: 622px;
     height: 574px;
-    left: 333px;
-    top: -398px;
+    left: 57%;
+    top: 18%;
   }
 }
 
