@@ -101,6 +101,9 @@ const EventSlider = (props) => {
               objectFit="cover"
               objectPosition="50% 50%"
               quality={100}
+              onError={(e) => {
+                console.error(`Error loading image: ${e.target.src}`);
+              }}
             />
           </div>
         ))}
