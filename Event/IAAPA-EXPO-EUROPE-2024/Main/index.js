@@ -103,7 +103,7 @@ function EventInfo(props) {
           <div className={style.event_info__place_icon_outer}>
             {props.iconsBlue ? dateIconBlue : dateIcon}
           </div>
-          <h3
+          <h2
             className={
               props.iconsBlue
                 ? style.event_info__title_blue
@@ -111,7 +111,7 @@ function EventInfo(props) {
             }
           >
             {props.dateName}
-          </h3>
+          </h2>
         </div>
         <p
           className={`${
@@ -129,7 +129,7 @@ function EventInfo(props) {
             <div className={style.event_info__place_icon_outer}>
               {props.iconsBlue ? timeIconBlue : timeIcon}
             </div>
-            <h3
+            <h2
               className={
                 props.iconsBlue
                   ? style.event_info__title_blue
@@ -137,7 +137,7 @@ function EventInfo(props) {
               }
             >
               {props.timeName}
-            </h3>
+            </h2>
           </div>
           <p
             className={
@@ -157,7 +157,7 @@ function EventInfo(props) {
           <div className={style.event_info__place_icon_outer}>
             {props.iconsBlue ? placeIconBlue : placeIcon}
           </div>
-          <h3
+          <h2
             className={
               props.iconsBlue
                 ? style.event_info__title_blue
@@ -165,7 +165,7 @@ function EventInfo(props) {
             }
           >
             {props.placeName}
-          </h3>
+          </h2>
         </div>
         <p
           className={classNames(
@@ -188,7 +188,7 @@ function EventInfo(props) {
           <div className={style.event_info__place_icon_outer}>
             {props.iconsBlue ? standIconBlue : standIcon}
           </div>
-          <h3
+          <h2
             className={
               props.iconsBlue
                 ? style.event_info__title_blue
@@ -196,7 +196,7 @@ function EventInfo(props) {
             }
           >
             {props.standName}
-          </h3>
+          </h2>
         </div>
         <p
           className={

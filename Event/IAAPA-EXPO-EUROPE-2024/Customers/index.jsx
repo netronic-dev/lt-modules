@@ -124,7 +124,7 @@ const Customers = (props) => {
           <div className={style.grid}>
             {props.data.map((item, index) => (
               <div className={style.cell} key={index}>
-                <a
+                <button
                   className={style.cell_image}
                   onClick={() => modals.VideoModalOpen(getLInk(index))}
                   target="_blank"
@@ -144,15 +144,15 @@ const Customers = (props) => {
                       height={40}
                     />
                   </div>
-                </a>
+                </button>
                 <div className={style.divider}></div>
-                <a
+                <button
                   onClick={() => modals.VideoModalOpen(getLInk(index))}
                   target="_blank"
                   className={style.cell_text}
                 >
                   {item.text}
-                </a>
+                </button>
               </div>
             ))}
           </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "./style.module.scss";
+import Image from "next/image";
 
 function FooterSocial(props) {
   const GAEvents = useGAEvents();
@@ -13,7 +14,8 @@ function FooterSocial(props) {
         <a
           className={style.netronic_logo_bg}
           href="https://netronic.net"
-          target="_blank" aria-label="Netronic"
+          target="_blank"
+          aria-label="Netronic"
         >
           {netronic}
         </a>

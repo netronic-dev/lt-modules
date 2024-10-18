@@ -3,17 +3,14 @@ import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 export default function FooterMenu(props) {
-  const GAEvents = useGAEvents()
+  const GAEvents = useGAEvents();
 
   function SendGAClickEvent(link) {
-    GAEvents.buttonClick("Footer", "Link click", link)
+    GAEvents.buttonClick("Footer", "Link click", link);
   }
 
   if (!props.data) {
-    return (
-      <div className={style.footer_menu}>
-      </div>
-    )
+    return <div className={style.footer_menu}></div>;
   }
   return (
     <div className={style.footer_menu}>
@@ -21,13 +18,15 @@ export default function FooterMenu(props) {
         {props.data.map((item, index) => (
           <ul key={index}>
             {item.data.map((subItem, subIndex) => (
-              <Cell
-                key={"" + subIndex + index}
-                name={subItem.name}
-                general={subItem.general}
-                link={subItem.link}
-                onLinkClick={() => SendGAClickEvent(subItem.link)}
-              />
+              <li key={"" + subIndex + index}>
+                <Cell
+                  key={"" + subIndex + index}
+                  name={subItem.name}
+                  general={subItem.general}
+                  link={subItem.link}
+                  onLinkClick={() => SendGAClickEvent(subItem.link)}
+                />
+              </li>
             ))}
           </ul>
         ))}
@@ -38,16 +37,12 @@ export default function FooterMenu(props) {
 
 function Cell(props) {
   return (
-    <Link
-      href={props.link}
-    >
-      <a
-        onClick={props.onLinkClick}
-      >
-        <li className={`${props.general && style.general}`}>
+    <Link href={props.link}>
+      <a onClick={props.onLinkClick}>
+        <span className={`${props.general && style.general}`}>
           {props.name}
-        </li>
+        </span>
       </a>
     </Link>
-  )
+  );
 }

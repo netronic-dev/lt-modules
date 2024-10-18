@@ -499,6 +499,8 @@
     transform: translate(-50%, -50%);
     cursor: pointer;
     z-index: 2;
+    border: none;
+    background-color: transparent;
 
     &:hover {
       color: #d22e2e;

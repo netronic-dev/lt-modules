@@ -10,7 +10,12 @@ const Benefits = (props) => {
     <section className={style.benefits}>
       <div className={style.container}>
         <div className={style.bg_logo}>
-          <Image src={props.bg_logo} alt="background logo" fill sizes="100%" />
+          <Image
+            src={props.bg_logo}
+            alt="background logo"
+            layout="fill"
+            sizes="100%"
+          />
         </div>
         <p className={style.subtitle}>{props.subtitle}</p>
         <div className={style.titleBlock}>
@@ -26,13 +31,13 @@ const Benefits = (props) => {
                   'url("/blog/iaapa-2024-orlando/benefitsVideoImgOne.webp")',
               }}
             >
-              <a
+              <button
                 onClick={() => modals.VideoModalOpen("21gkLvALdHs")}
                 target="_blank"
                 className={style.playIcon}
               >
                 <Icon name="icon-benefits-play" width={63} height={63} />
-              </a>
+              </button>
               <div
                 className={classNames(
                   style.videosItemTitleBox,
@@ -62,13 +67,13 @@ const Benefits = (props) => {
                   'url("/blog/iaapa-2024-orlando/benefitsVideoImgTwo.webp")',
               }}
             >
-              <a
+              <button
                 onClick={() => modals.VideoModalOpen("eip3-9jx19U")}
                 className={style.playIcon}
                 target="_blank"
               >
                 <Icon name="icon-benefits-play" width={63} height={63} />
-              </a>
+              </button>
               <div
                 className={classNames(
                   style.videosItemTitleBox,
