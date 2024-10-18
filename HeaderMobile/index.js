@@ -45,7 +45,7 @@ export function HeaderMobile(props) {
           <div className={style.header_mobile__logo}>
             <Link href="/">
               <a onClick={() => onGAEventSend("/")}>
-                <img src={props.logo} alt="logo" />
+                <img src={props.logo} alt="logo" width={101} height="auto" />
               </a>
             </Link>
           </div>

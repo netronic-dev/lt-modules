@@ -37,7 +37,7 @@ export default function Header(props) {
           <li className={style.header__logo_net}>
             <Link href="/">
               <a onClick={() => onGAEventSend("/")}>
-                <img src={props.logo} alt="logo" />
+                <img src={props.logo} alt="logo" width={101} height="auto" />
               </a>
             </Link>
           </li>
