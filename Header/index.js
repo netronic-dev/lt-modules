@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 // import Calendly from "../Calendly";
 
@@ -37,7 +38,7 @@ export default function Header(props) {
           <li className={style.header__logo_net}>
             <Link href="/">
               <a onClick={() => onGAEventSend("/")}>
-                <img src={props.logo} alt="logo" width={101} height="auto" />
+                <Image src={props.logo} alt="logo" width={101} height={36} />
               </a>
             </Link>
           </li>

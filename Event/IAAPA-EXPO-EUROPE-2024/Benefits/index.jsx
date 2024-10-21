@@ -35,6 +35,7 @@ const Benefits = (props) => {
                 onClick={() => modals.VideoModalOpen("21gkLvALdHs")}
                 target="_blank"
                 className={style.playIcon}
+                aria-label="Play video"
               >
                 <Icon name="icon-benefits-play" width={63} height={63} />
               </button>
@@ -71,6 +72,7 @@ const Benefits = (props) => {
                 onClick={() => modals.VideoModalOpen("eip3-9jx19U")}
                 className={style.playIcon}
                 target="_blank"
+                aria-label="Play video"
               >
                 <Icon name="icon-benefits-play" width={63} height={63} />
               </button>

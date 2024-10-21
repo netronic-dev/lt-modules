@@ -6,6 +6,7 @@ import { useGAEvents } from "../../context/GAEventsProvider";
 import dynamic from "next/dynamic";
 const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 import { PopupModal } from "react-calendly";
+import Image from "next/image";
 
 export function HeaderMobile(props) {
   const [isBurgerOpen, setBurgerOpen] = useState(false);
@@ -43,9 +44,9 @@ export function HeaderMobile(props) {
             <BurgerVector isBurgerOpen={isBurgerOpen} />
           </button>
           <div className={style.header_mobile__logo}>
-            <Link href="/">
+            <Link href="/" className={style.header_mobile__logo_link}>
               <a onClick={() => onGAEventSend("/")}>
-                <img src={props.logo} alt="logo" width={101} height="auto" />
+                <Image src={props.logo} alt="logo" width={101} height={36} />
               </a>
             </Link>
           </div>
