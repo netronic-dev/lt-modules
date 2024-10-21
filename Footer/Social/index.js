@@ -10,12 +10,14 @@ function FooterSocial(props) {
     <div className={style.footer_social}>
       <div className={style.logos_row}>
         {/* {lasertagLogo} */}
-        <Image
-          src="/ltnet-halloween-logo.gif"
-          alt="ltnet logo"
-          width={287}
-          height={119}
-        />
+        <div className={style.ltnet_logo}>
+          <Image
+            src="/ltnet-halloween-logo.gif"
+            alt="ltnet logo"
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
         {partOf}
         <a
           className={style.netronic_logo_bg}

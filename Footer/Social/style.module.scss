@@ -1,122 +1,128 @@
 .footer_social {
-    padding: 50px 0 115px 0;
-    width: 1170px;
-    margin: 0 auto;
+  padding: 50px 0 115px 0;
+  width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    padding: 50px 20px 115px;
+  }
+
+  .logos_row {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 16px;
 
-    @media (max-width: 1200px) {
-        width: 100%;
-        padding: 50px 20px 115px;
+    .netronic_logo_bg {
+      &:hover {
+        cursor: pointer;
+        .white_to_blue {
+          fill: #0090ff;
+        }
+      }
     }
 
-    .logos_row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
+    @media (max-width: 700px) {
+      .part_of {
+        width: 88px;
+        height: 10px;
+      }
 
-        .netronic_logo_bg {
-            &:hover {
-                cursor: pointer;
-                .white_to_blue {
-                    fill: #0090ff;
-                }
-            }
-        }
+      .lasertag_logo {
+        width: 200px;
+        height: 83px;
+      }
 
-        @media (max-width: 700px) {
-            .part_of {
-                width: 88px;
-                height: 10px;
-            }
-
-            .lasertag_logo {
-                width: 200px;
-                height: 83px;
-            }
-
-            .netronic_logo {
-                width: 115px;
-                height: 25px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .part_of {
-                width: 65px;
-                height: 7.5px;
-            }
-
-            .lasertag_logo {
-                width: 147px;
-                height: 61px;
-            }
-
-            .netronic_logo {
-                width: 84px;
-                height: 13px;
-            }
-        }
+      .netronic_logo {
+        width: 115px;
+        height: 25px;
+      }
     }
 
-    .social_text {
-        margin: 28px 0 43px 0;
-        color: #fff;
-        text-align: center;
-        font-family: Manrope;
-        font-size: 19px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        max-width: 714px;
+    @media (max-width: 500px) {
+      .part_of {
+        width: 65px;
+        height: 7.5px;
+      }
 
-        @media (max-width: 580px) {
-            font-size: 14px;
-        }
+      .lasertag_logo {
+        width: 147px;
+        height: 61px;
+      }
+
+      .netronic_logo {
+        width: 84px;
+        height: 13px;
+      }
+    }
+  }
+
+  .social_text {
+    margin: 28px 0 43px 0;
+    color: #fff;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 714px;
+
+    @media (max-width: 580px) {
+      font-size: 14px;
+    }
+  }
+
+  .social_links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 72px;
+
+    @media (max-width: 580px) {
+      gap: 35px;
+
+      svg {
+        width: 34px;
+        height: 34px;
+      }
     }
 
-    .social_links {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        gap: 72px;
-
-        @media (max-width: 580px) {
-            gap: 35px;
-
-            svg {
-                width: 34px;
-                height: 34px;
-            }
-        }
-
-        @media (max-width: 420px) {
-            gap: 34px;
-        }
-
-        svg {
-            &:hover {
-                path {
-                    fill: #606060;
-                }
-            }
-        }
+    @media (max-width: 420px) {
+      gap: 34px;
     }
 
-    .footer_text {
-        margin-top: 45px;
-        color: #fff;
-        opacity: 0.4;
-
-        a {
-            color: inherit;
+    svg {
+      &:hover {
+        path {
+          fill: #606060;
         }
+      }
     }
+  }
 
-    .copyright {
-        margin-top: 20px;
-        color: #fff;
-        opacity: 0.4;
+  .footer_text {
+    margin-top: 45px;
+    color: #fff;
+    opacity: 0.4;
+
+    a {
+      color: inherit;
     }
+  }
+
+  .copyright {
+    margin-top: 20px;
+    color: #fff;
+    opacity: 0.4;
+  }
+
+  .ltnet_logo {
+    position: relative;
+    width: 287px;
+    height: 119px;
+  }
 }
