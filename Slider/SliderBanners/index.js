@@ -105,8 +105,8 @@ export default function SliderBanners(props) {
 
 function CellAdder(props) {
   return props.visible ? (
-    <Link href={props.link} aria-label="Slider">
-      <a className={`fade-up-animation`} aria-label="Slider">
+    <Link href={props.link} aria-label="Slider link to redirect">
+      <a className={`fade-up-animation`} aria-label="Slider link to redirect">
         <Image
           src={props.image}
           layout="responsive"

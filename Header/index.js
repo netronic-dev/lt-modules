@@ -37,8 +37,16 @@ export default function Header(props) {
         >
           <li className={style.header__logo_net}>
             <Link href="/">
-              <a onClick={() => onGAEventSend("/")}>
-                <Image src={props.logo} alt="logo" width={101} height={36} />
+              <a
+                onClick={() => onGAEventSend("/")}
+                className={style.header__logo_link}
+              >
+                <Image
+                  src={props.logo}
+                  alt="logo"
+                  layout="fill"
+                  objectFit="contain"
+                />
               </a>
             </Link>
           </li>

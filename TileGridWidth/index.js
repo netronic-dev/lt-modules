@@ -241,74 +241,71 @@ export function TileGridWidthButtons(props) {
         GAEvents.sectionWasInView(sectionName);
     }
     return (
-        <InView
-            as='div'
-            onChange={(inView, entry) =>
-                inView && sectionWasInView(`Card ${props.title || ''}`)
-            }
+      <InView
+        as="div"
+        onChange={(inView, entry) =>
+          inView && sectionWasInView(`Card ${props.title || ""}`)
+        }
+      >
+        <div
+          className={`${style.tile} ${theme[props.style]}`}
+          style={{
+            height: props.height,
+          }}
         >
-            <div
-                className={`${style.tile} ${theme[props.style]}`}
-                style={{
-                    height: props.height,
-                }}
+          <Link href={props.link}>
+            <a
+              aria-label="Redirect to Laser Tag Guns"
+              onClick={() =>
+                GAEvents.buttonClick("Card", "Link Click", props.link)
+              }
             >
-                <Link href={props.link}>
-                    <a
-                        onClick={() =>
-                            GAEvents.buttonClick(
-                                'Card',
-                                'Link Click',
-                                props.link
-                            )
-                        }
-                    >
-                        <div
-                            className={style.tile_bg}
-                            style={{ backgroundColor: props.bgColor }}
-                        >
-                            <Image
-                                alt={props.title}
-                                src={image}
-                                layout='fill'
-                                objectFit='contain'
-                                objectPosition='50% 50%'
-                                priority={true}
-                            />
-                        </div>
-                        <div className={style.text}>
-                            <TitleText
-                                title={props.title}
-                                text={props.text}
-                                theme={props.style}
-                                buttonText={props.buttonText}
-                            />
-                        </div>
-                    </a>
-                </Link>
-                <div className={style.buttons_out}>
-                    <div className={style.buttons} onClick={onSwapImage}>
-                        <div
-                            className={
-                                image === firstImage
-                                    ? style.buttonActive
-                                    : style.buttonInactive
-                            }
-                        >
-                            {props.textFirstButton}
-                        </div>
-                        <div
-                            className={
-                                image === secondImage
-                                    ? style.buttonActive
-                                    : style.buttonInactive
-                            }
-                        >
-                            {props.textSecondButton}
-                        </div>
-                    </div>
-                </div>
+              <div
+                className={style.tile_bg}
+                style={{ backgroundColor: props.bgColor }}
+              >
+                <Image
+                  alt={props.title}
+                  src={image}
+                  layout="fill"
+                  objectFit="contain"
+                  objectPosition="50% 50%"
+                  priority={true}
+                />
+              </div>
+              <div className={style.text}>
+                <TitleText
+                  title={props.title}
+                  text={props.text}
+                  theme={props.style}
+                  buttonText={props.buttonText}
+                />
+              </div>
+            </a>
+          </Link>
+          <div className={style.buttons_out}>
+            <div className={style.buttons} onClick={onSwapImage}>
+              <div
+                className={
+                  image === firstImage
+                    ? style.buttonActive
+                    : style.buttonInactive
+                }
+              >
+                {props.textFirstButton}
+              </div>
+              <div
+                className={
+                  image === secondImage
+                    ? style.buttonActive
+                    : style.buttonInactive
+                }
+              >
+                {props.textSecondButton}
+              </div>
             </div>
-        </InView>
+          </div>
+        </div>
+      </InView>
     );
 }

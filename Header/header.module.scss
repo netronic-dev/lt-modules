@@ -154,14 +154,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  a {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  img {
-    height: 80%;
-  }
+  // a {
+  //   height: 100%;
+  //   display: flex;
+  //   align-items: center;
+  // }
+  // img {
+  //   height: 80%;
+  // }
 }
 .dropmenu {
   background-color: #000000;
@@ -184,4 +184,10 @@
 
 .submenu {
   padding-left: 10px;
+}
+
+.header__logo_link {
+  position: relative;
+  width: 101px;
+  height: 36px;
 }

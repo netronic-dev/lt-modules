@@ -45,8 +45,16 @@ export function HeaderMobile(props) {
           </button>
           <div className={style.header_mobile__logo}>
             <Link href="/" className={style.header_mobile__logo_link}>
-              <a onClick={() => onGAEventSend("/")}>
-                <Image src={props.logo} alt="logo" width={101} height={36} />
+              <a
+                onClick={() => onGAEventSend("/")}
+                className={style.header__logo_link}
+              >
+                <Image
+                  src={props.logo}
+                  alt="logo"
+                  layout="fill"
+                  objectFit="contain"
+                />
               </a>
             </Link>
           </div>
