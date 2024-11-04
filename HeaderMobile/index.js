@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
 import dynamic from "next/dynamic";
-const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
+// const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 import { PopupModal } from "react-calendly";
 import Image from "next/image";
 
@@ -58,16 +58,14 @@ export function HeaderMobile(props) {
               </a>
             </Link>
           </div>
-          {/* <button
-                        onClick={onInputFormOpen}
-                        className={style.header_mobile__call}
-                        style={
-                            isBurgerOpen === true ? { display: 'none' } : null
-                        }
-                    >
-                        {phoneIcon}
-                    </button> */}
-          <Calendly setIsCalendly={setIsCalendly} setState={setState} />
+          <button
+            onClick={() => modals.formCallChangeVisibility()}
+            className={style.header_mobile__call}
+            style={isBurgerOpen === true ? { display: "none" } : null}
+          >
+            {phoneIcon}
+          </button>
+          {/* <Calendly setIsCalendly={setIsCalendly} setState={setState} /> */}
         </div>
         {isBurgerOpen ? (
           <div className={style.mobile__burger_menu}>
@@ -97,7 +95,7 @@ export function HeaderMobile(props) {
           ""
         )}
       </nav>
-      {isCalendly && (
+      {/* {isCalendly && (
         <PopupModal
           url="https://calendly.com/lasertag_net/30min"
           pageSettings={props.pageSettings}
@@ -107,7 +105,7 @@ export function HeaderMobile(props) {
           open={isOpen}
           rootElement={document.getElementById("__next")}
         />
-      )}
+      )} */}
     </>
   );
 }

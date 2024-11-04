@@ -2,7 +2,6 @@ import style from "./header.module.scss";
 import Link from "next/link";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import { PopupModal } from "react-calendly";
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
@@ -10,12 +9,11 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
-// import Calendly from "../Calendly";
+// const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 
 export default function Header(props) {
   const [isOpen, setState] = useState(false);
-  const [isCalendly, setIsCalendly] = useState(false);
+  // const [isCalendly, setIsCalendly] = useState(false);
   const dispatch = useDispatch();
   const modals = useModals();
   const GAEvents = useGAEvents();
@@ -68,17 +66,16 @@ export default function Header(props) {
               />
             )
           )}
-          {/* <li
-              className={`${style.phone_icon} ${style.nav__item}`}
-              onClick={() => setState(true)}
-            // onClick={modals.NamePhoneModalChangeVisibility}
-            >
-              {phoneIcon}
-            </li> */}
-          <Calendly setIsCalendly={setIsCalendly} setState={setState} />
+          <li
+            className={`${style.phone_icon} ${style.nav__item}`}
+            onClick={() => modals.formCallChangeVisibility()}
+          >
+            {phoneIcon}
+          </li>
+          {/* <Calendly setIsCalendly={setIsCalendly} setState={setState} /> */}
         </ul>
       </nav>
-      {isCalendly && (
+      {/* {isCalendly && (
         <PopupModal
           url="https://calendly.com/lasertag_net/30min"
           pageSettings={props.pageSettings}
@@ -88,7 +85,7 @@ export default function Header(props) {
           open={isOpen}
           rootElement={document.getElementById("__next")}
         />
-      )}
+      )} */}
     </div>
   );
 }
