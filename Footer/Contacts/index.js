@@ -36,7 +36,7 @@ const renderContact = (title, value, whatsapp, europe) => {
         <Link href={`mailto:${value}`}>{value}</Link>
       </span>
     );
-  } else if (title === "Phone") {
+  } else if (title === "Phone & WhatsApp") {
     return (
       <PhoneWithLinks
         title={title}
