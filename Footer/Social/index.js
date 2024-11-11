@@ -12,7 +12,7 @@ function FooterSocial(props) {
         {/* {lasertagLogo} */}
         <div className={style.ltnet_logo}>
           <Image
-            src="/ltnet-halloween-logo.gif"
+            src="/ltnet-logo.svg"
             alt="ltnet logo"
             layout="fill"
             objectFit="contain"
