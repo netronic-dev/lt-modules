@@ -48,6 +48,7 @@ export async function postData(
     name: values.name || "",
     email: values.email || "",
     budget: values.budget || "",
+    winnerPlace: values.winnerPlace || "",
     equipmentType: values.equipmentType || "",
     method: values.method || "",
     typeOfBusiness: values.typeOfBusiness || "",

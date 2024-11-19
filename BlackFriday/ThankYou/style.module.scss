@@ -1,44 +1,65 @@
 @import "../default";
 .section {
-	padding: 60px 0;
+  padding: 60px 0;
 }
 .main {
-	@extend %page_grid;
-	background: #fff;
+  @extend %page_grid;
+  background: #fff;
 }
 .main_in {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
 }
 .title {
-	font-family: $font-1;
-	font-weight: 600;
-	font-size: 48px;
-	line-height: 50px;
-	text-align: center;
-	text-transform: uppercase;
-	color: #000;
-	margin: 0 0 20px;
+  font-family: $font-1;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000;
+  margin: 0 0 20px;
 }
 .subtitle {
-	font-family: $font-1;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	text-align: center;
-	color: #828282;
+  font-family: $font-1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #828282;
+}
+.text {
+  max-width: 100%;
+  font-family: $font-1;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  color: #0090ff;
+  margin-top: 50px;
+
+  @media (min-width: 744px) {
+    max-width: 550px;
+  }
+}
+.logo {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  margin-bottom: 40px;
 }
 .image {
-	position: relative;
-	border-radius: 20px;
-	overflow: hidden;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
 @media (max-width: 550px) {
-	.title {
-		font-size: 30px;
-		line-height: 40px;
-		margin: 0 0 20px;
-	}
+  .title {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 0 0 20px;
+  }
 }
