@@ -122,7 +122,12 @@
 
   .ltnet_logo {
     position: relative;
-    width: 287px;
-    height: 119px;
+    width: 87px;
+    height: 39px;
+
+    @media (min-width: 744px) {
+      width: 287px;
+      height: 119px;
+    }
   }
 }
