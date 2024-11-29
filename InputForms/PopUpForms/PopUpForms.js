@@ -284,7 +284,16 @@ export function PopUpNamePhone(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
@@ -703,7 +712,16 @@ export function PopUpEmail(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
@@ -1039,7 +1057,16 @@ export function PopUpEmailPhone(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
@@ -1459,7 +1486,16 @@ export function PopUpEvent(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
@@ -1871,7 +1907,16 @@ export function PopUpNameEmail(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 

@@ -364,7 +364,16 @@ export function ThemeForm(props) {
         );
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
@@ -810,7 +819,16 @@ export function ThemeFormAll(props) {
         );
       });
     } catch (error) {
-      handleServerErrors(error.response.data);
+      if (error.response.data) {
+        handleServerErrors(error.response.data);
+      } else {
+        await axios.post(
+          "https://back.netronic.net/telegram/send-error-message",
+          {
+            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+          }
+        );
+      }
     }
   };
 
