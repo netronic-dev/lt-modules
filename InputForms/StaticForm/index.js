@@ -828,7 +828,7 @@ export function ThemeFormAll(props) {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
           }
         );
-      }
+    }
     }
   };
 
