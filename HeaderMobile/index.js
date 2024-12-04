@@ -1,10 +1,9 @@
 import style from "./style.module.scss";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
 import dynamic from "next/dynamic";
-// const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 import { PopupModal } from "react-calendly";
 import Image from "next/image";
 
@@ -17,6 +16,15 @@ export function HeaderMobile(props) {
   function onInputFormOpen() {
     modals.NamePhoneModalChangeVisibility();
   }
+
+  // useEffect(() => {
+  //   const hasRefreshed = sessionStorage.getItem("hasRefreshed");
+
+  //   if (!hasRefreshed) {
+  //     sessionStorage.setItem("hasRefreshed", "true");
+  //     window.location.reload();
+  //   }
+  // }, []);
 
   function openBurgerMenu() {
     setBurgerOpen(!isBurgerOpen);
@@ -70,10 +78,12 @@ export function HeaderMobile(props) {
         {isBurgerOpen ? (
           <div className={style.mobile__burger_menu}>
             {props.data.map((item, index) =>
-              item.items ? (
+              // item.items ? (
+              item.items && item.items.length > 0 ? (
                 <HeaderAccordion
                   key={index}
-                  data={item.items}
+                  // data={item.items}
+                  data={item.items || []}
                   id={index}
                   link={item.link}
                   title={item.name}
@@ -110,6 +120,7 @@ export function HeaderMobile(props) {
   );
 }
 
+// Contacts, manuals
 export function HeaderAccordion(props) {
   function onMenuButtonClick() {
     document.body.className = "";
@@ -126,7 +137,11 @@ export function HeaderAccordion(props) {
         {props.link ? (
           <Link href={props.link}>
             <p
-              onClick={(props.click, onMenuButtonClick)}
+              // onClick={(props.click, onMenuButtonClick)}
+              onClick={() => {
+                onMenuButtonClick();
+                props.click();
+              }}
               className={style.accordion__text}
             >
               {props.title}
@@ -139,17 +154,19 @@ export function HeaderAccordion(props) {
       </label>
       <span className={style.tab_content}>
         <ul>
-          {props.data.map((item, index) => (
-            <HeaderAccordionItem
-              key={index}
-              link={item.link}
-              text={item.name}
-              click={props.click}
-              developing={item.developing}
-              items={item.items}
-              onLinkClick={() => props.onLinkClick(item.link)}
-            />
-          ))}
+          {props.data &&
+            props.data.length > 0 &&
+            props.data.map((item, index) => (
+              <HeaderAccordionItem
+                key={index}
+                link={item.link}
+                text={item.name}
+                click={props.click}
+                developing={item.developing}
+                items={item.items}
+                onLinkClick={() => props.onLinkClick(item.link)}
+              />
+            ))}
         </ul>
       </span>
     </div>
@@ -157,8 +174,7 @@ export function HeaderAccordion(props) {
 }
 
 export function HeaderAccordionItem(props) {
-  console.log(props, "props");
-  console.log(props.items, "items");
+  console.log(props.items);
   function onMenuButtonClick() {
     document.body.className = "";
   }
@@ -166,13 +182,16 @@ export function HeaderAccordionItem(props) {
     <Link href={props.link ? props.link : ""}>
       <a target={props.blank ? "_blank" : false} onClick={props.onLinkClick}>
         <li
-          onClick={(onMenuButtonClick, props.click)}
+          onClick={() => {
+            onMenuButtonClick();
+            props.click();
+          }}
           className={style.tab_content__list}
         >
           {props.text}
         </li>
         {props.items && props.items.length > 0 && (
-          <ul className={style.submenu}>
+          <ol className={style.submenu}>
             {props.items.map((subItem, index) => (
               <li key={index} className={style.tab_content__list}>
                 <Link href={subItem.link}>
@@ -185,7 +204,7 @@ export function HeaderAccordionItem(props) {
                 </Link>
               </li>
             ))}
-          </ul>
+          </ol>
         )}
       </a>
     </Link>
@@ -198,7 +217,10 @@ function NonBurgerItem(props) {
   }
   return (
     <div
-      onClick={(onMenuButtonClick, props.click)}
+      onClick={() => {
+        onMenuButtonClick();
+        props.click();
+      }}
       className={style.nonBurgerItem}
     >
       <Link href={props.link}>

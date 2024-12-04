@@ -4,20 +4,12 @@ import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
-
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-// const Calendly = dynamic(() => import("../Calendly"), { ssr: false });
 
 export default function Header(props) {
   const [isOpen, setState] = useState(false);
-  // const [isCalendly, setIsCalendly] = useState(false);
-  const dispatch = useDispatch();
   const modals = useModals();
   const GAEvents = useGAEvents();
-  const router = useRouter();
 
   function onGAEventSend(link) {
     GAEvents.buttonClick("Header", "link click", link);
