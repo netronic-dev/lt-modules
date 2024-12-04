@@ -1,16 +1,12 @@
 import style from "./style.module.scss";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import dynamic from "next/dynamic";
-import { PopupModal } from "react-calendly";
 import Image from "next/image";
 
 export function HeaderMobile(props) {
   const [isBurgerOpen, setBurgerOpen] = useState(false);
-  const [isOpen, setState] = useState(false);
-  const [isCalendly, setIsCalendly] = useState(false);
   const modals = useModals();
 
   function onInputFormOpen() {
@@ -64,17 +60,14 @@ export function HeaderMobile(props) {
           >
             {phoneIcon}
           </button>
-          {/* <Calendly setIsCalendly={setIsCalendly} setState={setState} /> */}
         </div>
         {isBurgerOpen ? (
           <div className={style.mobile__burger_menu}>
             {props.data.map((item, index) =>
-              // item.items ? (
               item.items && item.items.length > 0 ? (
                 <HeaderAccordion
                   key={index}
-                  // data={item.items}
-                  data={item.items || []}
+                  data={item.items}
                   id={index}
                   link={item.link}
                   title={item.name}
@@ -96,22 +89,10 @@ export function HeaderMobile(props) {
           ""
         )}
       </nav>
-      {/* {isCalendly && (
-        <PopupModal
-          url="https://calendly.com/lasertag_net/30min"
-          pageSettings={props.pageSettings}
-          utm={props.utm}
-          prefill={props.prefill}
-          onModalClose={() => setState(false)}
-          open={isOpen}
-          rootElement={document.getElementById("__next")}
-        />
-      )} */}
     </>
   );
 }
 
-// Contacts, manuals
 export function HeaderAccordion(props) {
   console.log(props, "main");
   function onMenuButtonClick() {
@@ -129,7 +110,6 @@ export function HeaderAccordion(props) {
         {props.link ? (
           <Link href={props.link}>
             <p
-              // onClick={(props.click, onMenuButtonClick)}
               onClick={() => {
                 onMenuButtonClick();
                 props.click();
@@ -166,8 +146,6 @@ export function HeaderAccordion(props) {
 }
 
 export function HeaderAccordionItem(props) {
-  console.log(props.items);
-  console.log(props, "props");
   function onMenuButtonClick() {
     document.body.className = "";
   }
@@ -190,7 +168,10 @@ export function HeaderAccordionItem(props) {
                 <Link href={subItem.link}>
                   <a
                     className={`${style.nav__item_a} ${style.submenu_item}`}
-                    onClick={props.onLinkClick}
+                    onClick={() => {
+                      onMenuButtonClick();
+                      props.onLinkClick();
+                    }}
                   >
                     {subItem.name}
                   </a>
