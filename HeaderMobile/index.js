@@ -17,15 +17,6 @@ export function HeaderMobile(props) {
     modals.NamePhoneModalChangeVisibility();
   }
 
-  // useEffect(() => {
-  //   const hasRefreshed = sessionStorage.getItem("hasRefreshed");
-
-  //   if (!hasRefreshed) {
-  //     sessionStorage.setItem("hasRefreshed", "true");
-  //     window.location.reload();
-  //   }
-  // }, []);
-
   function openBurgerMenu() {
     setBurgerOpen(!isBurgerOpen);
     isBurgerOpen === false
@@ -122,6 +113,7 @@ export function HeaderMobile(props) {
 
 // Contacts, manuals
 export function HeaderAccordion(props) {
+  console.log(props, "main");
   function onMenuButtonClick() {
     document.body.className = "";
   }
@@ -175,6 +167,7 @@ export function HeaderAccordion(props) {
 
 export function HeaderAccordionItem(props) {
   console.log(props.items);
+  console.log(props, "props");
   function onMenuButtonClick() {
     document.body.className = "";
   }
@@ -190,7 +183,7 @@ export function HeaderAccordionItem(props) {
         >
           {props.text}
         </li>
-        {props.items && props.items.length > 0 && (
+        {props.text === "Manuals" && props.items && props.items.length > 0 && (
           <ol className={style.submenu}>
             {props.items.map((subItem, index) => (
               <li key={index} className={style.tab_content__list}>
