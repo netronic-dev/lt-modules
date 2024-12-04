@@ -184,7 +184,7 @@ export function HeaderAccordionItem(props) {
           {props.text}
         </li>
         {props.text === "Manuals" && props.items && props.items.length > 0 && (
-          <ol className={style.submenu}>
+          <ul className={style.submenu}>
             {props.items.map((subItem, index) => (
               <li key={index} className={style.tab_content__list}>
                 <Link href={subItem.link}>
@@ -197,7 +197,7 @@ export function HeaderAccordionItem(props) {
                 </Link>
               </li>
             ))}
-          </ol>
+          </ul>
         )}
       </a>
     </Link>
