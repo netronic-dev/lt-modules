@@ -9,7 +9,9 @@ export default class SliderTwoButtons extends Component {
       customPaging: function (i) {
         return (
           <div>
-            <button>{buttonTitles[i++]}</button>
+            <button>
+              {buttonTitles[i++]}
+            </button>
           </div>
         );
       },
