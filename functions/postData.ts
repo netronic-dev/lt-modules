@@ -35,6 +35,7 @@ export async function postData(
           utm_medium: routerQuery.utm_medium || "referral",
           utm_source: routerQuery.utm_source || "google",
           utm_term: routerQuery.utm_term || "",
+          gclid: routerQuery.gclid || "",
         }
       : {
           utm_source: "google",

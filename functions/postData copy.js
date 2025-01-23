@@ -16,7 +16,7 @@ export async function postData(
   fields
 ) {
   let locationInfo = await getLocationData();
-  console.log(locationInfo, 'locationInfo');
+  console.log(locationInfo, "locationInfo");
   const storedCookieConsent = getLocalStorage("cookie_consent", null);
 
   let data = {
@@ -34,6 +34,7 @@ export async function postData(
           utm_medium: routerQuerry.utm_medium || "",
           utm_source: routerQuerry.utm_source || "direct",
           utm_term: routerQuerry.utm_term || "",
+          gclid: routerQuerry.gclid || "",
         }
       : { utm_source: "direct" },
     fbpCookie,
