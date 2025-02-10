@@ -160,55 +160,8 @@ const Form = (props) => {
             noIcons
             errorTheme="rounded_flat"
           />
-          {/* <label className={style.label_wrapper}>
-            <span
-              className={`${style.dropdown_label} ${
-                isFocused || formik.values.budget ? style.label_active : ""
-              }`}
-            >
-              {props.label || "Budget range"}
-              <Icon name="icon-label-star" width={7} height={7} />
-            </span>
-            <div ref={dropdownRef}>
-              <Dropdown
-                className="dropdown"
-                options={props.budgetData}
-                onChange={(item) => onBudgetChange(item)}
-                value={formik.values.budget}
-                placeholder=""
-                onFocus={handleBudgetFocus}
-              />
-            </div>
-          </label> */}
-          {/* <InputCountry
-            onChange={formik.handleChange}
-            value={formik.values.country}
-            error={formik.errors.country}
-            touched={formik.touched.country}
-            theme="rounded"
-            noIcons
-            errorTheme="rounded_flat"
-          />
-          <Dropdown
-            className="dropdown"
-            onChange={(item) => {
-              onEquipmentTypeChange(item);
-            }}
-            options={props.equipData}
-            value={formik.values.equipmentType}
-            placeholder="How do you plan to use the equipment?"
-          /> */}
         </div>
         <div className={style.cell}>
-          {/* <InputCompanyName
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.companyName}
-            error={formik.errors.companyName}
-            touched={formik.touched.companyName}
-            theme="rounded"
-            noIcons
-          /> */}
           <PhoneInput
             country={regionCode}
             excludeCountries={"ru"}

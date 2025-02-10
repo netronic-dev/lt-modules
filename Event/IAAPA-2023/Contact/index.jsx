@@ -32,9 +32,6 @@ const Page = (props) => {
                 </Link>
               ) : null}
               {item.email ? (
-                // <Link href={`mailto:${item.email}`}>
-                //     <a className={style.link}>{item.email}</a>
-                // </Link>
                 <Link href={`mailto:${obfuscateEmail(item.email)}`} passHref>
                   <a
                     className={style.link}
