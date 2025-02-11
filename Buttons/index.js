@@ -1,3 +1,4 @@
+import { useId } from "react";
 import style from "./pricebutton.module.scss";
 import { useModals } from "../../context/ModalsProvider";
 
