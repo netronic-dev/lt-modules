@@ -1,6 +1,6 @@
-import { useId } from "react";
 import style from "./pricebutton.module.scss";
 import { useModals } from "../../context/ModalsProvider";
+import { useUniqueId } from "../functions/useUniqueId";
 
 const fillButtonStyles = {
   blueBlack: style.button_blue_black,
@@ -91,7 +91,7 @@ export function Button(props) {
 }
 
 export function FillButton(props) {
-  const generatedId = useId();
+  const generateId = useUniqueId();
 
   return (
     <button
@@ -99,7 +99,7 @@ export function FillButton(props) {
       className={`${fillButtonStyles[props.style || "blueBlack"]}
         ${props.className}
     `}
-      id={props.id ? props.id : generatedId}
+      id={props.id ? props.id : generateId}
       type={props.submit ? "submit" : "button"}
       onClick={props.onClick}
       style={props.uppercase ? { textTransform: "uppercase" } : null}
