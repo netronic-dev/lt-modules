@@ -221,7 +221,7 @@ const Form = (props) => {
               {props.label || "Budget range"}
               <Icon name="icon-label-star" width={7} height={7} />
             </span>
-            <div ref={dropdownRef}>
+            <span ref={dropdownRef}>
               <Dropdown
                 className="dropdown"
                 options={props.budgetData}
@@ -230,7 +230,7 @@ const Form = (props) => {
                 placeholder=""
                 onFocus={handleBudgetFocus}
               />
-            </div>
+            </span>
           </label>
           {/* <InputWebsite
             onChange={formik.handleChange}

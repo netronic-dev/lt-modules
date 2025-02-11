@@ -65,16 +65,16 @@ function FooterAccordion(props) {
             </span>
           </Link>
         ) : (
-          <p className={style.accordion__text}>{props.title}</p>
+          <span className={style.accordion__text}>{props.title}</span>
         )}
-        <div className={style.accordion__arrow}>
+        <span className={style.accordion__arrow}>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path
               d="M10.59 7.40997L6 2.82997L1.41 7.40997L1.23266e-07 5.99997L6 -2.72274e-05L12 5.99997L10.59 7.40997Z"
               fill="white"
             />
           </svg>
-        </div>
+        </span>
       </label>
       <span className={style.tab_content}>
         <ul>

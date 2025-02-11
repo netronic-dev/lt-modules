@@ -122,7 +122,7 @@ export function HeaderAccordion(props) {
         ) : (
           <span className={style.accordion__text}>{props.title}</span>
         )}
-        <div className={style.accordion__arrow}>{accordionArrow}</div>
+        <span className={style.accordion__arrow}>{accordionArrow}</span>
       </label>
       <span className={style.tab_content}>
         <ul>
