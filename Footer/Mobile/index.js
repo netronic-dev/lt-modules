@@ -57,12 +57,12 @@ function FooterAccordion(props) {
       <label htmlFor={props.id + "f"} className={style.tab_title}>
         {props.link ? (
           <Link href={props.link}>
-            <p
+            <span
               className={style.accordion__text}
               onClick={() => props.onLinkClick(props.link)}
             >
               {props.title}
-            </p>
+            </span>
           </Link>
         ) : (
           <p className={style.accordion__text}>{props.title}</p>

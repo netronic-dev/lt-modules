@@ -109,7 +109,7 @@ export function HeaderAccordion(props) {
       <label htmlFor={props.id} className={style.tab_title}>
         {props.link ? (
           <Link href={props.link}>
-            <p
+            <span
               onClick={() => {
                 onMenuButtonClick();
                 props.click();
@@ -117,10 +117,10 @@ export function HeaderAccordion(props) {
               className={style.accordion__text}
             >
               {props.title}
-            </p>
+            </span>
           </Link>
         ) : (
-          <p className={style.accordion__text}>{props.title}</p>
+          <span className={style.accordion__text}>{props.title}</span>
         )}
         <div className={style.accordion__arrow}>{accordionArrow}</div>
       </label>
