@@ -90,13 +90,15 @@ export function Button(props) {
 }
 
 export function FillButton(props) {
+  const generatedId = useId();
+
   return (
     <button
       aria-label={props.text || "Download"}
       className={`${fillButtonStyles[props.style || "blueBlack"]}
         ${props.className}
     `}
-      id={props.id ? props.id : ""}
+      id={props.id ? props.id : generatedId}
       type={props.submit ? "submit" : "button"}
       onClick={props.onClick}
       style={props.uppercase ? { textTransform: "uppercase" } : null}
