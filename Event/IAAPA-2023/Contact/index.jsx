@@ -26,7 +26,7 @@ const Page = (props) => {
                       : `tel:${item.phone1}`
                   }
                 >
-                  <a className={style.link} target="_black">
+                  <a className={style.link} target="_blank">
                     {formatPhoneNumberUsa(item.phone1)}
                   </a>
                 </Link>
@@ -49,7 +49,7 @@ const Page = (props) => {
                       : `tel:${item.phone2}`
                   }
                 >
-                  <a className={style.link} target="_black">
+                  <a className={style.link} target="_blank">
                     {formatPhoneNumberEurope(item.phone2)}
                   </a>
                 </Link>

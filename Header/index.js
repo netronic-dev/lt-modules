@@ -104,7 +104,7 @@ function HeaderSingleItem(props) {
       <Link href={props.link}>
         <a
           className={style.nav__item_a}
-          target={props.blank ? "_blank" : ""}
+          target={props.blank ? "_blank" : "_blank"}
           onClick={props.onLinkClick}
         >
           {props.text}
@@ -166,7 +166,7 @@ function HeaderSingleItemMain(props) {
       <Link href={props.link}>
         <a
           className={style.nav__item_main_a}
-          target={props.blank ? "_blank" : ""}
+          target={props.blank ? "_blank" : "_blank"}
           onClick={() => props.onLinkClick(props.link)}
         >
           {props.text}
