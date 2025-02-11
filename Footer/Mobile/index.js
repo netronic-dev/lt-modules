@@ -101,7 +101,7 @@ function AccordionItem(props) {
     <li onClick={scroll} className={style.tab_content__list}>
       <Link href={props.link || "/"}>
         <a
-          target={props.blank ? "_blank" : "_blank"}
+          target={props.blank ? "_blank" : undefined}
           onClick={props.onLinkClick}
         >
           {props.text}
