@@ -3,32 +3,27 @@ import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "../footer.module.scss";
 
 export default function FooterMobile(props) {
-
-  const GAEvents = useGAEvents()
+  const GAEvents = useGAEvents();
 
   function scroll() {
-    window.scroll({ top: 0 })
+    window.scroll({ top: 0 });
   }
 
   function SendGAClickEvent(link) {
-    GAEvents.buttonClick("Footer", "Link click", link)
+    GAEvents.buttonClick("Footer", "Link click", link);
   }
 
   if (!props.data) {
-    return (
-      <div className={style.footer_menu_mobile}>
-      </div>
-    )
+    return <div className={style.footer_menu_mobile}></div>;
   }
   return (
     <div className={style.footer_menu_mobile}>
       {props.data.map((data, index) =>
         data.items === undefined ? (
-          <Link href={data.link} key={index} >
+          <Link href={data.link} key={index}>
             <div
               onClick={() => {
-                scroll(),
-                  SendGAClickEvent(data.link)
+                scroll(), SendGAClickEvent(data.link);
               }}
               className={style.mobile_menu__item}
             >
@@ -60,16 +55,18 @@ function FooterAccordion(props) {
         className={style.accordion__input}
       />
       <label htmlFor={props.id + "f"} className={style.tab_title}>
-        {props.link ?
-          (<Link href={props.link}>
+        {props.link ? (
+          <Link href={props.link}>
             <p
               className={style.accordion__text}
               onClick={() => props.onLinkClick(props.link)}
             >
               {props.title}
             </p>
-          </Link>) :
-          (<p className={style.accordion__text}>{props.title}</p>)}
+          </Link>
+        ) : (
+          <p className={style.accordion__text}>{props.title}</p>
+        )}
         <div className={style.accordion__arrow}>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path
@@ -91,26 +88,22 @@ function FooterAccordion(props) {
           ))}
         </ul>
       </span>
-    </div >
+    </div>
   );
 }
 
 function AccordionItem(props) {
-
   function scroll() {
-    window.scroll({ top: 0 })
+    window.scroll({ top: 0 });
   }
 
   return (
-    <Link href={props.link || "/"}>
-      <a
-        target={props.blank ? "_blank" : ""}
-        onClick={props.onLinkClick}
-      >
-        <li onClick={scroll} className={style.tab_content__list}>
+    <li onClick={scroll} className={style.tab_content__list}>
+      <Link href={props.link || "/"}>
+        <a target={props.blank ? "_blank" : ""} onClick={props.onLinkClick}>
           {props.text}
-        </li>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </li>
   );
 }

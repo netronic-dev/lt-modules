@@ -150,38 +150,39 @@ export function HeaderAccordionItem(props) {
     document.body.className = "";
   }
   return (
-    <Link href={props.link ? props.link : ""}>
-      <a target={props.blank ? "_blank" : false} onClick={props.onLinkClick}>
-        <li
-          onClick={() => {
-            onMenuButtonClick();
-            props.click();
-          }}
-          className={style.tab_content__list}
-        >
+    <li
+      onClick={() => {
+        onMenuButtonClick();
+        props.click();
+      }}
+      className={style.tab_content__list}
+    >
+      <Link href={props.link ? props.link : ""}>
+        <a target={props.blank ? "_blank" : false} onClick={props.onLinkClick}>
           {props.text}
-        </li>
-        {props.text === "Manuals" && props.items && props.items.length > 0 && (
-          <ul className={style.submenu}>
-            {props.items.map((subItem, index) => (
-              <li key={index} className={style.tab_content__list}>
-                <Link href={subItem.link}>
-                  <a
-                    className={`${style.nav__item_a} ${style.submenu_item}`}
-                    onClick={() => {
-                      onMenuButtonClick();
-                      props.onLinkClick();
-                    }}
-                  >
-                    {subItem.name}
-                  </a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </a>
-    </Link>
+        </a>
+      </Link>
+
+      {props.text === "Manuals" && props.items && props.items.length > 0 && (
+        <ul className={style.submenu}>
+          {props.items.map((subItem, index) => (
+            <li key={index} className={style.tab_content__list}>
+              <Link href={subItem.link}>
+                <a
+                  className={`${style.nav__item_a} ${style.submenu_item}`}
+                  onClick={() => {
+                    onMenuButtonClick();
+                    props.onLinkClick();
+                  }}
+                >
+                  {subItem.name}
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
   );
 }
 
