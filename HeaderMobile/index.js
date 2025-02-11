@@ -124,7 +124,7 @@ export function HeaderAccordion(props) {
         )}
         <span className={style.accordion__arrow}>{accordionArrow}</span>
       </label>
-      <span className={style.tab_content}>
+      <div className={style.tab_content}>
         <ul>
           {props.data &&
             props.data.length > 0 &&
@@ -140,7 +140,7 @@ export function HeaderAccordion(props) {
               />
             ))}
         </ul>
-      </span>
+      </div>
     </div>
   );
 }

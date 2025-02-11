@@ -76,7 +76,7 @@ function FooterAccordion(props) {
           </svg>
         </span>
       </label>
-      <span className={style.tab_content}>
+      <div className={style.tab_content}>
         <ul>
           {props.listData.map((listData, index) => (
             <AccordionItem
@@ -87,7 +87,7 @@ function FooterAccordion(props) {
             />
           ))}
         </ul>
-      </span>
+      </div>
     </div>
   );
 }
