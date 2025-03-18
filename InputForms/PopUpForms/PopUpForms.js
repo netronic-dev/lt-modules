@@ -229,12 +229,12 @@ export function PopUpNamePhone(props) {
         setLoggedSocials("Facebook");
       } else {
         alert("Try again, please!");
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
+        //   }
+        // );
       }
     }
   };
@@ -287,12 +287,12 @@ export function PopUpNamePhone(props) {
       if (error.response.data) {
         handleServerErrors(error.response.data);
       } else {
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
+        //   }
+        // );
       }
     }
   };
@@ -613,12 +613,12 @@ export function PopUpEmail(props) {
         setLoggedSocials("Facebook");
       } else {
         alert("Try again, please!");
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
+        //   }
+        // );
       }
     }
   };
@@ -988,12 +988,12 @@ export function PopUpEmailPhone(props) {
         setLoggedSocials("Facebook");
       } else {
         alert("Try again, please!");
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
+        //   }
+        // );
       }
     }
   };
@@ -1381,12 +1381,12 @@ export function PopUpEvent(props) {
         setLoggedSocials("Facebook");
       } else {
         alert("Try again, please!");
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
+        //   }
+        // );
       }
     }
   };
@@ -1807,12 +1807,12 @@ export function PopUpNameEmail(props) {
         setLoggedSocials("Facebook");
       } else {
         alert("Try again, please!");
-        await axios.post(
-          "https://back.netronic.net/telegram/send-error-message",
-          {
-            message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
-          }
-        );
+        // await axios.post(
+        //   "https://back.netronic.net/telegram/send-error-message",
+        //   {
+        //     message: `frontend error: facebookAuth ❌ ${window.location.hostname}: Try again, please!`,
+        //   }
+        // );
       }
     }
   };
