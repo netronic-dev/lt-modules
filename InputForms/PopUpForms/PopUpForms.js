@@ -239,6 +239,7 @@ export function PopUpNamePhone(props) {
     : `(Noauthorization) ${props.orderName}`;
 
   const onSubmit = async (values) => {
+    debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
       ...values,
@@ -247,8 +248,6 @@ export function PopUpNamePhone(props) {
     };
 
     try {
-      debouncedSubmit("attempt", window.location.hostname);
-
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
@@ -259,6 +258,7 @@ export function PopUpNamePhone(props) {
       );
 
       Promise.all([postToCRMResponse]).then(() => {
+        debouncedSubmit("success", window.location.hostname);
         reset();
         ReactGA.event("generate_lead", {
           category: "form",
@@ -654,6 +654,7 @@ export function PopUpEmail(props) {
   };
 
   const onSubmit = async (values) => {
+    debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
@@ -661,8 +662,6 @@ export function PopUpEmail(props) {
     };
 
     try {
-      debouncedSubmit("attempt", window.location.hostname);
-
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
@@ -673,6 +672,7 @@ export function PopUpEmail(props) {
       );
 
       Promise.all([postToCRMResponse]).then(() => {
+        debouncedSubmit("success", window.location.hostname);
         reset();
         ReactGA.event("generate_lead", {
           category: "form",
@@ -972,6 +972,7 @@ export function PopUpEmailPhone(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
@@ -991,8 +992,6 @@ export function PopUpEmailPhone(props) {
       },
     };
     try {
-      debouncedSubmit("attempt", window.location.hostname);
-
       const sendEmailResponse = await axios.request(options);
       const postToCRMResponse = await postData(
         data,
@@ -1004,6 +1003,7 @@ export function PopUpEmailPhone(props) {
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        debouncedSubmit("success", window.location.hostname);
         reset();
         ReactGA.event("generate_lead", {
           category: "form",
@@ -1386,6 +1386,7 @@ export function PopUpEvent(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
       ...values,
@@ -1406,8 +1407,6 @@ export function PopUpEvent(props) {
       },
     };
     try {
-      debouncedSubmit("attempt", window.location.hostname);
-
       const sendEmailResponse = await axios.request(options);
       const postToCRMResponse = await postData(
         data,
@@ -1419,6 +1418,7 @@ export function PopUpEvent(props) {
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        debouncedSubmit("success", window.location.hostname);
         reset();
         ReactGA.event("generate_lead", {
           category: "form",
@@ -1793,6 +1793,7 @@ export function PopUpNameEmail(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
       ...values,
@@ -1813,8 +1814,6 @@ export function PopUpNameEmail(props) {
       },
     };
     try {
-      debouncedSubmit("attempt", window.location.hostname);
-
       const sendEmailResponse = await axios.request(options);
       const postToCRMResponse = await postData(
         data,
@@ -1826,6 +1825,7 @@ export function PopUpNameEmail(props) {
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
+        debouncedSubmit("success", window.location.hostname);
         reset();
         ReactGA.event("generate_lead", {
           category: "form",
