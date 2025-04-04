@@ -36,10 +36,6 @@ import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 import { selectOptions } from "../../../constants/globalConstants";
 import { Icon } from "../../../components/Icon";
 
-function turnOnScroll() {
-  document.body.className = "";
-}
-
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
     await axios.post("https://back.netronic.net/forms/trackSubmit", {
@@ -273,12 +269,6 @@ export function PopUpNamePhone(props) {
       if (error.response.data) {
         handleServerErrors(error.response.data);
       } else {
-        // await axios.post(
-        //   "https://back.netronic.net/telegram/send-error-message",
-        //   {
-        //     message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-        //   }
-        // );
       }
     }
   };
