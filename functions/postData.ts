@@ -27,20 +27,13 @@ export async function postData(
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
-  const queryLength = Object.keys(routerQuery).length;
-  const query =
-    queryLength > 0
-      ? {
-          utm_campaign: routerQuery.utm_campaign || "",
-          utm_medium: routerQuery.utm_medium || "referral",
-          utm_source: routerQuery.utm_source || "google",
-          utm_term: routerQuery.utm_term || "",
-          gclid: routerQuery.gclid || "",
-        }
-      : {
-          utm_source: "google",
-          utm_medium: "referral",
-        };
+  const query = {
+    utm_campaign: routerQuery.utm_campaign || "",
+    utm_medium: routerQuery.utm_medium || "",
+    utm_source: routerQuery.utm_source || "",
+    utm_term: routerQuery.utm_term || "",
+    gclid: routerQuery.gclid || "",
+  };
 
   let data: any = {
     fromPage: siteDomain,

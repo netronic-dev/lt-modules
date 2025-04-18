@@ -28,15 +28,13 @@ export async function postData(
     lang: lang,
     cookies: storedCookieConsent,
     comment: values.comment,
-    query: routerQuerry
-      ? {
-          utm_campaign: routerQuerry.utm_campaign || "",
-          utm_medium: routerQuerry.utm_medium || "",
-          utm_source: routerQuerry.utm_source || "direct",
-          utm_term: routerQuerry.utm_term || "",
-          gclid: routerQuerry.gclid || "",
-        }
-      : { utm_source: "direct" },
+    query: {
+      utm_campaign: routerQuerry.utm_campaign || "",
+      utm_medium: routerQuerry.utm_medium || "",
+      utm_source: routerQuerry.utm_source || "",
+      utm_term: routerQuerry.utm_term || "",
+      gclid: routerQuerry.gclid || "",
+    },
     fbpCookie,
     userLocationData: {
       ip: locationInfo.ip,
