@@ -7,7 +7,6 @@ export const sendEventToConversionApi = async (
   eventName,
   userData = {}
 ) => {
-  // const userLocationData = (await getLocationData()) || {};
   const userLocationData = (await getLocationDataFromBackend()) || {};
   const userAgent = navigator.userAgent;
 
@@ -30,7 +29,6 @@ export const sendEventToConversionApi = async (
   try {
     const response = await axios.post(
       "https://back.netronic.net/facebook/event",
-      // "http://localhost:5002/facebook/event",
       eventPayload,
       {
         headers: {
