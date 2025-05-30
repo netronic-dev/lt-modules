@@ -1,7 +1,7 @@
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { fbpCookie } from "./postData";
 import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
+import { generateUUID } from "./generateUUID";
 
 export const sendEventToConversionApi = async (
   siteName,
@@ -10,7 +10,7 @@ export const sendEventToConversionApi = async (
 ) => {
   const userLocationData = (await getLocationDataFromBackend()) || {};
   const userAgent = navigator.userAgent;
-  const eventId = uuidv4();
+  const eventId = generateUUID();
 
   const eventPayload = {
     eventName,
