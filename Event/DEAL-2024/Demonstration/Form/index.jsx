@@ -75,7 +75,10 @@ const Form = (props) => {
                         action: "submit",
                     });
                     ReactPixel.track("Lead");
-                    sendEventToConversionApi(window.location.href, "Lead");
+                    sendEventToConversionApi(window.location.href, "Lead", {
+                      email: values.email,
+                      phone: `+${values.phoneNumber}`,
+                    });
                     document.body.className = "";
                     router.push(props.thank_you_page_url);
                 })

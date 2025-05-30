@@ -261,7 +261,10 @@ export function PopUpNamePhone(props) {
           action: "submit",
         });
         ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead");
+        sendEventToConversionApi(window.location.href, "Lead", {
+          email: values.email,
+          phone: `+${values.phoneNumber}`,
+        });
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -669,7 +672,10 @@ export function PopUpEmail(props) {
           action: "submit",
         });
         ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead");
+        sendEventToConversionApi(window.location.href, "Lead", {
+          email: values.email,
+          phone: `+${values.phoneNumber}`,
+        });
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -1000,7 +1006,10 @@ export function PopUpEmailPhone(props) {
           action: "submit",
         });
         ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead");
+        sendEventToConversionApi(window.location.href, "Lead", {
+          email: values.email,
+          phone: `+${values.phoneNumber}`,
+        });
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -1415,7 +1424,10 @@ export function PopUpEvent(props) {
           action: "submit",
         });
         ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead");
+        sendEventToConversionApi(window.location.href, "Lead", {
+          email: values.email,
+          phone: `+${values.phoneNumber}`,
+        });
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -1822,7 +1834,10 @@ export function PopUpNameEmail(props) {
           action: "submit",
         });
         ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead");
+        sendEventToConversionApi(window.location.href, "Lead", {
+          email: values.email,
+          phone: `+${values.phoneNumber}`,
+        });
         modal.closeModal();
         router.push(props.thank_you_page);
       });
