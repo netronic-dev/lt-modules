@@ -26,9 +26,6 @@ export const sendEventToConversionApi = async (
     },
   };
 
-  console.log(eventPayload, "eventPayload");
-  console.log(siteName, eventName, "siteName, eventName");
-
   try {
     const response = await axios.post(
       "https://back.netronic.net/facebook/event",
@@ -42,6 +39,8 @@ export const sendEventToConversionApi = async (
 
     console.log("✅ Facebook event sent successfully:", response.data);
   } catch (error) {
-    console.error("❌ Error sending Facebook event:", error);
+    await axios.post("https://back.netronic.net/telegram/send-error-message", {
+      message: `❌ Error sending Facebook event ${window.location.hostname}: ${error}`,
+    });
   }
 };
