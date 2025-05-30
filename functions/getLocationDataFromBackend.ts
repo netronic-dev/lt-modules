@@ -1,4 +1,4 @@
-const getLocationDataFromBackend = async () => {
+export const getLocationDataFromBackend = async () => {
   try {
     const res = await fetch("https://back.netronic.net/user-location", {
       credentials: "include",
