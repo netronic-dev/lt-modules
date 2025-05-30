@@ -62,6 +62,7 @@ export const sendEventToConversionApi = async (siteName, eventName) => {
   //     console.error("Error:", error.response.data);
   //   });
   try {
+    console.log(requestData, "requestData");
     const response = await axios.post(url, requestData, {
       headers: {
         "Content-Type": "application/json",
