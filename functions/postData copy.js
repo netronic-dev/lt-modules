@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
+import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 
 export const fbpCookie = document.cookie
   .split("; ")
@@ -15,7 +16,7 @@ export async function postData(
   routerQuerry,
   fields
 ) {
-  let locationInfo = await getLocationData();
+  let locationInfo = await getLocationDataFromBackend();
   console.log(locationInfo, "locationInfo");
   const storedCookieConsent = getLocalStorage("cookie_consent", null);
 
@@ -72,36 +73,36 @@ export async function postData(
   return await axios.post(url, data);
 }
 
-export async function getLocationData() {
-  let locationData = {
-    ip: "",
-    city: "",
-    region: "",
-    country: "",
-    zipcode: "",
-    state: "",
-  };
-  await axios
-    .get(
-      "https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee"
-    )
-    .then((response) => {
-      locationData = {
-        ip: response.data.ip,
-        city: response.data.city,
-        region: response.data.country_code2,
-        country: response.data.country_name,
-        zipcode: response.data.zipcode,
-        state: response.data.state_prov,
-      };
-    })
-    .catch(async (error) => {
-      await axios.post(
-        "https://back.netronic.net/telegram/send-error-message",
-        {
-          message: `frontend error: postData ❌ ${window.location.hostname}: ${error}`,
-        }
-      );
-    });
-  return locationData;
-}
+// export async function getLocationData() {
+//   let locationData = {
+//     ip: "",
+//     city: "",
+//     region: "",
+//     country: "",
+//     zipcode: "",
+//     state: "",
+//   };
+//   await axios
+//     .get(
+//       "https://api.ipgeolocation.io/ipgeo?apiKey=2e4dabeb35b6489d9348d88276585aee"
+//     )
+//     .then((response) => {
+//       locationData = {
+//         ip: response.data.ip,
+//         city: response.data.city,
+//         region: response.data.country_code2,
+//         country: response.data.country_name,
+//         zipcode: response.data.zipcode,
+//         state: response.data.state_prov,
+//       };
+//     })
+//     .catch(async (error) => {
+//       await axios.post(
+//         "https://back.netronic.net/telegram/send-error-message",
+//         {
+//           message: `frontend error: postData ❌ ${window.location.hostname}: ${error}`,
+//         }
+//       );
+//     });
+//   return locationData;
+// }

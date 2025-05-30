@@ -1,7 +1,8 @@
 import { createHash } from "crypto";
 import axios from "axios";
 
-import { fbpCookie, getLocationData } from "./postData";
+import { fbpCookie } from "./postData";
+import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 
 const access_token =
   "EAAN764ZC98fEBOZBeixQ3cINCjP8l1X33gnNC8jeHJzUjogI2oL2dOz2wtg1m8KcNiIpGZBTAZCmmT9JC4adYZB28AT80n9hB2ZArGGUZAUd3GlwAyyj091ZBNJ6V8X7ZBh2wfL5KoJRZB8uQuKPenYexO2VZAQxTlMeONlr8x77TwWaysAwehHE4ZCgiDuFH74OYZANp0QZDZD";
@@ -9,7 +10,7 @@ const pixel_id = "1815249061859086";
 const url = `https://graph.facebook.com/v19.0/${pixel_id}/events`;
 
 export const sendEventToConversionApi = async (siteName, eventName) => {
-  const userLocationData = await getLocationData();
+  const userLocationData = await getLocationDataFromBackend();
   const userAgent = navigator.userAgent;
 
   const hashedCity = createHash("sha256")

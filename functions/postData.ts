@@ -2,6 +2,7 @@ import axios from "axios";
 import { getName } from "country-list";
 import { getCountryCode } from "./getCountryCode";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
+import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 
 const getCookieByKey = (key: string) => {
   if (typeof window !== "undefined") {
@@ -23,7 +24,8 @@ export async function postData(
   routerQuery?: any,
   source?: string
 ) {
-  let locationInfo: any = await getLocationData();
+  // let locationInfo: any = await getLocationData();
+  let locationInfo: any = await getLocationDataFromBackend();
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
@@ -69,61 +71,61 @@ export interface field {
   value: string;
 }
 
-export async function getLocationData() {
-  let locationData = {
-    ip: "",
-    city: "",
-    region: "",
-    country: "",
-    zipcode: "",
-    state: "",
-  };
-  let cookieIp = getCookieByKey("ip");
+// export async function getLocationData() {
+//   let locationData = {
+//     ip: "",
+//     city: "",
+//     region: "",
+//     country: "",
+//     zipcode: "",
+//     state: "",
+//   };
+//   let cookieIp = getCookieByKey("ip");
 
-  const clientIP = await axios.get("https://api.ipify.org/?format=json");
-  if (clientIP.data.ip === cookieIp) {
-    locationData = {
-      ip: getCookieByKey("ip") || "",
-      city: getCookieByKey("city") || "",
-      region: getCookieByKey("region") || "",
-      country: getCookieByKey("country") || "",
-      zipcode: getCookieByKey("zipcode") || "",
-      state: getCookieByKey("state") || "",
-    };
-  } else {
-    await axios
-      .get("https://ipinfo.io/json?token=ee40c07fb51963")
-      .then((response) => {
-        locationData = {
-          ip: response.data.ip,
-          city: response.data.city,
-          region: response.data.country,
-          country: response.data.country,
-          zipcode: response.data.postal,
-          state: response.data.region,
-        };
-      })
-      .catch(async (error) => {
-        await axios
-          .get("https://ipinfo.io/json?token=eba5da567f5208")
-          .then((response) => {
-            locationData = {
-              ip: response.data.ip,
-              city: response.data.city,
-              region: response.data.country,
-              country: response.data.country,
-              zipcode: response.data.postal,
-              state: response.data.region,
-            };
-          })
-          .catch(console.log);
-      });
+//   const clientIP = await axios.get("https://api.ipify.org/?format=json");
+//   if (clientIP.data.ip === cookieIp) {
+//     locationData = {
+//       ip: getCookieByKey("ip") || "",
+//       city: getCookieByKey("city") || "",
+//       region: getCookieByKey("region") || "",
+//       country: getCookieByKey("country") || "",
+//       zipcode: getCookieByKey("zipcode") || "",
+//       state: getCookieByKey("state") || "",
+//     };
+//   } else {
+//     await axios
+//       .get("https://ipinfo.io/json?token=ee40c07fb51963")
+//       .then((response) => {
+//         locationData = {
+//           ip: response.data.ip,
+//           city: response.data.city,
+//           region: response.data.country,
+//           country: response.data.country,
+//           zipcode: response.data.postal,
+//           state: response.data.region,
+//         };
+//       })
+//       .catch(async (error) => {
+//         await axios
+//           .get("https://ipinfo.io/json?token=eba5da567f5208")
+//           .then((response) => {
+//             locationData = {
+//               ip: response.data.ip,
+//               city: response.data.city,
+//               region: response.data.country,
+//               country: response.data.country,
+//               zipcode: response.data.postal,
+//               state: response.data.region,
+//             };
+//           })
+//           .catch(console.log);
+//       });
 
-    let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
-    for (const [key, value] of Object.entries(locationData)) {
-      document.cookie = `${key}=${value}; expires="${date}"`;
-    }
-  }
+//     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+//     for (const [key, value] of Object.entries(locationData)) {
+//       document.cookie = `${key}=${value}; expires="${date}"`;
+//     }
+//   }
 
-  return locationData;
-}
+//   return locationData;
+// }
