@@ -11,6 +11,7 @@ const url = `https://graph.facebook.com/v19.0/${pixel_id}/events`;
 export const sendEventToConversionApi = async (siteName, eventName) => {
   const userLocationData = await getLocationData();
   const userAgent = navigator.userAgent;
+  console.log(userAgent, "userAgent");
 
   console.log(siteName, "siteName");
   console.log(eventName, "eventName");
@@ -48,16 +49,49 @@ export const sendEventToConversionApi = async (siteName, eventName) => {
 
   const requestData = { data: data };
 
-  await axios
-    .post(url, requestData, {
+  // await axios
+  //   .post(url, requestData, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     params: {
+  //       access_token: access_token,
+  //     },
+  //   })
+  //   .catch(async (error) => {
+  //     console.error("Error:", error.response.data);
+  //   });
+  try {
+    const response = await axios.post(url, requestData, {
       headers: {
         "Content-Type": "application/json",
       },
       params: {
         access_token: access_token,
       },
-    })
-    .catch(async (error) => {
-      console.error("Error:", error.response.data);
     });
+
+    console.log("✅ Facebook event sent successfully:", {
+      status: response.status,
+      statusText: response.statusText,
+      data: response.data,
+    });
+  } catch (error) {
+    console.error("❌ Error sending Facebook event:");
+
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        console.error("Response error:", {
+          status: error.response.status,
+          data: error.response.data,
+        });
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
+    } else {
+      console.error("Unknown error:", error);
+    }
+  }
 };
