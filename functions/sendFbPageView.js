@@ -40,7 +40,10 @@ export const sendEventToConversionApi = async (
       }
     );
 
-    console.log("✅ Facebook event sent successfully:", response.data);
+    console.log(
+      `✅ Facebook event "${eventName}" sent successfully:`,
+      response.data
+    );
   } catch (error) {
     await axios.post("https://back.netronic.net/telegram/send-error-message", {
       message: `❌ Error sending Facebook event ${window.location.hostname}: ${error}`,
