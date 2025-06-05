@@ -17,7 +17,7 @@ export function SeoTitleText(props) {
       }
     >
       <div className={style.title_text}>
-        <h2 className={style.title}>{props.title}</h2>
+        {props.title && <h2 className={style.title}>{props.title}</h2>}
         <div className={style.text}>
           {props.text}
           {props.list}
@@ -67,7 +67,7 @@ export function SeoTitleTable(props) {
       }
     >
       <div className={style.title_table}>
-        <h2 className={style.title}>{props.title}</h2>
+        {props.title && <h2 className={style.title}>{props.title}</h2>}
         <table className={style.table}>{props.table}</table>
       </div>
     </InView>
