@@ -16,7 +16,7 @@ export function TitleText(props) {
     <div className={`${themes[props.theme]} ${direction[props.direction]}`
     }>
       <div className={style.inside}>
-        <h2 className={style.title}>{props.title}</h2>
+        <h3 className={style.title}>{props.title}</h3>
         {props.text
           ?
           (<p className={style.text}>{props.text}</p>)
