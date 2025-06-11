@@ -262,7 +262,7 @@ export function PopUpNamePhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", {}, { eventID: eventId });
+        ReactPixel.track("Lead", { eventID: eventId });
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -679,7 +679,7 @@ export function PopUpEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", {}, { eventID: eventId });
+        ReactPixel.track("Lead", { eventID: eventId });
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1019,7 +1019,7 @@ export function PopUpEmailPhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", {}, { eventID: eventId });
+        ReactPixel.track("Lead", { eventID: eventId });
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1443,7 +1443,7 @@ export function PopUpEvent(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", {}, { eventID: eventId });
+        ReactPixel.track("Lead", { eventID: eventId });
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1859,7 +1859,7 @@ export function PopUpNameEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", {}, { eventID: eventId });
+        ReactPixel.track("Lead", { eventID: eventId });
         sendEventToConversionApi(
           window.location.href,
           "Lead",

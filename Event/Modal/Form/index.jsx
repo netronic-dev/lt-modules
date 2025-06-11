@@ -77,7 +77,7 @@ const FormModal = (props) => {
             category: "form",
             action: "submit",
           });
-          ReactPixel.track("Lead", {}, { eventID: eventId });
+          ReactPixel.track("Lead", { eventID: eventId });
           sendEventToConversionApi(
             window.location.href,
             "Lead",
