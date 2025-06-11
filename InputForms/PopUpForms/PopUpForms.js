@@ -35,6 +35,7 @@ import { icons } from "../icons/icons";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 import { selectOptions } from "../../../constants/globalConstants";
 import { Icon } from "../../../components/Icon";
+import { generateUUID } from "../../functions/generateUUID";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
@@ -134,6 +135,7 @@ export function PopUpNamePhone(props) {
   const queryParams = useSelector(searchParams);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
+  const eventId = generateUUID();
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -260,11 +262,16 @@ export function PopUpNamePhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -531,6 +538,7 @@ export function PopUpEmail(props) {
   const modal = useModals();
   const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
+  const eventId = generateUUID();
 
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 1200);
@@ -671,11 +679,16 @@ export function PopUpEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -858,6 +871,7 @@ export function PopUpEmailPhone(props) {
   const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
   const [isDesktop, setIsDesktop] = useState(true);
+  const eventId = generateUUID();
 
   const orderName = loggedViaSocials
     ? `(${loggedViaSocials}) ${props.orderName}`
@@ -1005,11 +1019,16 @@ export function PopUpEmailPhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -1277,6 +1296,7 @@ export function PopUpEvent(props) {
   const dispatch = useDispatch();
   const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
+  const eventId = generateUUID();
 
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 1200);
@@ -1423,11 +1443,16 @@ export function PopUpEvent(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(props.thank_you_page);
       });
@@ -1692,6 +1717,7 @@ export function PopUpNameEmail(props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [loggedViaSocials, setLoggedSocials] = useState("");
   const [regionCode, setRegionCode] = useState();
+  const eventId = generateUUID();
 
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 1200);
@@ -1833,11 +1859,16 @@ export function PopUpNameEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(props.thank_you_page);
       });

@@ -23,11 +23,13 @@ import { useEffect, useRef, useState } from "react";
 import { useModals } from "../../../../../context/ModalsProvider";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { Icon } from "../../../../../components/Icon";
+import { generateUUID } from "../../../../functions/generateUUID";
 
 const Form = (props) => {
   let validate = validation;
   const [regionCode, setRegionCode] = useState();
   const modal = useModals();
+  const eventId = generateUUID();
 
   useEffect(() => {
     modal?.region
@@ -92,11 +94,16 @@ const Form = (props) => {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         document.body.className = "";
         router.push(props.thank_you_page_url);
       } catch (error) {

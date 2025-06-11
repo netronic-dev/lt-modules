@@ -13,16 +13,17 @@ function getFbclid() {
 export const sendEventToConversionApi = async (
   siteName,
   eventName,
-  userData = {}
+  userData = {},
+  eventId
 ) => {
   const userLocationData = (await getLocationDataFromBackend()) || {};
   const userAgent = navigator.userAgent;
-  const eventId = generateUUID();
+  const finalEventId = eventId || generateUUID(); 
 
   const eventPayload = {
     eventName,
     eventUrl: siteName,
-    eventId,
+    eventId: finalEventId,
     userData: {
       ...userData,
       city: userLocationData.city || "",

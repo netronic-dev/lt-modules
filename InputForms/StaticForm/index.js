@@ -31,6 +31,7 @@ import googleLogo from "../../../public/icons/google__logo.png";
 import { icons } from "../icons/icons";
 import { setUserData } from "../../../store/actions/userData.js";
 import { Icon } from "../../../components/Icon";
+import { generateUUID } from "../../functions/generateUUID";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
@@ -144,6 +145,7 @@ export function ThemeForm(props) {
   const dispatch = useDispatch();
   const modal = useModals();
   const queryParams = useSelector(searchParams);
+  const eventId = generateUUID();
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -342,11 +344,16 @@ export function ThemeForm(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(
           props.thank_you_page ? props.thank_you_page : "/thanks-call"
@@ -636,6 +643,7 @@ export function ThemeFormAll(props) {
   const [loggedViaSocials, setLoggedSocials] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const eventId = generateUUID();
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -786,11 +794,16 @@ export function ThemeFormAll(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead");
-        sendEventToConversionApi(window.location.href, "Lead", {
-          email: values.email,
-          phone: `+${values.phoneNumber}`,
-        });
+        ReactPixel.track("Lead", {}, { eventID: eventId });
+        sendEventToConversionApi(
+          window.location.href,
+          "Lead",
+          {
+            email: values.email,
+            phone: `+${values.phoneNumber}`,
+          },
+          eventId
+        );
         modal.closeModal();
         router.push(
           props.thank_you_page ? props.thank_you_page : "/thanks-call"
