@@ -18,7 +18,10 @@ export function SeoTitleText(props) {
     >
       <div className={style.title_text}>
         {props.title && <h2 className={style.title}>{props.title}</h2>}
-        <div className={style.text}>
+        <div
+          className={`${style.text} ${!props.title ? style.rightColumn : ""}`}
+          // className={style.text}
+        >
           {props.text}
           {props.list}
         </div>

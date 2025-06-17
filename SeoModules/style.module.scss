@@ -17,7 +17,6 @@
 }
 .text {
   font-weight: 400;
-  // font-size: 12px;
   font-size: 14px;
   line-height: 18px;
   color: #8e8e8e;
@@ -29,6 +28,10 @@
     color: #005596;
   }
 }
+.rightColumn {
+  grid-column: 2; 
+}
+
 .img {
   @extend %margins;
 }
