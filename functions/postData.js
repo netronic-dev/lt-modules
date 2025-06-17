@@ -89,83 +89,6 @@ export async function postData(
 // }
 
 
-// export async function getLocationData() {
-//   let locationData = {
-//     ip: "",
-//     city: "",
-//     region: "",
-//     country: "",
-//     zipcode: "",
-//     state: "",
-//   };
-
-//   let cookieIp = getCookieByKey("ip");
-
-//   const clientIP = await axios.get("https://api.ipify.org/?format=json");
-//   if (clientIP.data.ip === cookieIp) {
-//     locationData = {
-//       ip: getCookieByKey("ip"),
-//       city: getCookieByKey("city"),
-//       region: getCookieByKey("region"),
-//       country: getCookieByKey("country"),
-//       zipcode: getCookieByKey("zipcode"),
-//       state: getCookieByKey("state"),
-//     };
-//   } else {
-//     try {
-//       const response = await axios.get(
-//         "https://ipinfo.io/json?token=ee40c07fb51963"
-//       );
-//       locationData = {
-//         ip: response.data.ip,
-//         city: response.data.city,
-//         region: response.data.country,
-//         country: response.data.country,
-//         zipcode: response.data.postal,
-//         state: response.data.region,
-//       };
-//     } catch (err1) {
-//       try {
-//         const response = await axios.get(
-//           "https://ipinfo.io/json?token=eba5da567f5208"
-//         );
-//         locationData = {
-//           ip: response.data.ip,
-//           city: response.data.city,
-//           region: response.data.country,
-//           country: response.data.country,
-//           zipcode: response.data.postal,
-//           state: response.data.region,
-//         };
-//       } catch (err2) {
-//         try {
-//           const response = await axios.get("https://ipwho.is/");
-//           if (response.data.success !== false) {
-//             locationData = {
-//               ip: response.data.ip || "",
-//               city: response.data.city || "",
-//               region: response.data.region || "",
-//               country: response.data.country_code || "",
-//               zipcode: response.data.postal || "",
-//               state: response.data.region || "",
-//             };
-//           }
-//         } catch (err3) {
-//           console.warn("All geolocation services failed:", err3.message);
-//         }
-//       }
-//     }
-
-//     // Set cookies for 30 days
-//     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
-//     Object.keys(locationData).forEach((key) => {
-//       document.cookie = `${key}=${locationData[key]}; expires=${date}; path=/`;
-//     });
-//   }
-
-//   return locationData;
-// }
-
 export async function getLocationData() {
   let locationData = {
     ip: "",
@@ -196,7 +119,7 @@ export async function getLocationData() {
       locationData = {
         ip: response.data.ip,
         city: response.data.city,
-        region: response.data.region,
+        region: response.data.country,
         country: response.data.country,
         zipcode: response.data.postal,
         state: response.data.region,
@@ -209,25 +132,24 @@ export async function getLocationData() {
         locationData = {
           ip: response.data.ip,
           city: response.data.city,
-          region: response.data.region,
+          region: response.data.country,
           country: response.data.country,
           zipcode: response.data.postal,
           state: response.data.region,
         };
       } catch (err2) {
         try {
-          // geojs.io не потребує токена і повертає базову геоінформацію
-          const response = await axios.get(
-            `https://get.geojs.io/v1/${clientIP.data.ip}/geo.json`
-          );
-          locationData = {
-            ip: response.data.ip || "",
-            city: response.data.city || "",
-            region: response.data.region || "",
-            country: response.data.country || "",
-            zipcode: "", // geojs не повертає поштовий індекс
-            state: response.data.region || "",
-          };
+          const response = await axios.get("https://ipwho.is/");
+          if (response.data.success !== false) {
+            locationData = {
+              ip: response.data.ip || "",
+              city: response.data.city || "",
+              region: response.data.region || "",
+              country: response.data.country_code || "",
+              zipcode: response.data.postal || "",
+              state: response.data.region || "",
+            };
+          }
         } catch (err3) {
           console.warn("All geolocation services failed:", err3.message);
         }
