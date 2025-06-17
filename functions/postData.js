@@ -218,7 +218,7 @@ export async function getLocationData() {
         try {
           // geojs.io не потребує токена і повертає базову геоінформацію
           const response = await axios.get(
-            "https://get.geojs.io/v1/ip/geo.json"
+            `https://get.geojs.io/v1/${clientIP.data.ip}/geo.json`
           );
           locationData = {
             ip: response.data.ip || "",
