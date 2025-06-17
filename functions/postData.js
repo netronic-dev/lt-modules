@@ -88,6 +88,7 @@ export async function postData(
 //   value: string;
 // }
 
+
 // export async function getLocationData() {
 //   let locationData = {
 //     ip: "",
@@ -97,6 +98,7 @@ export async function postData(
 //     zipcode: "",
 //     state: "",
 //   };
+
 //   let cookieIp = getCookieByKey("ip");
 
 //   const clientIP = await axios.get("https://api.ipify.org/?format=json");
@@ -110,9 +112,23 @@ export async function postData(
 //       state: getCookieByKey("state"),
 //     };
 //   } else {
-//     await axios
-//       .get("https://ipinfo.io/json?token=ee40c07fb51963")
-//       .then((response) => {
+//     try {
+//       const response = await axios.get(
+//         "https://ipinfo.io/json?token=ee40c07fb51963"
+//       );
+//       locationData = {
+//         ip: response.data.ip,
+//         city: response.data.city,
+//         region: response.data.country,
+//         country: response.data.country,
+//         zipcode: response.data.postal,
+//         state: response.data.region,
+//       };
+//     } catch (err1) {
+//       try {
+//         const response = await axios.get(
+//           "https://ipinfo.io/json?token=eba5da567f5208"
+//         );
 //         locationData = {
 //           ip: response.data.ip,
 //           city: response.data.city,
@@ -121,27 +137,29 @@ export async function postData(
 //           zipcode: response.data.postal,
 //           state: response.data.region,
 //         };
-//       })
-//       .catch(async (error) => {
-//         await axios
-//           .get("https://ipinfo.io/json?token=eba5da567f5208")
-//           .then((response) => {
+//       } catch (err2) {
+//         try {
+//           const response = await axios.get("https://ipwho.is/");
+//           if (response.data.success !== false) {
 //             locationData = {
-//               ip: response.data.ip,
-//               city: response.data.city,
-//               region: response.data.country,
-//               country: response.data.country,
-//               zipcode: response.data.postal,
-//               state: response.data.region,
+//               ip: response.data.ip || "",
+//               city: response.data.city || "",
+//               region: response.data.region || "",
+//               country: response.data.country_code || "",
+//               zipcode: response.data.postal || "",
+//               state: response.data.region || "",
 //             };
-//           })
-//           .catch(console.log);
-//       });
+//           }
+//         } catch (err3) {
+//           console.warn("All geolocation services failed:", err3.message);
+//         }
+//       }
+//     }
 
-//     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-//     date = date.toUTCString();
+//     // Set cookies for 30 days
+//     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
 //     Object.keys(locationData).forEach((key) => {
-//       document.cookie = `${key}=${locationData[key]}; expires=" + ${date}`;
+//       document.cookie = `${key}=${locationData[key]}; expires=${date}; path=/`;
 //     });
 //   }
 
@@ -178,7 +196,7 @@ export async function getLocationData() {
       locationData = {
         ip: response.data.ip,
         city: response.data.city,
-        region: response.data.country,
+        region: response.data.region,
         country: response.data.country,
         zipcode: response.data.postal,
         state: response.data.region,
@@ -191,24 +209,25 @@ export async function getLocationData() {
         locationData = {
           ip: response.data.ip,
           city: response.data.city,
-          region: response.data.country,
+          region: response.data.region,
           country: response.data.country,
           zipcode: response.data.postal,
           state: response.data.region,
         };
       } catch (err2) {
         try {
-          const response = await axios.get("https://ipwho.is/");
-          if (response.data.success !== false) {
-            locationData = {
-              ip: response.data.ip || "",
-              city: response.data.city || "",
-              region: response.data.region || "",
-              country: response.data.country_code || "",
-              zipcode: response.data.postal || "",
-              state: response.data.region || "",
-            };
-          }
+          // geojs.io не потребує токена і повертає базову геоінформацію
+          const response = await axios.get(
+            "https://get.geojs.io/v1/ip/geo.json"
+          );
+          locationData = {
+            ip: response.data.ip || "",
+            city: response.data.city || "",
+            region: response.data.region || "",
+            country: response.data.country || "",
+            zipcode: "", // geojs не повертає поштовий індекс
+            state: response.data.region || "",
+          };
         } catch (err3) {
           console.warn("All geolocation services failed:", err3.message);
         }
