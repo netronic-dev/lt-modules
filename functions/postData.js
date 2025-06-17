@@ -88,6 +88,66 @@ export async function postData(
 //   value: string;
 // }
 
+// export async function getLocationData() {
+//   let locationData = {
+//     ip: "",
+//     city: "",
+//     region: "",
+//     country: "",
+//     zipcode: "",
+//     state: "",
+//   };
+//   let cookieIp = getCookieByKey("ip");
+
+//   const clientIP = await axios.get("https://api.ipify.org/?format=json");
+//   if (clientIP.data.ip === cookieIp) {
+//     locationData = {
+//       ip: getCookieByKey("ip"),
+//       city: getCookieByKey("city"),
+//       region: getCookieByKey("region"),
+//       country: getCookieByKey("country"),
+//       zipcode: getCookieByKey("zipcode"),
+//       state: getCookieByKey("state"),
+//     };
+//   } else {
+//     await axios
+//       .get("https://ipinfo.io/json?token=ee40c07fb51963")
+//       .then((response) => {
+//         locationData = {
+//           ip: response.data.ip,
+//           city: response.data.city,
+//           region: response.data.country,
+//           country: response.data.country,
+//           zipcode: response.data.postal,
+//           state: response.data.region,
+//         };
+//       })
+//       .catch(async (error) => {
+//         await axios
+//           .get("https://ipinfo.io/json?token=eba5da567f5208")
+//           .then((response) => {
+//             locationData = {
+//               ip: response.data.ip,
+//               city: response.data.city,
+//               region: response.data.country,
+//               country: response.data.country,
+//               zipcode: response.data.postal,
+//               state: response.data.region,
+//             };
+//           })
+//           .catch(console.log);
+//       });
+
+//     let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+//     date = date.toUTCString();
+//     Object.keys(locationData).forEach((key) => {
+//       document.cookie = `${key}=${locationData[key]}; expires=" + ${date}`;
+//     });
+//   }
+
+//   return locationData;
+// }
+
 export async function getLocationData() {
   let locationData = {
     ip: "",
@@ -97,6 +157,7 @@ export async function getLocationData() {
     zipcode: "",
     state: "",
   };
+
   let cookieIp = getCookieByKey("ip");
 
   const clientIP = await axios.get("https://api.ipify.org/?format=json");
@@ -110,9 +171,23 @@ export async function getLocationData() {
       state: getCookieByKey("state"),
     };
   } else {
-    await axios
-      .get("https://ipinfo.io/json?token=ee40c07fb51963")
-      .then((response) => {
+    try {
+      const response = await axios.get(
+        "https://ipinfo.io/json?token=ee40c07fb51963"
+      );
+      locationData = {
+        ip: response.data.ip,
+        city: response.data.city,
+        region: response.data.country,
+        country: response.data.country,
+        zipcode: response.data.postal,
+        state: response.data.region,
+      };
+    } catch (err1) {
+      try {
+        const response = await axios.get(
+          "https://ipinfo.io/json?token=eba5da567f5208"
+        );
         locationData = {
           ip: response.data.ip,
           city: response.data.city,
@@ -121,27 +196,29 @@ export async function getLocationData() {
           zipcode: response.data.postal,
           state: response.data.region,
         };
-      })
-      .catch(async (error) => {
-        await axios
-          .get("https://ipinfo.io/json?token=eba5da567f5208")
-          .then((response) => {
+      } catch (err2) {
+        try {
+          const response = await axios.get("https://ipwho.is/");
+          if (response.data.success !== false) {
             locationData = {
-              ip: response.data.ip,
-              city: response.data.city,
-              region: response.data.country,
-              country: response.data.country,
-              zipcode: response.data.postal,
-              state: response.data.region,
+              ip: response.data.ip || "",
+              city: response.data.city || "",
+              region: response.data.region || "",
+              country: response.data.country_code || "",
+              zipcode: response.data.postal || "",
+              state: response.data.region || "",
             };
-          })
-          .catch(console.log);
-      });
+          }
+        } catch (err3) {
+          console.warn("All geolocation services failed:", err3.message);
+        }
+      }
+    }
 
-    let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-    date = date.toUTCString();
+    // Set cookies for 30 days
+    let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
     Object.keys(locationData).forEach((key) => {
-      document.cookie = `${key}=${locationData[key]}; expires=" + ${date}`;
+      document.cookie = `${key}=${locationData[key]}; expires=${date}; path=/`;
     });
   }
 
