@@ -35,6 +35,8 @@ export async function postData(
     referrer = localStorage.getItem("referrer") || "";
   }
 
+  console.log(referrer, "referrer");
+
   const query = {
     utm_campaign: routerQuery.utm_campaign || "",
     utm_medium: routerQuery.utm_medium || "",
@@ -66,7 +68,6 @@ export async function postData(
       city: locationInfo.city,
     },
     source: source || "",
-    referrer,
     language: "Англійська",
     chatId: values.chatId || "",
   };
