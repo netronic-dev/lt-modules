@@ -1,6 +1,6 @@
 import axios from "axios";
-import { fbpCookie } from "./postData";
-import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
+import { fbpCookie, getLocationData } from "./postData";
+// import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 import { generateUUID } from "./generateUUID";
 
 function getFbclid() {
@@ -16,7 +16,8 @@ export const sendEventToConversionApi = async (
   userData = {},
   eventId
 ) => {
-  const userLocationData = (await getLocationDataFromBackend()) || {};
+  // const userLocationData = (await getLocationDataFromBackend()) || {};
+  const userLocationData = (await getLocationData()) || {};
   const userAgent = navigator.userAgent;
   const finalEventId = eventId || generateUUID();
   const fbclid = getFbclid();
