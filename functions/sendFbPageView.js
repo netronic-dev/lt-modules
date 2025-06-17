@@ -18,23 +18,26 @@ export const sendEventToConversionApi = async (
 ) => {
   const userLocationData = (await getLocationDataFromBackend()) || {};
   const userAgent = navigator.userAgent;
-  const finalEventId = eventId || generateUUID(); 
+  const finalEventId = eventId || generateUUID();
+  const fbclid = getFbclid();
+
+  const finalUserData = {
+    ...userData,
+    city: userLocationData.city || "",
+    region: userLocationData.region || "",
+    country: userLocationData.country || "",
+    zip: userLocationData.zipcode || "",
+    ip: userLocationData.ip || "",
+    userAgent,
+    ...(fbpCookie && { fbp: fbpCookie }),
+    ...(fbclid && { fbc: fbclid }),
+  };
 
   const eventPayload = {
     eventName,
     eventUrl: siteName,
     eventId: finalEventId,
-    userData: {
-      ...userData,
-      city: userLocationData.city || "",
-      region: userLocationData.region || "",
-      country: userLocationData.country || "",
-      zip: userLocationData.zipcode || "",
-      ip: userLocationData.ip || "",
-      userAgent,
-      fbp: fbpCookie || "",
-      fbc: getFbclid() || "",
-    },
+    userData: finalUserData,
   };
 
   try {

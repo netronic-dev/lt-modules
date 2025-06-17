@@ -3,6 +3,7 @@ import { getName } from "country-list";
 import { getCountryCode } from "./getCountryCode";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
 import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
+import { ref } from "yup";
 
 const getCookieByKey = (key: string) => {
   if (typeof window !== "undefined") {
@@ -28,6 +29,14 @@ export async function postData(
   const storedCookieConsent = getLocalStorage("cookie_consent");
   const countryName = getName(locationInfo.country);
   const countryCode = getCountryCode(values.phoneNumber);
+
+  let referrer = "";
+  if (typeof window !== "undefined") {
+    referrer = localStorage.getItem("referrer") || "";
+  }
+
+  console.log(referrer, "referrer");
+
   const query = {
     utm_campaign: routerQuery.utm_campaign || "",
     utm_medium: routerQuery.utm_medium || "",
@@ -59,6 +68,7 @@ export async function postData(
       city: locationInfo.city,
     },
     source: source || "",
+    // referrer,
     language: "Англійська",
     chatId: values.chatId || "",
   };
