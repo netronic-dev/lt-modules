@@ -2,7 +2,6 @@ import axios from "axios";
 import { getName } from "country-list";
 import { getCountryCode } from "./getCountryCode";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
-import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 
 // const getCookieByKey = (key: string) => {
 const getCookieByKey = (key) => {
@@ -111,7 +110,6 @@ export async function getLocationData() {
     };
   } else {
     try {
-      console.log("try 1");
       const response = await axios.get(
         "https://ipinfo.io/json?token=ee40c07fb51963"
       );
@@ -124,7 +122,6 @@ export async function getLocationData() {
         state: response.data.region,
       };
     } catch (err1) {
-      console.log('error 1');
       try {
         const response = await axios.get(
           "https://ipinfo.io/json?token=eba5da567f5208"
@@ -138,14 +135,13 @@ export async function getLocationData() {
           state: response.data.region,
         };
       } catch (err2) {
-        console.log('error 2');
         try {
           const response = await axios.get("https://ipwho.is/");
           if (response.data.success !== false) {
             locationData = {
               ip: response.data.ip || "",
               city: response.data.city || "",
-              region: response.data.region || "",
+              region: response.data.country || "",
               country: response.data.country_code || "",
               zipcode: response.data.postal || "",
               state: response.data.region || "",
