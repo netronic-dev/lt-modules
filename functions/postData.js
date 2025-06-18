@@ -30,7 +30,7 @@ export async function postData(
   siteDomain,
   fromSite,
   routerQuery,
-  source,
+  source
 ) {
   // let locationInfo: any = await getLocationDataFromBackend();
   let locationInfo = await getLocationData();
@@ -42,8 +42,6 @@ export async function postData(
   if (typeof window !== "undefined") {
     referrer = localStorage.getItem("referrer") || "";
   }
-
-  console.log(referrer, "referrer");
 
   const query = {
     utm_campaign: routerQuery.utm_campaign || "",
@@ -79,6 +77,7 @@ export async function postData(
     source: source || "",
     language: "Англійська",
     chatId: values.chatId || "",
+    referrer,
   };
   return await axios.post(url, data);
 }
@@ -87,7 +86,6 @@ export async function postData(
 //   name: string;
 //   value: string;
 // }
-
 
 export async function getLocationData() {
   let locationData = {
@@ -113,6 +111,7 @@ export async function getLocationData() {
     };
   } else {
     try {
+      console.log("try 1");
       const response = await axios.get(
         "https://ipinfo.io/json?token=ee40c07fb51963"
       );
@@ -125,6 +124,7 @@ export async function getLocationData() {
         state: response.data.region,
       };
     } catch (err1) {
+      console.log('error 1');
       try {
         const response = await axios.get(
           "https://ipinfo.io/json?token=eba5da567f5208"
@@ -138,6 +138,7 @@ export async function getLocationData() {
           state: response.data.region,
         };
       } catch (err2) {
+        console.log('error 2');
         try {
           const response = await axios.get("https://ipwho.is/");
           if (response.data.success !== false) {
