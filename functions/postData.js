@@ -103,7 +103,8 @@ export async function getLocationData() {
     locationData = {
       ip: getCookieByKey("ip"),
       city: getCookieByKey("city"),
-      region: getCookieByKey("region"),
+      // region: getCookieByKey("region"),
+      region: getCookieByKey("country"),
       country: getCookieByKey("country"),
       zipcode: getCookieByKey("zipcode"),
       state: getCookieByKey("state"),
