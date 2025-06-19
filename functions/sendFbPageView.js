@@ -18,7 +18,7 @@ function getFbclid() {
   const fbclid = urlParams.get("fbclid");
 
   if (fbclid) {
-    const fbc = `fb.1.${Math.floor(Date.now() / 1000)}.${fbclid}`;
+    const fbc = `fb.1.${Date.now()}.${fbclid}`;
 
     document.cookie = `fbc=${fbc}; path=/; max-age=${90 * 24 * 60 * 60}`;
 
