@@ -1,13 +1,31 @@
 import axios from "axios";
 import { fbpCookie, getLocationData } from "./postData";
-// import { getLocationDataFromBackend } from "./getLocationDataFromBackend";
 import { generateUUID } from "./generateUUID";
 
 function getFbclid() {
   if (typeof window === "undefined") return null;
+
+  const fbcCookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("fbc="))
+    ?.split("=")[1];
+
+  if (fbcCookie) {
+    return fbcCookie;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const fbclid = urlParams.get("fbclid");
-  return fbclid ? `fb.${Math.floor(Date.now() / 1000)}.${fbclid}` : null;
+
+  if (fbclid) {
+    const fbc = `fb.1.${Math.floor(Date.now() / 1000)}.${fbclid}`;
+
+    document.cookie = `fbc=${fbc}; path=/; max-age=${90 * 24 * 60 * 60}`;
+
+    return fbc;
+  }
+
+  return null;
 }
 
 export const sendEventToConversionApi = async (
@@ -16,11 +34,10 @@ export const sendEventToConversionApi = async (
   userData = {},
   eventId
 ) => {
-  // const userLocationData = (await getLocationDataFromBackend()) || {};
   const userLocationData = (await getLocationData()) || {};
   const userAgent = navigator.userAgent;
   const finalEventId = eventId || generateUUID();
-  const fbclid = getFbclid();
+  const fbc = getFbclid();
 
   const finalUserData = {
     ...userData,
@@ -31,7 +48,7 @@ export const sendEventToConversionApi = async (
     ip: userLocationData.ip || "",
     userAgent,
     ...(fbpCookie && { fbp: fbpCookie }),
-    ...(fbclid && { fbc: fbclid }),
+    ...(fbc && { fbc }),
   };
 
   const eventPayload = {
