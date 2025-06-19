@@ -2,30 +2,27 @@ import axios from "axios";
 import { fbpCookie, getLocationData } from "./postData";
 import { generateUUID } from "./generateUUID";
 
-function getFbclid() {
+function getFbc() {
   if (typeof window === "undefined") return null;
 
-  const fbcCookie = document.cookie
+  const existingFbc = document.cookie
     .split("; ")
-    .find((row) => row.startsWith("fbc="))
+    .find((row) => row.startsWith("_fbc="))
     ?.split("=")[1];
-
-  if (fbcCookie) {
-    return fbcCookie;
-  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const fbclid = urlParams.get("fbclid");
 
-  if (fbclid) {
-    const fbc = `fb.1.${Date.now()}.${fbclid}`;
+  if (!fbclid) return existingFbc ?? null;
 
-    document.cookie = `fbc=${fbc}; path=/; max-age=${90 * 24 * 60 * 60}`;
-
-    return fbc;
+  const existingFbclid = existingFbc?.split(".").at(-1);
+  if (!existingFbc || existingFbclid !== fbclid) {
+    const newFbc = `fb.1.${Date.now()}.${fbclid}`;
+    document.cookie = `_fbc=${newFbc}; path=/; max-age=${90 * 24 * 60 * 60}`;
+    return newFbc;
   }
 
-  return null;
+  return existingFbc;
 }
 
 export const sendEventToConversionApi = async (
@@ -37,7 +34,7 @@ export const sendEventToConversionApi = async (
   const userLocationData = (await getLocationData()) || {};
   const userAgent = navigator.userAgent;
   const finalEventId = eventId || generateUUID();
-  const fbc = getFbclid();
+  const fbc = getFbc();
 
   const finalUserData = {
     ...userData,
