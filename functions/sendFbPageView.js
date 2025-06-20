@@ -1,6 +1,7 @@
 import axios from "axios";
 import { fbpCookie, getLocationData } from "./postData";
 import { generateUUID } from "./generateUUID";
+import getOrCreateExternalId from "./getOrCreateExternalId";
 
 function getFbc() {
   if (typeof window === "undefined") return null;
@@ -35,9 +36,11 @@ export const sendEventToConversionApi = async (
   const userAgent = navigator.userAgent;
   const finalEventId = eventId || generateUUID();
   const fbc = getFbc();
+  const externalId = getOrCreateExternalId();
 
   const finalUserData = {
     ...userData,
+    external_id: externalId,
     city: userLocationData.city || "",
     region: userLocationData.region || "",
     country: userLocationData.country || "",
