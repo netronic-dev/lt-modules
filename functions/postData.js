@@ -101,13 +101,12 @@ export async function getLocationData() {
   const clientIP = await axios.get("https://api.ipify.org/?format=json");
   if (clientIP.data.ip === cookieIp) {
     locationData = {
-      ip: getCookieByKey("ip"),
-      city: getCookieByKey("city"),
-      // region: getCookieByKey("region"),
-      region: getCookieByKey("country"),
-      country: getCookieByKey("country"),
-      zipcode: getCookieByKey("zipcode"),
-      state: getCookieByKey("state"),
+      ip: getCookieByKey("ip") || "",
+      city: getCookieByKey("city") || "",
+      region: getCookieByKey("country") || "",
+      country: getCookieByKey("country") || "",
+      zipcode: getCookieByKey("zipcode") || "",
+      state: getCookieByKey("state") || "",
     };
   } else {
     try {
@@ -115,12 +114,12 @@ export async function getLocationData() {
         "https://ipinfo.io/json?token=ee40c07fb51963"
       );
       locationData = {
-        ip: response.data.ip,
-        city: response.data.city,
-        region: response.data.country,
-        country: response.data.country,
-        zipcode: response.data.postal,
-        state: response.data.region,
+        ip: response.data.ip || "",
+        city: response.data.city || "",
+        region: response.data.country || "",
+        country: response.data.country || "",
+        zipcode: response.data.postal || "",
+        state: response.data.region || "",
       };
     } catch (err1) {
       try {
@@ -128,12 +127,12 @@ export async function getLocationData() {
           "https://ipinfo.io/json?token=eba5da567f5208"
         );
         locationData = {
-          ip: response.data.ip,
-          city: response.data.city,
-          region: response.data.country,
-          country: response.data.country,
-          zipcode: response.data.postal,
-          state: response.data.region,
+          ip: response.data.ip || "",
+          city: response.data.city || "",
+          region: response.data.country || "",
+          country: response.data.country || "",
+          zipcode: response.data.postal || "",
+          state: response.data.region || "",
         };
       } catch (err2) {
         try {
@@ -147,18 +146,34 @@ export async function getLocationData() {
               zipcode: response.data.postal || "",
               state: response.data.region || "",
             };
+          } else {
+            throw new Error("ipwho.is returned unsuccessful");
           }
         } catch (err3) {
-          console.warn("All geolocation services failed:", err3.message);
+          try {
+            const response = await axios.get("https://ipapi.co/json/");
+            locationData = {
+              ip: response.data.query || "",
+              city: response.data.city || "",
+              region: response.data.country || "",
+              country: response.data.country || "",
+              zipcode: response.data.postal || "",
+              state: response.data.region || "",
+            };
+          } catch (err4) {
+            console.warn("All geolocation services failed:", err4.message);
+          }
         }
       }
     }
 
     // Set cookies for 30 days
-    let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
-    Object.keys(locationData).forEach((key) => {
-      document.cookie = `${key}=${locationData[key]}; expires=${date}; path=/`;
-    });
+    if (locationData.country) {
+      let date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+      Object.keys(locationData).forEach((key) => {
+        document.cookie = `${key}=${locationData[key]}; expires=${date}; path=/`;
+      });
+    }
   }
 
   return locationData;
