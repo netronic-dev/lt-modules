@@ -16,7 +16,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Dropdown from "react-dropdown";
-import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch, useSelector } from "react-redux";
@@ -262,7 +261,9 @@ export function PopUpNamePhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -679,7 +680,9 @@ export function PopUpEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1019,7 +1022,9 @@ export function PopUpEmailPhone(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1443,7 +1448,9 @@ export function PopUpEvent(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -1859,7 +1866,9 @@ export function PopUpNameEmail(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",

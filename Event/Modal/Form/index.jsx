@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import { FunctionComponent, ReactNode } from "react";
 import {
   DropDownList,
   InputCall,
@@ -13,7 +12,6 @@ import Agreement from "../../Form/Agreement";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../../../store/actions/userData";
 import ReactGA from "react-ga4";
-import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../store/searchParamsSlice";
 import { postData } from "../../../functions/postData";
 import { sendEventToConversionApi } from "../../../functions/sendFbPageView";
@@ -77,7 +75,9 @@ const FormModal = (props) => {
             category: "form",
             action: "submit",
           });
-          ReactPixel.track("Lead", { eventID: eventId });
+          if (typeof window !== "undefined" && window.fbq) {
+            window.fbq("track", "Lead", {}, { eventID: eventId });
+          }
           sendEventToConversionApi(
             window.location.href,
             "Lead",

@@ -5,7 +5,6 @@ import ReactGA from "react-ga4";
 import axios from "axios";
 import { postData } from "../functions/postData";
 import { useCalendlyEventListener } from "react-calendly";
-import ReactPixel from "react-facebook-pixel";
 import style from "./style.module.scss";
 import { addUserData } from "../../store/userSlice";
 import { searchParams } from "../../store/searchParamsSlice";
@@ -60,7 +59,6 @@ const Calendly = (props) => {
                 action: "submit",
               })
             )
-            .then(ReactPixel.track("Lead"))
             .then(router.push("/thanks-call"))
             .catch(async (error) => {
               await axios.post(

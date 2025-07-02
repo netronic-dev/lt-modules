@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ReactGA from "react-ga4";
-import ReactPixel from "react-facebook-pixel";
 import style from "./style.module.scss";
 
 import Agreement from "./Agreement";
@@ -126,7 +125,6 @@ const ConsultationForm = (props) => {
                         action: "submit",
                     })
                 )
-                .then(ReactPixel.track("Lead"))
                 .then(router.push(props.thank_you_page))
                 .catch(console.log);
         },

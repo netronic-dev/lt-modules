@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-dropdown";
-import ReactPixel from "react-facebook-pixel";
 import {
     InputCall,
     InputEmail,
@@ -72,7 +71,6 @@ const Form = (props) => {
                         action: "submit",
                     })
                 )
-                .then(ReactPixel.track("Lead"))
                 .then(() => {
                     document.body.className = "";
                     router.push(props.thank_you_page_url);

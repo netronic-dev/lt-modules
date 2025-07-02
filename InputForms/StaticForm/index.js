@@ -21,7 +21,6 @@ import "react-phone-input-2/lib/style.css";
 import { useEffect, useState } from "react";
 import { useModals } from "../../../context/ModalsProvider.js";
 import axios from "axios";
-import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../store/searchParamsSlice.js";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView.js";
 import { authentication } from "../../../firebase-config";
@@ -344,7 +343,9 @@ export function ThemeForm(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",
@@ -794,7 +795,9 @@ export function ThemeFormAll(props) {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",

@@ -9,7 +9,6 @@ import Agreement from "../Agreement";
 import { postData } from "../../../../functions/postData";
 import ReactGA from "react-ga4";
 import { addUserData } from "../../../../../store/userSlice";
-import ReactPixel from "react-facebook-pixel";
 import { searchParams } from "../../../../../store/searchParamsSlice";
 import { sendEventToConversionApi } from "../../../../functions/sendFbPageView";
 import {
@@ -94,7 +93,9 @@ const Form = (props) => {
           category: "form",
           action: "submit",
         });
-        ReactPixel.track("Lead", { eventID: eventId });
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
         sendEventToConversionApi(
           window.location.href,
           "Lead",

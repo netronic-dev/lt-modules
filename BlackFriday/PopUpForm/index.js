@@ -2,7 +2,6 @@ import style from "./style.module.scss";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import ReactGA from "react-ga4";
-import ReactPixel from "react-facebook-pixel";
 
 import {
   InputEmail,
@@ -57,7 +56,6 @@ export function PopUpForm(props) {
             action: "submit",
           })
         )
-        .then(ReactPixel.track("Lead"))
         .then(router.push(props.thank_you_page_url))
         .catch(console.log);
     },
