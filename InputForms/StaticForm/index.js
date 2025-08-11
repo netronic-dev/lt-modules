@@ -1,14 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signOut,
-  linkWithCredential,
-} from "firebase/auth";
 import { debounce } from "lodash";
 import Select, { components } from "react-select";
 import style from "../forms.module.scss";
@@ -23,13 +15,10 @@ import { useModals } from "../../../context/ModalsProvider.js";
 import axios from "axios";
 import { searchParams } from "../../../store/searchParamsSlice.js";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView.js";
-import { authentication } from "../../../firebase-config";
 import { schema } from "../../../Layouts/validate.js";
 import { selectOptions } from "../../../constants/globalConstants";
-import googleLogo from "../../../public/icons/google__logo.png";
 import { icons } from "../icons/icons";
 import { setUserData } from "../../../store/actions/userData.js";
-import { Icon } from "../../../components/Icon";
 import { generateUUID } from "../../functions/generateUUID";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
@@ -137,9 +126,7 @@ const themeFormTheme = {
 
 export function ThemeForm(props) {
   const [regionCode, setRegionCode] = useState();
-  const [isDesktop, setIsDesktop] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [loggedViaSocials, setLoggedSocials] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const modal = useModals();
@@ -223,7 +210,6 @@ export function ThemeForm(props) {
     setError,
     getValues,
     setValue,
-    watch,
     trigger,
   } = useForm({
     mode: "onChange",
@@ -233,76 +219,10 @@ export function ThemeForm(props) {
     },
   });
 
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
-
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-      contactMethod: "",
-    });
-  };
-
   const handleAgreementChange = (e) => {
     setValue("agreement", !getValues("agreement"));
     trigger("agreement");
   };
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
 
   const onSubmit = async (values) => {
     debouncedSubmit("attempt", window.location.hostname);
@@ -330,7 +250,7 @@ export function ThemeForm(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -406,70 +326,6 @@ export function ThemeForm(props) {
 
   return (
     <div>
-      {isDesktop ? (
-        <div className={style.auth_block}>
-          <div className={style.buttons_row}>
-            {loggedViaSocials ? (
-              <>
-                <button className={style.clear_button} onClick={clearAuth}>
-                  Clear
-                </button>
-                <button
-                  className={style.change_button}
-                  onClick={
-                    loggedViaSocials === "Google" ? googleAuth : facebookAuth
-                  }
-                >
-                  Change account
-                </button>
-              </>
-            ) : (
-              <>
-                <button className={style.google_button} onClick={googleAuth}>
-                  <Image
-                    src={googleLogo}
-                    alt="google logo"
-                    height={15}
-                    width={15}
-                  />{" "}
-                  Authorization via Google
-                </button>
-                <button
-                  className={style.facebook_button}
-                  onClick={facebookAuth}
-                >
-                  <Icon
-                    name="icon-facebook_logo"
-                    className={style.facebook_icon}
-                    width={15}
-                    height={15}
-                  />{" "}
-                  Authorization via Meta (Facebook)
-                </button>
-              </>
-            )}
-          </div>
-          <div className={style.divider_block}>
-            <span
-              className={`${style.divider} ${
-                props.isModal ? "" : style.divider_white
-              }`}
-            ></span>
-            <span
-              className={`${style.divider_text} ${
-                props.isModal ? "" : style.divider_text_white
-              }`}
-            >
-              or
-            </span>
-            <span
-              className={`${style.divider} ${
-                props.isModal ? "" : style.divider_white
-              }`}
-            ></span>
-          </div>
-        </div>
-      ) : null}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={
@@ -641,7 +497,6 @@ export function ThemeFormAll(props) {
   const router = useRouter();
   const modal = useModals();
   const queryParams = useSelector(searchParams);
-  const [loggedViaSocials, setLoggedSocials] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
   const eventId = generateUUID();
@@ -662,12 +517,6 @@ export function ThemeFormAll(props) {
       ? setRegionCode(modal?.region.toLowerCase())
       : setRegionCode("us");
   }, [modal.region]);
-
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
 
   const handleMenuOpen = () => setMenuIsOpen(true);
   const handleMenuClose = () => setMenuIsOpen(false);
@@ -695,67 +544,6 @@ export function ThemeFormAll(props) {
     trigger("agreement");
   };
 
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-    });
-  };
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
   const onSubmit = async (values) => {
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -782,7 +570,7 @@ export function ThemeFormAll(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -828,70 +616,6 @@ export function ThemeFormAll(props) {
 
   return (
     <div>
-      {isDesktop ? (
-        <div className={style.auth_block}>
-          <div className={style.buttons_row}>
-            {loggedViaSocials ? (
-              <>
-                <button className={style.clear_button} onClick={clearAuth}>
-                  Clear
-                </button>
-                <button
-                  className={style.change_button}
-                  onClick={
-                    loggedViaSocials === "Google" ? googleAuth : facebookAuth
-                  }
-                >
-                  Change account
-                </button>
-              </>
-            ) : (
-              <>
-                <button className={style.google_button} onClick={googleAuth}>
-                  <Image
-                    src={googleLogo}
-                    alt="google logo"
-                    height={15}
-                    width={15}
-                  />{" "}
-                  Authorization via Google
-                </button>
-                <button
-                  className={style.facebook_button}
-                  onClick={facebookAuth}
-                >
-                  <Icon
-                    name="icon-facebook_logo"
-                    className={style.facebook_icon}
-                    width={15}
-                    height={15}
-                  />{" "}
-                  Authorization via Meta (Facebook)
-                </button>
-              </>
-            )}
-          </div>
-          <div className={style.divider_block}>
-            <span
-              className={`${style.divider} ${
-                props.isModal ? "" : style.divider_white
-              }`}
-            ></span>
-            <span
-              className={`${style.divider_text} ${
-                props.isModal ? "" : style.divider_text_white
-              }`}
-            >
-              or
-            </span>
-            <span
-              className={`${style.divider} ${
-                props.isModal ? "" : style.divider_white
-              }`}
-            ></span>
-          </div>
-        </div>
-      ) : null}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={
@@ -1056,23 +780,3 @@ export function ThemeFormAll(props) {
     </div>
   );
 }
-
-const Input = (props) => {
-  return (
-    <label className={style.input__label}>
-      <input
-        name={props.name}
-        className={`${style.input_white} ${
-          props.error ? style.input__error : ""
-        }`}
-        type={props.type}
-        onChange={props.onChange}
-        value={props.value}
-        placeholder={props.placeholder}
-      />
-      {props.error ? (
-        <span className={style.error__message}>{props.error}</span>
-      ) : null}
-    </label>
-  );
-};

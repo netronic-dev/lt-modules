@@ -4,14 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Select, { components } from "react-select";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { debounce } from "lodash";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signOut,
-  linkWithCredential,
-} from "firebase/auth";
-import Image from "next/image";
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -20,11 +12,7 @@ import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch, useSelector } from "react-redux";
 import "react-phone-input-2/lib/style.css";
-import { authentication } from "../../../firebase-config";
 import { schema } from "../../../Layouts/validate";
-import googleLogo from "../../../public/icons/google__logo.png";
-
-import { useGAEvents } from "../../../context/GAEventsProvider";
 import { useModals } from "../../../context/ModalsProvider";
 import { setUserData } from "../../../store/actions/userData";
 import { searchParams } from "../../../store/searchParamsSlice";
@@ -33,7 +21,6 @@ import style from "../forms.module.scss";
 import { icons } from "../icons/icons";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 import { selectOptions } from "../../../constants/globalConstants";
-import { Icon } from "../../../components/Icon";
 import { generateUUID } from "../../functions/generateUUID";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
@@ -124,16 +111,12 @@ const DropdownIndicator = (props) => {
 
 export function PopUpNamePhone(props) {
   const [regionCode, setRegionCode] = useState();
-  const [loggedViaSocials, setLoggedSocials] = useState("");
 
   const router = useRouter();
   const modal = useModals();
   const dispatch = useDispatch();
-  const [agreement, changeAgreement] = useState(false);
-  const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
   const eventId = generateUUID();
 
   const handleServerErrors = (error) => {
@@ -146,10 +129,6 @@ export function PopUpNamePhone(props) {
       }
     });
   };
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
 
   const {
     register,
@@ -174,67 +153,6 @@ export function PopUpNamePhone(props) {
     trigger("agreement");
   };
 
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-    });
-  };
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
   const onSubmit = async (values) => {
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -248,7 +166,7 @@ export function PopUpNamePhone(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -300,70 +218,6 @@ export function PopUpNamePhone(props) {
         <div className={style.close}>
           <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-        {isDesktop ? (
-          <div className={style.auth_block}>
-            <div className={style.buttons_row}>
-              {loggedViaSocials ? (
-                <>
-                  <button className={style.clear_button} onClick={clearAuth}>
-                    Clear
-                  </button>
-                  <button
-                    className={style.change_button}
-                    onClick={
-                      loggedViaSocials === "Google" ? googleAuth : facebookAuth
-                    }
-                  >
-                    Change account
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className={style.google_button} onClick={googleAuth}>
-                    <Image
-                      src={googleLogo}
-                      alt="google logo"
-                      height={15}
-                      width={15}
-                    />{" "}
-                    Authorization via Google
-                  </button>
-                  <button
-                    className={style.facebook_button}
-                    onClick={facebookAuth}
-                  >
-                    <Icon
-                      name="icon-facebook_logo"
-                      className={style.facebook_icon}
-                      width={15}
-                      height={15}
-                    />{" "}
-                    Authorization via Meta (Facebook)
-                  </button>
-                </>
-              )}
-            </div>
-            <div className={style.divider_block}>
-              <span
-                className={`${style.divider} ${
-                  props.isModal ? "" : style.divider_white
-                }`}
-              ></span>
-              <span
-                className={`${style.divider_text} ${
-                  props.isModal ? "" : style.divider_text_white
-                }`}
-              >
-                or
-              </span>
-              <span
-                className={`${style.divider} ${
-                  props.isModal ? "" : style.divider_white
-                }`}
-              ></span>
-            </div>
-          </div>
-        ) : null}
         <div className={style.text_block}>
           <p className={style.title}>
             {props.title || "Fill in the form below"}
@@ -531,81 +385,11 @@ export function PopUpNamePhone(props) {
 
 export function PopUpEmail(props) {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
-  const [isDesktop, setIsDesktop] = useState(true);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [loggedViaSocials, setLoggedSocials] = useState("");
 
   const router = useRouter();
   const modal = useModals();
-  const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-      contactMethod: "",
-    });
-  };
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -621,8 +405,7 @@ export function PopUpEmail(props) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
-    control,
+    formState: { errors },
     reset,
     setError,
     getValues,
@@ -652,7 +435,6 @@ export function PopUpEmail(props) {
 
   const onSelectLanguage = (option) => {
     setSelectedLanguage(option.value);
-    // formik.setFieldValue("language", option.value);
   };
 
   const onSubmit = async (values) => {
@@ -667,7 +449,7 @@ export function PopUpEmail(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -722,75 +504,6 @@ export function PopUpEmail(props) {
           </p>
         </div>
         <div className={style.inputs_block__inputs}>
-          {isDesktop ? (
-            <div className={style.auth_block}>
-              <div className={style.buttons_row}>
-                {loggedViaSocials ? (
-                  <>
-                    <button className={style.clear_button} onClick={clearAuth}>
-                      Clear
-                    </button>
-                    <button
-                      className={style.change_button}
-                      onClick={
-                        loggedViaSocials === "Google"
-                          ? googleAuth
-                          : facebookAuth
-                      }
-                    >
-                      Change account
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={style.google_button}
-                      onClick={googleAuth}
-                    >
-                      <Image
-                        src={googleLogo}
-                        alt="google logo"
-                        height={15}
-                        width={15}
-                      />{" "}
-                      Authorization via Google
-                    </button>
-                    <button
-                      className={style.facebook_button}
-                      onClick={facebookAuth}
-                    >
-                      <Icon
-                        name="icon-facebook_logo"
-                        className={style.facebook_icon}
-                        width={15}
-                        height={15}
-                      />{" "}
-                      Authorization via Meta (Facebook)
-                    </button>
-                  </>
-                )}
-              </div>
-              <div className={style.divider_block}>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-                <span
-                  className={`${style.divider_text} ${
-                    props.isModal ? "" : style.divider_text_white
-                  }`}
-                >
-                  or
-                </span>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-              </div>
-            </div>
-          ) : null}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.input__label}>
               <input
@@ -866,23 +579,12 @@ export function PopUpEmail(props) {
 
 export function PopUpEmailPhone(props) {
   const [regionCode, setRegionCode] = useState();
-  const [loggedViaSocials, setLoggedSocials] = useState("");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const router = useRouter();
   const modal = useModals();
-  const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
-  const [isDesktop, setIsDesktop] = useState(true);
   const eventId = generateUUID();
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
 
   const handleMenuOpen = () => setMenuIsOpen(true);
   const handleMenuClose = () => setMenuIsOpen(false);
@@ -921,63 +623,6 @@ export function PopUpEmailPhone(props) {
     trigger("agreement");
   };
 
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-    });
-  };
-
   useEffect(() => {
     modal?.region
       ? setRegionCode(modal?.region.toLowerCase())
@@ -1009,7 +654,7 @@ export function PopUpEmailPhone(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -1058,70 +703,6 @@ export function PopUpEmailPhone(props) {
         <div className={style.close}>
           <button onClick={props.closeClick}>{icons.cross}</button>
         </div>
-        {isDesktop ? (
-          <div className={style.auth_block}>
-            <div className={style.buttons_row}>
-              {loggedViaSocials ? (
-                <>
-                  <button className={style.clear_button} onClick={clearAuth}>
-                    Clear
-                  </button>
-                  <button
-                    className={style.change_button}
-                    onClick={
-                      loggedViaSocials === "Google" ? googleAuth : facebookAuth
-                    }
-                  >
-                    Change account
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className={style.google_button} onClick={googleAuth}>
-                    <Image
-                      src={googleLogo}
-                      alt="google logo"
-                      height={15}
-                      width={15}
-                    />{" "}
-                    Authorization via Google
-                  </button>
-                  <button
-                    className={style.facebook_button}
-                    onClick={facebookAuth}
-                  >
-                    <Icon
-                      name="icon-facebook_logo"
-                      className={style.facebook_icon}
-                      width={15}
-                      height={15}
-                    />{" "}
-                    Authorization via Meta (Facebook)
-                  </button>
-                </>
-              )}
-            </div>
-            <div className={style.divider_block}>
-              <span
-                className={`${style.divider} ${
-                  props.isModal ? "" : style.divider_white
-                }`}
-              ></span>
-              <span
-                className={`${style.divider_text} ${
-                  props.isModal ? "" : style.divider_text_white
-                }`}
-              >
-                or
-              </span>
-              <span
-                className={`${style.divider} ${
-                  props.isModal ? "" : style.divider_white
-                }`}
-              ></span>
-            </div>
-          </div>
-        ) : null}
         <div className={style.text_block}>
           <p className={style.title}>
             {props.title || "Fill in the form below"}
@@ -1292,82 +873,13 @@ export function PopUpEmailPhone(props) {
 
 export function PopUpEvent(props) {
   const [regionCode, setRegionCode] = useState();
-  const [isDesktop, setIsDesktop] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [loggedViaSocials, setLoggedSocials] = useState("");
 
   const router = useRouter();
   const modal = useModals();
   const dispatch = useDispatch();
-  const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-      contactMethod: "",
-    });
-  };
 
   const {
     register,
@@ -1435,7 +947,7 @@ export function PopUpEvent(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -1491,75 +1003,6 @@ export function PopUpEvent(props) {
           <p className={style.paragraph}>{props.subTitle}</p>
         </div>
         <div className={style.inputs_block__inputs}>
-          {isDesktop ? (
-            <div className={style.auth_block}>
-              <div className={style.buttons_row}>
-                {loggedViaSocials ? (
-                  <>
-                    <button className={style.clear_button} onClick={clearAuth}>
-                      Clear
-                    </button>
-                    <button
-                      className={style.change_button}
-                      onClick={
-                        loggedViaSocials === "Google"
-                          ? googleAuth
-                          : facebookAuth
-                      }
-                    >
-                      Change account
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={style.google_button}
-                      onClick={googleAuth}
-                    >
-                      <Image
-                        src={googleLogo}
-                        alt="google logo"
-                        height={15}
-                        width={15}
-                      />{" "}
-                      Authorization via Google
-                    </button>
-                    <button
-                      className={style.facebook_button}
-                      onClick={facebookAuth}
-                    >
-                      <Icon
-                        name="icon-facebook_logo"
-                        className={style.facebook_icon}
-                        width={15}
-                        height={15}
-                      />{" "}
-                      Authorization via Meta (Facebook)
-                    </button>
-                  </>
-                )}
-              </div>
-              <div className={style.divider_block}>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-                <span
-                  className={`${style.divider_text} ${
-                    props.isModal ? "" : style.divider_text_white
-                  }`}
-                >
-                  or
-                </span>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-              </div>
-            </div>
-          ) : null}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div className={style.input__label}>
@@ -1718,79 +1161,10 @@ export function PopUpNameEmail(props) {
   const router = useRouter();
   const modal = useModals();
   const dispatch = useDispatch();
-  const GAEvents = useGAEvents();
   const queryParams = useSelector(searchParams);
-  const [isDesktop, setIsDesktop] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [loggedViaSocials, setLoggedSocials] = useState("");
   const [regionCode, setRegionCode] = useState();
   const eventId = generateUUID();
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1200);
-  }, [window.innerWidth]);
-
-  const orderName = loggedViaSocials
-    ? `(${loggedViaSocials}) ${props.orderName}`
-    : `(Noauthorization) ${props.orderName}`;
-
-  const googleAuth = async () => {
-    await signOut(authentication);
-
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(authentication, provider);
-    setLoggedSocials("Google");
-    reset({
-      email: user.email,
-      name: user.displayName,
-    });
-  };
-
-  const facebookAuth = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const { user } = await signInWithPopup(authentication, provider);
-
-      setLoggedSocials("Facebook");
-      reset({
-        email: user.email
-          ? user.email
-          : user.reloadUserInfo.providerUserInfo[0].email,
-        name: user.displayName,
-      });
-    } catch (error) {
-      if (error.code === "auth/popup-blocked") {
-        alert("Please allow pop-ups for this site.");
-      } else if (
-        error.code === "auth/account-exists-with-different-credential"
-      ) {
-        const pendingCred = FacebookAuthProvider.credentialFromError(error);
-        const googleProvider = new GoogleAuthProvider();
-        const googleUser = await signInWithPopup(
-          authentication,
-          googleProvider
-        );
-        const user = await linkWithCredential(googleUser.user, pendingCred);
-        reset({
-          email: user._tokenResponse.email,
-          name: user._tokenResponse.displayName,
-        });
-        setLoggedSocials("Facebook");
-      } else {
-        alert("Try again, please!");
-      }
-    }
-  };
-
-  const clearAuth = async () => {
-    await signOut(authentication);
-    setLoggedSocials("");
-    reset({
-      email: "",
-      name: "",
-      contactMethod: "",
-    });
-  };
 
   const {
     register,
@@ -1853,7 +1227,7 @@ export function PopUpNameEmail(props) {
       const postToCRMResponse = await postData(
         data,
         props.destinationURL,
-        orderName,
+        props.orderName,
         window.location.href,
         window.location.hostname,
         queryParams || router.query
@@ -1915,75 +1289,6 @@ export function PopUpNameEmail(props) {
           <p className={style.paragraph}>{props.subtitle}</p>
         </div>
         <div className={style.inputs_block__inputs}>
-          {isDesktop ? (
-            <div className={style.auth_block}>
-              <div className={style.buttons_row}>
-                {loggedViaSocials ? (
-                  <>
-                    <button className={style.clear_button} onClick={clearAuth}>
-                      Clear
-                    </button>
-                    <button
-                      className={style.change_button}
-                      onClick={
-                        loggedViaSocials === "Google"
-                          ? googleAuth
-                          : facebookAuth
-                      }
-                    >
-                      Change account
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={style.google_button}
-                      onClick={googleAuth}
-                    >
-                      <Image
-                        src={googleLogo}
-                        alt="google logo"
-                        height={15}
-                        width={15}
-                      />{" "}
-                      Authorization via Google
-                    </button>
-                    <button
-                      className={style.facebook_button}
-                      onClick={facebookAuth}
-                    >
-                      <Icon
-                        name="icon-facebook_logo"
-                        className={style.facebook_icon}
-                        width={15}
-                        height={15}
-                      />{" "}
-                      Authorization via Meta (Facebook)
-                    </button>
-                  </>
-                )}
-              </div>
-              <div className={style.divider_block}>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-                <span
-                  className={`${style.divider_text} ${
-                    props.isModal ? "" : style.divider_text_white
-                  }`}
-                >
-                  or
-                </span>
-                <span
-                  className={`${style.divider} ${
-                    props.isModal ? "" : style.divider_white
-                  }`}
-                ></span>
-              </div>
-            </div>
-          ) : null}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div className={style.input__label}>
@@ -2145,21 +1450,3 @@ export function PopUpNameEmail(props) {
     </div>
   );
 }
-
-const Input = (props) => {
-  return (
-    <label className={style.input__label}>
-      <input
-        name={props.name}
-        className={`${style.input} ${props.error ? style.input__error : ""}`}
-        type={props.type}
-        onChange={props.onChange}
-        value={props.value}
-        placeholder={props.placeholder}
-      />
-      {props.error ? (
-        <span className={style.error__message}>{props.error}</span>
-      ) : null}
-    </label>
-  );
-};
