@@ -1,13 +1,10 @@
 import style from "./header.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import { useState } from "react";
-
-import Image from "next/image";
 
 export default function Header(props) {
-  const [isOpen, setState] = useState(false);
   const modals = useModals();
   const GAEvents = useGAEvents();
 
@@ -64,20 +61,8 @@ export default function Header(props) {
           >
             {phoneIcon}
           </li>
-          {/* <Calendly setIsCalendly={setIsCalendly} setState={setState} /> */}
         </ul>
       </nav>
-      {/* {isCalendly && (
-        <PopupModal
-          url="https://calendly.com/lasertag_net/30min"
-          pageSettings={props.pageSettings}
-          utm={props.utm}
-          prefill={props.prefill}
-          onModalClose={() => setState(false)}
-          open={isOpen}
-          rootElement={document.getElementById("__next")}
-        />
-      )} */}
     </div>
   );
 }
@@ -105,6 +90,11 @@ function HeaderSingleItem(props) {
         <a
           className={style.nav__item_a}
           target={props.blank ? "_blank" : undefined}
+          rel={
+            props.link === "https://vion-vr.com/"
+              ? "sponsored"
+              : "nofollow sponsored"
+          }
           onClick={props.onLinkClick}
         >
           {props.text}

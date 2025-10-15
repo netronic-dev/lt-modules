@@ -31,7 +31,6 @@
   }
   .nav__item {
     width: 100%;
-    // display: flex;
     align-items: center;
     cursor: default;
     list-style: none;
@@ -154,14 +153,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  // a {
-  //   height: 100%;
-  //   display: flex;
-  //   align-items: center;
-  // }
-  // img {
-  //   height: 80%;
-  // }
 }
 .dropmenu {
   background-color: #000000;
@@ -178,7 +169,6 @@
 @media (max-width: 1200px) {
   .header {
     height: 50px;
-    // display: none;
   }
 }
 

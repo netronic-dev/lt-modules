@@ -19,14 +19,11 @@ function FooterSocial(props) {
           />
         </div>
         {partOf}
-        <a
+        <span
           className={style.netronic_logo_bg}
-          href="https://netronic.net"
-          target="_blank"
-          aria-label="Netronic"
         >
           {netronic}
-        </a>
+        </span>
       </div>
       <span className={style.social_text}>{props.text}</span>
       <ul className={style.social_links}>
