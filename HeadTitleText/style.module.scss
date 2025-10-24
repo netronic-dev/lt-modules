@@ -47,6 +47,21 @@
     color: #4f4f4f;
   }
 }
+.block_white_new {
+  @extend %block;
+  padding: 30px 0;
+  background: #fff;
+
+  .title {
+    @extend %title;
+    color: #212121;
+    font-weight: 700;
+  }
+  .text {
+    @extend %text;
+    color: #4f4f4f;
+  }
+}
 .block_light {
   @extend %block;
   background: #f2f2f2;
