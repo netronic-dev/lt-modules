@@ -215,6 +215,8 @@ export function TileGridWidthButtons(props) {
       }
     } else {
       setImage(firstImage);
+      setTitle(props.title);
+      setLink(props.link);
     }
   }
   function sectionWasInView(sectionName) {
@@ -236,9 +238,7 @@ export function TileGridWidthButtons(props) {
         <Link href={link}>
           <a
             aria-label="Redirect to Laser Tag Guns"
-            onClick={() =>
-              GAEvents.buttonClick("Card", "Link Click", link)
-            }
+            onClick={() => GAEvents.buttonClick("Card", "Link Click", link)}
           >
             <div
               className={style.tile_bg}
