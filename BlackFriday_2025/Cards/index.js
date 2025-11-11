@@ -5,7 +5,7 @@ const Cards = (props) => {
   return (
     <section className={style.section} id={props.name}>
       <div className={style.wrapper}>
-        {props.title && <h2 className={style.title}>{props.title}</h2>}
+        <h2 className={style.title}>{props.title}</h2>
         <div className={style.cards_wrapper}>
           {props.data?.map((item, index) => (
             <CardCell
@@ -15,11 +15,11 @@ const Cards = (props) => {
               subtitle={item.subtitle}
               text1={item.text1}
               text2={item.text2}
+              buttonText={item.buttonText}
               list={item.list}
               subsubtitle1={item.subsubtitle1}
               subsubtitle2={item.subsubtitle2}
               subsubtitle3={item.subsubtitle3}
-              buttonText={item.buttonText}
               price={item.price}
               discount={item.discount}
               color={item.color}
@@ -66,6 +66,15 @@ const CardCell = (props) => {
             </ul>
           )}
           <p className={style.cell__subsubtitle}>{props.subsubtitle3}</p>
+        </div>
+        <div className={style.cell_bottom}>
+          <button
+            style={{ background: props.color }}
+            className={style.cell__button}
+            onClick={props.onClick}
+          >
+            {props.buttonText}
+          </button>
         </div>
       </div>
     </div>
