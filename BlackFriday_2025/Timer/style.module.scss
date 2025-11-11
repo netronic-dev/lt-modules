@@ -1,0 +1,60 @@
+@import "../default";
+
+.section {
+	background: #fff;
+	position: relative;
+	z-index: 4;
+}
+.section_inner {
+	background: #f0f0f2;
+	border-radius: 20px;
+	padding: 115px 20px 95px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.title {
+	@extend %title;
+	text-align: center;
+	margin-bottom: 45px;
+}
+.timer_outer {
+	padding: 8px 45px 15px;
+	background: #dfdfdf;
+	border-radius: 70px;
+	margin-bottom: 50px;
+	width: 750px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.button {
+	font-family: Manrope;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #f1f4f6;
+	background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+
+	border-radius: 60px;
+	padding: 13px 40px;
+	outline: 0;
+	border: 0;
+	cursor: pointer;
+	&:hover {
+		background: linear-gradient(81.25deg, #000000 18.31%, #000000 126.68%);
+		color: $color-2;
+		animation: none;
+	}
+}
+@media (max-width: 900px) {
+	.timer_outer {
+		padding: 8px 20px 15px;
+	}
+	.timer_outer {
+		width: auto;
+	}
+}

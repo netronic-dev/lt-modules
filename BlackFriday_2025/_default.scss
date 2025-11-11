@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+
+$font-1: Manrope;
+
+$color-1: #0090ff;
+$color-2: #fff;
+$color-3: #040e18;
+$color-4: #d6d6d6;
+$color-5: #f0f0f2;
+
+%page_grid {
+	width: 1170px;
+	margin: 0 auto;
+}
+%title {
+	font-size: 60px;
+	line-height: 70px;
+	text-transform: uppercase;
+	margin: 0;
+	span {
+		color: #0090ff;
+	}
+}
+
+@media (max-width: 1200px) {
+	%page_grid {
+		width: auto;
+		margin: 0 20px;
+	}
+}
+@media (max-width: 900px) {
+	%title {
+		font-size: 40px;
+		line-height: 42px;
+	}
+}

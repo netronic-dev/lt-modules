@@ -1,0 +1,126 @@
+@import "../default";
+
+.section {
+  position: relative;
+  padding-bottom: 130px;
+}
+.section_inner {
+  @extend %page_grid;
+  padding-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+.responsive {
+  display: none;
+}
+.content {
+  margin-bottom: 85px;
+}
+.words_slider {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  bottom: 0px;
+}
+.title {
+  font-weight: 800;
+  font-size: 80px;
+  line-height: 90px;
+  color: $color-2;
+  text-transform: uppercase;
+
+  span {
+    color: #0090ff;
+  }
+}
+.subtitle {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: normal;
+  color: $color-2;
+  text-transform: uppercase;
+  margin: 0 0 25px;
+}
+.text {
+  font-family: $font-1;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: $color-2;
+  margin-bottom: 30px;
+
+  span {
+	color: #0090ff;
+	font-weight: 800;
+  }
+}
+.button {
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  font-family: $font-1;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #f1f4f6;
+  padding: 19px 55px 17px;
+  background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+  border-radius: 60px;
+  outline: 0;
+  border: 0;
+  animation: radial-pulse 1s infinite;
+  &:hover {
+    background: linear-gradient(81.25deg, #000000 18.31%, #000000 126.68%);
+    color: $color-2;
+    animation: none;
+  }
+}
+.image_outer {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  border-radius: 20px;
+  overflow: hidden;
+  * {
+    user-select: none;
+    pointer-events: none;
+  }
+}
+@keyframes radial-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.97);
+  }
+}
+@media (max-width: 750px) {
+  .desktop {
+    display: none;
+  }
+  .responsive {
+    display: block;
+  }
+}
+@media (max-width: 600px) {
+  .image_outer {
+    height: 385px;
+  }
+  .title {
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 50px;
+    span {
+      font-weight: 600;
+    }
+    br {
+      display: none;
+    }
+  }
+  .text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
