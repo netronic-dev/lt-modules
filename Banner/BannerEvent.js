@@ -55,7 +55,7 @@ const Banner = (props) => {
 
 export default Banner;
 
-const closeBtn = (
+ const closeBtn = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="40"
