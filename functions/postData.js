@@ -29,12 +29,16 @@ export async function postData(
   siteDomain,
   fromSite,
   routerQuery,
-  source
+  source,
 ) {
   // let locationInfo: any = await getLocationDataFromBackend();
   let locationInfo = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
-  const countryName = getName(locationInfo.country);
+  const countryNameRaw = getName(locationInfo.country);
+
+  const countryName = countryNameRaw
+    ? countryNameRaw.replace(/\s*\(the\)$/i, "")
+    : "";
   const countryCode = getCountryCode(values.phoneNumber);
 
   let referrer = "";
@@ -111,7 +115,7 @@ export async function getLocationData() {
   } else {
     try {
       const response = await axios.get(
-        "https://ipinfo.io/json?token=ee40c07fb51963"
+        "https://ipinfo.io/json?token=ee40c07fb51963",
       );
       locationData = {
         ip: response.data.ip || "",
@@ -124,7 +128,7 @@ export async function getLocationData() {
     } catch (err1) {
       try {
         const response = await axios.get(
-          "https://ipinfo.io/json?token=eba5da567f5208"
+          "https://ipinfo.io/json?token=eba5da567f5208",
         );
         locationData = {
           ip: response.data.ip || "",
