@@ -28,28 +28,34 @@ export default function CookieBanner(props) {
 //   }
     // }, [cookieConsent]);
     
-    useEffect(() => {
-      if (typeof window.gtag === "function") {
-        const newValue = cookieConsent ? "granted" : "denied";
+useEffect(() => {
+  if (typeof window.gtag === "function") {
+    const newValue = cookieConsent ? "granted" : "denied";
 
-        // Оновлюємо згоду для Google
-        window.gtag("consent", "update", {
-          analytics_storage: newValue,
-          ad_storage: newValue,
-        });
+    // Оновлюємо згоду для Google
+    window.gtag("consent", "update", {
+      analytics_storage: newValue,
+      ad_storage: newValue,
+    });
 
-        // --- ДОДАЙТЕ ЦЕ ДЛЯ COOKIEHUB ---
-        if (typeof window.CookieHub !== "undefined") {
-          // Оновлюємо згоду в CookieHub, щоб він знав про вибір користувача
-          window.CookieHub.changeConsent(cookieConsent ? "allow" : "deny");
-        }
-        // --------------------------------
+    // --- ВИПРАВЛЕНО ДЛЯ COOKIEHUB ---
+    // Перевіряємо, чи завантажився CookieHub
+    if (
+      typeof window.cookiehub !== "undefined" &&
+      typeof window.cookiehub.changeConsent === "function"
+    ) {
+      // Оновлюємо згоду в CookieHub, щоб він знав про вибір користувача
+      window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
+    } else {
+      console.warn("CookieHub is not loaded yet.");
+    }
+    // --------------------------------
 
-        setLocalStorage("cookie_consent", cookieConsent);
-      } else {
-        console.warn("Google Analytics is not loaded yet.");
-      }
-    }, [cookieConsent]);
+    setLocalStorage("cookie_consent", cookieConsent);
+  } else {
+    console.warn("Google Analytics is not loaded yet.");
+  }
+}, [cookieConsent]);
 
     return cookieConsent === null ? (
         <div className={style.banner}>
