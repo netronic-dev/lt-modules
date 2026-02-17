@@ -109,19 +109,17 @@ useEffect(() => {
     });
   }
 
-  // 2. Оновлюємо згоду в CookieHub через load()
+  // 2. Оновлюємо згоду в CookieHub
   if (
     typeof window.cookiehub !== "undefined" &&
     typeof window.cookiehub.load === "function"
   ) {
-    // Якщо cookieConsent true -> дозволяємо (allow), якщо false -> забороняємо (deny)
+    // Викликаємо load ТІЛЬКИ для застосування згоди, не ініціалізуючи UI знову
     window.cookiehub.load(cookieConsent ? "allow" : "deny");
     console.log(
-      "CookieHub consent loaded with:",
+      "CookieHub consent updated with:",
       cookieConsent ? "allow" : "deny",
     );
-  } else {
-    console.error("CookieHub load method not available");
   }
 
   // 3. Зберігаємо вибір користувача
