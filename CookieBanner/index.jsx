@@ -97,34 +97,45 @@ export default function CookieBanner(props) {
     setCookieConsent(storedCookieConsent);
   }, []);
 
-  useEffect(() => {
-    // Якщо користувач ще не зробив вибір, нічого не робимо
-    if (cookieConsent === null) return;
+useEffect(() => {
+  if (cookieConsent === null) return;
 
-    const newValue = cookieConsent ? "granted" : "denied";
+  const newValue = cookieConsent ? "granted" : "denied";
 
-    // 1. Оновлюємо згоду для Google Consent Mode
-    if (typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: newValue,
-        ad_storage: newValue,
-      });
-    }
+  // 1. Оновлюємо згоду для Google Consent Mode
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: newValue,
+      ad_storage: newValue,
+    });
+  }
 
-    // 2. Оновлюємо згоду в CookieHub
+  // 2. Оновлюємо згоду в CookieHub з перевіркою isReady()
+  const updateCookieHub = () => {
     if (
       typeof window.cookiehub !== "undefined" &&
       typeof window.cookiehub.changeConsent === "function"
     ) {
-      window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
+      // ПЕРЕВІРКА НА ГОТОВНІСТЬ API
+      if (
+        typeof window.cookiehub.isReady === "function" &&
+        window.cookiehub.isReady()
+      ) {
+        window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
+      } else {
+        // Якщо не готовий, чекаємо трохи і пробуємо знову
+        setTimeout(updateCookieHub, 100);
+      }
     } else {
-      // Якщо CookieHub ще не завантажився, можна спробувати почекати або залогінити помилку
       console.warn("CookieHub API not available yet.");
     }
+  };
 
-    // 3. Зберігаємо вибір користувача
-    setLocalStorage("cookie_consent", cookieConsent);
-  }, [cookieConsent]);
+  updateCookieHub();
+
+  // 3. Зберігаємо вибір користувача
+  setLocalStorage("cookie_consent", cookieConsent);
+}, [cookieConsent]);
 
   // Якщо користувач вже зробив вибір, не показуємо банер
   if (cookieConsent !== null) return null;
