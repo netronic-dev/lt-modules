@@ -96,39 +96,37 @@ export default function CookieBanner(props) {
     setCookieConsent(storedCookieConsent);
   }, []);
 
-  useEffect(() => {
-    if (cookieConsent === null) return;
+useEffect(() => {
+  if (cookieConsent === null) return;
 
-    const newValue = cookieConsent ? "granted" : "denied";
+  const newValue = cookieConsent ? "granted" : "denied";
 
-    // 1. Оновлюємо згоду для Google Consent Mode
-    if (typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: newValue,
-        ad_storage: newValue,
-      });
-    }
+  // 1. Оновлюємо згоду для Google Consent Mode
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: newValue,
+      ad_storage: newValue,
+    });
+  }
 
-    // 2. Оновлюємо згоду в CookieHub (Агресивний підхід)
-    const tryUpdateCookieHub = setInterval(() => {
-      if (
-        typeof window.cookiehub !== "undefined" &&
-        typeof window.cookiehub.changeConsent === "function"
-      ) {
-        window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
-        console.log("CookieHub consent updated!");
-        clearInterval(tryUpdateCookieHub); // Зупиняємо перевірку, коли спрацювало
-      } else {
-        console.warn("Waiting for CookieHub API...");
-      }
-    }, 200); // Перевіряємо кожні 200мс
+  // 2. Оновлюємо згоду в CookieHub через load()
+  if (
+    typeof window.cookiehub !== "undefined" &&
+    typeof window.cookiehub.load === "function"
+  ) {
+    // Якщо cookieConsent true -> дозволяємо (allow), якщо false -> забороняємо (deny)
+    window.cookiehub.load(cookieConsent ? "allow" : "deny");
+    console.log(
+      "CookieHub consent loaded with:",
+      cookieConsent ? "allow" : "deny",
+    );
+  } else {
+    console.error("CookieHub load method not available");
+  }
 
-    // Очистка інтервалу при розмонтуванні компонента
-    return () => clearInterval(tryUpdateCookieHub);
-
-    // 3. Зберігаємо вибір користувача
-    setLocalStorage("cookie_consent", cookieConsent);
-  }, [cookieConsent]);
+  // 3. Зберігаємо вибір користувача
+  setLocalStorage("cookie_consent", cookieConsent);
+}, [cookieConsent]);
 
   if (cookieConsent !== null) return null;
 
