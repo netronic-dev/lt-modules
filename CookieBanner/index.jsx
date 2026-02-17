@@ -84,7 +84,6 @@
 // }
 
 import "client-only";
-
 import style from "./style.module.scss";
 import { getLocalStorage, setLocalStorage } from "./storageHelper";
 import { useState, useEffect, useLayoutEffect } from "react";
@@ -97,47 +96,40 @@ export default function CookieBanner(props) {
     setCookieConsent(storedCookieConsent);
   }, []);
 
-useEffect(() => {
-  if (cookieConsent === null) return;
+  useEffect(() => {
+    if (cookieConsent === null) return;
 
-  const newValue = cookieConsent ? "granted" : "denied";
+    const newValue = cookieConsent ? "granted" : "denied";
 
-  // 1. Оновлюємо згоду для Google Consent Mode
-  if (typeof window.gtag === "function") {
-    window.gtag("consent", "update", {
-      analytics_storage: newValue,
-      ad_storage: newValue,
-    });
-  }
+    // 1. Оновлюємо згоду для Google Consent Mode
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: newValue,
+        ad_storage: newValue,
+      });
+    }
 
-  // 2. Оновлюємо згоду в CookieHub з перевіркою isReady()
-  const updateCookieHub = () => {
-    if (
-      typeof window.cookiehub !== "undefined" &&
-      typeof window.cookiehub.changeConsent === "function"
-    ) {
-      // ПЕРЕВІРКА НА ГОТОВНІСТЬ API
+    // 2. Оновлюємо згоду в CookieHub (Агресивний підхід)
+    const tryUpdateCookieHub = setInterval(() => {
       if (
-        typeof window.cookiehub.isReady === "function" &&
-        window.cookiehub.isReady()
+        typeof window.cookiehub !== "undefined" &&
+        typeof window.cookiehub.changeConsent === "function"
       ) {
         window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
+        console.log("CookieHub consent updated!");
+        clearInterval(tryUpdateCookieHub); // Зупиняємо перевірку, коли спрацювало
       } else {
-        // Якщо не готовий, чекаємо трохи і пробуємо знову
-        setTimeout(updateCookieHub, 100);
+        console.warn("Waiting for CookieHub API...");
       }
-    } else {
-      console.warn("CookieHub API not available yet.");
-    }
-  };
+    }, 200); // Перевіряємо кожні 200мс
 
-  updateCookieHub();
+    // Очистка інтервалу при розмонтуванні компонента
+    return () => clearInterval(tryUpdateCookieHub);
 
-  // 3. Зберігаємо вибір користувача
-  setLocalStorage("cookie_consent", cookieConsent);
-}, [cookieConsent]);
+    // 3. Зберігаємо вибір користувача
+    setLocalStorage("cookie_consent", cookieConsent);
+  }, [cookieConsent]);
 
-  // Якщо користувач вже зробив вибір, не показуємо банер
   if (cookieConsent !== null) return null;
 
   return (
@@ -152,14 +144,15 @@ useEffect(() => {
             className={style.allow_button}
             onClick={() => {
               setCookieConsent(true);
-              // window.location.reload(); // <--- Спробуйте прибрати це
             }}
           >
             {props.allow_btn_text}
           </button>
           <button
             className={style.decline_button}
-            onClick={() => setCookieConsent(false)}
+            onClick={() => {
+              setCookieConsent(false);
+            }}
           >
             {props.decline_btn_text}
           </button>
