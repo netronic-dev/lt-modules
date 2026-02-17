@@ -39,12 +39,11 @@ useEffect(() => {
     });
 
     // --- ВИПРАВЛЕНО ДЛЯ COOKIEHUB ---
-    // Перевіряємо, чи завантажився CookieHub
+    // Перевіряємо об'єкт у нижньому регістрі
     if (
       typeof window.cookiehub !== "undefined" &&
       typeof window.cookiehub.changeConsent === "function"
     ) {
-      // Оновлюємо згоду в CookieHub, щоб він знав про вибір користувача
       window.cookiehub.changeConsent(cookieConsent ? "allow" : "deny");
     } else {
       console.warn("CookieHub is not loaded yet.");
@@ -52,8 +51,6 @@ useEffect(() => {
     // --------------------------------
 
     setLocalStorage("cookie_consent", cookieConsent);
-  } else {
-    console.warn("Google Analytics is not loaded yet.");
   }
 }, [cookieConsent]);
 
