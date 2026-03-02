@@ -47,7 +47,7 @@ export function TileToTile(props) {
                             >
                                 <Image
                                     priority={true}
-                                    alt={props.title}
+                                    alt={props.altOne}
                                     src={props.bgOne}
                                     layout='fill'
                                     objectPosition={
@@ -92,7 +92,7 @@ export function TileToTile(props) {
                             >
                                 <Image
                                     priority={true}
-                                    alt={props.title}
+                                    alt={props.altTwo}
                                     src={props.bgTwo}
                                     layout='fill'
                                     objectFit={
@@ -161,7 +161,7 @@ export function TileToTileReverse(props) {
                                 >
                                     <Image
                                         priority={true}
-                                        alt={props.title}
+                                        alt={props.altOne}
                                         src={props.bgOne}
                                         layout='fill'
                                         objectPosition={
@@ -213,7 +213,7 @@ export function TileToTileReverse(props) {
                                 >
                                     <Image
                                         priority={true}
-                                        alt={props.titleTwo}
+                                        alt={props.altTwo}
                                         src={props.bgTwo}
                                         layout='fill'
                                         objectFit={
@@ -276,7 +276,7 @@ export function TileToTileStatic(props) {
                         <div className={style.tile_static_img}>
                             <Image
                                 priority={true}
-                                alt={props.title}
+                                alt={props.altOne}
                                 src={props.bgOne}
                                 layout='fill'
                                 objectFit='contain'
@@ -297,7 +297,7 @@ export function TileToTileStatic(props) {
                         <div className={style.tile_static_img}>
                             <Image
                                 priority={true}
-                                alt={props.titleTwo}
+                                alt={props.altTwo}
                                 src={props.bgTwo}
                                 layout='fill'
                                 objectFit='contain'

@@ -56,7 +56,7 @@ export function TileGridWidth(props) {
                   style={{ backgroundColor: props.bgColor }}
                 >
                   <Image
-                    alt={props.title}
+                    alt={props.alt}
                     src={props.bgDesktop}
                     layout="fill"
                     priority={true}
@@ -71,7 +71,7 @@ export function TileGridWidth(props) {
                   style={{ backgroundColor: props.bgColor }}
                 >
                   <Image
-                    alt={props.title}
+                    alt={props.alt}
                     src={props.bgResponsive}
                     layout="fill"
                     objectPosition={

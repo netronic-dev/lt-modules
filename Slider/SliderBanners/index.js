@@ -70,6 +70,7 @@ export default function SliderBanners(props) {
           <CellAdder
             key={firstPicNumber}
             image={data[firstPicNumber].image}
+            alt="World leader in mobile laser tag solutions photo 16"
             text={props.buttonText}
             objectPosition="100% 100%"
           />
@@ -81,6 +82,7 @@ export default function SliderBanners(props) {
           <CellAdder
             key={secondPicNumber}
             image={data[secondPicNumber].image}
+            alt="World leader in mobile laser tag solutions photo 17"
             text={props.buttonText}
             link={data[secondPicNumber].link}
             visible
@@ -94,6 +96,7 @@ export default function SliderBanners(props) {
           <CellAdder
             key={thirdPicNumber}
             image={data[thirdPicNumber].image}
+            alt="World leader in mobile laser tag solutions photo 18"
             text={props.buttonText}
             objectPosition="0 0"
           />
@@ -114,7 +117,7 @@ function CellAdder(props) {
           height={530}
           quality={92}
           priority={true}
-          alt="slider"
+          alt={props.alt}
         />
         <div
           className={`

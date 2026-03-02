@@ -39,7 +39,7 @@ export function TileFullWidth(props) {
                                         }}
                                     >
                                         <Image
-                                            alt={props.title}
+                                            alt={props.alt}
                                             src={props.bg}
                                             layout='fill'
                                             objectFit={
@@ -73,7 +73,7 @@ export function TileFullWidth(props) {
                                 </>
                             ) : (
                                 <Image
-                                    alt={props.title}
+                                    alt={props.alt}
                                     src={props.bg}
                                     layout='fill'
                                     objectFit='cover'
@@ -133,7 +133,7 @@ export function TileFullWidthReverse(props) {
                                         }}
                                     >
                                         <Image
-                                            alt={props.title}
+                                            alt={props.alt}
                                             src={props.bg}
                                             layout='fill'
                                             objectFit={
@@ -167,7 +167,7 @@ export function TileFullWidthReverse(props) {
                                 </>
                             ) : (
                                 <Image
-                                    alt={props.title}
+                                    alt={props.alt}
                                     src={props.bg}
                                     layout='fill'
                                     objectFit='cover'
