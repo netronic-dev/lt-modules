@@ -81,6 +81,7 @@ export async function postData(
     language: "Англійська",
     chatId: values.chatId || "",
     referrer,
+    agreementToReceiveSms: values.agreementToReceiveSms || false,
   };
   return await axios.post(url, data);
 }
