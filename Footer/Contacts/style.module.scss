@@ -1,178 +1,108 @@
 .container {
-    width: 1170px;
-    margin: 0 auto;
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 15px 21px;
+  border-radius: 5px;
+  background: #101010;
 
-    @media (max-width: 1200px) {
-        width: 100%;
-        padding: 0 20px;
+  .contacts_title {
+    color: #0090ff;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 14px;
+  }
+
+  .contacts {
+    display: grid;
+    gap: 36px;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .contacts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: "europe usa support";
-        gap: 41px;
+    .cell {
+      display: grid;
+      gap: 5px;
 
-        @media (max-width: 1024px) {
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-areas:
-                "europe usa"
-                "support support";
-            justify-content: center;
+      .title {
+        color: #fff;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.4px;
+      }
+
+      .contact_block {
+        display: flex;
+        flex-direction: column;
+
+        .contact__title {
+          color: #8e8e8e;
+          font-family: Roboto;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
         }
 
-        @media (max-width: 743px) {
-            gap: 30px;
+        .contact__text {
+          color: #fff;
+          font-family: Roboto;
+          font-size: 14px;
+          line-height: normal;
+
+          a {
+            color: #fff;
+            text-decoration-line: underline;
+          }
+
+          &:hover {
+            a {
+              color: #606060;
+            }
+          }
         }
 
-        @media (max-width: 620px) {
-            gap: 20px;
+        .contact__text_phone {
+          text-decoration: none;
         }
 
-        @media (max-width: 600px) {
-            grid-template-columns: 1fr;
-            grid-template-areas:
-                "europe"
-                "usa"
-                "support";
+        .links_union {
+          display: flex;
+          justify-content: space-between;
+          gap: 13px;
+          align-items: center;
+
+          .phone_link {
+            a {
+              color: #fff;
+              font-family: Roboto;
+              font-size: 14px;
+              line-height: normal;
+            }
+
+            &:hover {
+              a {
+                color: #606060;
+              }
+            }
+          }
+          .icon_link {
+            display: block;
+            height: 22px;
+            &:hover {
+              .whatsapp {
+                path {
+                  fill: #606060;
+                }
+              }
+            }
+          }
         }
-
-        .cell {
-            display: grid;
-            grid-template-columns: 1fr;
-            align-content: flex-start;
-            align-items: stretch;
-            gap: 24px;
-            padding: 41px 23px;
-            border-radius: 20px;
-            background: #101010;
-
-            .title {
-                color: #0090ff;
-                font-family: Roboto;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
-            }
-
-            .contact_block {
-                display: flex;
-                flex-direction: column;
-                gap: 7px;
-
-                .contact__title {
-                    color: #8e8e8e;
-                    font-family: Roboto;
-                    font-size: 12px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: normal;
-                }
-
-                .contact__text {
-                    color: #fff;
-                    font-family: Roboto;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 116.667%;
-
-                    &:first-child {
-                        display: none;
-                    }
-
-                    a {
-                        color: #fff;
-                        text-decoration-line: underline;
-                    }
-
-                    &:hover {
-                        a {
-                            color: #606060;
-                        }
-                    }
-                }
-
-                .contact__text_phone {
-                    text-decoration: none;
-                }
-
-                .links_union {
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 13px;
-                    align-items: center;
-
-                    .phone_link {
-                        a {
-                            color: #fff;
-                            font-family: Roboto;
-                            font-size: 24px;
-                            font-style: normal;
-                            font-weight: 500;
-                            line-height: 116.667%;
-                        }
-
-                        &:hover {
-                            a {
-                                color: #606060;
-                            }
-                        }
-                    }
-                    .icon_link {
-                        display: block;
-                        height: 22px;
-                        &:hover {
-                            .whatsapp {
-                                path {
-                                    fill: #606060;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            &:nth-child(1) {
-                grid-area: europe;
-            }
-
-            &:nth-child(2) {
-                grid-area: usa;
-            }
-
-            &:nth-child(3) {
-                grid-area: support;
-                max-width: 460px;
-                width: 100%;
-                margin: 0 auto;
-
-                @media (max-width: 743px) {
-                    max-width: 100%;
-                    grid-template-columns: 1fr 1fr;
-                    grid-template-areas:
-                        "title title"
-                        "email phone";
-
-                    .title {
-                        grid-area: title;
-                    }
-                }
-
-                @media (max-width: 600px) {
-                    max-width: 100%;
-                    grid-template-columns: 1fr;
-                    grid-template-areas:
-                        "title "
-                        "email"
-                        " phone";
-
-                    .title {
-                        grid-area: title;
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 }

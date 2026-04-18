@@ -1,13 +1,11 @@
-import { useGAEvents } from "../../../context/GAEventsProvider";
-import style from "./style.module.scss";
 import Link from "next/link";
+import style from "./style.module.scss";
 
 export function Contacts(props) {
-  const GAEvents = useGAEvents();
-
   return (
     <div className={style.container}>
-      <div className={style.contacts}>
+      <p className={style.contacts_title}>Offices</p>
+      <ul className={style.contacts}>
         {props.data.map((item, index) => (
           <div className={style.cell} key={index}>
             <h3 className={style.title}>{item.title}</h3>
@@ -18,13 +16,13 @@ export function Contacts(props) {
                   item.title,
                   item.value,
                   item.whatsAppLink,
-                  item.europe
+                  item.europe,
                 )}
               </div>
             ))}
           </div>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
