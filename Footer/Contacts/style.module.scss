@@ -26,6 +26,10 @@
       display: grid;
       gap: 5px;
 
+      @media (min-width: 1024px) {
+        gap: 10px;
+      }
+
       .title {
         color: #fff;
         font-family: Roboto;
