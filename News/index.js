@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useInView } from "react-hook-inview";
 import { InView } from "react-intersection-observer";
 import { useGAEvents } from "../../context/GAEventsProvider";
+import { formatNewsDate } from "../functions/formatNewsDate";
 
 const theme = {
   news: {
@@ -54,7 +55,7 @@ export function News(props) {
               />
             </div>
             <div className={style.news_content}>
-              <p className={style.news_date}>{props.date}</p>
+              <p className={style.news_date}>{formatNewsDate(props.date)}</p>
               <p className={style.news_title}>{props.title}</p>
               <p className={style.news_text}>{props.text}</p>
             </div>
