@@ -206,6 +206,7 @@ export function TileGridWidthButtons(props) {
   const [link, setLink] = useState(props.link);
 
   function onSwapImage() {
+    if (!props.textSecondButton) return null;
     if (image === firstImage) {
       setImage(secondImage);
 
@@ -272,15 +273,17 @@ export function TileGridWidthButtons(props) {
             >
               {props.textFirstButton}
             </div>
-            <div
-              className={
-                image === secondImage
-                  ? style.buttonActive
-                  : style.buttonInactive
-              }
-            >
-              {props.textSecondButton}
-            </div>
+            {props.textSecondButton && (
+              <div
+                className={
+                  image === secondImage
+                    ? style.buttonActive
+                    : style.buttonInactive
+                }
+              >
+                {props.textSecondButton}
+              </div>
+            )}
           </div>
         </div>
       </div>
