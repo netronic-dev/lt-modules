@@ -77,6 +77,7 @@ export function Button(props) {
     event: modals.EventModalChangeVisibility,
     nameEmail: modals.NameEmailModalChangeVisibility,
     price: modals.formGetPriceChangeVisibility,
+    testDrive: modals.TestDriveModalChangeVisibility,
   };
 
   return (
