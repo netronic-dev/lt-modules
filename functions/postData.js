@@ -25,18 +25,14 @@ export async function postData(
 ) {
   let locationInfo = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
-  // const countryNameRaw = getName(locationInfo.country);
-
-  // const countryName = countryNameRaw
-  //   ? countryNameRaw.replace(/\s*\(the\)$/i, "")
-  //   : "";
-  
   let countryNameRaw =
     getName(locationInfo.country) || locationInfo.country || "";
   let countryName =
     typeof countryNameRaw === "string" ? countryNameRaw.trim() : "";
+
+  countryName = countryName.replace(/\s*\(the\)$/i, "").trim();
+
   const countryFixes = {
-    "The Netherlands": "Netherlands",
     "Netherlands (Kingdom of the)": "Netherlands",
     "Moldova": "Moldova, Republic of",
     "Korea (the Republic of)": "Korea, Republic of",
