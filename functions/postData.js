@@ -3,7 +3,6 @@ import { getName } from "country-list";
 import { getCountryCode } from "./getCountryCode";
 import { getLocalStorage } from "../CookieBanner/storageHelper";
 
-// const getCookieByKey = (key: string) => {
 const getCookieByKey = (key) => {
   if (typeof window !== "undefined") {
     return document.cookie
@@ -16,13 +15,6 @@ const getCookieByKey = (key) => {
 export const fbpCookie = getCookieByKey("_fbp");
 
 export async function postData(
-  // values: any,
-  // url: string,
-  // orderName: string,
-  // siteDomain: string,
-  // fromSite: string,
-  // routerQuery?: any,
-  // source?: string
   values,
   url,
   orderName,
@@ -31,14 +23,29 @@ export async function postData(
   routerQuery,
   source,
 ) {
-  // let locationInfo: any = await getLocationDataFromBackend();
   let locationInfo = await getLocationData();
   const storedCookieConsent = getLocalStorage("cookie_consent");
-  const countryNameRaw = getName(locationInfo.country);
+  // const countryNameRaw = getName(locationInfo.country);
 
-  const countryName = countryNameRaw
-    ? countryNameRaw.replace(/\s*\(the\)$/i, "")
-    : "";
+  // const countryName = countryNameRaw
+  //   ? countryNameRaw.replace(/\s*\(the\)$/i, "")
+  //   : "";
+  
+  let countryNameRaw =
+    getName(locationInfo.country) || locationInfo.country || "";
+  let countryName =
+    typeof countryNameRaw === "string" ? countryNameRaw.trim() : "";
+  const countryFixes = {
+    "The Netherlands": "Netherlands",
+    "Netherlands (Kingdom of the)": "Netherlands",
+    "Moldova": "Moldova, Republic of",
+    "Korea (the Republic of)": "Korea, Republic of",
+  };
+
+  if (countryFixes[countryName]) {
+    countryName = countryFixes[countryName];
+  }
+
   const countryCode = getCountryCode(values.phoneNumber);
 
   let referrer = "";
@@ -54,7 +61,6 @@ export async function postData(
     gclid: routerQuery.gclid || "",
   };
 
-  // let data: any = {
   let data = {
     fromPage: siteDomain,
     fromSite,
@@ -85,11 +91,6 @@ export async function postData(
   };
   return await axios.post(url, data);
 }
-
-// export interface field {
-//   name: string;
-//   value: string;
-// }
 
 export async function getLocationData() {
   let locationData = {
