@@ -34,7 +34,7 @@ export async function postData(
 
   const countryFixes = {
     "Netherlands (Kingdom of the)": "Netherlands",
-    "Moldova": "Moldova, Republic of",
+    Moldova: "Moldova, Republic of",
     "Korea (the Republic of)": "Korea, Republic of",
   };
 
@@ -76,14 +76,17 @@ export async function postData(
     query,
     cookies: storedCookieConsent,
     geoInfo: {
-      country: values.country ? values.country : countryName,
-      city: locationInfo.city,
+      country: values.country ?? countryName ?? "",
+      city: locationInfo.city || "",
+      ip: locationInfo.ip || "",
     },
     source: source || "",
     language: "Англійська",
     chatId: values.chatId || "",
     referrer,
     agreementToReceiveSms: values.agreementToReceiveSms || false,
+    turnstileToken: values.turnstileToken || "",
+    honeypot_check: values.honeypot_check || "",
   };
   return await axios.post(url, data);
 }

@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useModals } from "../../../context/ModalsProvider.js";
 import axios from "axios";
 import { searchParams } from "../../../store/searchParamsSlice.js";
@@ -132,6 +133,12 @@ export function ThemeForm(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -216,6 +223,7 @@ export function ThemeForm(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -225,6 +233,23 @@ export function ThemeForm(props) {
   };
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
@@ -253,7 +278,7 @@ export function ThemeForm(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
@@ -273,11 +298,11 @@ export function ThemeForm(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(
-          props.thank_you_page ? props.thank_you_page : "/thanks-call"
+          props.thank_you_page ? props.thank_you_page : "/thanks-call",
         );
       });
     } catch (error) {
@@ -288,7 +313,7 @@ export function ThemeForm(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -471,6 +496,20 @@ export function ThemeForm(props) {
             </div>
           </div>
         </div>
+        <div style={{ marginTop: "15px" }}>
+          <Turnstile
+            siteKey={
+              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+              "0x4AAAAAAD9nNenDNZ5KX93b"
+            }
+            options={{
+              execution: "render",
+              appearance: "interaction-only", // або 'execute'
+            }}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onExpire={() => setTurnstileToken("")}
+          />
+        </div>
         <button
           type="submit"
           className={`
@@ -500,6 +539,12 @@ export function ThemeFormAll(props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -536,6 +581,7 @@ export function ThemeFormAll(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -545,6 +591,23 @@ export function ThemeFormAll(props) {
   };
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
@@ -573,7 +636,7 @@ export function ThemeFormAll(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
@@ -593,11 +656,11 @@ export function ThemeFormAll(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(
-          props.thank_you_page ? props.thank_you_page : "/thanks-call"
+          props.thank_you_page ? props.thank_you_page : "/thanks-call",
         );
       });
     } catch (error) {
@@ -608,7 +671,7 @@ export function ThemeFormAll(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -762,6 +825,20 @@ export function ThemeFormAll(props) {
               )}
             </div>
           </div>
+        </div>
+        <div style={{ marginTop: "15px" }}>
+          <Turnstile
+            siteKey={
+              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+              "0x4AAAAAAD9nNenDNZ5KX93b"
+            }
+            options={{
+              execution: "render",
+              appearance: "interaction-only", // або 'execute'
+            }}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onExpire={() => setTurnstileToken("")}
+          />
         </div>
         <button
           type="submit"

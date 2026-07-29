@@ -6,9 +6,10 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import { debounce } from "lodash";
 
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Dropdown from "react-dropdown";
 import ReactGA from "react-ga4";
+import { Turnstile } from "@marsidev/react-turnstile";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch, useSelector } from "react-redux";
 import "react-phone-input-2/lib/style.css";
@@ -118,6 +119,12 @@ export function PopUpNamePhone(props) {
   const queryParams = useSelector(searchParams);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -145,6 +152,7 @@ export function PopUpNamePhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -154,6 +162,23 @@ export function PopUpNamePhone(props) {
   };
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
@@ -169,7 +194,7 @@ export function PopUpNamePhone(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([postToCRMResponse]).then(() => {
@@ -189,7 +214,7 @@ export function PopUpNamePhone(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(props.thank_you_page);
@@ -365,6 +390,20 @@ export function PopUpNamePhone(props) {
               )}
             </div>
           </div>
+          <div style={{ marginTop: "15px" }}>
+            <Turnstile
+              siteKey={
+                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                "0x4AAAAAAD9nNenDNZ5KX93b"
+              }
+              options={{
+                execution: "render",
+                appearance: "interaction-only", // або 'execute'
+              }}
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+            />
+          </div>
           <button
             type="submit"
             className={`${
@@ -390,6 +429,12 @@ export function PopUpEmail(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -416,6 +461,7 @@ export function PopUpEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -438,6 +484,23 @@ export function PopUpEmail(props) {
   };
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
@@ -452,7 +515,7 @@ export function PopUpEmail(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([postToCRMResponse]).then(() => {
@@ -472,7 +535,7 @@ export function PopUpEmail(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(props.thank_you_page);
@@ -485,7 +548,7 @@ export function PopUpEmail(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -561,6 +624,20 @@ export function PopUpEmail(props) {
                 )}
               </div>
             </div>
+            <div style={{ marginTop: "15px" }}>
+              <Turnstile
+                siteKey={
+                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                  "0x4AAAAAAD9nNenDNZ5KX93b"
+                }
+                options={{
+                  execution: "render",
+                  appearance: "interaction-only", // або 'execute'
+                }}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken("")}
+              />
+            </div>
             <button
               type={agreement ? "submit" : "button"}
               className={`
@@ -585,6 +662,12 @@ export function PopUpEmailPhone(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleMenuOpen = () => setMenuIsOpen(true);
   const handleMenuClose = () => setMenuIsOpen(false);
@@ -615,6 +698,7 @@ export function PopUpEmailPhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -630,6 +714,22 @@ export function PopUpEmailPhone(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
     debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
@@ -657,7 +757,7 @@ export function PopUpEmailPhone(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
@@ -677,7 +777,7 @@ export function PopUpEmailPhone(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(props.thank_you_page);
@@ -690,7 +790,7 @@ export function PopUpEmailPhone(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -851,6 +951,20 @@ export function PopUpEmailPhone(props) {
                 )}
               </div>
             </div>
+            <div style={{ marginTop: "15px" }}>
+              <Turnstile
+                siteKey={
+                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                  "0x4AAAAAAD9nNenDNZ5KX93b"
+                }
+                options={{
+                  execution: "render",
+                  appearance: "interaction-only", // або 'execute'
+                }}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken("")}
+              />
+            </div>
             <button
               type="submit"
               className={`${
@@ -880,6 +994,12 @@ export function PopUpEvent(props) {
   const dispatch = useDispatch();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const {
     register,
@@ -896,6 +1016,7 @@ export function PopUpEvent(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -922,6 +1043,23 @@ export function PopUpEvent(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
@@ -950,7 +1088,7 @@ export function PopUpEvent(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
@@ -970,7 +1108,7 @@ export function PopUpEvent(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(props.thank_you_page);
@@ -983,7 +1121,7 @@ export function PopUpEvent(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -1139,6 +1277,20 @@ export function PopUpEvent(props) {
                 )}
               </div>
             </div>
+            <div style={{ marginTop: "15px" }}>
+              <Turnstile
+                siteKey={
+                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                  "0x4AAAAAAD9nNenDNZ5KX93b"
+                }
+                options={{
+                  execution: "render",
+                  appearance: "interaction-only", // або 'execute'
+                }}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken("")}
+              />
+            </div>
             <button
               type="submit"
               className={`${
@@ -1165,6 +1317,12 @@ export function PopUpNameEmail(props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [regionCode, setRegionCode] = useState();
   const eventId = generateUUID();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
+
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const {
     register,
@@ -1181,6 +1339,7 @@ export function PopUpNameEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
+      honeypot_check: "",
     },
   });
 
@@ -1202,6 +1361,23 @@ export function PopUpNameEmail(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
+
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
+
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
     const data = {
@@ -1230,7 +1406,7 @@ export function PopUpNameEmail(props) {
         props.orderName,
         window.location.href,
         window.location.hostname,
-        queryParams || router.query
+        queryParams || router.query,
       );
 
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
@@ -1250,7 +1426,7 @@ export function PopUpNameEmail(props) {
             email: values.email,
             phone: `+${values.phoneNumber}`,
           },
-          eventId
+          eventId,
         );
         modal.closeModal();
         router.push(props.thank_you_page);
@@ -1263,7 +1439,7 @@ export function PopUpNameEmail(props) {
           "https://back.netronic.net/telegram/send-error-message",
           {
             message: `frontend error: FORM SUBMIT ❌ ${window.location.hostname}: ${error}`,
-          }
+          },
         );
       }
     }
@@ -1430,7 +1606,20 @@ export function PopUpNameEmail(props) {
                 </div>
               </div>
             </div>
-
+            <div style={{ marginTop: "15px" }}>
+              <Turnstile
+                siteKey={
+                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+                  "0x4AAAAAAD9nNenDNZ5KX93b"
+                }
+                options={{
+                  execution: "render",
+                  appearance: "interaction-only", // або 'execute'
+                }}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken("")}
+              />
+            </div>
             <button
               type="submit"
               className={`${
