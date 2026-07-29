@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import Dropdown from "react-dropdown";
 import ReactGA from "react-ga4";
-import { Turnstile } from "@marsidev/react-turnstile";
+import Turnstile from "../../../lt-modules/functions/Turnstile";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch, useSelector } from "react-redux";
 import "react-phone-input-2/lib/style.css";
@@ -390,20 +390,14 @@ export function PopUpNamePhone(props) {
               )}
             </div>
           </div>
-          <div style={{ marginTop: "15px" }}>
-            <Turnstile
-              siteKey={
-                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-                "0x4AAAAAAD9nNenDNZ5KX93b"
-              }
-              options={{
-                execution: "render",
-                appearance: "interaction-only", // або 'execute'
-              }}
-              onSuccess={(token) => setTurnstileToken(token)}
-              onExpire={() => setTurnstileToken("")}
-            />
-          </div>
+          <Turnstile
+            siteKey={
+              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+              "0x4AAAAAAD9nNenDNZ5KX93b"
+            }
+            onSuccess={(token) => setTurnstileToken(token)}
+            onExpire={() => setTurnstileToken("")}
+          />
           <button
             type="submit"
             className={`${
@@ -624,20 +618,14 @@ export function PopUpEmail(props) {
                 )}
               </div>
             </div>
-            <div style={{ marginTop: "15px" }}>
-              <Turnstile
-                siteKey={
-                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-                  "0x4AAAAAAD9nNenDNZ5KX93b"
-                }
-                options={{
-                  execution: "render",
-                  appearance: "interaction-only", // або 'execute'
-                }}
-                onSuccess={(token) => setTurnstileToken(token)}
-                onExpire={() => setTurnstileToken("")}
-              />
-            </div>
+            <Turnstile
+              siteKey={
+                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+                "0x4AAAAAAD9nNenDNZ5KX93b"
+              }
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+            />
             <button
               type={agreement ? "submit" : "button"}
               className={`
@@ -951,20 +939,14 @@ export function PopUpEmailPhone(props) {
                 )}
               </div>
             </div>
-            <div style={{ marginTop: "15px" }}>
-              <Turnstile
-                siteKey={
-                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-                  "0x4AAAAAAD9nNenDNZ5KX93b"
-                }
-                options={{
-                  execution: "render",
-                  appearance: "interaction-only", // або 'execute'
-                }}
-                onSuccess={(token) => setTurnstileToken(token)}
-                onExpire={() => setTurnstileToken("")}
-              />
-            </div>
+            <Turnstile
+              siteKey={
+                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+                "0x4AAAAAAD9nNenDNZ5KX93b"
+              }
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+            />
             <button
               type="submit"
               className={`${
@@ -1277,20 +1259,14 @@ export function PopUpEvent(props) {
                 )}
               </div>
             </div>
-            <div style={{ marginTop: "15px" }}>
-              <Turnstile
-                siteKey={
-                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-                  "0x4AAAAAAD9nNenDNZ5KX93b"
-                }
-                options={{
-                  execution: "render",
-                  appearance: "interaction-only", // або 'execute'
-                }}
-                onSuccess={(token) => setTurnstileToken(token)}
-                onExpire={() => setTurnstileToken("")}
-              />
-            </div>
+            <Turnstile
+              siteKey={
+                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+                "0x4AAAAAAD9nNenDNZ5KX93b"
+              }
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+            />
             <button
               type="submit"
               className={`${
@@ -1606,20 +1582,14 @@ export function PopUpNameEmail(props) {
                 </div>
               </div>
             </div>
-            <div style={{ marginTop: "15px" }}>
-              <Turnstile
-                siteKey={
-                  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-                  "0x4AAAAAAD9nNenDNZ5KX93b"
-                }
-                options={{
-                  execution: "render",
-                  appearance: "interaction-only", // або 'execute'
-                }}
-                onSuccess={(token) => setTurnstileToken(token)}
-                onExpire={() => setTurnstileToken("")}
-              />
-            </div>
+            <Turnstile
+              siteKey={
+                process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+                "0x4AAAAAAD9nNenDNZ5KX93b"
+              }
+              onSuccess={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+            />
             <button
               type="submit"
               className={`${

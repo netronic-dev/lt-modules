@@ -11,7 +11,7 @@ import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useEffect, useState, useRef } from "react";
-import { Turnstile } from "@marsidev/react-turnstile";
+import Turnstile from "../../../lt-modules/functions/Turnstile";
 import { useModals } from "../../../context/ModalsProvider.js";
 import axios from "axios";
 import { searchParams } from "../../../store/searchParamsSlice.js";
@@ -496,20 +496,14 @@ export function ThemeForm(props) {
             </div>
           </div>
         </div>
-        <div style={{ marginTop: "15px" }}>
           <Turnstile
             siteKey={
-              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
               "0x4AAAAAAD9nNenDNZ5KX93b"
             }
-            options={{
-              execution: "render",
-              appearance: "interaction-only", // або 'execute'
-            }}
             onSuccess={(token) => setTurnstileToken(token)}
             onExpire={() => setTurnstileToken("")}
           />
-        </div>
         <button
           type="submit"
           className={`
@@ -826,20 +820,14 @@ export function ThemeFormAll(props) {
             </div>
           </div>
         </div>
-        <div style={{ marginTop: "15px" }}>
           <Turnstile
             siteKey={
-              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+              process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
               "0x4AAAAAAD9nNenDNZ5KX93b"
             }
-            options={{
-              execution: "render",
-              appearance: "interaction-only", // або 'execute'
-            }}
             onSuccess={(token) => setTurnstileToken(token)}
             onExpire={() => setTurnstileToken("")}
           />
-        </div>
         <button
           type="submit"
           className={`
