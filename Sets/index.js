@@ -46,7 +46,7 @@ export function SetsHeader(props) {
         <p className={style.text}>{props.text}</p>
       </div>
       <div className={style.sets_header_button}>
-        <Button style="blueBlack" text={props.buttonText} />
+        <Button type={props.type} style="blueBlack" text={props.buttonText} />
       </div>
     </div>
   );

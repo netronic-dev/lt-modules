@@ -96,6 +96,7 @@ export function SeoCTA(props) {
           textTop={props.textTop}
           textBottom={props.textBottom}
           buttonText={props.buttonText}
+          type="catalog"
         />
       </div>
     </InView>

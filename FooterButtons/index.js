@@ -43,7 +43,11 @@ export function FooterButtons(props) {
           </div>
           <div className={style.right_side}>
             <button
-              onClick={modals.NamePhoneModalChangeVisibility}
+              onClick={
+                props.type === "catalog"
+                  ? modals.EmailPhoneModalChangeVisibility
+                  : modals.NamePhoneModalChangeVisibility
+              }
               className={`${style.button} fade-animation`}
             >
               {props.buttonText}
