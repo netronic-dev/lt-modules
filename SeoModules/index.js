@@ -1,8 +1,9 @@
-import { FooterButtons } from "../FooterButtons";
-import style from "./style.module.scss";
 import Image from "next/image";
 import { InView } from "react-intersection-observer";
 import { useGAEvents } from "../../context/GAEventsProvider";
+import { FooterButtons } from "../FooterButtons";
+import { Button } from "../../lt-modules/Buttons";
+import style from "./style.module.scss";
 
 export function SeoTitleText(props) {
   const GAEvents = useGAEvents();
@@ -17,7 +18,16 @@ export function SeoTitleText(props) {
       }
     >
       <div className={style.title_text}>
-        {props.title && <h2 className={style.title}>{props.title}</h2>}
+        <div className={style.title_btn_box}>
+          {props.title && <h2 className={style.title}>{props.title}</h2>}
+          {props.buttonText && (
+            <Button
+              type={props.buttonType ? props.buttonType : "catalog"}
+              style="blueWhite"
+              text={props.buttonText ? props.buttonText : "Get full catalog"}
+            />
+          )}
+        </div>
         <div
           className={`${style.text} ${!props.title ? style.rightColumn : ""}`}
           // className={style.text}

@@ -8,6 +8,11 @@
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 20px;
 }
+.title_btn_box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .title {
   width: 75%;
   font-weight: 400;
@@ -29,7 +34,7 @@
   }
 }
 .rightColumn {
-  grid-column: 2; 
+  grid-column: 2;
 }
 
 .img {

@@ -1,10 +1,12 @@
-import style from "./style.module.scss";
-import { TitleText } from "../TitleText";
+import { InView } from "react-intersection-observer";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import style from "./style.module.scss";
+import { TitleText } from "../TitleText";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import { InView } from "react-intersection-observer";
+import ButtonDetails from "../../lt-modules/Buttons/ButtonDetails";
+import { Button } from "../../lt-modules/Buttons";
 
 const theme = {
   White: "white_tile",
@@ -236,43 +238,58 @@ export function TileGridWidthButtons(props) {
           height: props.height,
         }}
       >
-        <Link href={link}>
-          <a
-            aria-label="Redirect to Laser Tag Guns"
-            onClick={() => GAEvents.buttonClick("Card", "Link Click", link)}
-          >
-            <div
-              className={style.tile_bg}
-              style={{ backgroundColor: props.bgColor }}
-            >
-              <Image
-                alt={title}
-                src={image}
-                layout="fill"
-                objectFit="contain"
-                objectPosition="50% 50%"
-                priority={true}
-              />
+        <div
+          className={style.tile_bg}
+          style={{ backgroundColor: props.bgColor }}
+        >
+          <Image
+            alt={title}
+            src={image}
+            layout="fill"
+            objectFit="contain"
+            objectPosition="50% 80%"
+            priority={true}
+          />
+        </div>
+        <div className={style.text}>
+          <div className={style.title_box_inside}>
+            <div className={style.title_box}>
+              <h3 className={style.title_block}>{props.title}</h3>
+              <div className={style.buttons_box}>
+                <Button
+                  type="catalog"
+                  style="whiteBlack"
+                  text="Get full catalog"
+                />
+                <Link href={link}>
+                  <a
+                    aria-label="Redirect to Laser Tag Guns"
+                    onClick={() =>
+                      GAEvents.buttonClick("Card", "Link Click", link)
+                    }
+                  >
+                    <ButtonDetails theme="White" text={props.buttonText} />
+                  </a>
+                </Link>
+              </div>
             </div>
-            <div className={style.text}>
-              <TitleText
-                title={title}
-                text={props.text}
-                theme={props.style}
-                buttonText={props.buttonText}
-              />
-            </div>
-          </a>
-        </Link>
+            <p className={style.text_block}>{props.text}</p>
+          </div>
+        </div>
+
         <div className={style.buttons_out}>
           <div className={style.buttons} onClick={onSwapImage}>
-            <div
-              className={
-                image === firstImage ? style.buttonActive : style.buttonInactive
-              }
-            >
-              {props.textFirstButton}
-            </div>
+            {props.textFirstButton && (
+              <div
+                className={
+                  image === firstImage
+                    ? style.buttonActive
+                    : style.buttonInactive
+                }
+              >
+                {props.textFirstButton}
+              </div>
+            )}
             {props.textSecondButton && (
               <div
                 className={
