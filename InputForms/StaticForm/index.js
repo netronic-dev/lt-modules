@@ -11,7 +11,7 @@ import ReactGA from "react-ga4";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useEffect, useState, useRef } from "react";
-// import Turnstile from "../../../lt-modules/functions/Turnstile";
+import Turnstile from "../../../lt-modules/functions/Turnstile";
 import { useModals } from "../../../context/ModalsProvider.js";
 import axios from "axios";
 import { searchParams } from "../../../store/searchParamsSlice.js";
@@ -133,12 +133,12 @@ export function ThemeForm(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-  // const [turnstileToken, setTurnstileToken] = useState("");
-  // const formRenderTime = useRef(Date.now());
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
 
-  // useEffect(() => {
-  //   formRenderTime.current = Date.now();
-  // }, []);
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -223,7 +223,7 @@ export function ThemeForm(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      // honeypot_check: "",
+      honeypot_check: "",
     },
   });
 
@@ -233,22 +233,22 @@ export function ThemeForm(props) {
   };
 
   const onSubmit = async (values) => {
-    // if (values.honeypot_check) {
-    //   console.warn("Spam bot detected via honeypot!");
-    //   return;
-    // }
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
 
-    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    // if (elapsedTime < 4) {
-    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
-    //   alert("Please take your time filling out the form.");
-    //   return;
-    // }
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
 
-    // if (!turnstileToken) {
-    //   alert("Please wait for the CAPTCHA to be verified.");
-    //   return;
-    // }
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
 
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -256,7 +256,7 @@ export function ThemeForm(props) {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      // turnstileToken,
+      turnstileToken,
     };
 
     const options = {
@@ -359,7 +359,7 @@ export function ThemeForm(props) {
         }
       >
         <div className={style.inputs}>
-          {/* <div
+          <div
               style={{
                 position: "absolute",
                 left: "-9999px",
@@ -374,7 +374,7 @@ export function ThemeForm(props) {
                 autoComplete="off"
                 {...register("honeypot_check")}
               />
-            </div> */}
+            </div>
           <div className={style.input__label}>
             <input
               className={style.input}
@@ -513,14 +513,14 @@ export function ThemeForm(props) {
             </div>
           </div>
         </div>
-        {/* <Turnstile
+        <Turnstile
           siteKey={
             process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
             "0x4AAAAAAD9nNenDNZ5KX93b"
           }
           onSuccess={(token) => setTurnstileToken(token)}
           onExpire={() => setTurnstileToken("")}
-        /> */}
+        />
         <button
           type="submit"
           className={`
@@ -550,12 +550,12 @@ export function ThemeFormAll(props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const dispatch = useDispatch();
   const eventId = generateUUID();
-  // const [turnstileToken, setTurnstileToken] = useState("");
-  // const formRenderTime = useRef(Date.now());
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formRenderTime = useRef(Date.now());
 
-  // useEffect(() => {
-  //   formRenderTime.current = Date.now();
-  // }, []);
+  useEffect(() => {
+    formRenderTime.current = Date.now();
+  }, []);
 
   const handleServerErrors = (error) => {
     Object.entries(error).forEach(([key, message]) => {
@@ -592,7 +592,7 @@ export function ThemeFormAll(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      // honeypot_check: "",
+      honeypot_check: "",
     },
   });
 
@@ -602,22 +602,22 @@ export function ThemeFormAll(props) {
   };
 
   const onSubmit = async (values) => {
-    // if (values.honeypot_check) {
-    //   console.warn("Spam bot detected via honeypot!");
-    //   return;
-    // }
+    if (values.honeypot_check) {
+      console.warn("Spam bot detected via honeypot!");
+      return;
+    }
 
-    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    // if (elapsedTime < 4) {
-    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
-    //   alert("Please take your time filling out the form.");
-    //   return;
-    // }
+    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    if (elapsedTime < 4) {
+      console.warn(`Form submitted too fast: ${elapsedTime}s`);
+      alert("Please take your time filling out the form.");
+      return;
+    }
 
-    // if (!turnstileToken) {
-    //   alert("Please wait for the CAPTCHA to be verified.");
-    //   return;
-    // }
+    if (!turnstileToken) {
+      alert("Please wait for the CAPTCHA to be verified.");
+      return;
+    }
 
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -625,7 +625,7 @@ export function ThemeFormAll(props) {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      // turnstileToken,
+      turnstileToken,
     };
 
     const options = {
@@ -698,7 +698,7 @@ export function ThemeFormAll(props) {
         }
       >
         <div className={style.inputs}>
-          {/* <div
+          <div
               style={{
                 position: "absolute",
                 left: "-9999px",
@@ -713,7 +713,7 @@ export function ThemeFormAll(props) {
                 autoComplete="off"
                 {...register("honeypot_check")}
               />
-            </div> */}
+            </div>
           <div className={style.input__label}>
             <input
               className={style.input_white}
@@ -854,14 +854,14 @@ export function ThemeFormAll(props) {
             </div>
           </div>
         </div>
-        {/* <Turnstile
+        <Turnstile
           siteKey={
             process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
             "0x4AAAAAAD9nNenDNZ5KX93b"
           }
           onSuccess={(token) => setTurnstileToken(token)}
           onExpire={() => setTurnstileToken("")}
-        /> */}
+        />
         <button
           type="submit"
           className={`
