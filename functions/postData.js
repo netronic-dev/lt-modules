@@ -69,7 +69,12 @@ export async function postData(
     typeOfBusiness: values.typeOfBusiness || "",
     website: values.website || "",
     comment: values.comment || "",
-    phoneNumber: values.phone ? `+${values.phone}` : values.phoneNumber || "",
+    // phoneNumber: values.phone ? `+${values.phone}` : values.phoneNumber || "",
+    phoneNumber: values.phone
+      ? values.phone.startsWith("+")
+        ? values.phone
+        : `+${values.phone}`
+      : values.phoneNumber || "",
     chatPhone: values.chatPhone || "",
     countryCode: countryCode || "",
     companyName: values.companyName || "",
