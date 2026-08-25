@@ -257,16 +257,21 @@ export function PopUpNamePhone(props) {
             <div
               style={{
                 position: "absolute",
-                left: "-9999px",
                 opacity: 0,
+                top: 0,
+                left: 0,
                 height: 0,
+                width: 0,
+                zIndex: -1,
                 overflow: "hidden",
               }}
+              aria-hidden="true"
             >
               <input
                 type="text"
                 tabIndex="-1"
-                autoComplete="off"
+                autoComplete="new-password"
+                id="honeypot_check"
                 {...register("honeypot_check")}
               />
             </div>
@@ -582,16 +587,21 @@ export function PopUpEmail(props) {
             <div
               style={{
                 position: "absolute",
-                left: "-9999px",
                 opacity: 0,
+                top: 0,
+                left: 0,
                 height: 0,
+                width: 0,
+                zIndex: -1,
                 overflow: "hidden",
               }}
+              aria-hidden="true"
             >
               <input
                 type="text"
                 tabIndex="-1"
-                autoComplete="off"
+                autoComplete="new-password"
+                id="honeypot_check"
                 {...register("honeypot_check")}
               />
             </div>
@@ -837,21 +847,26 @@ export function PopUpEmailPhone(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-              style={{
-                position: "absolute",
-                left: "-9999px",
-                opacity: 0,
-                height: 0,
-                overflow: "hidden",
-              }}
-            >
-              <input
-                type="text"
-                tabIndex="-1"
-                autoComplete="off"
-                {...register("honeypot_check")}
-              />
-            </div>
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  top: 0,
+                  left: 0,
+                  height: 0,
+                  width: 0,
+                  zIndex: -1,
+                  overflow: "hidden",
+                }}
+                aria-hidden="true"
+              >
+                <input
+                  type="text"
+                  tabIndex="-1"
+                  autoComplete="new-password"
+                  id="honeypot_check"
+                  {...register("honeypot_check")}
+                />
+              </div>
               <div className={style.input__label}>
                 <input
                   className={style.input}
@@ -1177,21 +1192,26 @@ export function PopUpEvent(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-              style={{
-                position: "absolute",
-                left: "-9999px",
-                opacity: 0,
-                height: 0,
-                overflow: "hidden",
-              }}
-            >
-              <input
-                type="text"
-                tabIndex="-1"
-                autoComplete="off"
-                {...register("honeypot_check")}
-              />
-            </div>
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  top: 0,
+                  left: 0,
+                  height: 0,
+                  width: 0,
+                  zIndex: -1,
+                  overflow: "hidden",
+                }}
+                aria-hidden="true"
+              >
+                <input
+                  type="text"
+                  tabIndex="-1"
+                  autoComplete="new-password"
+                  id="honeypot_check"
+                  {...register("honeypot_check")}
+                />
+              </div>
               <div className={style.input__label}>
                 <input
                   className={style.input}
@@ -1512,21 +1532,26 @@ export function PopUpNameEmail(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-              style={{
-                position: "absolute",
-                left: "-9999px",
-                opacity: 0,
-                height: 0,
-                overflow: "hidden",
-              }}
-            >
-              <input
-                type="text"
-                tabIndex="-1"
-                autoComplete="off"
-                {...register("honeypot_check")}
-              />
-            </div>
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  top: 0,
+                  left: 0,
+                  height: 0,
+                  width: 0,
+                  zIndex: -1,
+                  overflow: "hidden",
+                }}
+                aria-hidden="true"
+              >
+                <input
+                  type="text"
+                  tabIndex="-1"
+                  autoComplete="new-password"
+                  id="honeypot_check"
+                  {...register("honeypot_check")}
+                />
+              </div>
               <div className={style.input__label}>
                 <input
                   className={style.input}
