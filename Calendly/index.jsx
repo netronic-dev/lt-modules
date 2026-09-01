@@ -51,13 +51,14 @@ const Calendly = (props) => {
             `Call  order (Calendly) | LT NET (Call ${data.time})`,
             window.location.href,
             window.location.hostname,
-            queryParams || router.query
+            queryParams || router.query,
           )
             .then(
               ReactGA.event("generate_lead", {
-                category: "form",
-                action: "submit",
-              })
+                event_category: "form",
+                event_label: "submit",
+                page_path: router.pathname,
+              }),
             )
             .then(router.push("/thanks-call"))
             .catch(async (error) => {
@@ -65,7 +66,7 @@ const Calendly = (props) => {
                 "https://back.netronic.net/telegram/send-error-message",
                 {
                   message: `frontend error: calendly ❌ ${window.location.hostname}: ${error}`,
-                }
+                },
               );
             });
         })
@@ -74,7 +75,7 @@ const Calendly = (props) => {
             "https://back.netronic.net/telegram/send-error-message",
             {
               message: `frontend error: calendly ❌ ${window.location.hostname}: ${error}`,
-            }
+            },
           );
         });
   }, [eventData]);

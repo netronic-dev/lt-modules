@@ -201,10 +201,11 @@ export function PopUpNamePhone(props) {
       Promise.all([postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-        ReactGA.event("generate_lead", {
-          category: "form",
-          action: "submit",
-        });
+       ReactGA.event("generate_lead", {
+         event_category: "form",
+         event_label: "submit",
+         page_path: router.pathname,
+       });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -537,10 +538,11 @@ export function PopUpEmail(props) {
       Promise.all([postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-        ReactGA.event("generate_lead", {
-          category: "form",
-          action: "submit",
-        });
+      ReactGA.event("generate_lead", {
+        event_category: "form",
+        event_label: "submit",
+        page_path: router.pathname,
+      });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -795,10 +797,11 @@ export function PopUpEmailPhone(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-        ReactGA.event("generate_lead", {
-          category: "form",
-          action: "submit",
-        });
+      ReactGA.event("generate_lead", {
+  event_category: "form",
+  event_label: "submit",
+  page_path: router.pathname,
+});
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -1142,10 +1145,11 @@ export function PopUpEvent(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-        ReactGA.event("generate_lead", {
-          category: "form",
-          action: "submit",
-        });
+       ReactGA.event("generate_lead", {
+  event_category: "form",
+  event_label: "submit",
+  page_path: router.pathname,
+});
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -1476,10 +1480,11 @@ export function PopUpNameEmail(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-        ReactGA.event("generate_lead", {
-          category: "form",
-          action: "submit",
-        });
+      ReactGA.event("generate_lead", {
+  event_category: "form",
+  event_label: "submit",
+  page_path: router.pathname,
+});
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }

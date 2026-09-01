@@ -25,7 +25,7 @@ export function PopUpForm(props) {
   function onAgreementChange() {
     formik.setFieldValue(
       "isAgreePrivacyPolicy",
-      !formik.values.isAgreePrivacyPolicy
+      !formik.values.isAgreePrivacyPolicy,
     );
   }
 
@@ -39,7 +39,7 @@ export function PopUpForm(props) {
     validate,
     onSubmit: (values) => {
       dispatch(
-        setUserData(values.name, values.email, values.phone, props.activeSet)
+        setUserData(values.name, values.email, values.phone, props.activeSet),
       );
       document.body.className = "";
       postData(
@@ -48,13 +48,14 @@ export function PopUpForm(props) {
         props.orderName,
         props.lang,
         window.location.href,
-        queryParams || router.query
+        queryParams || router.query,
       )
         .then(
           ReactGA.event("generate_lead", {
-            category: "form",
-            action: "submit",
-          })
+            event_category: "form",
+            event_label: "submit",
+            page_path: router.pathname,
+          }),
         )
         .then(router.push(props.thank_you_page_url))
         .catch(console.log);

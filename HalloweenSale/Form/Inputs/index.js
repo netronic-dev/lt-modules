@@ -31,13 +31,14 @@ export function InputsWName(props) {
         props.orderName,
         props.lang,
         window.location.href,
-        queryParams || router.query
+        queryParams || router.query,
       )
         .then(
           ReactGA.event("generate_lead", {
-            category: "form",
-            action: "submit",
-          })
+            event_category: "form",
+            event_label: "submit",
+            page_path: router.pathname,
+          }),
         )
         .then(router.push(props.thankYouPage))
         .catch(console.log);
@@ -188,7 +189,7 @@ export const validate = (values) => {
       errors.phone = "Required field";
     } else if (
       !/^[\+]?[(]?[0-9]{1,3}[)]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{1,13}$/im.test(
-        values.phone
+        values.phone,
       )
     ) {
       errors.phone = "Wrong phone number";
