@@ -151,10 +151,11 @@ const ConsultationForm = (props) => {
             )
                 .then(modal?.closeModal())
                 .then(
-                    ReactGA.event("generate_lead", {
-                        category: "form",
-                        action: "submit",
-                    })
+          ReactGA.event("generate_lead", {
+  event_category: "form",
+  event_label: "submit",
+  page_path: router.pathname,
+})
                 )
                 .then(router.push(props.thank_you_page))
                 .catch(console.log);
