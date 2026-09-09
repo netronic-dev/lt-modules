@@ -90,11 +90,7 @@ function HeaderSingleItem(props) {
         <a
           className={style.nav__item_a}
           target={props.blank ? "_blank" : undefined}
-          rel={
-            props.link === "https://vion-vr.com/"
-              ? "sponsored"
-              : "nofollow sponsored"
-          }
+          rel="nofollow sponsored"
           onClick={props.onLinkClick}
         >
           {props.text}
