@@ -152,7 +152,7 @@ export function PopUpNamePhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -162,7 +162,7 @@ export function PopUpNamePhone(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -201,11 +201,11 @@ export function PopUpNamePhone(props) {
       Promise.all([postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-       ReactGA.event("generate_lead", {
-         event_category: "form",
-         event_label: "submit",
-         page_path: router.pathname,
-       });
+        ReactGA.event("generate_lead", {
+          event_category: "form",
+          event_label: "submit",
+          page_path: router.pathname,
+        });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -256,24 +256,15 @@ export function PopUpNamePhone(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={style.inputs_block__input}>
             <div
-              style={{
-                position: "absolute",
-                opacity: 0,
-                top: 0,
-                left: 0,
-                height: 0,
-                width: 0,
-                zIndex: -1,
-                overflow: "hidden",
-              }}
+              style={{ position: "absolute", left: "-9999px" }}
               aria-hidden="true"
             >
               <input
                 type="text"
                 tabIndex="-1"
-                autoComplete="new-password"
-                id="honeypot_check"
-                {...register("honeypot_check")}
+                autoComplete="middle_name"
+                id="middle_name"
+                {...register("middle_name")}
               />
             </div>
             <div className={style.input__label}>
@@ -424,11 +415,11 @@ export function PopUpNamePhone(props) {
           <button
             type="submit"
             className={`${
-              !isValid || isSubmitting
+              !isValid || isSubmitting || !turnstileToken
                 ? style.general_button_inactive
                 : style.general_button_active
             } button-submit`}
-            disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting || !turnstileToken}
           >
             {isSubmitting ? props.submittingText : props.buttonText}
           </button>
@@ -477,7 +468,7 @@ export function PopUpEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -500,7 +491,7 @@ export function PopUpEmail(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -538,11 +529,11 @@ export function PopUpEmail(props) {
       Promise.all([postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-      ReactGA.event("generate_lead", {
-        event_category: "form",
-        event_label: "submit",
-        page_path: router.pathname,
-      });
+        ReactGA.event("generate_lead", {
+          event_category: "form",
+          event_label: "submit",
+          page_path: router.pathname,
+        });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -587,24 +578,15 @@ export function PopUpEmail(props) {
         <div className={style.inputs_block__inputs}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div
-              style={{
-                position: "absolute",
-                opacity: 0,
-                top: 0,
-                left: 0,
-                height: 0,
-                width: 0,
-                zIndex: -1,
-                overflow: "hidden",
-              }}
+              style={{ position: "absolute", left: "-9999px" }}
               aria-hidden="true"
             >
               <input
                 type="text"
                 tabIndex="-1"
-                autoComplete="new-password"
-                id="honeypot_check"
-                {...register("honeypot_check")}
+                autoComplete="middle_name"
+                id="middle_name"
+                {...register("middle_name")}
               />
             </div>
             <div className={style.input__label}>
@@ -676,7 +658,7 @@ export function PopUpEmail(props) {
               className={`
                     ${style.general_button_inactive}
                 "button-submit"`}
-              disabled={formik.isSubmitting}
+              disabled={formik.isSubmitting || !turnstileToken}
             >
               {formik.isSubmitting ? props.submittingText : props.buttonText}
             </button>
@@ -731,7 +713,7 @@ export function PopUpEmailPhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -747,7 +729,7 @@ export function PopUpEmailPhone(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -797,11 +779,11 @@ export function PopUpEmailPhone(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-      ReactGA.event("generate_lead", {
-  event_category: "form",
-  event_label: "submit",
-  page_path: router.pathname,
-});
+        ReactGA.event("generate_lead", {
+          event_category: "form",
+          event_label: "submit",
+          page_path: router.pathname,
+        });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -850,24 +832,15 @@ export function PopUpEmailPhone(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-                style={{
-                  position: "absolute",
-                  opacity: 0,
-                  top: 0,
-                  left: 0,
-                  height: 0,
-                  width: 0,
-                  zIndex: -1,
-                  overflow: "hidden",
-                }}
+                style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
                 <input
                   type="text"
                   tabIndex="-1"
-                  autoComplete="new-password"
-                  id="honeypot_check"
-                  {...register("honeypot_check")}
+                  autoComplete="middle_name"
+                  id="middle_name"
+                  {...register("middle_name")}
                 />
               </div>
               <div className={style.input__label}>
@@ -1018,11 +991,11 @@ export function PopUpEmailPhone(props) {
             <button
               type="submit"
               className={`${
-                !isValid || isSubmitting
+                !isValid || isSubmitting || !turnstileToken
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting}
+              disabled={!isValid || isSubmitting || !turnstileToken}
             >
               {isSubmitting
                 ? props.submittingText
@@ -1066,7 +1039,7 @@ export function PopUpEvent(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -1093,7 +1066,7 @@ export function PopUpEvent(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -1145,11 +1118,11 @@ export function PopUpEvent(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-       ReactGA.event("generate_lead", {
-  event_category: "form",
-  event_label: "submit",
-  page_path: router.pathname,
-});
+        ReactGA.event("generate_lead", {
+          event_category: "form",
+          event_label: "submit",
+          page_path: router.pathname,
+        });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -1196,24 +1169,15 @@ export function PopUpEvent(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-                style={{
-                  position: "absolute",
-                  opacity: 0,
-                  top: 0,
-                  left: 0,
-                  height: 0,
-                  width: 0,
-                  zIndex: -1,
-                  overflow: "hidden",
-                }}
+                style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
                 <input
                   type="text"
                   tabIndex="-1"
-                  autoComplete="new-password"
-                  id="honeypot_check"
-                  {...register("honeypot_check")}
+                  autoComplete="middle_name"
+                  id="middle_name"
+                  {...register("middle_name")}
                 />
               </div>
               <div className={style.input__label}>
@@ -1361,11 +1325,11 @@ export function PopUpEvent(props) {
             <button
               type="submit"
               className={`${
-                !isValid || isSubmitting
+                !isValid || isSubmitting || !turnstileToken
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting}
+              disabled={!isValid || isSubmitting || !turnstileToken}
             >
               {isSubmitting ? props.submittingText : props.buttonText}
             </button>
@@ -1406,7 +1370,7 @@ export function PopUpNameEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -1428,7 +1392,7 @@ export function PopUpNameEmail(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -1480,11 +1444,11 @@ export function PopUpNameEmail(props) {
       Promise.all([sendEmailResponse, postToCRMResponse]).then(() => {
         debouncedSubmit("success", window.location.hostname);
         reset();
-      ReactGA.event("generate_lead", {
-  event_category: "form",
-  event_label: "submit",
-  page_path: router.pathname,
-});
+        ReactGA.event("generate_lead", {
+          event_category: "form",
+          event_label: "submit",
+          page_path: router.pathname,
+        });
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {}, { eventID: eventId });
         }
@@ -1537,24 +1501,15 @@ export function PopUpNameEmail(props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
               <div
-                style={{
-                  position: "absolute",
-                  opacity: 0,
-                  top: 0,
-                  left: 0,
-                  height: 0,
-                  width: 0,
-                  zIndex: -1,
-                  overflow: "hidden",
-                }}
+                style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
                 <input
                   type="text"
                   tabIndex="-1"
-                  autoComplete="new-password"
-                  id="honeypot_check"
-                  {...register("honeypot_check")}
+                  autoComplete="middle_name"
+                  id="middle_name"
+                  {...register("middle_name")}
                 />
               </div>
               <div className={style.input__label}>
@@ -1707,11 +1662,11 @@ export function PopUpNameEmail(props) {
             <button
               type="submit"
               className={`${
-                !isValid || isSubmitting
+                !isValid || isSubmitting || !turnstileToken
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting}
+              disabled={!isValid || isSubmitting || !turnstileToken}
             >
               {isSubmitting
                 ? props.submittingText

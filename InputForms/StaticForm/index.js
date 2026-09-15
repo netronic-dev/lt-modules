@@ -223,7 +223,7 @@ export function ThemeForm(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -233,7 +233,7 @@ export function ThemeForm(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -361,24 +361,15 @@ export function ThemeForm(props) {
       >
         <div className={style.inputs}>
           <div
-            style={{
-              position: "absolute",
-              opacity: 0,
-              top: 0,
-              left: 0,
-              height: 0,
-              width: 0,
-              zIndex: -1,
-              overflow: "hidden",
-            }}
+            style={{ position: "absolute", left: "-9999px" }}
             aria-hidden="true"
           >
             <input
               type="text"
               tabIndex="-1"
-              autoComplete="new-password"
-              id="honeypot_check"
-              {...register("honeypot_check")}
+              autoComplete="middle_name"
+              id="middle_name"
+              {...register("middle_name")}
             />
           </div>
           <div className={style.input__label}>
@@ -531,15 +522,15 @@ export function ThemeForm(props) {
           type="submit"
           className={`
           ${
-            !isValid || isSubmitting
+            !isValid || isSubmitting || !turnstileToken
               ? buttonActiveTheme[props.buttonActiveTheme]
               : buttonTheme[props.buttonTheme]
           }
           `}
           style={{
-            cursor: !isValid || isSubmitting ? "not-allowed" : "pointer",
+            cursor: !isValid || isSubmitting || !turnstileToken ? "not-allowed" : "pointer",
           }}
-          disabled={!isValid || isSubmitting}
+          disabled={!isValid || isSubmitting || !turnstileToken}
         >
           {isSubmitting ? props.submittingText : props.buttonText}
         </button>
@@ -598,7 +589,7 @@ export function ThemeFormAll(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      honeypot_check: "",
+      middle_name: "",
     },
   });
 
@@ -608,7 +599,7 @@ export function ThemeFormAll(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.honeypot_check) {
+    if (values.middle_name) {
       console.warn("Spam bot detected via honeypot!");
       return;
     }
@@ -706,24 +697,15 @@ export function ThemeFormAll(props) {
       >
         <div className={style.inputs}>
           <div
-            style={{
-              position: "absolute",
-              opacity: 0,
-              top: 0,
-              left: 0,
-              height: 0,
-              width: 0,
-              zIndex: -1,
-              overflow: "hidden",
-            }}
+            style={{ position: "absolute", left: "-9999px" }}
             aria-hidden="true"
           >
             <input
               type="text"
               tabIndex="-1"
-              autoComplete="new-password"
-              id="honeypot_check"
-              {...register("honeypot_check")}
+              autoComplete="middle_name"
+              id="middle_name"
+              {...register("middle_name")}
             />
           </div>
           <div className={style.input__label}>
@@ -878,12 +860,12 @@ export function ThemeFormAll(props) {
           type="submit"
           className={`
             ${
-              !isValid || isSubmitting
+              !isValid || isSubmitting || !turnstileToken
                 ? buttonTheme[props.buttonTheme]
                 : buttonActiveTheme[props.buttonActiveTheme]
             }
             `}
-          disabled={!isValid || isSubmitting}
+          disabled={!isValid || isSubmitting || !turnstileToken}
         >
           {isSubmitting ? props.submittingText : props.buttonText}
         </button>
