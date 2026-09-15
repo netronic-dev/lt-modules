@@ -1,20 +1,23 @@
+import Link from "next/link";
+import Image from "next/image";
 import { useGAEvents } from "../../../context/GAEventsProvider";
 import style from "./style.module.scss";
-import Image from "next/image";
 
 function FooterSocial(props) {
   const GAEvents = useGAEvents();
 
   return (
     <div className={style.footer_social}>
-      <div className={style.ltnet_logo}>
-        <Image
-          src="/ltnet-logo.svg"
-          alt="ltnet logo"
-          layout="fill"
-          objectFit="contain"
-        />
-      </div>
+      <Link href="/">
+        <a className={style.ltnet_logo}>
+          <Image
+            src="/ltnet-logo.svg"
+            alt="ltnet logo"
+            layout="fill"
+            objectFit="contain"
+          />
+        </a>
+      </Link>
       <ul className={style.social_links}>
         {/* facebook */}
         <li>
