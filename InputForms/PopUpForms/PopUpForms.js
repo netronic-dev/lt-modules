@@ -23,6 +23,7 @@ import { icons } from "../icons/icons";
 import { sendEventToConversionApi } from "../../functions/sendFbPageView";
 import { selectOptions } from "../../../constants/globalConstants";
 import { generateUUID } from "../../functions/generateUUID";
+import { handleServerErrors } from "../../functions/handleServerErrors";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
@@ -126,24 +127,12 @@ export function PopUpNamePhone(props) {
     formRenderTime.current = Date.now();
   }, []);
 
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
     control,
     reset,
-    setError,
     getValues,
     setValue,
     trigger,
@@ -443,17 +432,6 @@ export function PopUpEmail(props) {
     formRenderTime.current = Date.now();
   }, []);
 
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
-
   const {
     register,
     handleSubmit,
@@ -686,17 +664,6 @@ export function PopUpEmailPhone(props) {
 
   const handleMenuOpen = () => setMenuIsOpen(true);
   const handleMenuClose = () => setMenuIsOpen(false);
-
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
 
   const {
     register,
@@ -1043,17 +1010,6 @@ export function PopUpEvent(props) {
     },
   });
 
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
-
   const handleAgreementChange = (e) => {
     setValue("agreement", !getValues("agreement"));
     trigger("agreement");
@@ -1373,17 +1329,6 @@ export function PopUpNameEmail(props) {
       middle_name: "",
     },
   });
-
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
 
   useEffect(() => {
     modal?.region

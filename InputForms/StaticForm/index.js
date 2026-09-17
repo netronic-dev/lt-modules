@@ -21,6 +21,7 @@ import { selectOptions } from "../../../constants/globalConstants";
 import { icons } from "../icons/icons";
 import { setUserData } from "../../../store/actions/userData.js";
 import { generateUUID } from "../../functions/generateUUID";
+import { handleServerErrors } from "../../functions/handleServerErrors.js";
 
 const debouncedSubmit = debounce(async (type, siteName) => {
   try {
@@ -139,17 +140,6 @@ export function ThemeForm(props) {
   useEffect(() => {
     formRenderTime.current = Date.now();
   }, []);
-
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
 
   const customStyles = {
     control: (provided) => ({
@@ -553,17 +543,6 @@ export function ThemeFormAll(props) {
   useEffect(() => {
     formRenderTime.current = Date.now();
   }, []);
-
-  const handleServerErrors = (error) => {
-    Object.entries(error).forEach(([key, message]) => {
-      if (["name", "email", "phoneNumber"].includes(key)) {
-        setError(key, {
-          type: "server",
-          message,
-        });
-      }
-    });
-  };
 
   useEffect(() => {
     modal?.region
