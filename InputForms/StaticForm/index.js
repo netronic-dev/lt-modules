@@ -299,7 +299,7 @@ export function ThemeForm(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
@@ -654,7 +654,7 @@ export function ThemeFormAll(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",

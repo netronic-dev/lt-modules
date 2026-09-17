@@ -1,4 +1,4 @@
-export const handleServerErrors = (error) => {
+export const handleServerErrors = (error, setError) => {
   const rawErrors =
     error?.response?.data?.message || error?.response?.data || error;
 
@@ -6,6 +6,7 @@ export const handleServerErrors = (error) => {
     rawErrors.forEach((err) => {
       if (
         typeof err === "object" &&
+        err &&
         err.property &&
         ["name", "email", "phoneNumber"].includes(err.property)
       ) {

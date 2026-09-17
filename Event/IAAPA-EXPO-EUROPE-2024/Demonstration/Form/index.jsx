@@ -118,7 +118,7 @@ const Form = (props) => {
         document.body.className = "";
         router.push(props.thank_you_page_url);
       } catch (error) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       }
     },
   });

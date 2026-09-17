@@ -211,10 +211,7 @@ export function PopUpNamePhone(props) {
         router.push(props.thank_you_page);
       });
     } catch (error) {
-      if (error.response.data) {
-        handleServerErrors(error.response.data);
-      } else {
-      }
+      handleServerErrors(error, setError);
     }
   };
 
@@ -529,7 +526,7 @@ export function PopUpEmail(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
@@ -768,7 +765,7 @@ export function PopUpEmailPhone(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
@@ -1096,7 +1093,7 @@ export function PopUpEvent(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
@@ -1411,7 +1408,7 @@ export function PopUpNameEmail(props) {
       });
     } catch (error) {
       if (error.response.data) {
-        handleServerErrors(error.response.data);
+        handleServerErrors(error, setError);
       } else {
         await axios.post(
           "https://back.netronic.net/telegram/send-error-message",
