@@ -23,7 +23,6 @@ import { useModals } from "../../../../../context/ModalsProvider";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { Icon } from "../../../../../components/Icon";
 import { generateUUID } from "../../../../functions/generateUUID";
-import { handleServerErrors } from "../../../../functions/handleServerErrors";
 
 const Form = (props) => {
   let validate = validation;
@@ -40,6 +39,15 @@ const Form = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const queryParams = useSelector(searchParams);
+
+    const handleServerErrors = (error) => {
+      console.log(error, "error");
+      Object.entries(error).forEach(([key, message]) => {
+        if (["name", "email", "phone"].includes(key)) {
+          formik.setFieldError(key, message);
+        }
+      });
+    };
 
   function onAgreementChange() {
     formik.setFieldValue(
