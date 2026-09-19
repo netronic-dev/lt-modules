@@ -7,7 +7,7 @@ export function Contacts(props) {
       <p className={style.contacts_title}>Offices</p>
       <ul className={style.contacts}>
         {props.data.map((item, index) => (
-          <div className={style.cell} key={index}>
+          <li className={style.cell} key={index}>
             <h3 className={style.title}>{item.title}</h3>
             {item.contacts.map((item, index) => (
               <div className={style.contact_block} key={index}>
@@ -20,7 +20,7 @@ export function Contacts(props) {
                 )}
               </div>
             ))}
-          </div>
+          </li>
         ))}
       </ul>
     </div>
@@ -31,7 +31,9 @@ const renderContact = (title, value, whatsapp, europe) => {
   if (title === "Email") {
     return (
       <span className={style.contact__text}>
-        <Link href={`mailto:${value}`}>{value}</Link>
+        <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
+        <a href={`mailto:${value}`}>{value}</a>
+        <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
       </span>
     );
   } else if (title === "Phone & WhatsApp") {
@@ -67,11 +69,11 @@ function PhoneWithLinks(props) {
     <div className={style.links_union}>
       {props.phone_number ? (
         <p className={style.phone_link}>
-          <Link target="_blank" href={`tel:${props.phone_number}`}>
+          <a target="_blank" href={`tel:${props.phone_number}`}>
             {props.europe
               ? formatPhoneNumberEurope(props.phone_number)
               : formatPhoneNumber(props.phone_number)}
-          </Link>
+          </a>
         </p>
       ) : null}
       {props.whatsapp ? (
