@@ -31,9 +31,9 @@ const renderContact = (title, value, whatsapp, europe) => {
   if (title === "Email") {
     return (
       <span className={style.contact__text}>
-        <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
-        <a href={`mailto:${value}`}>{value}</a>
-        <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
+        <a href={`mailto:${value}`} data-cfemail="false">
+          {value}
+        </a>
       </span>
     );
   } else if (title === "Phone & WhatsApp") {
