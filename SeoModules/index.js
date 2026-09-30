@@ -30,7 +30,6 @@ export function SeoTitleText(props) {
         </div>
         <div
           className={`${style.text} ${!props.title ? style.rightColumn : ""}`}
-          // className={style.text}
         >
           {props.text}
           {props.list}
@@ -59,7 +58,7 @@ export function SeoImg(props) {
           width={1170}
           height={400}
           objectFit="contain"
-          alt="image"
+          alt={props.alt}
         />
       </div>
     </InView>
@@ -103,6 +102,7 @@ export function SeoCTA(props) {
         <FooterButtons
           theme={props.theme}
           logoName={props.logoName}
+          logoAlt={props.logoAlt}
           textTop={props.textTop}
           textBottom={props.textBottom}
           buttonText={props.buttonText}

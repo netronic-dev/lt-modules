@@ -27,7 +27,7 @@ export default function SliderLand(props) {
                     {props.sliderData.map((data, index) => (
                         <BlockAdder
                             src={data.image}
-                            alt={data.itemText}
+                            alt={data.alt ? data.alt : data.itemText}
                             itemText={data.itemText}
                             key={index}
                             width={props.width}
