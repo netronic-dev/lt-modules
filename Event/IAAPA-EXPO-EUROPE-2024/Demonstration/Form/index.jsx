@@ -41,7 +41,6 @@ const Form = (props) => {
   const queryParams = useSelector(searchParams);
 
     const handleServerErrors = (error) => {
-      console.log(error, "error");
       Object.entries(error).forEach(([key, message]) => {
         if (["name", "email", "phone"].includes(key)) {
           formik.setFieldError(key, message);
