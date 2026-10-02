@@ -25,7 +25,7 @@ export default class SliderThreeButtons extends Component {
           {this.props.sliderData.map((data, index) => (
             <ImageAdder
               src={data.image}
-              alt={data.title}
+              alt={data.alt}
               title={data.title}
               text={data.text}
               key={index}

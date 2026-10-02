@@ -134,7 +134,7 @@ export function TileGridWidthLeft(props) {
               <div className={style.right}>
                 <Image
                   priority={true}
-                  alt={props.title}
+                  alt={props.alt}
                   src={props.bg}
                   layout="fill"
                   objectFit="cover"
@@ -176,7 +176,7 @@ export function TileGridWidthLeftFull(props) {
               <div className={style.tile_bg}>
                 <Image
                   priority={true}
-                  alt={props.title}
+                  alt={props.alt}
                   src={props.bg}
                   layout="fill"
                   objectFit="cover"
@@ -243,7 +243,7 @@ export function TileGridWidthButtons(props) {
           style={{ backgroundColor: props.bgColor }}
         >
           <Image
-            alt={title}
+            alt={props.alt}
             src={image}
             layout="fill"
             objectFit="contain"
