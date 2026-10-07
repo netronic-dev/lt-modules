@@ -21,35 +21,38 @@ export default function SliderLand(props) {
         nextArrow: nextArrow,
     };
     return (
-        <div className={props.eclipse ? 'slider_land_eclipse' : 'slider_land'}>
-            {props.eclipse ?
-                <Slider {...settings}>
-                    {props.sliderData.map((data, index) => (
-                        <BlockAdder
-                            src={data.image}
-                            alt={data.alt ? data.alt : data.itemText}
-                            itemText={data.itemText}
-                            key={index}
-                            width={props.width}
-                            height={props.height}
-                            itemTitle={data.itemTitle}
-                            eclipse
-                        />
-                    ))}
-                </Slider> : <Slider {...settings}>
-                    {props.sliderData.map((data, index) => (
-                        <BlockAdder
-                            src={data.image}
-                            alt={data.alt ? data.alt : data.itemText}
-                            itemText={data.itemText}
-                            key={index}
-                            width={props.width}
-                            height={props.height}
-                            itemTitle={data.itemTitle}
-                        />
-                    ))}
-                </Slider>}
-        </div>
+      <div className={props.eclipse ? "slider_land_eclipse" : "slider_land"}>
+        {props.eclipse ? (
+          <Slider {...settings}>
+            {props.sliderData.map((data, index) => (
+              <BlockAdder
+                src={data.image}
+                alt={data.alt || data.itemText || "Lasertag equipment image"}
+                itemText={data.itemText}
+                key={index}
+                width={props.width}
+                height={props.height}
+                itemTitle={data.itemTitle}
+                eclipse
+              />
+            ))}
+          </Slider>
+        ) : (
+          <Slider {...settings}>
+            {props.sliderData.map((data, index) => (
+              <BlockAdder
+                src={data.image}
+                alt={data.alt || data.itemText || "Lasertag equipment image"}
+                itemText={data.itemText}
+                key={index}
+                width={props.width}
+                height={props.height}
+                itemTitle={data.itemTitle}
+              />
+            ))}
+          </Slider>
+        )}
+      </div>
     );
 }
 

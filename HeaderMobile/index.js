@@ -35,6 +35,7 @@ export function HeaderMobile(props) {
           <button
             className={style.header_mobile__burger}
             onClick={openBurgerMenu}
+            aria-label={isBurgerOpen ? "Close menu" : "Open menu"}
           >
             <BurgerVector isBurgerOpen={isBurgerOpen} />
           </button>
@@ -56,6 +57,7 @@ export function HeaderMobile(props) {
           <button
             onClick={() => modals.formCallChangeVisibility()}
             className={style.header_mobile__call}
+            aria-label="Request a call"
             style={isBurgerOpen === true ? { display: "none" } : null}
           >
             {phoneIcon}
@@ -82,7 +84,7 @@ export function HeaderMobile(props) {
                   click={openBurgerMenu}
                   onLinkClick={(link) => onGAEventSend(link)}
                 />
-              )
+              ),
             )}
           </div>
         ) : (
