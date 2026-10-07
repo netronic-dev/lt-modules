@@ -35,7 +35,10 @@ export function FooterButtons(props) {
         `}
         >
           <div className={style.left_side}>
-            <img src={logoses[props.logoName]} alt={props.logoAlt} />
+            <img
+              src={logoses[props.logoName]}
+              alt={props.logoAlt ? props.logoAlt : "Footer network icon"}
+            />
             <div className={style.text_block}>
               <p className={style.top}>{props.textTop}</p>
               <p className={style.bottom}>{props.textBottom}</p>
