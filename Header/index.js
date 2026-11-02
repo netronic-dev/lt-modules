@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
+import { AnnouncementBanner } from "../../components/AnnouncementBanner";
 
 export default function Header(props) {
   const modals = useModals();
@@ -53,7 +54,7 @@ export default function Header(props) {
                 link={item.link}
                 onLinkClick={(link) => onGAEventSend(link)}
               />
-            )
+            ),
           )}
           <li
             className={`${style.phone_icon} ${style.nav__item}`}
@@ -63,6 +64,7 @@ export default function Header(props) {
           </li>
         </ul>
       </nav>
+      <AnnouncementBanner /> 
     </div>
   );
 }
