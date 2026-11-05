@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
-import { AnnouncementBanner } from "../../components/AnnouncementBanner";
+// import { AnnouncementBanner } from "../../components/AnnouncementBanner";
 
 export default function Header(props) {
   const modals = useModals();
@@ -64,7 +64,7 @@ export default function Header(props) {
           </li>
         </ul>
       </nav>
-      <AnnouncementBanner /> 
+      {/* <AnnouncementBanner />  */}
     </div>
   );
 }

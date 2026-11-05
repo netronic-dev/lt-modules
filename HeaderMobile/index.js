@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useModals } from "../../context/ModalsProvider";
 import { useGAEvents } from "../../context/GAEventsProvider";
 import Image from "next/image";
-import { AnnouncementBanner } from "../../components/AnnouncementBanner";
+// import { AnnouncementBanner } from "../../components/AnnouncementBanner";
 
 export function HeaderMobile(props) {
   const [isBurgerOpen, setBurgerOpen] = useState(false);
@@ -63,7 +63,7 @@ export function HeaderMobile(props) {
           >
             {phoneIcon}
           </button>
-         <AnnouncementBanner /> 
+         {/* <AnnouncementBanner />  */}
         </div>
         {isBurgerOpen ? (
           <div className={style.mobile__burger_menu}>

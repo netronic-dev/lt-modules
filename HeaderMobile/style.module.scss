@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
-  overflow: visible !important; //for AnnouncementBanner
+  // overflow: visible !important; // for AnnouncementBanner
 }
 // Buttons
 .header_mobile__call {
