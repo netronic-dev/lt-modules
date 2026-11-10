@@ -27,6 +27,20 @@
   color: $color-2;
   margin-bottom: 35px;
 }
+.text {
+  font-family: $font-1;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: $color-2;
+  margin-bottom: 30px;
+
+  span {
+    color: #0090ff;
+    font-weight: 800;
+  }
+}
 .image_outer {
   position: relative;
   overflow: hidden;
@@ -90,7 +104,6 @@
   font-weight: 600;
   font-size: 24px;
   line-height: normal;
-  text-transform: uppercase;
   color: #040e18;
   margin: 0 0 15px;
 }
@@ -102,7 +115,10 @@
   color: #040e18;
 }
 .cell__list {
-  list-style-type: disc;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding-left: 30px;
   font-family: "Manrope";
 }

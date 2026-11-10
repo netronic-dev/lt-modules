@@ -1,7 +1,7 @@
 import style from "./style.module.scss";
 import Image from "next/image";
 import WordSlider from "../WordSlider";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+// import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export default function SectionComponent(props) {
   return (
@@ -11,9 +11,21 @@ export default function SectionComponent(props) {
           <h1 className={style.title}>{props.title}</h1>
           <h2 className={style.subtitle}>{props.subtitle}</h2>
           <p className={style.text}>{props.text}</p>
-          <AnchorLink href="#cards">
-            <button className={style.button}>{props.buttonText}</button>
-          </AnchorLink>
+
+          <div className={style.formula_boxes}>
+            <div className={style.formula_box}>
+              <span>You buy 10</span>
+            </div>
+            <div className={style.formula_box}>
+              <span>+ 2 sets free</span>
+            </div>
+            <div className={style.formula_box}>
+              <span>= 12 sets in your arena</span>
+            </div>
+          </div>
+            <button className={style.button} onClick={props.onClick}>
+              {props.buttonText}
+            </button>
         </div>
         <div className={`${style.image_outer} ${style.desktop}`}>
           <Image

@@ -24,10 +24,11 @@
 }
 .title {
   font-weight: 800;
-  font-size: 80px;
-  line-height: 90px;
+  font-size: 60px;
+  line-height: normal;
   color: $color-2;
   text-transform: uppercase;
+  margin-bottom: 30px;
 
   span {
     color: #0090ff;
@@ -40,6 +41,10 @@
   color: $color-2;
   text-transform: uppercase;
   margin: 0 0 25px;
+
+  span {
+    color: #0090ff;
+  }
 }
 .text {
   font-family: $font-1;
@@ -51,10 +56,45 @@
   margin-bottom: 30px;
 
   span {
-	color: #0090ff;
-	font-weight: 800;
+    color: #0090ff;
+    font-weight: 800;
   }
 }
+
+.formula_boxes {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.formula_box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px 15px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  
+  span {
+    font-family: $font-1;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: $color-2;
+    text-transform: uppercase;
+  }
+
+  &:last-child {
+    border-color: rgba(0, 144, 255, 0.4);
+    background: rgba(0, 144, 255, 0.05);
+    span {
+      color: #0090ff;
+      font-weight: 700;
+    }
+  }
+}
+
 .button {
   cursor: pointer;
   transition: all 0.4s ease-in-out;
@@ -83,10 +123,8 @@
   height: 560px;
   border-radius: 20px;
   overflow: hidden;
-  * {
-    user-select: none;
-    pointer-events: none;
-  }
+  user-select: none;
+  pointer-events: none;
 }
 @keyframes radial-pulse {
   0% {
@@ -96,6 +134,14 @@
     transform: scale(0.97);
   }
 }
+
+@media (max-width: 900px) {
+  .formula_boxes {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 @media (max-width: 750px) {
   .desktop {
     display: none;
@@ -104,6 +150,7 @@
     display: block;
   }
 }
+
 @media (max-width: 600px) {
   .image_outer {
     height: 385px;
@@ -122,5 +169,11 @@
   .text {
     font-size: 14px;
     line-height: 18px;
+  }
+  .formula_box {
+    padding: 15px 10px;
+    span {
+      font-size: 14px;
+    }
   }
 }
