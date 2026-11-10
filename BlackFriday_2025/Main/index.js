@@ -23,10 +23,13 @@ export default function SectionComponent(props) {
               <span>= 12 sets in your arena</span>
             </div>
           </div>
-            <button className={style.button} onClick={props.onClick}>
-              {props.buttonText}
-            </button>
+          <button className={style.button} onClick={props.onClick}>
+            {props.buttonText}
+          </button>
         </div>
+        <p className={style.subtitle}>
+          Buy 10. <span>Get 2 Free.</span>
+        </p>
         <div className={`${style.image_outer} ${style.desktop}`}>
           <Image
             src={props.image}
