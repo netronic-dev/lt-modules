@@ -27,9 +27,6 @@ export default function SectionComponent(props) {
             {props.buttonText}
           </button>
         </div>
-        <p className={style.subtitle}>
-          Buy 10. <span>Get 2 Free.</span>
-        </p>
         <div className={`${style.image_outer} ${style.desktop}`}>
           <Image
             src={props.image}
