@@ -1,6 +1,6 @@
 import Image from "next/image";
 import style from "./style.module.scss";
-import WordSlider from "../WordSlider";
+// import WordSlider from "../WordSlider";
 
 export default function SectionComponent(props) {
   return (
@@ -47,7 +47,7 @@ export default function SectionComponent(props) {
           />
         </div>
       </div>
-      <WordSlider className={style.words_slider} text={props.sliderWordsText} />
+      {/* <WordSlider className={style.words_slider} text={props.sliderWordsText} /> */}
     </section>
   );
 }
