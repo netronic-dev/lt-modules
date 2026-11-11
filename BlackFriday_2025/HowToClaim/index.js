@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-// import WordSlider from "../WordSlider";
+import WordSlider from "../WordSlider";
 
 export default function HowToClaim(props) {
   const steps = [
@@ -54,7 +54,7 @@ export default function HowToClaim(props) {
           </button>
         </div>
       </div>
-      {/* <WordSlider
+      <WordSlider
         className={style.words_slider}
         text={
           <>
@@ -62,7 +62,7 @@ export default function HowToClaim(props) {
             <br /> Friday
           </>
         }
-      /> */}
+      />
     </section>
   );
 }

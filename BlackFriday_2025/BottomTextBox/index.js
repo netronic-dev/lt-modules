@@ -1,8 +1,7 @@
 import style from "./style.module.scss";
-// import WordSlider from "../WordSlider";
+import WordSlider from "../WordSlider";
 
 export default function SectionComponent(props) {
-  // Дані для сітки карток "Why it pays off" (з другого скріншота)
   const benefitsData = [
     {
       title: "More players per session",
@@ -30,7 +29,6 @@ export default function SectionComponent(props) {
           <p className={style.text}>{props.text}</p>
         </div>
 
-        {/* Сітка карток переваг */}
         <div className={style.benefits_grid}>
           {benefitsData.map((item, index) => (
             <div key={index} className={style.benefit_card}>
@@ -40,7 +38,7 @@ export default function SectionComponent(props) {
           ))}
         </div>
       </div>
-      {/* <WordSlider className={style.words_slider} text={props.sliderWordsText} /> */}
+      <WordSlider className={style.words_slider} text={props.sliderWordsText} />
     </section>
   );
 }
