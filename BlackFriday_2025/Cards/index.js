@@ -26,7 +26,6 @@ const Cards = (props) => {
               price={item.price}
               discount={item.discount}
               color={item.color}
-              onClick={() => props.onClick(item)}
             />
           ))}
         </div>
