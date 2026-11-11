@@ -1,5 +1,5 @@
 import style from "./style.module.scss";
-import WordSlider from "../WordSlider";
+// import WordSlider from "../WordSlider";
 
 export default function SectionComponent(props) {
   // Дані для сітки карток "Why it pays off" (з другого скріншота)
@@ -40,7 +40,7 @@ export default function SectionComponent(props) {
           ))}
         </div>
       </div>
-      <WordSlider className={style.words_slider} text={props.sliderWordsText} />
+      {/* <WordSlider className={style.words_slider} text={props.sliderWordsText} /> */}
     </section>
   );
 }

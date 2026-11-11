@@ -1,7 +1,6 @@
-import style from "./style.module.scss";
 import Image from "next/image";
-import WordSlider from "../WordSlider";
-// import AnchorLink from "react-anchor-link-smooth-scroll";
+import style from "./style.module.scss";
+// import WordSlider from "../WordSlider";
 
 export default function SectionComponent(props) {
   return (
@@ -48,7 +47,7 @@ export default function SectionComponent(props) {
           />
         </div>
       </div>
-      <WordSlider className={style.words_slider} text={props.sliderWordsText} />
+      {/* <WordSlider className={style.words_slider} text={props.sliderWordsText} /> */}
     </section>
   );
 }
