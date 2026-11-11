@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import Dropdown from "react-dropdown";
 import ReactGA from "react-ga4";
-import Turnstile from "../../../lt-modules/functions/Turnstile";
+// import Turnstile from "../../../lt-modules/functions/Turnstile";
 import PhoneInput from "react-phone-input-2";
 import { useDispatch, useSelector } from "react-redux";
 import "react-phone-input-2/lib/style.css";
@@ -120,12 +120,12 @@ export function PopUpNamePhone(props) {
   const queryParams = useSelector(searchParams);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const eventId = generateUUID();
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const formRenderTime = useRef(Date.now());
+  // const [turnstileToken, setTurnstileToken] = useState("");
+  // const formRenderTime = useRef(Date.now());
 
-  useEffect(() => {
-    formRenderTime.current = Date.now();
-  }, []);
+  // useEffect(() => {
+  //   formRenderTime.current = Date.now();
+  // }, []);
 
   const {
     register,
@@ -141,7 +141,7 @@ export function PopUpNamePhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      middle_name: "",
+      // middle_name: "",
     },
   });
 
@@ -151,22 +151,22 @@ export function PopUpNamePhone(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.middle_name) {
-      console.warn("Spam bot detected via honeypot!");
-      return;
-    }
+    // if (values.middle_name) {
+    //   console.warn("Spam bot detected via honeypot!");
+    //   return;
+    // }
 
-    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    if (elapsedTime < 4) {
-      console.warn(`Form submitted too fast: ${elapsedTime}s`);
-      alert("Please take your time filling out the form.");
-      return;
-    }
+    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    // if (elapsedTime < 4) {
+    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
+    //   alert("Please take your time filling out the form.");
+    //   return;
+    // }
 
-    if (!turnstileToken) {
-      alert("Please wait for the CAPTCHA to be verified.");
-      return;
-    }
+    // if (!turnstileToken) {
+    //   alert("Please wait for the CAPTCHA to be verified.");
+    //   return;
+    // }
 
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -174,7 +174,7 @@ export function PopUpNamePhone(props) {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      turnstileToken,
+      // turnstileToken,
     };
 
     try {
@@ -241,7 +241,7 @@ export function PopUpNamePhone(props) {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={style.inputs_block__input}>
-            <div
+            {/* <div
               style={{ position: "absolute", left: "-9999px" }}
               aria-hidden="true"
             >
@@ -252,7 +252,7 @@ export function PopUpNamePhone(props) {
                 id="middle_name"
                 {...register("middle_name")}
               />
-            </div>
+            </div> */}
             <div className={style.input__label}>
               <input
                 className={style.input}
@@ -390,22 +390,28 @@ export function PopUpNamePhone(props) {
               )}
             </div>
           </div>
-          <Turnstile
+          {/* <Turnstile
             siteKey={
               process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
               "0x4AAAAAAD9nNenDNZ5KX93b"
             }
             onSuccess={(token) => setTurnstileToken(token)}
             onExpire={() => setTurnstileToken("")}
-          />
+          /> */}
           <button
             type="submit"
             className={`${
-              !isValid || isSubmitting || !turnstileToken
+              !isValid || isSubmitting
                 ? style.general_button_inactive
                 : style.general_button_active
             } button-submit`}
-            disabled={!isValid || isSubmitting || !turnstileToken}
+            // className={`${
+            //   !isValid || isSubmitting || !turnstileToken
+            //     ? style.general_button_inactive
+            //     : style.general_button_active
+            // } button-submit`}
+            // disabled={!isValid || isSubmitting || !turnstileToken}
+            disabled={!isValid || isSubmitting}
           >
             {isSubmitting ? props.submittingText : props.buttonText}
           </button>
@@ -422,12 +428,12 @@ export function PopUpEmail(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const formRenderTime = useRef(Date.now());
+  // const [turnstileToken, setTurnstileToken] = useState("");
+  // const formRenderTime = useRef(Date.now());
 
-  useEffect(() => {
-    formRenderTime.current = Date.now();
-  }, []);
+  // useEffect(() => {
+  //   formRenderTime.current = Date.now();
+  // }, []);
 
   const {
     register,
@@ -443,7 +449,7 @@ export function PopUpEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      middle_name: "",
+      // middle_name: "",
     },
   });
 
@@ -466,29 +472,29 @@ export function PopUpEmail(props) {
   };
 
   const onSubmit = async (values) => {
-    if (values.middle_name) {
-      console.warn("Spam bot detected via honeypot!");
-      return;
-    }
+    // if (values.middle_name) {
+    //   console.warn("Spam bot detected via honeypot!");
+    //   return;
+    // }
 
-    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    if (elapsedTime < 4) {
-      console.warn(`Form submitted too fast: ${elapsedTime}s`);
-      alert("Please take your time filling out the form.");
-      return;
-    }
+    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    // if (elapsedTime < 4) {
+    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
+    //   alert("Please take your time filling out the form.");
+    //   return;
+    // }
 
-    if (!turnstileToken) {
-      alert("Please wait for the CAPTCHA to be verified.");
-      return;
-    }
+    // if (!turnstileToken) {
+    //   alert("Please wait for the CAPTCHA to be verified.");
+    //   return;
+    // }
 
     debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      turnstileToken,
+      // turnstileToken,
     };
 
     try {
@@ -552,7 +558,7 @@ export function PopUpEmail(props) {
         </div>
         <div className={style.inputs_block__inputs}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div
+            {/* <div
               style={{ position: "absolute", left: "-9999px" }}
               aria-hidden="true"
             >
@@ -563,7 +569,7 @@ export function PopUpEmail(props) {
                 id="middle_name"
                 {...register("middle_name")}
               />
-            </div>
+            </div> */}
             <div className={style.input__label}>
               <input
                 className={style.input}
@@ -620,20 +626,21 @@ export function PopUpEmail(props) {
                 )}
               </div>
             </div>
-            <Turnstile
+            {/* <Turnstile
               siteKey={
                 process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
                 "0x4AAAAAAD9nNenDNZ5KX93b"
               }
               onSuccess={(token) => setTurnstileToken(token)}
               onExpire={() => setTurnstileToken("")}
-            />
+            /> */}
             <button
               type={agreement ? "submit" : "button"}
               className={`
                     ${style.general_button_inactive}
                 "button-submit"`}
-              disabled={formik.isSubmitting || !turnstileToken}
+              // disabled={formik.isSubmitting || !turnstileToken}
+              disabled={formik.isSubmitting}
             >
               {formik.isSubmitting ? props.submittingText : props.buttonText}
             </button>
@@ -652,12 +659,12 @@ export function PopUpEmailPhone(props) {
   const modal = useModals();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const formRenderTime = useRef(Date.now());
+  // const [turnstileToken, setTurnstileToken] = useState("");
+  // const formRenderTime = useRef(Date.now());
 
-  useEffect(() => {
-    formRenderTime.current = Date.now();
-  }, []);
+  // useEffect(() => {
+  //   formRenderTime.current = Date.now();
+  // }, []);
 
   const handleMenuOpen = () => setMenuIsOpen(true);
   const handleMenuClose = () => setMenuIsOpen(false);
@@ -677,7 +684,7 @@ export function PopUpEmailPhone(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      middle_name: "",
+      // middle_name: "",
     },
   });
 
@@ -693,28 +700,28 @@ export function PopUpEmailPhone(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.middle_name) {
-      console.warn("Spam bot detected via honeypot!");
-      return;
-    }
+    // if (values.middle_name) {
+    //   console.warn("Spam bot detected via honeypot!");
+    //   return;
+    // }
 
-    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    if (elapsedTime < 4) {
-      console.warn(`Form submitted too fast: ${elapsedTime}s`);
-      alert("Please take your time filling out the form.");
-      return;
-    }
+    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    // if (elapsedTime < 4) {
+    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
+    //   alert("Please take your time filling out the form.");
+    //   return;
+    // }
 
-    if (!turnstileToken) {
-      alert("Please wait for the CAPTCHA to be verified.");
-      return;
-    }
+    // if (!turnstileToken) {
+    //   alert("Please wait for the CAPTCHA to be verified.");
+    //   return;
+    // }
     debouncedSubmit("attempt", window.location.hostname);
     const data = {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      turnstileToken,
+      // turnstileToken,
     };
 
     const options = {
@@ -795,7 +802,7 @@ export function PopUpEmailPhone(props) {
         <div className={style.inputs_block__inputs}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
-              <div
+              {/* <div
                 style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
@@ -806,7 +813,7 @@ export function PopUpEmailPhone(props) {
                   id="middle_name"
                   {...register("middle_name")}
                 />
-              </div>
+              </div> */}
               <div className={style.input__label}>
                 <input
                   className={style.input}
@@ -944,22 +951,27 @@ export function PopUpEmailPhone(props) {
                 )}
               </div>
             </div>
-            <Turnstile
+            {/* <Turnstile
               siteKey={
                 process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
                 "0x4AAAAAAD9nNenDNZ5KX93b"
               }
               onSuccess={(token) => setTurnstileToken(token)}
               onExpire={() => setTurnstileToken("")}
-            />
+            /> */}
             <button
               type="submit"
               className={`${
-                !isValid || isSubmitting || !turnstileToken
+                !isValid || isSubmitting
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting || !turnstileToken}
+              // className={`${!isValid || isSubmitting || !turnstileToken
+              //     ? style.general_button_inactive
+              //     : style.general_button_active
+              //   } button-submit`}
+              // disabled={!isValid || isSubmitting || !turnstileToken}
+              disabled={!isValid || isSubmitting}
             >
               {isSubmitting
                 ? props.submittingText
@@ -981,12 +993,12 @@ export function PopUpEvent(props) {
   const dispatch = useDispatch();
   const queryParams = useSelector(searchParams);
   const eventId = generateUUID();
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const formRenderTime = useRef(Date.now());
+  // const [turnstileToken, setTurnstileToken] = useState("");
+  // const formRenderTime = useRef(Date.now());
 
-  useEffect(() => {
-    formRenderTime.current = Date.now();
-  }, []);
+  // useEffect(() => {
+  //   formRenderTime.current = Date.now();
+  // }, []);
 
   const {
     register,
@@ -1003,7 +1015,7 @@ export function PopUpEvent(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      middle_name: "",
+      // middle_name: "",
     },
   });
 
@@ -1019,22 +1031,22 @@ export function PopUpEvent(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.middle_name) {
-      console.warn("Spam bot detected via honeypot!");
-      return;
-    }
+    // if (values.middle_name) {
+    //   console.warn("Spam bot detected via honeypot!");
+    //   return;
+    // }
 
-    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    if (elapsedTime < 4) {
-      console.warn(`Form submitted too fast: ${elapsedTime}s`);
-      alert("Please take your time filling out the form.");
-      return;
-    }
+    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    // if (elapsedTime < 4) {
+    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
+    //   alert("Please take your time filling out the form.");
+    //   return;
+    // }
 
-    if (!turnstileToken) {
-      alert("Please wait for the CAPTCHA to be verified.");
-      return;
-    }
+    // if (!turnstileToken) {
+    //   alert("Please wait for the CAPTCHA to be verified.");
+    //   return;
+    // }
 
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -1042,7 +1054,7 @@ export function PopUpEvent(props) {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      turnstileToken,
+      // turnstileToken,
     };
 
     const options = {
@@ -1121,7 +1133,7 @@ export function PopUpEvent(props) {
         <div className={style.inputs_block__inputs}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
-              <div
+              {/* <div
                 style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
@@ -1132,7 +1144,7 @@ export function PopUpEvent(props) {
                   id="middle_name"
                   {...register("middle_name")}
                 />
-              </div>
+              </div> */}
               <div className={style.input__label}>
                 <input
                   className={style.input}
@@ -1267,22 +1279,27 @@ export function PopUpEvent(props) {
                 )}
               </div>
             </div>
-            <Turnstile
+            {/* <Turnstile
               siteKey={
                 process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
                 "0x4AAAAAAD9nNenDNZ5KX93b"
               }
               onSuccess={(token) => setTurnstileToken(token)}
               onExpire={() => setTurnstileToken("")}
-            />
+            /> */}
             <button
               type="submit"
+              // className={`${!isValid || isSubmitting || !turnstileToken
+              //     ? style.general_button_inactive
+              //     : style.general_button_active
+              //   } button-submit`}
+              // disabled={!isValid || isSubmitting || !turnstileToken}
               className={`${
-                !isValid || isSubmitting || !turnstileToken
+                !isValid || isSubmitting
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting || !turnstileToken}
+              disabled={!isValid || isSubmitting}
             >
               {isSubmitting ? props.submittingText : props.buttonText}
             </button>
@@ -1301,12 +1318,12 @@ export function PopUpNameEmail(props) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [regionCode, setRegionCode] = useState();
   const eventId = generateUUID();
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const formRenderTime = useRef(Date.now());
+  // const [turnstileToken, setTurnstileToken] = useState("");
+  // const formRenderTime = useRef(Date.now());
 
-  useEffect(() => {
-    formRenderTime.current = Date.now();
-  }, []);
+  // useEffect(() => {
+  //   formRenderTime.current = Date.now();
+  // }, []);
 
   const {
     register,
@@ -1323,7 +1340,7 @@ export function PopUpNameEmail(props) {
     resolver: yupResolver(schema),
     defaultValues: {
       agreement: true,
-      middle_name: "",
+      // middle_name: "",
     },
   });
 
@@ -1334,22 +1351,22 @@ export function PopUpNameEmail(props) {
   }, [modal.region]);
 
   const onSubmit = async (values) => {
-    if (values.middle_name) {
-      console.warn("Spam bot detected via honeypot!");
-      return;
-    }
+    // if (values.middle_name) {
+    //   console.warn("Spam bot detected via honeypot!");
+    //   return;
+    // }
 
-    const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
-    if (elapsedTime < 4) {
-      console.warn(`Form submitted too fast: ${elapsedTime}s`);
-      alert("Please take your time filling out the form.");
-      return;
-    }
+    // const elapsedTime = (Date.now() - formRenderTime.current) / 1000;
+    // if (elapsedTime < 4) {
+    //   console.warn(`Form submitted too fast: ${elapsedTime}s`);
+    //   alert("Please take your time filling out the form.");
+    //   return;
+    // }
 
-    if (!turnstileToken) {
-      alert("Please wait for the CAPTCHA to be verified.");
-      return;
-    }
+    // if (!turnstileToken) {
+    //   alert("Please wait for the CAPTCHA to be verified.");
+    //   return;
+    // }
 
     debouncedSubmit("attempt", window.location.hostname);
     dispatch(setUserData(values.name));
@@ -1357,7 +1374,7 @@ export function PopUpNameEmail(props) {
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
       budget: values.budget.value,
-      turnstileToken,
+      // turnstileToken,
     };
 
     const options = {
@@ -1442,7 +1459,7 @@ export function PopUpNameEmail(props) {
         <div className={style.inputs_block__inputs}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputs_block__input}>
-              <div
+              {/* <div
                 style={{ position: "absolute", left: "-9999px" }}
                 aria-hidden="true"
               >
@@ -1453,7 +1470,7 @@ export function PopUpNameEmail(props) {
                   id="middle_name"
                   {...register("middle_name")}
                 />
-              </div>
+              </div> */}
               <div className={style.input__label}>
                 <input
                   className={style.input}
@@ -1593,22 +1610,27 @@ export function PopUpNameEmail(props) {
                 </div>
               </div>
             </div>
-            <Turnstile
+            {/* <Turnstile
               siteKey={
                 process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
                 "0x4AAAAAAD9nNenDNZ5KX93b"
               }
               onSuccess={(token) => setTurnstileToken(token)}
               onExpire={() => setTurnstileToken("")}
-            />
+            /> */}
             <button
               type="submit"
               className={`${
-                !isValid || isSubmitting || !turnstileToken
+                !isValid || isSubmitting
                   ? style.general_button_inactive
                   : style.general_button_active
               } button-submit`}
-              disabled={!isValid || isSubmitting || !turnstileToken}
+              // className={`${!isValid || isSubmitting || !turnstileToken
+              //     ? style.general_button_inactive
+              //     : style.general_button_active
+              //   } button-submit`}
+              // disabled={!isValid || isSubmitting || !turnstileToken}
+              disabled={!isValid || isSubmitting}
             >
               {isSubmitting
                 ? props.submittingText
