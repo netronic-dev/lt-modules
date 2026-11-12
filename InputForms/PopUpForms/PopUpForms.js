@@ -796,7 +796,7 @@ export function PopUpEmailPhone(props) {
             {props.title || "Fill in the form below"}
           </p>
           <p className={style.paragraph}>
-            {props.subTitle || "Get an equipment catalog with prices"}
+            {props.subTitle || "Get an equipment catalog"}
           </p>
         </div>
         <div className={style.inputs_block__inputs}>
