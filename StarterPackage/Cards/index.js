@@ -1,0 +1,98 @@
+import Image from "next/image";
+import style from "./style.module.scss";
+
+const Cards = (props) => {
+  return (
+    <section className={style.section} id={props.name}>
+      <div className={style.wrapper}>
+        {props.title && <h2 className={style.title}>{props.title}</h2>}
+        <p className={style.text}>{props.text}</p>
+        <div className={style.cards_wrapper}>
+          {props.data?.map((item, index) => (
+            <CardCell
+              key={index}
+              image={item.image}
+              title={item.title}
+              subtitle={item.subtitle}
+              text1={item.text1}
+              text2={item.text2}
+              buttonText={item.buttonText}
+              list={item.list}
+              list2={item.list2}
+              subsubtitle1={item.subsubtitle1}
+              subsubtitle2={item.subsubtitle2}
+              subsubtitle3={item.subsubtitle3}
+              subsubtitle4={item.subsubtitle4}
+              price={item.price}
+              discount={item.discount}
+              color={item.color}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Cards;
+
+const CardCell = (props) => {
+  return (
+    <div className={style.cell}>
+      <div className={style.image_outer}>
+        {props.image.src && (
+          <Image
+            src={props.image.src}
+            layout="fill"
+            objectFit="cover"
+            objectPosition={props.image.objectPosition || "0 0"}
+            alt="image"
+          />
+        )}
+      </div>
+      <div className={style.cell_text_outer}>
+        <div className={style.cell_top}>
+          <h3 className={style.cell__title}>{props.title}</h3>
+          <h4 className={style.cell__subtitle}>{props.subtitle}</h4>
+          {props.subsubtitle1 && (
+            <p className={style.cell__subsubtitle}>{props.subsubtitle1}</p>
+          )}
+          <p className={style.cell__text}>{props.text1}</p>
+          <p className={style.cell__text}>{props.text2}</p>
+          <p className={style.cell__subsubtitle}>{props.subsubtitle2}</p>
+          {props.list && (
+            <ul className={style.cell__list}>
+              {props.list.map((item, index) => (
+                <li key={index}>{item.text}</li>
+              ))}
+            </ul>
+          )}
+          {props.subsubtitle3 && (
+            <p className={style.cell__subsubtitle}>{props.subsubtitle3}</p>
+          )}
+          {props.list2 && (
+            <ul className={style.cell__list}>
+              {props.list2.map((item, index) => (
+                <li key={index}>{item.text}</li>
+              ))}
+            </ul>
+          )}
+          {props.subsubtitle4 && (
+            <p className={style.cell__subsubtitle}>{props.subsubtitle4}</p>
+          )}
+        </div>
+        {props.buttonText && (
+          <div className={style.cell_bottom}>
+            <button
+              style={{ background: props.color }}
+              className={style.cell__button}
+              onClick={props.onClick}
+            >
+              {props.buttonText}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

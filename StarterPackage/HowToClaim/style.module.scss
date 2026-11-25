@@ -1,0 +1,180 @@
+@import "../default";
+
+.section {
+  position: relative;
+  padding-bottom: 100px;
+}
+.section_inner {
+  @extend %page_grid;
+  padding-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+.words_slider {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  bottom: 0px;
+}
+.content {
+  margin-bottom: 30px;
+}
+.subtitle {
+  font-weight: 700;
+  font-size: 45px;
+  line-height: normal;
+  color: $color-2;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.steps_container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.step_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step_card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(0, 144, 255, 0.4);
+    background: rgba(0, 144, 255, 0.03);
+  }
+}
+
+.step_number {
+  display: inline-block;
+  font-family: $font-1;
+  font-weight: 800;
+  font-size: 14px;
+  color: #0090ff;
+  background: rgba(0, 144, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.step_title {
+  font-family: $font-1;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: $color-2;
+  margin-bottom: 8px;
+}
+
+.step_text {
+  font-family: $font-1;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba($color-2, 0.75);
+}
+
+.step_arrow {
+  font-size: 24px;
+  color: #0090ff;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.promo_box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.promo_title {
+  font-family: $font-1;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 42px;
+  color: $color-2;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+
+  span {
+    color: #0090ff;
+  }
+}
+
+.promo_text {
+  font-family: $font-1;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba($color-2, 0.8);
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.button {
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  font-family: $font-1;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #f1f4f6;
+  padding: 19px 55px 17px;
+  background: linear-gradient(81.25deg, #0090ff 18.31%, #00f18a 126.68%);
+  border-radius: 60px;
+  outline: 0;
+  border: 0;
+  animation: radial-pulse 1s infinite;
+
+  &:hover {
+    background: linear-gradient(81.25deg, #000000 18.31%, #000000 126.68%);
+    color: $color-2;
+    animation: none;
+  }
+}
+
+@keyframes radial-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 600px) {
+  .subtitle {
+    font-size: 32px;
+  }
+  .step_card {
+    padding: 20px;
+  }
+  .step_title {
+    font-size: 18px;
+  }
+  .promo_box {
+    padding: 25px 15px;
+  }
+  .promo_title {
+    font-size: 26px;
+    line-height: 32px;
+  }
+}
